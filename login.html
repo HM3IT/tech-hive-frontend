@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            margin: auto; /* Center the container */
+        }
+
+        .container h2 {
+            color: #d11a2a;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .checkbox-group input {
+            margin-right: 5px;
+        }
+
+        .button {
+            background-color: #d11a2a;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .button:hover {
+            background-color: #b71825;
+        }
+
+        /* Footer Styling */
+        .footer {
+            width: 100%;
+            background-color: #f8f9fa;
+            padding: 20px;
+            color: #333;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin-top: auto; /* Push footer to the bottom */
+        }
+
+        .footer h3 {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .footer-bottom {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Login</h2>
+    <form>
+        <div class="form-group">
+            <label for="email">Email*</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password*</label>
+            <input type="password" id="password" name="password" required>
+            <div class="checkbox-group">
+                <input type="checkbox" id="show-password" onclick="togglePassword()">
+                <label for="show-password">Show Password</label>
+            </div>
+        </div>
+        <button type="submit" class="button">Login</button>
+    </form>
+</div>
+
+<script>
+    // Function to toggle password visibility
+    function togglePassword() {
+        var field = document.getElementById('password');
+        field.type = field.type === 'password' ? 'text' : 'password';
+    }
+</script>
+
+<footer class="footer">
+    <div class="footer-container">
+        <!-- Follow Us Section -->
+        <div class="footer-section follow-us">
+            <h3>FOLLOW US</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+
+        <!-- Visit Us Section -->
+        <div class="footer-section visit-us">
+            <h3>VISIT US</h3>
+            <a href="#" class="visit-btn stores">Stores</a>
+            <a href="#" class="visit-btn service">Service</a>
+            <a href="#" class="visit-btn appointment">Appointment</a>
+        </div>
+
+        <!-- INNWA YANGON Section -->
+        <div class="footer-section innwa-yangon">
+            <h3>INNWA YANGON</h3>
+            <p>INNWA Merchant Road Branch <span class="arrow">▼</span></p>
+            <p>INNWA Premium Seik Kan Thar Street Branch <span class="arrow">▼</span></p>
+            <p>INNWA IT & Mobile U Chit Maung Branch <span class="arrow">▼</span></p>
+            <p>INNWA IT & Mobile North Dagon Pinlon Branch <span class="arrow">▼</span></p>
+        </div>
+
+        <!-- INNWA MANDALAY Section -->
+        <div class="footer-section innwa-mandalay">
+            <h3>INNWA MANDALAY</h3>
+            <p>INNWA IT & Mobile (ကဇာကွတ်) Branch <span class="arrow">▼</span></p>
+            <p>INNWA IT & Mobile (ချမ်းအေးသာဇံ) Branch <span class="arrow">▼</span></p>
+            <p>INNWA IT & Mobile (မလိခ) Branch <span class="arrow">▼</span></p>
+        </div>
+
+        <!-- Viber Section -->
+        <div class="footer-section viber">
+            <h3>Viber</h3>
+            <p><i class="fas fa-phone"></i> +959771966688</p>
+            <img src="static/images/qr-code.png" alt="QR Code" class="qr-code">
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>INNWA IT & MOBILE © 2024.</p>
+    </div>
+</footer>
+
+</body>
+</html>

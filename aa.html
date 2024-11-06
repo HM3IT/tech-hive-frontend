@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laptop Product Page</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Main Container */
+        .product-container {
+            display: flex;
+            max-width: 800px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Image Gallery */
+        .image-gallery {
+            flex: 1;
+            position: relative;
+            margin-right: 20px;
+        }
+
+        .main-image {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: transparent;
+            color: black;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+        }
+
+        #prevBtn { left: 10px; }
+        #nextBtn { right: 10px; }
+
+        .thumbnail-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            gap: 5px;
+        }
+
+        .thumbnail {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .thumbnail:hover, .thumbnail.active {
+            opacity: 1;
+            border-color: #007bff;
+        }
+
+        /* Product Details */
+        .product-details {
+            flex: 1;
+        }
+
+        .product-details h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .product-details p {
+            margin: 5px 0;
+        }
+
+        .specs p, .color-option, .availability {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* Price */
+        .price {
+            margin: 15px 0;
+        }
+
+        .original-price {
+            font-size: 1.2rem;
+            color: #888;
+            text-decoration: line-through;
+        }
+
+        .discounted-price {
+            font-size: 1.5rem;
+            color: #b12704;
+            margin-left: 5px;
+        }
+
+        .discount {
+            font-size: 1rem;
+            color: green;
+            margin-top: 5px;
+        }
+
+        /* Quantity Controls */
+        .quantity {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .quantity-btn {
+            background-color: #ddd;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #ccc;
+            margin: 0 5px;
+        }
+
+        /* Description */
+        .description {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        /* Rating */
+        .rating {
+            margin-top: 15px;
+        }
+
+        .stars span {
+            font-size: 1.5rem;
+            color: #ddd;
+            cursor: pointer;
+        }
+
+        .stars span.active {
+            color: #f5c518;
+        }
+
+        /* Add to Cart Button */
+        .add-to-cart {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="product-container">
+    <div class="image-gallery">
+        <button class="slider-btn" id="prevBtn" onclick="prevImage()">&#10094;</button>
+        
+        <!-- Main Image Display -->
+        <img src="static/images/13.jpg" alt="Laptop Image" class="main-image" id="mainImage">
+        
+        <button class="slider-btn" id="nextBtn" onclick="nextImage()">&#10095;</button>
+
+        <!-- Thumbnail Images -->
+        <div class="thumbnail-container">
+            <img src="static/images/14.jpg" alt="Thumbnail 1" class="thumbnail" onclick="showImage(0)">
+            <img src="static/images/15.jpg" alt="Thumbnail 2" class="thumbnail" onclick="showImage(1)">
+            <img src="static/images/16.jpg" alt="Thumbnail 3" class="thumbnail" onclick="showImage(2)">
+            <img src="static/images/17.jpg" alt="Thumbnail 4" class="thumbnail" onclick="showImage(3)">
+        </div>
+    </div>
+    
+    <div class="product-details">
+        <h2>UltraBook Pro 13 - i7 13th Gen</h2>
+        <p class="category">Category: <span>Laptop</span></p>
+        <p class="brand">Brand: <span>UltraTech</span></p>
+
+        <div class="specs">
+            <p><strong>CPU:</strong> Core i7</p>
+            <p><strong>RAM:</strong> 16GB</p>
+            <p><strong>Storage:</strong> 1TB SSD</p>
+            <p><strong>Display:</strong> 13.3 inches</p>
+            <p><strong>Graphics:</strong> Intel® Iris® Xe Graphics</p>
+        </div>
+
+        <div class="color-option">
+            <p>Color: <span class="color-circle"></span> Space Gray</p>
+        </div>
+
+        <div class="price">
+            <p><span class="original-price">4,500,000 Ks</span> <span class="discounted-price">3,600,000 Ks</span></p>
+            <p class="discount">Discount: 20% OFF</p>
+        </div>
+
+        <div class="quantity">
+            <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
+            <input type="text" value="1" class="quantity-input" id="quantityInput">
+            <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
+        </div>
+
+        <p class="availability">Available Quantity - 5</p>
+
+        <div class="description">
+            <p><strong>Description:</strong> This UltraBook Pro 13 is a powerful, sleek laptop equipped with the latest 13th Gen Intel Core i7 processor, 16GB RAM, and 1TB SSD, perfect for both professional and personal use.</p>
+        </div>
+
+        <div class="rating">
+            <p><strong>Rating:</strong></p>
+            <div class="stars">
+                <span onclick="rateProduct(1)">&#9733;</span>
+                <span onclick="rateProduct(2)">&#9733;</span>
+                <span onclick="rateProduct(3)">&#9733;</span>
+                <span onclick="rateProduct(4)">&#9733;</span>
+                <span onclick="rateProduct(5)">&#9733;</span>
+            </div>
+            <p id="userRating"></p>
+        </div>
+
+        <button class="add-to-cart">Add to Cart</button>
+    </div>
+</div>
+
+<script>
+    function changeQuantity(amount) {
+        const quantityInput = document.getElementById('quantityInput');
+        let currentQuantity = parseInt(quantityInput.value);
+
+        if (!isNaN(currentQuantity)) {
+            currentQuantity += amount;
+            if (currentQuantity < 1) currentQuantity = 1; // Ensure quantity doesn't go below 1
+            quantityInput.value = currentQuantity;
+        }
+    }
+    const images = [
+    'static/images/13.jpg', // Replace with actual paths
+    'static/images/14.jpg',
+    'static/images/15.jpg',
+    'static/images/16.jpg'
+];
+
+let currentImageIndex = 0;
+const mainImage = document.getElementById('mainImage');
+const thumbnails = document.querySelectorAll('.thumbnail');
+
+// Update the main image and active thumbnail
+function updateImage(index) {
+    mainImage.src = images[index];
+    thumbnails.forEach((thumb, idx) => {
+        thumb.classList.toggle('active', idx === index);
+    });
+}
+
+function prevImage() {
+    currentImageIndex = (currentImageIndex === 0) ? images.length - 1 : currentImageIndex - 1;
+    updateImage(currentImageIndex);
+}
+
+function nextImage() {
+    currentImageIndex = (currentImageIndex === images.length - 1) ? 0 : currentImageIndex + 1;
+    updateImage(currentImageIndex);
+}
+
+function showImage(index) {
+    currentImageIndex = index;
+    updateImage(currentImageIndex);
+}
+
+// Initialize the first image as active
+updateImage(currentImageIndex);
+
+// Rating Functionality
+function rateProduct(rating) {
+    const stars = document.querySelectorAll('.stars span');
+    stars.forEach((star, index) => {
+        star.classList.toggle('active', index < rating);
+    });
+    document.getElementById('userRating').innerText = `You rated this product ${rating} stars`;
+}
+
+</script>
+
+</body>
+</html>

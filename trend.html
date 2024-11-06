@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Customer View</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            padding: 20px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 200px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-right: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .filter-section {
+            margin-bottom: 20px;
+        }
+
+        .filter-section label {
+            display: block;
+            font-size: 0.9em;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .filter-section input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        .filter-section input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        /* Product View and Pagination */
+        .content {
+            flex: 1;
+        }
+
+        .product-view {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product-card {
+            width: 250px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+
+        .product-title {
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .product-description {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .product-tags {
+            margin-bottom: 10px;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin: 2px;
+        }
+
+        .read-more {
+            background-color: #007bff;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .read-more:hover {
+            background-color: #0056b3;
+        }
+
+        .product-date {
+            font-size: 0.8em;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        /* Pagination Controls */
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            margin: 0 4px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination button:hover {
+            background-color: #0056b3;
+        }
+
+        .pagination button:disabled {
+            background-color: #ddd;
+            cursor: default;
+        }
+
+        #pageIndicator {
+            font-size: 1em;
+            color: #333;
+            padding: 0 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Filter -->
+    <div class="sidebar">
+        <h2>Filter Products</h2>
+
+        <div class="filter-section">
+            <label>Search</label>
+            <input type="text" id="searchInput" placeholder="Search by name">
+        </div>
+
+        <div class="filter-section">
+            <label>Category</label>
+            <div><input type="checkbox" value="Promotion"> Promotion</div>
+            <div><input type="checkbox" value="Speaker"> Speaker</div>
+            <!-- Add more categories as needed -->
+        </div>
+
+        <div class="filter-section">
+            <label>Tags</label>
+            <div><input type="checkbox" value="Discount"> Discount</div>
+            <div><input type="checkbox" value="New Arrival"> New Arrival</div>
+            <!-- Add more tags as needed -->
+        </div>
+
+        <button onclick="applyFilters()">Apply Filters</button>
+    </div>
+
+    <!-- Product Content with Pagination -->
+    <div class="content">
+        <div class="product-view" id="productView">
+            <!-- Product cards here -->
+            <div class="product-card">
+                <img src="static/images/1.jpg" alt="Promotion 1" class="product-image">
+                <h3 class="product-title">INNWA Smartphone Promotion (Oct 17 - Oct 20)</h3>
+                <p class="product-description">
+                    ဖော်ပြချက်ကောင်းပြီအကြောင်း<br>
+                    ဖော်ပြချက်များအပြည့်အစုံ
+                </p>
+                <div class="product-tags">
+                    <span class="tag">Discount</span>
+                </div>
+                <a href="product_view.html">
+                    <button class="read-more">Read More</button>
+                </a>
+                
+                <p class="product-date">Sunday, 20th of October 2024</p>
+            </div>
+            <!-- Add more product cards as needed -->
+            <div class="product-card">
+                <img src="static/images/1.jpg" alt="Promotion 1" class="product-image">
+                <h3 class="product-title">INNWA Smartphone Promotion (Oct 17 - Oct 20)</h3>
+                <p class="product-description">
+                    ဖော်ပြချက်ကောင်းပြီအကြောင်း<br>
+                    ဖော်ပြချက်များအပြည့်အစုံ
+                </p>
+                <div class="product-tags">
+                    <span class="tag">Promotion</span>
+                </div>
+                <button class="read-more">Read More</button>
+                <p class="product-date">Sunday, 20th of October 2024</p>
+            </div>
+            <div class="product-card">
+                <img src="static/images/1.jpg" alt="Promotion 1" class="product-image">
+                <h3 class="product-title">INNWA Smartphone Promotion (Oct 17 - Oct 20)</h3>
+                <p class="product-description">
+                    ဖော်ပြချက်ကောင်းပြီအကြောင်း<br>
+                    ဖော်ပြချက်များအပြည့်အစုံ
+                </p>
+                <div class="product-tags">
+                    <span class="tag">Promotion</span>
+                </div>
+                <button class="read-more">Read More</button>
+                <p class="product-date">Sunday, 20th of October 2024</p>
+            </div>
+            <div class="product-card">
+                <img src="static/images/1.jpg" alt="Promotion 1" class="product-image">
+                <h3 class="product-title">INNWA Smartphone Promotion (Oct 17 - Oct 20)</h3>
+                <p class="product-description">
+                    ဖော်ပြချက်ကောင်းပြီအကြောင်း<br>
+                    ဖော်ပြချက်များအပြည့်အစုံ
+                </p>
+                <div class="product-tags">
+                    <span class="tag">Promotion</span>
+                </div>
+                <button class="read-more">Read More</button>
+                <p class="product-date">Sunday, 20th of October 2024</p>
+            </div>
+            <div class="product-card">
+                <img src="static/images/1.jpg" alt="Promotion 1" class="product-image">
+                <h3 class="product-title">INNWA Smartphone Promotion (Oct 17 - Oct 20)</h3>
+                <p class="product-description">
+                    ဖော်ပြချက်ကောင်းပြီအကြောင်း<br>
+                    ဖော်ပြချက်များအပြည့်အစုံ
+                </p>
+                <div class="product-tags">
+                    <span class="tag">Promotion</span>
+                </div>
+                <button class="read-more">Read More</button>
+                <p class="product-date">Sunday, 20th of October 2024</p>
+            </div>
+            <div class="product-card">
+                <img src="static/images/1.jpg" alt="Promotion 1" class="product-image">
+                <h3 class="product-title">INNWA Smartphone Promotion (Oct 17 - Oct 20)</h3>
+                <p class="product-description">
+                    ဖော်ပြချက်ကောင်းပြီအကြောင်း<br>
+                    ဖော်ပြချက်များအပြည့်အစုံ
+                </p>
+                <div class="product-tags">
+                    <span class="tag">Promotion</span>
+                </div>
+                <button class="read-more">Read More</button>
+                <p class="product-date">Sunday, 20th of October 2024</p>
+            </div>
+            <div class="product-card">
+                <img src="static/images/1.jpg" alt="Promotion 1" class="product-image">
+                <h3 class="product-title">INNWA Smartphone Promotion (Oct 17 - Oct 20)</h3>
+                <p class="product-description">
+                    ဖော်ပြချက်ကောင်းပြီအကြောင်း<br>
+                    ဖော်ပြချက်များအပြည့်အစုံ
+                </p>
+                <div class="product-tags">
+                    <span class="tag">Promotion</span>
+                </div>
+                <button class="read-more">Read More</button>
+                <p class="product-date">Sunday, 20th of October 2024</p>
+            </div>
+            <div class="product-card">
+                <img src="static/images/1.jpg" alt="Promotion 1" class="product-image">
+                <h3 class="product-title">INNWA Smartphone Promotion (Oct 17 - Oct 20)</h3>
+                <p class="product-description">
+                    ဖော်ပြချက်ကောင်းပြီအကြောင်း<br>
+                    ဖော်ပြချက်များအပြည့်အစုံ
+                </p>
+                <div class="product-tags">
+                    <span class="tag">Promotion</span>
+                </div>
+                <button class="read-more">Read More</button>
+                <p class="product-date">Sunday, 20th of October 2024</p>
+            </div>
+            <div class="product-card">
+                <img src="static/images/1.jpg" alt="Promotion 1" class="product-image">
+                <h3 class="product-title">INNWA Smartphone Promotion (Oct 17 - Oct 20)</h3>
+                <p class="product-description">
+                    ဖော်ပြချက်ကောင်းပြီအကြောင်း<br>
+                    ဖော်ပြချက်များအပြည့်အစုံ
+                </p>
+                <div class="product-tags">
+                    <span class="tag">Promotion</span>
+                </div>
+                <button class="read-more">Read More</button>
+                <p class="product-date">Sunday, 20th of October 2024</p>
+            </div>
+            <div class="product-card">
+                <img src="static/images/1.jpg" alt="Promotion 1" class="product-image">
+                <h3 class="product-title">INNWA Smartphone Promotion (Oct 17 - Oct 20)</h3>
+                <p class="product-description">
+                    ဖော်ပြချက်ကောင်းပြီအကြောင်း<br>
+                    ဖော်ပြချက်များအပြည့်အစုံ
+                </p>
+                <div class="product-tags">
+                    <span class="tag">Promotion</span>
+                </div>
+                <button class="read-more">Read More</button>
+                <p class="product-date">Sunday, 20th of October 2024</p>
+            </div>
+        </div>
+
+        <!-- Pagination Controls -->
+        <div class="pagination">
+            <button id="prevButton" onclick="changePage(-1)">Previous</button>
+            <span id="pageIndicator">Page 1</span>
+            <button id="nextButton" onclick="changePage(1)">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const itemsPerPage = 8;
+        let currentPage = 1;
+
+        function displayItems() {
+            const productView = document.getElementById("productView");
+            const products = Array.from(productView.getElementsByClassName("product-card"));
+            const totalPages = Math.ceil(products.length / itemsPerPage);
+
+            products.forEach(item => item.style.display = "none");
+
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            for (let i = start; i < end && i < products.length; i++) {
+                products[i].style.display = "block";
+            }
+
+            document.getElementById("prevButton").disabled = currentPage === 1;
+            document.getElementById("nextButton").disabled = currentPage === totalPages;
+            document.getElementById("pageIndicator").textContent = `Page ${currentPage}`;
+        }
+
+        function changePage(direction) {
+            currentPage += direction;
+            displayItems();
+        }
+
+        function applyFilters() {
+            const searchInput = document.getElementById("searchInput").value.toLowerCase();
+            const categories = Array.from(document.querySelectorAll('.filter-section input[type="checkbox"]:checked')).map(input => input.value.toLowerCase());
+
+            const products = document.getElementsByClassName("product-card");
+            for (let product of products) {
+                const title = product.querySelector(".product-title").textContent.toLowerCase();
+                const tags = Array.from(product.getElementsByClassName("tag")).map(tag => tag.textContent.toLowerCase());
+
+                const matchesSearch = !searchInput || title.includes(searchInput);
+                const matchesCategory = !categories.length || categories.some(cat => tags.includes(cat));
+
+                product.style.display = matchesSearch && matchesCategory ? "block" : "none";
+            }
+        }
+
+        displayItems();
+    </script>
+</body>
+</html>

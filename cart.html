@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      /* styles.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    background-color: #f0f2f5;
+    padding: 20px;
+}
+
+.cart-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.cart-detail {
+    flex: 3;
+    background-color: #fff;
+    border: 1px solid #e2e2e2;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.cart-total {
+    flex: 1;
+    background-color: #fff;
+    border: 1px solid #e2e2e2;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+h2 {
+    color: #4b4b4b;
+    margin-bottom: 20px;
+}
+
+.cart-detail table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart-detail th,
+.cart-detail td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.cart-detail img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.product-info {
+    text-align: left;
+}
+
+.product-name {
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+}
+
+.label {
+    color: #a0a0a0;
+    font-size: 0.9em;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantity-controls button {
+    width: 25px;
+    height: 25px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+}
+
+.quantity-controls input {
+    width: 30px;
+    text-align: center;
+    border: 1px solid #e2e2e2;
+    border-radius: 4px;
+}
+
+.cart-total .total {
+    margin-top: 20px;
+}
+
+.cart-total p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.cart-total .total-amount {
+    font-weight: bold;
+    color: #d9534f;
+}
+
+.checkout-btn {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 1em;
+}
+
+.checkout-btn:hover {
+    background-color: #004999;
+}
+
+    </style>
+</head>
+<body>
+    <div class="cart-container">
+        <div class="cart-detail">
+            <h2><i class="fas fa-shopping-cart"></i> CART DETAIL</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <img src="static/images/1.jpg" alt="Product Image">
+                            <div class="product-info">
+                                <a href="#" class="product-name">Kingston 32GB DDR5 4800MHz Laptop Memory RAM</a>
+                                <p><span class="label">Device Type:</span> Laptop RAM, <span class="label">Speed:</span> DDR5 4800MHz, <span class="label">Capacity:</span> 32GB</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="quantity-controls">
+                                <button class="minus">-</button>
+                                <input type="text" value="1">
+                                <button class="plus">+</button>
+                            </div>
+                            <p>Available Quantity: 1</p>
+                        </td>
+                        <td>750,750 Ks</td>
+                        <td>750,750 Ks</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="cart-total">
+            <h2><i class="fas fa-coins"></i> CART TOTAL</h2>
+            <div class="total">
+                <p>SUBTOTAL <span>750,750 Ks</span></p>
+                <p class="total-amount">TOTAL <span>750,750 Ks</span></p>
+            </div>
+            <button class="checkout-btn">PROCEED TO CHECKOUT</button>
+        </div>
+    </div>
+</body>
+</html>

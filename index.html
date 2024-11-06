@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Showcase</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">INNWA IT & Mobile</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact US</a></li>
+                <li><a href="#">Trending Products</a></li>
+                
+                <div class="dropdown">
+                    <a href="#" class="dropdown-btn">Components </a>
+                    <div class="dropdown-content">
+                        
+                        
+                        <!-- Nested dropdown for Lifestyle Shoes -->
+                        <div class="nested-dropdown">
+                            <a href="#" class="nested-dropdown-btn">Computer</a>
+                            <div class="nested-dropdown-content">
+                                <a href="#">CPU</a>
+                                <a href="#">RAM</a>
+                                <a href="#">Power supply</a>
+                                <a href="#">Motherboard</a>
+                                <a href="#">Cpu Cooler</a>
+                                <a href="#">SSD</a>
+                                <a href="#">Hard Disk</a>
+                            </div>
+                        </div>
+                        <div class="nested-dropdown">
+                            <a href="#" class="nested-dropdown-btn">Lifestyle Shoes</a>
+                            <div class="nested-dropdown-content">
+                                <a href="#">Casual Sneakers</a>
+                                <a href="#">Walking Shoes</a>
+                                <a href="#">Slip-ons</a>
+                            </div>
+                        </div>
+                        <div class="nested-dropdown">
+                            <a href="#" class="nested-dropdown-btn">Lifestyle Shoes</a>
+                            <div class="nested-dropdown-content">
+                                <a href="#">Casual Sneakers</a>
+                                <a href="#">Walking Shoes</a>
+                                <a href="#">Slip-ons</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </nav>
+        
+        
+            
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Search...">
+            <button class="search-btn">Search</button>
+            
+        </div>
+        
+            
+            <span class="cart-icon">🛒</span>
+            <div class="dropdown">
+                <span class="user-icon">👤</span>
+                <div class="dropdown-content">
+                    <a href="#">Register</a>
+                    <a href="#">Login</a>
+                    
+                </div>
+            </div>
+            
+            <button class="language-btn">Language</button>
+        </div>
+    </header>
+
+    <!-- Main Banner Section -->
+    <section class="banner">
+        <div class="slider">
+            <button class="slide-btn left-btn" onclick="prevSlide()">‹</button>
+            <div class="slide-container">
+                <div class="slide">
+                    <img src="static/images/6.jpg" alt="Product Image" class="slide-image">
+                    <img src="static/images/7.jpg" alt="Product Image" class="slide-image">
+                    <img src="static/images/11.jpg" alt="Product Image" class="slide-image">
+                    <img src="static/images/9.jpg" alt="Product Image" class="slide-image">
+                </div>
+                
+            </div>
+            <button class="slide-btn right-btn" onclick="nextSlide()">›</button>
+        </div>
+    </section>
+    <script>
+        let currentSlide = 0;
+const slides = document.querySelectorAll('.slide-image');
+const totalSlides = slides.length;
+
+function showSlide(index) {
+    currentSlide = (index + totalSlides) % totalSlides;  // Wrap the index
+    const offset = -currentSlide * 100;                   // Calculate the offset
+    document.querySelector('.slide').style.transform = `translateX(${offset}%)`;
+}
+
+function nextSlide() {
+    showSlide(currentSlide + 1);
+}
+
+function prevSlide() {
+    showSlide(currentSlide - 1);
+}
+
+// Automatic slide transition every 3 seconds
+setInterval(nextSlide, 3000);
+
+    </script>
+    <div class="container">
+        <h1>PC Parts</h1>
+        <div class="grid">
+            <!-- Intel CPUs -->
+            <div class="item">
+                <img src="static/images/12.jpg" alt="Intel CPUs">
+                <a href="#">Intel CPUs</a>
+            </div>
+            <!-- AMD CPUs -->
+            <div class="item">
+                <img src="static/images/13.jpg" alt="AMD CPUs">
+                <a href="#">AMD CPUs</a>
+            </div>
+            <!-- NVIDIA Graphics Cards -->
+            <div class="item">
+                <img src="static/images/14.jpg" alt="NVIDIA Graphics Cards">
+                <a href="#">NVIDIA Graphics Cards</a>
+            </div>
+            <!-- AMD Graphics Cards -->
+            <div class="item">
+                <img src="static/images/15.jpg" alt="AMD Graphics Cards">
+                <a href="#">AMD Graphics Cards</a>
+            </div>
+            <!-- Intel Motherboards -->
+            <div class="item">
+                <img src="static/images/16.jpg" alt="Intel Motherboards">
+                <a href="#">Intel Motherboards</a>
+            </div>
+            <!-- AMD Motherboards -->
+            <div class="item">
+                <img src="static/images/17.jpg" alt="AMD Motherboards">
+                <a href="#">AMD Motherboards</a>
+            </div>
+            <!-- DDR4 RAM -->
+            <div class="item">
+                <img src="static/images/18.jpg" alt="DDR4 RAM">
+                <a href="#">DDR4 RAM</a>
+            </div>
+            <!-- DDR5 RAM -->
+            <div class="item">
+                <img src="static/images/19.jpg" alt="DDR5 RAM">
+                <a href="#">DDR5 RAM</a>
+            </div>
+            <!-- Storage -->
+            <div class="item">
+                <img src="static/images/20.jpg" alt="Storage">
+                <a href="#">SSD</a>
+            </div>
+            <div class="item">
+                <img src="static/images/21.jpg" alt="Storage">
+                <a href="#">Hard Drive</a>
+            </div>
+            <!-- Cases -->
+            <div class="item">
+                <img src="static/images/22.jpg" alt="PC Cases">
+                <a href="#">PC Cases</a>
+            </div>
+            <!-- Power Supplies -->
+            <div class="item">
+                <img src="static/images/23.jpg" alt="Power Supplies">
+                <a href="#">Power Supplies</a>
+            </div>
+        </div>
+    </div>
+
+  
+<!-- Best Seller Component -->
+<div class="container">
+    <h2>Component Best Sellers</h2>
+    <div class="carousel">
+      <span class="arrow" id="arrowLeft">&#10094;</span>
+      <div class="product-grid" id="productGrid">
+        <div class="product">
+          <img src="static/images/15.jpg" alt="Product 1">
+          <div class="product-name">Ryzen 7 7800X3D Raphael AM5 4.2GHz 8-Co...</div>
+          <div class="rating">★★★★★</div>
+          <div class="price">$449.99</div>
+          <a href="#">DDR5 RAM</a>
+        </div>
+        <div class="product">
+          <img src="static/images/16.jpg" alt="Product 2">
+          <div class="product-name">NVIDIA GeForce RTX 4080 Super TUF Gam...</div>
+          <div class="rating">★★★★★</div>
+          <div class="price">$1,099.99</div>
+        </div>
+        <div class="product">
+          <img src="static/images/17.jpg" alt="Product 3">
+          <div class="product-name">NVIDIA GeForce RTX 4090 Gaming X Slim...</div>
+          <div class="rating">★★★★★</div>
+          <div class="price">$1,859.99</div>
+        </div>
+        <div class="product">
+          <img src="static/images/18.jpg" alt="Product 4">
+          <div class="product-name">990 PRO 2TB Samsung V NAND 3-bit MLC...</div>
+          <div class="rating">★★★★★</div>
+          <div class="price">$149.99</div>
+        </div>
+        <div class="product">
+          <img src="static/images/19.jpg" alt="Product 5">
+          <div class="product-name">990 PRO 4TB Samsung V NAND TLC NAND...</div>
+          <div class="rating">★★★★★</div>
+          <div class="price">$299.99</div>
+        </div>
+        <div class="product">
+          <img src="static/images/20.jpg" alt="Product 6">
+          <div class="product-name">NVIDIA GeForce RTX 4070 Super Windfor...</div>
+          <div class="rating">★★★★★</div>
+          <div class="price">$599.99</div>
+        </div>
+      </div>
+      
+      <span class="arrow" id="arrowRight">&#10095;</span>
+    </div>
+  </div>
+
+  <script>
+    const productGrid = document.getElementById('productGrid');
+    const arrowLeft = document.getElementById('arrowLeft');
+    const arrowRight = document.getElementById('arrowRight');
+
+    arrowLeft.addEventListener('click', () => {
+      productGrid.scrollBy({
+        left: -200,
+        behavior: 'smooth'
+      });
+    });
+
+    arrowRight.addEventListener('click', () => {
+      productGrid.scrollBy({
+        left: 200,
+        behavior: 'smooth'
+      });
+    });
+  </script>
+    <!-- Footer with Brand Logos -->
+    
+
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Follow Us Section -->
+            <div class="footer-section follow-us">
+                <h3>FOLLOW US</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+    
+            <!-- Visit Us Section -->
+            <div class="footer-section visit-us">
+                <h3>VISIT US</h3>
+                <a href="#" class="visit-btn stores">Stores</a>
+                <a href="#" class="visit-btn service">Service</a>
+                <a href="#" class="visit-btn appointment">Appointment</a>
+            </div>
+    
+            <!-- INNWA YANGON Section -->
+            <div class="footer-section innwa-yangon">
+                <h3>INNWA YANGON</h3>
+                <p>INNWA Merchant Road Branch <span class="arrow">▼</span></p>
+                <p>INNWA Premium Seik Kan Thar Street Branch <span class="arrow">▼</span></p>
+                <p>INNWA IT & Mobile U Chit Maung Branch <span class="arrow">▼</span></p>
+                <p>INNWA IT & Mobile North Dagon Pinlon Branch <span class="arrow">▼</span></p>
+            </div>
+    
+            <!-- INNWA MANDALAY Section -->
+            <div class="footer-section innwa-mandalay">
+                <h3>INNWA MANDALAY</h3>
+                <p>INNWA IT & Mobile (ကဇာကွတ်) Branch <span class="arrow">▼</span></p>
+                <p>INNWA IT & Mobile (ချမ်းအေးသာဇံ) Branch <span class="arrow">▼</span></p>
+                <p>INNWA IT & Mobile (မလိခ) Branch <span class="arrow">▼</span></p>
+            </div>
+    
+            <!-- Viber Section -->
+            <div class="footer-section viber">
+                <h3>Viber</h3>
+                <p><i class="fas fa-phone"></i> +959771966688</p>
+                <img src="static/images/qr-code.png" alt="QR Code" class="qr-code">
+            </div>
+        </div>
+    
+        <div class="footer-bottom">
+            <p>INNWA IT & MOBILE © 2024.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>
