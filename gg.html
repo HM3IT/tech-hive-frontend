@@ -3,168 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laptop Product Page</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Intel Gen 13 Processors</title>
     <style>
-        /* Style moved to inline CSS */
-        /* style.css */
+        /* Basic Reset and Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
-.price .original-price {
-    font-size: 1.2rem;
-    color: #888;
-    text-decoration: line-through;
-}
+        /* Background with gradient */
+        body {
+            background: linear-gradient(135deg, #f0f2f5 0%, #e0e3e7 100%);
+            padding: 20px;
+            color: #333;
+        }
 
-.price .discounted-price {
-    font-size: 1.5rem;
-    color: #b12704;
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-.discount {
-    font-size: 1rem;
-    color: green;
-    margin-top: 5px;
-}
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-.description {
-    margin-top: 15px;
-    font-size: 0.9rem;
-    color: #333;
-}
+        .header h1 {
+            font-size: 2rem;
+            color: #333;
+        }
 
-.rating {
-    margin-top: 15px;
-}
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
 
-.stars span {
-    font-size: 1.5rem;
-    color: #ddd;
-    cursor: pointer;
-}
+        .product-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+            transition: transform 0.3s ease;
+        }
 
-.stars span.active {
-    color: #f5c518;
-}
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
 
-.add-to-cart {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+        .product-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background-color: #f3f3f3;
+        }
 
-.add-to-cart:hover {
-    background-color: #0056b3;
-}
-/* Main Image */
-.main-image {
-    width: 100%;
-    max-width: 400px; /* Set a maximum width to maintain consistency */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 8px;
-    object-fit: contain; /* Ensure the image fits without distortion */
-}
+        .product-info {
+            padding: 15px;
+        }
 
-/* Thumbnails */
-.thumbnail-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-    gap: 5px;
-}
+        .product-info h3 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
 
-.thumbnail {
-    width: 60px; /* Fixed width for thumbnails */
-    height: 60px; /* Fixed height for thumbnails */
-    border: 2px solid #ddd;
-    border-radius: 4px;
-    cursor: pointer;
-    opacity: 0.6;
-    transition: opacity 0.3s ease;
-    object-fit: cover; /* Cover the entire thumbnail area without distortion */
-}
+        .product-info p {
+            font-size: 0.9rem;
+            color: #666;
+        }
 
-.thumbnail:hover, .thumbnail.active {
-    opacity: 1;
-    border-color: #007bff;
-}
+        .product-price {
+            font-size: 1.1rem;
+            color: #b12704;
+            margin: 10px 0;
+        }
 
+        .view-details {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .view-details:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
 
-<div class="product-container">
-    <div class="image-gallery">
-        <button class="slider-btn" id="prevBtn" onclick="prevImage()">&#10094;</button>
-        
-        <!-- Main Image Display -->
-        <img src="static/images/13.jpg" alt="Laptop Image" class="main-image" id="mainImage">
-        
-        <button class="slider-btn" id="nextBtn" onclick="nextImage()">&#10095;</button>
-
-        <!-- Thumbnail Images -->
-        <div class="thumbnail-container">
-            <img src="static/images/14.jpg" alt="Thumbnail 1" class="thumbnail" onclick="showImage(0)">
-            <img src="static/images/15.jpg" alt="Thumbnail 2" class="thumbnail" onclick="showImage(1)">
-            <img src="static/images/16.jpg" alt="Thumbnail 3" class="thumbnail" onclick="showImage(2)">
-            <img src="static/images/17.jpg" alt="Thumbnail 4" class="thumbnail" onclick="showImage(3)">
-        </div>
+<div class="container">
+    <div class="header">
+        <h1>Intel 13th Generation Processors</h1>
+        <p>Discover the latest Intel Gen 13 processors optimized for superior performance.</p>
     </div>
-    
-    <div class="product-details">
-        <h2>UltraBook Pro 13 - i7 13th Gen</h2>
-        <p class="category">Category: <span>Laptop</span></p>
-        <p class="brand">Brand: <span>UltraTech</span></p>
 
-        <div class="specs">
-            <p><strong>CPU:</strong> Core i7</p>
-            <p><strong>RAM:</strong> 16GB</p>
-            <p><strong>Storage:</strong> 1TB SSD</p>
-            <p><strong>Display:</strong> 13.3 inches</p>
-            <p><strong>Graphics:</strong> Intel® Iris® Xe Graphics</p>
-        </div>
-
-        <div class="color-option">
-            <p>Color: <span class="color-circle"></span> Space Gray</p>
-        </div>
-
-        <div class="price">
-            <p><span class="original-price">4,500,000 Ks</span> <span class="discounted-price">3,600,000 Ks</span></p>
-            <p class="discount">Discount: 20% OFF</p>
-        </div>
-
-        <div class="quantity">
-            <button class="quantity-btn">-</button>
-            <input type="text" value="1" class="quantity-input">
-            <button class="quantity-btn">+</button>
-        </div>
-
-        <p class="availability">Available Quantity - 5</p>
-
-        <div class="description">
-            <p><strong>Description:</strong> This UltraBook Pro 13 is a powerful, sleek laptop equipped with the latest 13th Gen Intel Core i7 processor, 16GB RAM, and 1TB SSD, perfect for both professional and personal use.</p>
-        </div>
-
-        <div class="rating">
-            <p><strong>Rating:</strong></p>
-            <div class="stars">
-                <span onclick="rateProduct(1)">&#9733;</span>
-                <span onclick="rateProduct(2)">&#9733;</span>
-                <span onclick="rateProduct(3)">&#9733;</span>
-                <span onclick="rateProduct(4)">&#9733;</span>
-                <span onclick="rateProduct(5)">&#9733;</span>
+    <div class="product-grid">
+        <!-- Product Item 1 -->
+        <div class="product-item">
+            <img src="https://via.placeholder.com/300x180" alt="Processor Image" class="product-image">
+            <div class="product-info">
+                <h3>Intel Core i7-13700K</h3>
+                <p>16 cores, 24 threads, and unlocked performance for high-demand tasks.</p>
+                <p class="product-price">$429.99</p>
+                <a href="#" class="view-details">View Details</a>
             </div>
-            <p id="userRating"></p>
         </div>
 
-        <button class="add-to-cart">Add to Cart</button>
+        <!-- Product Item 2 -->
+        <div class="product-item">
+            <img src="https://via.placeholder.com/300x180" alt="Processor Image" class="product-image">
+            <div class="product-info">
+                <h3>Intel Core i9-13900K</h3>
+                <p>24 cores, 32 threads, ultimate performance for enthusiasts and gamers.</p>
+                <p class="product-price">$599.99</p>
+                <a href="#" class="view-details">View Details</a>
+            </div>
+        </div>
+
+        <!-- Product Item 3 -->
+        <div class="product-item">
+            <img src="https://via.placeholder.com/300x180" alt="Processor Image" class="product-image">
+            <div class="product-info">
+                <h3>Intel Core i5-13600K</h3>
+                <p>12 cores, 20 threads, balanced performance and efficiency for creators.</p>
+                <p class="product-price">$319.99</p>
+                <a href="#" class="view-details">View Details</a>
+            </div>
+        </div>
     </div>
 </div>
 
-<script src="script.js"></script>
 </body>
 </html>
