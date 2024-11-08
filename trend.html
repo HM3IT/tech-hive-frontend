@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Customer View</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Product Customer View with Price and Discount Filters</title>
     <style>
+        /* General Styles */
         * {
             margin: 0;
             padding: 0;
@@ -22,7 +21,7 @@
 
         /* Sidebar Styles */
         .sidebar {
-            width: 200px;
+            width: 220px;
             padding: 20px;
             background-color: #fff;
             border: 1px solid #ddd;
@@ -49,18 +48,26 @@
         }
 
         .filter-section input[type="checkbox"] {
-            margin-right: 8px;
+            margin-bottom: 5px;
         }
 
-        .filter-section input[type="text"] {
-            width: 100%;
-            padding: 5px;
-            border: 1px solid #ddd;
+        .sidebar button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
             border-radius: 4px;
-            margin-top: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+            width: 100%;
         }
 
-        /* Product View and Pagination */
+        .sidebar button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Content Styles */
         .content {
             flex: 1;
         }
@@ -98,7 +105,7 @@
         }
 
         .product-title {
-            font-size: 1.2em;
+            font-size: 1.1em;
             margin: 10px 0;
             color: #333;
         }
@@ -122,6 +129,13 @@
             border-radius: 4px;
             font-size: 0.8em;
             margin: 2px;
+        }
+
+        .product-price,
+        .product-discount {
+            font-size: 0.9em;
+            color: #333;
+            margin: 5px 0;
         }
 
         .read-more {
@@ -191,17 +205,19 @@
         </div>
 
         <div class="filter-section">
-            <label>Category</label>
-            <div><input type="checkbox" value="Promotion"> Promotion</div>
-            <div><input type="checkbox" value="Speaker"> Speaker</div>
-            <!-- Add more categories as needed -->
-        </div>
-
-        <div class="filter-section">
             <label>Tags</label>
             <div><input type="checkbox" value="Discount"> Discount</div>
             <div><input type="checkbox" value="New Arrival"> New Arrival</div>
-            <!-- Add more tags as needed -->
+        </div>
+
+        <!-- New Price Range Filter as Checkboxes -->
+        <div class="filter-section">
+            <label>Price Range</label>
+            <div><input type="checkbox" value="0-50" class="price-range"> $0 - $50</div>
+            <div><input type="checkbox" value="50-100" class="price-range"> $50 - $100</div>
+            <div><input type="checkbox" value="100-200" class="price-range"> $100 - $200</div>
+            <div><input type="checkbox" value="200-500" class="price-range"> $200 - $500</div>
+            <div><input type="checkbox" value="500" class="price-range"> Above $500</div>
         </div>
 
         <button onclick="applyFilters()">Apply Filters</button>
@@ -210,141 +226,20 @@
     <!-- Product Content with Pagination -->
     <div class="content">
         <div class="product-view" id="productView">
-            <!-- Product cards here -->
-            <div class="product-card">
+            <!-- Product Cards -->
+            <div class="product-card" data-price="200" data-discount="20">
                 <img src="static/images/1.jpg" alt="Promotion 1" class="product-image">
-                <h3 class="product-title">INNWA Smartphone Promotion (Oct 17 - Oct 20)</h3>
-                <p class="product-description">
-                    ဖော်ပြချက်ကောင်းပြီအကြောင်း<br>
-                    ဖော်ပြချက်များအပြည့်အစုံ
-                </p>
+                <h3 class="product-title">INNWA Smartphone Promotion</h3>
+                <p class="product-description">Product description goes here.</p>
                 <div class="product-tags">
                     <span class="tag">Discount</span>
                 </div>
-                <a href="product_view.html">
-                    <button class="read-more">Read More</button>
-                </a>
-                
-                <p class="product-date">Sunday, 20th of October 2024</p>
+                <p class="product-price">Price: $200</p>
+                <p class="product-discount">Discount: 20%</p>
+                <button class="read-more">Read More</button>
+                <p class="product-date">20th October 2024</p>
             </div>
             <!-- Add more product cards as needed -->
-            <div class="product-card">
-                <img src="static/images/1.jpg" alt="Promotion 1" class="product-image">
-                <h3 class="product-title">INNWA Smartphone Promotion (Oct 17 - Oct 20)</h3>
-                <p class="product-description">
-                    ဖော်ပြချက်ကောင်းပြီအကြောင်း<br>
-                    ဖော်ပြချက်များအပြည့်အစုံ
-                </p>
-                <div class="product-tags">
-                    <span class="tag">Promotion</span>
-                </div>
-                <button class="read-more">Read More</button>
-                <p class="product-date">Sunday, 20th of October 2024</p>
-            </div>
-            <div class="product-card">
-                <img src="static/images/1.jpg" alt="Promotion 1" class="product-image">
-                <h3 class="product-title">INNWA Smartphone Promotion (Oct 17 - Oct 20)</h3>
-                <p class="product-description">
-                    ဖော်ပြချက်ကောင်းပြီအကြောင်း<br>
-                    ဖော်ပြချက်များအပြည့်အစုံ
-                </p>
-                <div class="product-tags">
-                    <span class="tag">Promotion</span>
-                </div>
-                <button class="read-more">Read More</button>
-                <p class="product-date">Sunday, 20th of October 2024</p>
-            </div>
-            <div class="product-card">
-                <img src="static/images/1.jpg" alt="Promotion 1" class="product-image">
-                <h3 class="product-title">INNWA Smartphone Promotion (Oct 17 - Oct 20)</h3>
-                <p class="product-description">
-                    ဖော်ပြချက်ကောင်းပြီအကြောင်း<br>
-                    ဖော်ပြချက်များအပြည့်အစုံ
-                </p>
-                <div class="product-tags">
-                    <span class="tag">Promotion</span>
-                </div>
-                <button class="read-more">Read More</button>
-                <p class="product-date">Sunday, 20th of October 2024</p>
-            </div>
-            <div class="product-card">
-                <img src="static/images/1.jpg" alt="Promotion 1" class="product-image">
-                <h3 class="product-title">INNWA Smartphone Promotion (Oct 17 - Oct 20)</h3>
-                <p class="product-description">
-                    ဖော်ပြချက်ကောင်းပြီအကြောင်း<br>
-                    ဖော်ပြချက်များအပြည့်အစုံ
-                </p>
-                <div class="product-tags">
-                    <span class="tag">Promotion</span>
-                </div>
-                <button class="read-more">Read More</button>
-                <p class="product-date">Sunday, 20th of October 2024</p>
-            </div>
-            <div class="product-card">
-                <img src="static/images/1.jpg" alt="Promotion 1" class="product-image">
-                <h3 class="product-title">INNWA Smartphone Promotion (Oct 17 - Oct 20)</h3>
-                <p class="product-description">
-                    ဖော်ပြချက်ကောင်းပြီအကြောင်း<br>
-                    ဖော်ပြချက်များအပြည့်အစုံ
-                </p>
-                <div class="product-tags">
-                    <span class="tag">Promotion</span>
-                </div>
-                <button class="read-more">Read More</button>
-                <p class="product-date">Sunday, 20th of October 2024</p>
-            </div>
-            <div class="product-card">
-                <img src="static/images/1.jpg" alt="Promotion 1" class="product-image">
-                <h3 class="product-title">INNWA Smartphone Promotion (Oct 17 - Oct 20)</h3>
-                <p class="product-description">
-                    ဖော်ပြချက်ကောင်းပြီအကြောင်း<br>
-                    ဖော်ပြချက်များအပြည့်အစုံ
-                </p>
-                <div class="product-tags">
-                    <span class="tag">Promotion</span>
-                </div>
-                <button class="read-more">Read More</button>
-                <p class="product-date">Sunday, 20th of October 2024</p>
-            </div>
-            <div class="product-card">
-                <img src="static/images/1.jpg" alt="Promotion 1" class="product-image">
-                <h3 class="product-title">INNWA Smartphone Promotion (Oct 17 - Oct 20)</h3>
-                <p class="product-description">
-                    ဖော်ပြချက်ကောင်းပြီအကြောင်း<br>
-                    ဖော်ပြချက်များအပြည့်အစုံ
-                </p>
-                <div class="product-tags">
-                    <span class="tag">Promotion</span>
-                </div>
-                <button class="read-more">Read More</button>
-                <p class="product-date">Sunday, 20th of October 2024</p>
-            </div>
-            <div class="product-card">
-                <img src="static/images/1.jpg" alt="Promotion 1" class="product-image">
-                <h3 class="product-title">INNWA Smartphone Promotion (Oct 17 - Oct 20)</h3>
-                <p class="product-description">
-                    ဖော်ပြချက်ကောင်းပြီအကြောင်း<br>
-                    ဖော်ပြချက်များအပြည့်အစုံ
-                </p>
-                <div class="product-tags">
-                    <span class="tag">Promotion</span>
-                </div>
-                <button class="read-more">Read More</button>
-                <p class="product-date">Sunday, 20th of October 2024</p>
-            </div>
-            <div class="product-card">
-                <img src="static/images/1.jpg" alt="Promotion 1" class="product-image">
-                <h3 class="product-title">INNWA Smartphone Promotion (Oct 17 - Oct 20)</h3>
-                <p class="product-description">
-                    ဖော်ပြချက်ကောင်းပြီအကြောင်း<br>
-                    ဖော်ပြချက်များအပြည့်အစုံ
-                </p>
-                <div class="product-tags">
-                    <span class="tag">Promotion</span>
-                </div>
-                <button class="read-more">Read More</button>
-                <p class="product-date">Sunday, 20th of October 2024</p>
-            </div>
         </div>
 
         <!-- Pagination Controls -->
@@ -356,46 +251,61 @@
     </div>
 
     <script>
-        const itemsPerPage = 8;
+        const itemsPerPage = 2;
         let currentPage = 1;
+        let totalPages = 1;
 
         function displayItems() {
             const productView = document.getElementById("productView");
-            const products = Array.from(productView.getElementsByClassName("product-card"));
-            const totalPages = Math.ceil(products.length / itemsPerPage);
+            const allProducts = Array.from(productView.getElementsByClassName("product-card")).filter(product => product.style.display !== "none");
 
-            products.forEach(item => item.style.display = "none");
-
+            totalPages = Math.ceil(allProducts.length / itemsPerPage) || 1;
             const start = (currentPage - 1) * itemsPerPage;
             const end = start + itemsPerPage;
-            for (let i = start; i < end && i < products.length; i++) {
-                products[i].style.display = "block";
-            }
+
+            allProducts.forEach((product, index) => {
+                product.style.display = index >= start && index < end ? "block" : "none";
+            });
 
             document.getElementById("prevButton").disabled = currentPage === 1;
             document.getElementById("nextButton").disabled = currentPage === totalPages;
-            document.getElementById("pageIndicator").textContent = `Page ${currentPage}`;
+            document.getElementById("pageIndicator").textContent = `Page ${currentPage} of ${totalPages}`;
         }
 
         function changePage(direction) {
             currentPage += direction;
+            if (currentPage < 1) currentPage = 1;
+            if (currentPage > totalPages) currentPage = totalPages;
             displayItems();
         }
 
         function applyFilters() {
             const searchInput = document.getElementById("searchInput").value.toLowerCase();
-            const categories = Array.from(document.querySelectorAll('.filter-section input[type="checkbox"]:checked')).map(input => input.value.toLowerCase());
+            const selectedTags = Array.from(document.querySelectorAll('.filter-section input[type="checkbox"]:checked')).map(input => input.value.toLowerCase());
+            const selectedPriceRanges = Array.from(document.querySelectorAll('.price-range:checked')).map(input => input.value);
 
             const products = document.getElementsByClassName("product-card");
-            for (let product of products) {
+            Array.from(products).forEach(product => {
                 const title = product.querySelector(".product-title").textContent.toLowerCase();
                 const tags = Array.from(product.getElementsByClassName("tag")).map(tag => tag.textContent.toLowerCase());
+                const price = parseFloat(product.getAttribute('data-price'));
 
                 const matchesSearch = !searchInput || title.includes(searchInput);
-                const matchesCategory = !categories.length || categories.some(cat => tags.includes(cat));
+                const matchesTags = !selectedTags.length || selectedTags.some(tag => tags.includes(tag));
+                const matchesPrice = !selectedPriceRanges.length || selectedPriceRanges.some(range => {
+                    if (range === "0-50") return price >= 0 && price <= 50;
+                    if (range === "50-100") return price > 50 && price <= 100;
+                    if (range === "100-200") return price > 100 && price <= 200;
+                    if (range === "200-500") return price > 200 && price <= 500;
+                    if (range === "500") return price > 500;
+                    return false;
+                });
 
-                product.style.display = matchesSearch && matchesCategory ? "block" : "none";
-            }
+                product.style.display = matchesSearch && matchesTags && matchesPrice ? "block" : "none";
+            });
+
+            currentPage = 1;
+            displayItems();
         }
 
         displayItems();

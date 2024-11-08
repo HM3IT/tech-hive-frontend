@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>AMD Ryzen Processors</title>
+    <style>
+        /* Reset and Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+    
+        body {
+            background: linear-gradient(135deg, #ff4500, #2b2b2b); /* Adjusted gradient for a more refined look */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+        
+        /* Banner Image */
+        .header-image {
+            width: 100%; /* Full-width for all screen sizes */
+            max-width: 1800px; /* Max width for large screens */
+            height: 500px; /* Maintain aspect ratio */
+            object-fit: cover; /* Scale image to fit without stretching */
+            margin-bottom: 20px;
+        }
+        
+        /* Main Container */
+        .container {
+            display: flex;
+            gap: 20px;
+            max-width: 1200px;
+            padding: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+            background-color: transparent; /* Semi-transparent background for contrast */
+            border-radius: 10px;
+        }
+        
+        /* Product Item */
+        .product-item {
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            width: 300px;
+             /* Slight opacity for better contrast */
+        }
+        
+    
+        .product-image {
+            max-width: 100%;
+            margin-bottom: 20px;
+        }
+    
+        .product-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+    
+        .product-specs {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            color: #b0b0b0;
+        }
+    
+        .sku {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            margin-bottom: 20px;
+        }
+    
+        .in-store-only {
+            display: inline-block;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: transparent;
+            border: 1px solid #fff;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+    
+        .in-store-only:hover {
+            background-color: #ff6600;
+        }
+    
+        .footer {
+            background-color: #f8f9fa;
+            padding: 40px 20px;
+            color: #333;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            width: 100%;
+        }
+    
+        .footer-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: auto;
+            padding-top: 20px;
+        }
+    
+        .footer-section {
+            margin: 20px;
+            flex: 1;
+            min-width: 180px;
+        }
+    
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+    
+        .social-icons a {
+            color: #333;
+            margin: 0 8px;
+            font-size: 24px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+    
+        .social-icons a:hover {
+            color: #ff6600;
+        }
+    
+        .visit-btn {
+            display: inline-block;
+            border: 1px solid red;
+            border-radius: 20px;
+            color: red;
+            padding: 8px 20px;
+            margin: 5px 0;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+    
+        .visit-btn:hover {
+            background-color: red;
+            color: white;
+        }
+    
+        .innwa-yangon p, .innwa-mandalay p {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+    
+        .arrow {
+            font-size: 18px;
+            color: #333;
+        }
+    
+        .viber p {
+            font-size: 16px;
+            color: #333;
+        }
+    
+        .qr-code {
+            width: 100px;
+            height: 100px;
+            margin-top: 10px;
+        }
+    
+        .footer-bottom {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+    
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .container {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    
+        @media (max-width: 768px) {
+            .product-item {
+                width: 80%;
+            }
+    
+            .footer-container {
+                flex-direction: column;
+                align-items: center;
+            }
+    
+            .footer-section {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+    
+            .qr-code {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+    
+            .product-item {
+                width: 100%;
+            }
+    
+            .footer {
+                padding: 20px;
+            }
+    
+            .footer-section h3 {
+                font-size: 16px;
+            }
+    
+            .footer-bottom {
+                font-size: 12px;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+
+<!-- Header Image -->
+<img src="static/images/banner.png" alt="AMD Ryzen Processor Banner" class="header-image">
+
+<div class="container">
+    <!-- Product 1 -->
+    <div class="product-item">
+        <img src="static/images/r4.jpg" alt="Ryzen 5 5600X" class="product-image">
+        <div class="product-title">Ryzen 5 5600X</div>
+        <div class="product-specs">6 cores | 12 threads | Base Clock: 3.7GHz | Max Boost Clock: up to 4.6GHz</div>
+        <div class="sku">SKU 123456</div>
+        <div class="in-store-only">In-Store Only</div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product-item">
+        <img src="static/images/r5.jpg" alt="Ryzen 7 5800X" class="product-image">
+        <div class="product-title">Ryzen 7 5800X</div>
+        <div class="product-specs">8 cores | 16 threads | Base Clock: 3.8GHz | Max Boost Clock: up to 4.7GHz</div>
+        <div class="sku">SKU 654321</div>
+        <div class="in-store-only">In-Store Only</div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product-item">
+        <img src="static/images/r6.jpg" alt="Ryzen 9 5900X" class="product-image">
+        <div class="product-title">Ryzen 9 5900X</div>
+        <div class="product-specs">12 cores | 24 threads | Base Clock: 3.7GHz | Max Boost Clock: up to 4.8GHz</div>
+        <div class="sku">SKU 789012</div>
+        <div class="in-store-only">In-Store Only</div>
+    </div>
+    <div class="product-item">
+        <img src="static/images/r6.jpg" alt="Ryzen 9 5900X" class="product-image">
+        <div class="product-title">Ryzen 9 5900X</div>
+        <div class="product-specs">12 cores | 24 threads | Base Clock: 3.7GHz | Max Boost Clock: up to 4.8GHz</div>
+        <div class="sku">SKU 789012</div>
+        <div class="in-store-only">In-Store Only</div>
+    </div>
+    <div class="product-item">
+        <img src="static/images/r6.jpg" alt="Ryzen 9 5900X" class="product-image">
+        <div class="product-title">Ryzen 9 5900X</div>
+        <div class="product-specs">12 cores | 24 threads | Base Clock: 3.7GHz | Max Boost Clock: up to 4.8GHz</div>
+        <div class="sku">SKU 789012</div>
+        <div class="in-store-only">In-Store Only</div>
+    </div>
+    <div class="product-item">
+        <img src="static/images/r6.jpg" alt="Ryzen 9 5900X" class="product-image">
+        <div class="product-title">Ryzen 9 5900X</div>
+        <div class="product-specs">12 cores | 24 threads | Base Clock: 3.7GHz | Max Boost Clock: up to 4.8GHz</div>
+        <div class="sku">SKU 789012</div>
+        <div class="in-store-only">In-Store Only</div>
+    </div>
+</div>
+
+<footer class="footer">
+    <!-- Footer content here, same as above -->
+    
+        <div class="footer-container">
+            <!-- Follow Us Section -->
+            <div class="footer-section follow-us">
+                <h3>FOLLOW US</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+    
+            <!-- Visit Us Section -->
+            <div class="footer-section visit-us">
+                <h3>VISIT US</h3>
+                <a href="#" class="visit-btn stores">Stores</a>
+                <a href="#" class="visit-btn service">Service</a>
+                <a href="#" class="visit-btn appointment">Appointment</a>
+            </div>
+    
+            <!-- INNWA YANGON Section -->
+            <div class="footer-section innwa-yangon">
+                <h3>INNWA YANGON</h3>
+                <p>INNWA Merchant Road Branch <span class="arrow">▼</span></p>
+                <p>INNWA Premium Seik Kan Thar Street Branch <span class="arrow">▼</span></p>
+                <p>INNWA IT & Mobile U Chit Maung Branch <span class="arrow">▼</span></p>
+                <p>INNWA IT & Mobile North Dagon Pinlon Branch <span class="arrow">▼</span></p>
+            </div>
+    
+            <!-- INNWA MANDALAY Section -->
+            <div class="footer-section innwa-mandalay">
+                <h3>INNWA MANDALAY</h3>
+                <p>INNWA IT & Mobile (ကဇာကွတ်) Branch <span class="arrow">▼</span></p>
+                <p>INNWA IT & Mobile (ချမ်းအေးသာဇံ) Branch <span class="arrow">▼</span></p>
+                <p>INNWA IT & Mobile (မလိခ) Branch <span class="arrow">▼</span></p>
+            </div>
+    
+            <!-- Viber Section -->
+            <div class="footer-section viber">
+                <h3>Viber</h3>
+                <p><i class="fas fa-phone"></i> +959771966688</p>
+                <img src="static/images/qr-code.png" alt="QR Code" class="qr-code">
+            </div>
+        </div>
+    
+        <div class="footer-bottom">
+            <p>INNWA IT & MOBILE © 2024.</p>
+        </div>
+    
+</footer>
+
+</body>
+</html>

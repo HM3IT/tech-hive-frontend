@@ -3,185 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart Page</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Shopping Cart</title>
     <style>
-      /* styles.css */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
 
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    background-color: #f0f2f5;
-    padding: 20px;
-}
+        /* Cart Container */
+        .cart-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-.cart-container {
-    display: flex;
-    gap: 20px;
-    max-width: 1200px;
-    width: 100%;
-}
+        h2 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
 
-.cart-detail {
-    flex: 3;
-    background-color: #fff;
-    border: 1px solid #e2e2e2;
-    padding: 20px;
-    border-radius: 8px;
-}
+        /* Cart Items Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-.cart-total {
-    flex: 1;
-    background-color: #fff;
-    border: 1px solid #e2e2e2;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-}
+        table, th, td {
+            border: 1px solid #ddd;
+        }
 
-h2 {
-    color: #4b4b4b;
-    margin-bottom: 20px;
-}
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
 
-.cart-detail table {
-    width: 100%;
-    border-collapse: collapse;
-}
+        th {
+            background-color: #f7f7f7;
+            color: #333;
+            font-weight: bold;
+        }
 
-.cart-detail th,
-.cart-detail td {
-    padding: 10px;
-    text-align: center;
-    border-bottom: 1px solid #e2e2e2;
-}
+        /* Product Details */
+        .product-name {
+            text-align: left;
+        }
 
-.cart-detail img {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
-}
+        /* Quantity Controls */
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-.product-info {
-    text-align: left;
-}
+        .quantity-btn {
+            padding: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            background-color: #ddd;
+        }
 
-.product-name {
-    color: #0066cc;
-    text-decoration: none;
-    font-weight: bold;
-    display: block;
-}
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            margin: 0 5px;
+            border: 1px solid #ccc;
+        }
 
-.label {
-    color: #a0a0a0;
-    font-size: 0.9em;
-}
+        /* Total Price */
+        .total-price {
+            font-size: 1.2rem;
+            color: #b12704;
+            font-weight: bold;
+        }
 
-.quantity-controls {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
+        /* Remove Button */
+        .remove-btn {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-.quantity-controls button {
-    width: 25px;
-    height: 25px;
-    border: none;
-    background-color: #f0f0f0;
-    cursor: pointer;
-    font-size: 16px;
-    color: #333;
-}
+        /* Checkout Button */
+        .checkout-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
 
-.quantity-controls input {
-    width: 30px;
-    text-align: center;
-    border: 1px solid #e2e2e2;
-    border-radius: 4px;
-}
-
-.cart-total .total {
-    margin-top: 20px;
-}
-
-.cart-total p {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-}
-
-.cart-total .total-amount {
-    font-weight: bold;
-    color: #d9534f;
-}
-
-.checkout-btn {
-    background-color: #0066cc;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 20px;
-    font-size: 1em;
-}
-
-.checkout-btn:hover {
-    background-color: #004999;
-}
-
+        .checkout-btn:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
-    <div class="cart-container">
-        <div class="cart-detail">
-            <h2><i class="fas fa-shopping-cart"></i> CART DETAIL</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Subtotal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <img src="static/images/1.jpg" alt="Product Image">
-                            <div class="product-info">
-                                <a href="#" class="product-name">Kingston 32GB DDR5 4800MHz Laptop Memory RAM</a>
-                                <p><span class="label">Device Type:</span> Laptop RAM, <span class="label">Speed:</span> DDR5 4800MHz, <span class="label">Capacity:</span> 32GB</p>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="quantity-controls">
-                                <button class="minus">-</button>
-                                <input type="text" value="1">
-                                <button class="plus">+</button>
-                            </div>
-                            <p>Available Quantity: 1</p>
-                        </td>
-                        <td>750,750 Ks</td>
-                        <td>750,750 Ks</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="cart-total">
-            <h2><i class="fas fa-coins"></i> CART TOTAL</h2>
-            <div class="total">
-                <p>SUBTOTAL <span>750,750 Ks</span></p>
-                <p class="total-amount">TOTAL <span>750,750 Ks</span></p>
-            </div>
-            <button class="checkout-btn">PROCEED TO CHECKOUT</button>
-        </div>
-    </div>
+
+<div class="cart-container">
+    <h2>Your Shopping Cart</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="product-name">UltraBook Pro 13 - i7 13th Gen</td>
+                <td>3,600,000 Ks</td>
+                <td>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
+                        <input type="text" value="1" class="quantity-input" id="quantityInput">
+                        <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
+                    </div>
+                </td>
+                <td class="total-price">3,600,000 Ks</td>
+                <td><button class="remove-btn" onclick="removeItem(this)">Remove</button></td>
+            </tr>
+            <!-- Additional items can be added here -->
+        </tbody>
+    </table>
+    <button class="checkout-btn">Proceed to Checkout</button>
+</div>
+
+<script>
+    // Function to change quantity
+    function changeQuantity(amount) {
+        const quantityInput = document.getElementById('quantityInput');
+        let quantity = parseInt(quantityInput.value);
+        
+        if (!isNaN(quantity)) {
+            quantity += amount;
+            if (quantity < 1) quantity = 1; // Ensure quantity is at least 1
+            quantityInput.value = quantity;
+            updateTotalPrice(quantity);
+        }
+    }
+
+    // Function to update total price
+    function updateTotalPrice(quantity) {
+        const pricePerUnit = 3600000; // Replace with dynamic price if available
+        const totalPrice = pricePerUnit * quantity;
+        document.querySelector('.total-price').innerText = `${totalPrice.toLocaleString()} Ks`;
+    }
+
+    // Function to remove an item
+    function removeItem(button) {
+        const row = button.closest('tr');
+        row.remove();
+        // Optionally update grand total here if you have multiple items
+    }
+</script>
+
 </body>
 </html>
