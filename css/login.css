@@ -1,0 +1,143 @@
+<style>
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    margin: auto;
+}
+
+.container h2 {
+    color: #d11a2a;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.checkbox-group input {
+    margin-right: 5px;
+}
+
+.button {
+    background-color: #d11a2a;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.button:hover {
+    background-color: #b71825;
+}
+
+/* Footer Styling */
+.footer {
+    width: 100%;
+    background-color: #f8f9fa;
+    padding: 20px;
+    color: #333;
+    font-family: Arial, sans-serif;
+    margin-top: auto;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    text-align: left;
+    gap: 20px;
+}
+
+.footer-section {
+    flex: 1 1 200px;
+    max-width: 200px;
+}
+
+.footer-section h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.footer-section p {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+}
+
+.social-icons a {
+    font-size: 20px;
+    color: #666;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.social-icons a:hover {
+    color: #d11a2a;
+}
+
+.visit-btn {
+    display: block;
+    color: #d11a2a;
+    text-decoration: none;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.qr-code {
+    width: 100px;
+    margin-top: 10px;
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-top: 20px;
+}
+</style>
