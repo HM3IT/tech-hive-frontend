@@ -5,7 +5,9 @@ window.env = {
 
 
 function loadComponent(url, placeholderId) {
-    fetch(url)
+    console.log("url", url)
+    console.log("placeholderId", placeholderId)
+    fetch("../components/"+url)
         .then(response => response.text())
         .then(html => {
             document.getElementById(placeholderId).innerHTML = html;
