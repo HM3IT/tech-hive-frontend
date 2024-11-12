@@ -1,20 +1,20 @@
-export function setCookie(name, value, days) {
-	const d = new Date();
-	d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
-	let expires = "expires=" + d.toUTCString();
-	document.cookie = `${name}=${value}; ${expires}; path=/; Secure; HttpOnly; SameSite=Strict`;
-}
+export const TOKEN_NAME = "accessToken"
+export const API_ENDPOINT = "http://localhost:8000/api"
 
+export function setAccessTokenCookie(token, expiryTimeInMs) {
+    const expires = new Date(Date.now() + expiryTimeInMs);
+    document.cookie = `${TOKEN_NAME}=${token}; expires=${expires.toUTCString()}; path=/; secure; SameSite=Strict`;
+}
 
 export function getCookie(name) {
-	let nameEQ = name + "=";
-	let ca = document.cookie.split(';');
-	for (let i = 0; i < ca.length; i++) {
-		let c = ca[i];
-		while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-	}
-	return null;
-}
+    const nameEQ = `${name}=`;
+    const cookies = document.cookie.split(';');
 
- 
+    for (let cookie of cookies) {
+        cookie = cookie.trim();  
+        if (cookie.startsWith(nameEQ)) {
+            return cookie.substring(nameEQ.length);
+        }
+    }
+    return null;
+}

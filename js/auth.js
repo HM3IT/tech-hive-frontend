@@ -1,5 +1,5 @@
 
-import { setCookie, getCookie } from './utils.js';
+import { setAccessTokenCookie, getCookie } from './utils.js';
 import { sendRequest, sendAuthRequest } from './api.js';
 
 
@@ -16,8 +16,11 @@ export async function signin(event) {
 	if (response.ok) {
 		let responseData = await response.json();
 		const token = responseData.access_token	;  
+		console.log("token")
+		console.log(token)
+		const expireTimeMs = responseData.expireDate
 	 
-		setCookie('auth_token', token, 1);   
+		setAccessTokenCookie(token, expireTimeMs);   
 		console.log('Login successful and token stored in cookies');
 	} else {
 		let errorData = await response.json();

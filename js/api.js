@@ -1,9 +1,9 @@
 
-import { setCookie, getCookie } from './utils.js';
-const API_BASE = window.env.API_URL
+import {TOKEN_NAME, API_ENDPOINT, getCookie } from './utils.js';
+ 
 
 export async function sendRequest(url, data) {
-    return await fetch(API_BASE + url, {
+    return await fetch(API_ENDPOINT + url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ export async function sendRequest(url, data) {
 }
 
 export async function sendAuthRequest(url, method="GET", data = null) {
-    const token = getCookie('auth_token'); 
+    const token = getCookie(TOKEN_NAME); 
     let headers = {
         'Content-Type': 'application/json',
     };
@@ -37,5 +37,5 @@ export async function sendAuthRequest(url, method="GET", data = null) {
         options.body = JSON.stringify(data);
     }
 
-    return await fetch(API_BASE + url, options);
+    return await fetch(API_ENDPOINT + url, options);
 }

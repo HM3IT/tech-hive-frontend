@@ -7,9 +7,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
    <link rel="stylesheet" href="css/login.css">
 </head>
-
 <body>
+    <script src="js/main.js"></script>
+ 
+    <script type="module" src="js/components/login.js"></script>
+    <!-- Navbar -->
+     <nav id="nav">
 
+     </nav>
+     <!-- End of Navbar  -->
 <div class="container">
     <h2>Login</h2>
     <form id="login-form">
@@ -21,7 +27,7 @@
             <label for="password">Password*</label>
             <input type="password" id="signin-password" name="password" required>
             <div class="checkbox-group">
-                <input type="checkbox" id="show-password" onclick="togglePassword()">
+                <input type="checkbox" id="show-password">
                 <label for="show-password">Show Password</label>
             </div>
         </div>
@@ -29,55 +35,8 @@
     </form>
 </div>
 
-<footer class="footer">
-    <div class="footer-container">
-        <!-- Follow Us Section -->
-        <div class="footer-section follow-us">
-            <h3>FOLLOW US</h3>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-            </div>
-        </div>
-
-        <!-- Visit Us Section -->
-        <div class="footer-section visit-us">
-            <h3>VISIT US</h3>
-            <a href="#" class="visit-btn stores">Stores</a>
-            <a href="#" class="visit-btn service">Service</a>
-            <a href="#" class="visit-btn appointment">Appointment</a>
-        </div>
-
-        <!-- INNWA YANGON Section -->
-        <div class="footer-section innwa-yangon">
-            <h3>INNWA YANGON</h3>
-            <p>INNWA Merchant Road Branch <span class="arrow">▼</span></p>
-            <p>INNWA Premium Seik Kan Thar Street Branch <span class="arrow">▼</span></p>
-            <p>INNWA IT & Mobile U Chit Maung Branch <span class="arrow">▼</span></p>
-            <p>INNWA IT & Mobile North Dagon Pinlon Branch <span class="arrow">▼</span></p>
-        </div>
-
-        <!-- INNWA MANDALAY Section -->
-        <div class="footer-section innwa-mandalay">
-            <h3>INNWA MANDALAY</h3>
-            <p>INNWA IT & Mobile (ကဇာကွတ်) Branch <span class="arrow">▼</span></p>
-            <p>INNWA IT & Mobile (ချမ်းအေးသာဇံ) Branch <span class="arrow">▼</span></p>
-            <p>INNWA IT & Mobile (မလိခ) Branch <span class="arrow">▼</span></p>
-        </div>
-
-        <!-- Viber Section -->
-        <div class="footer-section viber">
-            <h3>Viber</h3>
-            <p><i class="fas fa-phone"></i> +959771966688</p>
-            <img src="static/images/qr-code.png" alt="QR Code" class="qr-code">
-        </div>
-    </div>
-
-    <div class="footer-bottom">
-        <p>INNWA IT & MOBILE © 2024.</p>
-    </div>
+<footer id="footer">
 </footer>
-<script type="module" src="js/components/login.js"></script>
+
 </body>
 </html>
