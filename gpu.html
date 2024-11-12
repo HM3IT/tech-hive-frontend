@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPU Collection</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1 {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        
+        .gpu-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .gpu-item {
+            text-align: center;
+        }
+        
+        .gpu-item img {
+            width: 100%;
+            height: auto;
+            max-width: 150px;
+        }
+        
+        .gpu-item a {
+            display: block;
+            margin-top: 10px;
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        .gpu-item a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .pagination button {
+            margin: 0 5px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+        
+        .pagination button:hover {
+            background-color: #0056b3;
+        }
+        
+        .pagination button.disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>NVIDIA GeForce™ Graphics Cards</h1>
+    <div class="gpu-section" id="gpu-container">
+        <!-- GPU items will be dynamically loaded here -->
+    </div>
+
+    <div class="pagination" id="pagination"></div>
+
+    <script >// script.js
+        const gpus = [
+            { image: "images/rtx4000.jpg", name: "GeForce™ RTX 4000 Series" },
+            { image: "images/rtx3090.jpg", name: "GeForce™ RTX 3090 Series" },
+            { image: "images/rtx3080.jpg", name: "GeForce™ RTX 3080 Series" },
+            { image: "images/rtx3070.jpg", name: "GeForce™ RTX 3070 Series" },
+            { image: "images/rtx3060.jpg", name: "GeForce™ RTX 3060 Series" },
+            { image: "images/rx7900.jpg", name: "Radeon™ RX 7900 Series" },
+            { image: "images/rx6900.jpg", name: "Radeon™ RX 6900 Series" },
+            { image: "images/rx6800.jpg", name: "Radeon™ RX 6800 Series" },
+            { image: "images/rx6700.jpg", name: "Radeon™ RX 6700 Series" },
+            { image: "images/rx6600.jpg", name: "Radeon™ RX 6600 Series" },
+            // Add more GPU items as needed
+        ];
+        
+        const itemsPerPage = 4; // Number of items per page
+        let currentPage = 1; // Current page
+        
+        // Function to display GPUs based on the current page
+        function displayGPUs() {
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const gpuContainer = document.getElementById("gpu-container");
+        
+            gpuContainer.innerHTML = ""; // Clear previous items
+        
+            // Load only items for the current page
+            gpus.slice(start, end).forEach(gpu => {
+                const gpuItem = document.createElement("div");
+                gpuItem.classList.add("gpu-item");
+                gpuItem.innerHTML = `
+                    <img src="${gpu.image}" alt="${gpu.name}">
+                    <a href="#">${gpu.name}</a>
+                `;
+                gpuContainer.appendChild(gpuItem);
+            });
+        
+            displayPagination();
+        }
+        
+        // Function to display pagination buttons
+        function displayPagination() {
+            const pagination = document.getElementById("pagination");
+            pagination.innerHTML = ""; // Clear previous pagination
+        
+            const totalPages = Math.ceil(gpus.length / itemsPerPage);
+        
+            // Previous button
+            const prevButton = document.createElement("button");
+            prevButton.textContent = "Previous";
+            prevButton.disabled = currentPage === 1;
+            prevButton.classList.add(currentPage === 1 ? "disabled" : "");
+            prevButton.onclick = () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    displayGPUs();
+                }
+            };
+            pagination.appendChild(prevButton);
+        
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement("button");
+                pageButton.textContent = i;
+                pageButton.classList.add(i === currentPage ? "active" : "");
+                pageButton.onclick = () => {
+                    currentPage = i;
+                    displayGPUs();
+                };
+                pagination.appendChild(pageButton);
+            }
+        
+            // Next button
+            const nextButton = document.createElement("button");
+            nextButton.textContent = "Next";
+            nextButton.disabled = currentPage === totalPages;
+            nextButton.classList.add(currentPage === totalPages ? "disabled" : "");
+            nextButton.onclick = () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    displayGPUs();
+                }
+            };
+            pagination.appendChild(nextButton);
+        }
+        
+        // Initial load
+        displayGPUs();
+        </script>
+</body>
+</html>
