@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
    <link rel="stylesheet" href="css/login.css">
 </head>
-<script src="js/auth.js"></script>
+
 <body>
 
 <div class="container">
@@ -28,24 +28,6 @@
         <button type="submit" class="button" >Login</button>
     </form>
 </div>
-
-<script>
-    // Function to toggle password visibility
-    addEventListener("DOMContentLoaded", (event) => {
-
-
-        function togglePassword() {
-            var field = document.getElementById('password');
-            field.type = field.type === 'password' ? 'text' : 'password';
-        }
-    
-    
-        let loginForm =  document.getElementById("login-form")
-        loginForm.addEventListener("submit", signin)
-
-    });
-
-</script>
 
 <footer class="footer">
     <div class="footer-container">
@@ -96,6 +78,6 @@
         <p>INNWA IT & MOBILE © 2024.</p>
     </div>
 </footer>
-
+<script type="module" src="js/components/login.js"></script>
 </body>
 </html>

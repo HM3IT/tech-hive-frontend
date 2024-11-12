@@ -1,34 +1,24 @@
 
+import { setCookie, getCookie } from './utils.js';
+import { sendRequest, sendAuthRequest } from './api.js';
 
-const API_BASE = "http://localhost:8000"
-async function sendRequest(url, data, method, token =null) {
 
-	header = {
-	'Content-Type': 'application/json',
-	}
-    return await fetch(API_BASE+url, {
-        method: method,
-        headers: header,
-        body: JSON.stringify(data),
-        // body: JSON.stringifydata,
-    });
-}
-
-async function signin(event) {
+const redirectDelayTime = 2000
+ 
+export async function signin(event) {
 	event.preventDefault();
 
 	let email = document.getElementById('signin-email').value;
 	let password = document.getElementById('signin-password').value;
  
-
-	let signinData = { email, password };
-	let response = await sendRequest('/api/access/login', signinData, 'POST');
+	let response = await sendRequest('/access/login', { email, password }, 'POST');
 	
 	if (response.ok) {
-		// setTimeout(function () {
-		// 	window.location.href = '/';
-		// }, redirectDelayTime);
-		console.log(response.json())
+		let responseData = await response.json();
+		const token = responseData.access_token	;  
+	 
+		setCookie('auth_token', token, 1);   
+		console.log('Login successful and token stored in cookies');
 	} else {
 		let errorData = await response.json();
 		console.log(errorData)
@@ -36,17 +26,15 @@ async function signin(event) {
 	}
 }
 
-async function logout(event) {
+export async function logout(event) {
 	event.preventDefault();
 
- 
-	let signinData = { email, password };
-	let response = await sendRequest('/api/access/logout', signinData, 'POST');
+	let response = await sendAuthRequest('/api/access/logout', 'POST');
 
 	if (response.ok) {
-		// setTimeout(function () {
-		// 	window.location.href = '/';
-		// }, redirectDelayTime);
+		setTimeout(function () {
+			window.location.href = '/';
+		}, redirectDelayTime);
 		console.log(response.json())
 	} else {
 		let errorData = await response.json();
@@ -55,7 +43,7 @@ async function logout(event) {
 }
 
 
-async function signup(event) {
+export async function signup(event) {
 	event.preventDefault();
 
 	let name = document.getElementById('signup-name').value;
