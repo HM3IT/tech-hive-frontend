@@ -3,8 +3,8 @@ import {TOKEN_NAME, getCookie } from '../utils.js';
 
 addEventListener("DOMContentLoaded", (e) => {
     if (getCookie(TOKEN_NAME)){
-        alert("already sign in")
-        window.location.href= "/index.html"
+        // alert("already sign in")
+        // window.location.href= "/index.html"
     }
 
     let loginForm =  document.getElementById("login-form")
@@ -14,10 +14,7 @@ addEventListener("DOMContentLoaded", (e) => {
         let field = document.getElementById('signin-password');
         field.type = field.type === 'password' ? 'text' : 'password';
     }
-    let el = document.getElementById('show-password'); 
+    document.getElementById('show-password').addEventListener("change", togglePassword);
  
- 
-    el.addEventListener("change", togglePassword);
 });
-
 
