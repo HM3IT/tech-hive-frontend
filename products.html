@@ -4,46 +4,54 @@
     <meta charset="UTF-8">
     <title>Product Customer View with Pagination</title>
     <link rel="stylesheet" href="css/products.css">
+    <link rel="stylesheet" href="css/nav.css">
     
 </head>
 <body>
     <script type="module"  src="js/components/products.js"></script> 
+    <script src="js/main.js"></script>
+    <!-- Navbar -->
+    <div>
+        <nav id="nav">
 
-    <!-- Sidebar Filter -->
-    <div class="sidebar">
-        <h2>Filter Products</h2>
-
-        <div class="filter-section">
-            <label>Search</label>
-            <input type="text" id="searchInput" placeholder="Search by name">
-        </div>
-
-        <div class="filter-section">
-            <label>Tags</label>
-            <div><input type="checkbox" class="tag-filter" value="Discount"> Discount</div>
-            <div><input type="checkbox" class="tag-filter" value="New Arrival"> New Arrival</div>
-        </div>
-
-        <div class="filter-section">
-            <label>Price Range</label>
-            <div><input type="checkbox" value="0-50" class="price-range"> $0 - $50</div>
-            <div><input type="checkbox" value="50-100" class="price-range"> $50 - $100</div>
-            <div><input type="checkbox" value="100-200" class="price-range"> $100 - $200</div>
-            <div><input type="checkbox" value="200-500" class="price-range"> $200 - $500</div>
-            <div><input type="checkbox" value="500" class="price-range"> Above $500</div>
-        </div>
-    </div>
-
-    <!-- Product Content with Pagination -->
-    <div class="content">
-        <div class="product-view" id="productView">
-            <!-- Product Cards will be dynamically inserted here -->
-        </div>
-
-        <!-- Pagination Controls -->
-        <div class="pagination" id="paginationControls">
-            <!-- Pagination buttons will be inserted here dynamically -->
-        </div>
+        </nav>
+        <!-- End 
+       <!-- Sidebar Filter -->
+       <div class="sidebar">
+           <h2>Filter Products</h2>
+   
+           <div class="filter-section">
+               <label>Search</label>
+               <input type="text" id="searchInput" placeholder="Search by name">
+           </div>
+   
+           <div class="filter-section">
+               <label>Tags</label>
+               <div><input type="checkbox" class="tag-filter" value="Discount"> Discount</div>
+               <div><input type="checkbox" class="tag-filter" value="New Arrival"> New Arrival</div>
+           </div>
+   
+           <div class="filter-section">
+               <label>Price Range</label>
+               <div><input type="checkbox" value="0-50" class="price-range"> $0 - $50</div>
+               <div><input type="checkbox" value="50-100" class="price-range"> $50 - $100</div>
+               <div><input type="checkbox" value="100-200" class="price-range"> $100 - $200</div>
+               <div><input type="checkbox" value="200-500" class="price-range"> $200 - $500</div>
+               <div><input type="checkbox" value="500" class="price-range"> Above $500</div>
+           </div>
+       </div>
+   
+       <!-- Product Content with Pagination -->
+       <div class="content">
+           <div class="product-view" id="productView">
+               <!-- Product Cards will be dynamically inserted here -->
+           </div>
+   
+           <!-- Pagination Controls -->
+           <div class="pagination" id="paginationControls">
+               <!-- Pagination buttons will be inserted here dynamically -->
+           </div>
+       </div>
     </div>
 
   

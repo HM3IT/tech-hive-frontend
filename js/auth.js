@@ -11,7 +11,7 @@ export async function signin(event) {
 	let email = document.getElementById('signin-email').value;
 	let password = document.getElementById('signin-password').value;
  
-	let response = await sendRequest('/access/login', { email, password }, 'POST');
+	let response = await sendRequest('/access/login', 'POST', { email, password });
 	
 	if (response.ok) {
 		let responseData = await response.json();
@@ -22,6 +22,8 @@ export async function signin(event) {
 	 
 		setAccessTokenCookie(token, expireTimeMs);   
 		console.log('Login successful and token stored in cookies');
+		alert("login successfull")
+		window.location.href = "index.html"
 	} else {
 		let errorData = await response.json();
 		console.log(errorData)
@@ -82,5 +84,20 @@ export async function signup(event) {
 		console.log(errorData)
 	 
 	}	 
-    
+}
+
+
+export async function logout(){
+	let response = await sendRequest('/access/logout', null, 'POST');
+	if (response.ok) {
+		let responseData = await response.json();
+	 
+		setAccessTokenCookie(null, expireTimeMs);   
+		alert(`Logout successfully!`);
+		window.location.href = "index.html";
+	} else {
+		let errorData = await response.json();
+		console.log(errorData)
+	 
+	}	 
 }
