@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
     <title>Register Form</title>
     <link rel="stylesheet" href="css/register.css">
-    <script src="js/auth.js"></script>
 </head>
 <body>
 
@@ -20,24 +18,16 @@
         </div>
         <div class="form-group">
             <label for="email">Email*</label>
-            <input type="email" id="signup-email" name="email" required>
+            <input type="email" id="email" name="email" required>
         </div>
         <div class="form-group">
             <label for="password">Password*</label>
             <input type="password" id="signup-password" name="password" required>
             <div class="checkbox-group">
-                <input type="checkbox" id="show-password" onclick="togglePassword('password')">
+                <input type="checkbox" id="show-password">
                 <label for="show-password">Show Password</label>
             </div>
         </div>
-        <!-- <div class="form-group">
-            <label for="confirm-password">Confirm Password*</label>
-            <input type="password" id="confirm-password" name="confirm-password" required>
-            <div class="checkbox-group">
-                <input type="checkbox" id="show-confirm-password" onclick="togglePassword('confirm-password')">
-                <label for="show-confirm-password">Show Password</label>
-            </div>
-        </div> -->
         <div class="checkbox-group">
             <input type="checkbox" id="terms" name="terms" required>
             <label for="terms">Accept the terms of use of the service of the website.</label>
@@ -48,15 +38,8 @@
     </form>
 </div>
 
-<script>
-    function togglePassword(fieldId) {
-        var field = document.getElementById(fieldId);
-        field.type = field.type === "password" ? "text" : "password";
-    }
-    let signUpForm = document.getElementById("signup-form")
-    signUpForm.addEventListener("submit", signup)
-
-</script>
+<!-- Script for Register.js as a module -->
+<script type="module" src="js/register.js"></script>
 
 <footer class="footer">
     <div class="footer-container">
@@ -69,38 +52,11 @@
             </div>
         </div>
 
-        <!-- Visit Us Section -->
-        <div class="footer-section visit-us">
-            <h3>VISIT US</h3>
-            <a href="#" class="visit-btn stores">Stores</a>
-            <a href="#" class="visit-btn service">Service</a>
-            <a href="#" class="visit-btn appointment">Appointment</a>
-        </div>
-
-        <!-- INNWA YANGON Section -->
-        <div class="footer-section innwa-yangon">
-            <h3>INNWA YANGON</h3>
-            <p>INNWA Merchant Road Branch <span class="arrow">▼</span></p>
-            <p>INNWA Premium Seik Kan Thar Street Branch <span class="arrow">▼</span></p>
-            <p>INNWA IT & Mobile U Chit Maung Branch <span class="arrow">▼</span></p>
-            <p>INNWA IT & Mobile North Dagon Pinlon Branch <span class="arrow">▼</span></p>
-        </div>
-
-        <!-- INNWA MANDALAY Section -->
-        <div class="footer-section innwa-mandalay">
-            <h3>INNWA MANDALAY</h3>
-            <p>INNWA IT & Mobile (ကဇာကွတ်) Branch <span class="arrow">▼</span></p>
-            <p>INNWA IT & Mobile (ချမ်းအေးသာဇံ) Branch <span class="arrow">▼</span></p>
-            <p>INNWA IT & Mobile (မလိခ) Branch <span class="arrow">▼</span></p>
-        </div>
-
-        <!-- Viber Section -->
         <div class="footer-section viber">
             <h3>Viber</h3>
             <p><i class="fas fa-phone"></i> +959771966688</p>
             <img src="static/images/qr-code.png" alt="QR Code" class="qr-code">
         </div>
-    </div>
     </div>
 
     <div class="footer-bottom">

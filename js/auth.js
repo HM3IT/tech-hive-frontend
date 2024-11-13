@@ -46,23 +46,31 @@ export async function logout(event) {
 }
 
 
-export async function signup(event) {
-	event.preventDefault();
+// auth.js
 
-	let name = document.getElementById('signup-name').value;
-	let email = document.getElementById('signup-email').value;
-	let password = document.getElementById('signup-password').value;
- 
+export function signup(event) {
+    event.preventDefault(); // Prevent form submission
 
-	let signupData = { name, email, password };
-	console.log(signupData)
-	let response = await sendRequest('/api/access/signup', signupData, 'POST');
+    const username = document.getElementById("signup-name").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("signup-password").value;
+    const terms = document.getElementById("terms").checked;
 
-	if (response.ok) {
-		console.log("Sign up successful")
-		console.log(response.json())
-	} else {
-		let errorData = await response.json();
-	 
-	}
+    if (!terms) {
+        alert("You must accept the terms to register.");
+        return;
+    }
+
+    // Simple validation and feedback (extend this logic as needed)
+    if (!username || !email || !password) {
+        alert("All fields are required.");
+        return;
+    }
+
+    // Registration logic here (example)
+    // In a real application, replace this with a request to your backend
+    alert(`User ${username} registered successfully!`);
+
+    // Redirect to a different page or reset form
+    window.location.href = "/index.html";
 }
