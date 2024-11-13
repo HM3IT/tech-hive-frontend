@@ -54,7 +54,6 @@ loadProduct()
 //     });
 // }
 
-
 function updatePaginationControls() {
     document.getElementById("prevButton").disabled = currentPage === 1;
     document.getElementById("nextButton").disabled = currentPage === totalPages;

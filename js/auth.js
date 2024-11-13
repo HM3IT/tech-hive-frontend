@@ -1,5 +1,5 @@
 
-import { setAccessTokenCookie, getCookie } from './utils.js';
+import { setAccessTokenCookie, deleteAccessTokenCookie } from './utils.js';
 import { sendRequest, sendAuthRequest } from './api.js';
 
 
@@ -72,11 +72,10 @@ export async function signup(event) {
 
 
 export async function logout(){
+	
 	let response = await sendRequest('/access/logout', 'POST', null);
 	if (response.ok) {
-		let responseData = await response.json();
-	 
-		setAccessTokenCookie(null, expireTimeMs);   
+		deleteAccessTokenCookie();     
 		alert(`Logout successfully!`);
 		window.location.href = "index.html";
 	} else {

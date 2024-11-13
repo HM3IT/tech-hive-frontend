@@ -6,6 +6,10 @@ export function setAccessTokenCookie(token, expiryTimeInMs) {
     document.cookie = `${TOKEN_NAME}=${token}; expires=${expires.toUTCString()}; path=/; secure; SameSite=Strict`;
 }
 
+export function deleteAccessTokenCookie() {
+    document.cookie = `${TOKEN_NAME}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; secure; SameSite=Strict`;
+}
+
 export function getCookie(name) {
     const nameEQ = `${name}=`;
     const cookies = document.cookie.split(';');
