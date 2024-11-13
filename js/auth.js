@@ -45,10 +45,8 @@ export async function logout(event) {
 	}
 }
 
-
-// auth.js
-
-export function signup(event) {
+ 
+export async function signup(event) {
     event.preventDefault(); // Prevent form submission
 
     const username = document.getElementById("signup-name").value;
@@ -66,11 +64,23 @@ export function signup(event) {
         alert("All fields are required.");
         return;
     }
-
-    // Registration logic here (example)
-    // In a real application, replace this with a request to your backend
-    alert(`User ${username} registered successfully!`);
-
-    // Redirect to a different page or reset form
-    window.location.href = "/index.html";
+	 
+	let response = await sendRequest('/access/signup', { email, password, "name":username }, 'POST');
+	
+	if (response.ok) {
+		let responseData = await response.json();
+		const token = responseData.access_token	;  
+		console.log("token")
+		console.log(token)
+		const expireTimeMs = responseData.expireDate
+	 
+		setAccessTokenCookie(token, expireTimeMs);   
+		alert(`User ${username} registered successfully!`);
+		window.location.href = "index.html";
+	} else {
+		let errorData = await response.json();
+		console.log(errorData)
+	 
+	}	 
+    
 }

@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Redirect if already signed in
     if (getCookie(TOKEN_NAME)) {
         alert("You are already signed in");
-        window.location.href = "/index.html";
+        window.location.href = "index.html";
     }
 
     // Handle the signup form submission
