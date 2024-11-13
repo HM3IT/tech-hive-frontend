@@ -152,3 +152,16 @@
     margin-left: 15px;
     cursor: pointer;
 }
+
+
+#logout-btn{
+  padding: 5px 10px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+}
+
+#logout-btn:hover{
+    cursor: pointer;
+  }

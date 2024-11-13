@@ -31,22 +31,6 @@ export async function signin(event) {
 	}
 }
 
-export async function logout(event) {
-	event.preventDefault();
-
-	let response = await sendAuthRequest('/api/access/logout', 'POST');
-
-	if (response.ok) {
-		setTimeout(function () {
-			window.location.href = '/';
-		}, redirectDelayTime);
-		console.log(response.json())
-	} else {
-		let errorData = await response.json();
-	 
-	}
-}
-
  
 export async function signup(event) {
     event.preventDefault(); // Prevent form submission
@@ -67,7 +51,7 @@ export async function signup(event) {
         return;
     }
 	 
-	let response = await sendRequest('/access/signup', { email, password, "name":username }, 'POST');
+	let response = await sendRequest('/access/signup', 'POST', { email, password, "name":username });
 	
 	if (response.ok) {
 		let responseData = await response.json();
@@ -88,7 +72,7 @@ export async function signup(event) {
 
 
 export async function logout(){
-	let response = await sendRequest('/access/logout', null, 'POST');
+	let response = await sendRequest('/access/logout', 'POST', null);
 	if (response.ok) {
 		let responseData = await response.json();
 	 

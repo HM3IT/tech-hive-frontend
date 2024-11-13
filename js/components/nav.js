@@ -1,5 +1,4 @@
 import { logout  } from "../auth";
 
-const logoutHandler=()=>{
-     logout()
-}
+
+document.getElementById('logout-btn').addEventListener('click', logout)
