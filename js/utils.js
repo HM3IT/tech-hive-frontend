@@ -18,10 +18,58 @@ export function getCookie(name) {
     }
     return null;
 }
+ 
+export async function createPagination(totalItems, currentPage, productsPerPage, getProducts, displayProducts) {
+    const totalPages = Math.ceil(totalItems / productsPerPage);
+    const paginationControls = document.getElementById('paginationControls');
+    paginationControls.innerHTML = '';  
 
-// utils.js
+    const prevLink = document.createElement('a');
+    prevLink.href = '#';
+    prevLink.innerHTML = '&laquo;';
+    prevLink.onclick = async (e) => {
+        e.preventDefault();
+        if (currentPage > 1) {
+            currentPage--;
+
+            // Use await here safely since the function is async
+            let products = await getProducts(currentPage);
+            console.log(products.items)
+            // displayProducts(products.items);
+        }
+    };
+
+    paginationControls.appendChild(prevLink);
 
 
+    for (let i = 1; i <= totalPages; i++) {
+        const pageLink = document.createElement('a');
+        pageLink.href = '#';
+        pageLink.innerText = i;
+        pageLink.className = currentPage === i ? 'active' : '';
+        pageLink.addEventListener('click', async (e) => {
+            e.preventDefault();
+            let products = await getProducts(currentPage=currentPage)
+            console.log(products.items)
+            // displayProducts(products.items);
+        });
+        paginationControls.appendChild(pageLink);
+    }
+
+    const nextLink = document.createElement('a');
+    nextLink.href = '#';
+    nextLink.innerHTML = '&raquo;';
+    nextLink.onclick = async(e) => {
+        e.preventDefault();
+        if (currentPage < totalPages) {
+            currentPage++;
+            let products = await getProducts(currentPage=currentPage)
+            console.log(products.items)
+            // displayProducts(products.items);
+        }
+    };
+    paginationControls.appendChild(nextLink);
+}
 
 
 
