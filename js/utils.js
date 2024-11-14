@@ -2,7 +2,7 @@ import { sendRequest } from "./api.js";
 
 export const TOKEN_NAME = "accessToken"
 export const API_ENDPOINT = "http://localhost:8000/api"
-
+export let currentPage = 1
 export function setAccessTokenCookie(token, expiryTimeInMs) {
     const expires = new Date(Date.now() + expiryTimeInMs);
     document.cookie = `${TOKEN_NAME}=${token}; expires=${expires.toUTCString()}; path=/; secure; SameSite=Strict`;
@@ -25,57 +25,50 @@ export function getCookie(name) {
     return null;
 }
  
-export async function createPagination(totalItems, currentPage, productsPerPage, getProducts, displayProducts) {
+export async function createPagination(totalItems, productsPerPage, getProducts, displayProducts) {
     const totalPages = Math.ceil(totalItems / productsPerPage);
+    console.log(`totalPages ${totalPages}`)
     const paginationControls = document.getElementById('paginationControls');
     paginationControls.innerHTML = '';  
-
-    const prevLink = document.createElement('a');
-    prevLink.href = '#';
-    prevLink.innerHTML = '&laquo;';
-    prevLink.onclick = async (e) => {
-        e.preventDefault();
+ 
+    const prevButton = document.createElement('button');
+    prevButton.innerHTML = '&laquo;';
+    prevButton.onclick = async () => {
         if (currentPage > 1) {
             currentPage--;
-
-            // Use await here safely since the function is async
             let products = await getProducts(currentPage);
-            console.log(products.items)
-            // displayProducts(products.items);
+            console.log(products.items);
+            displayProducts(products.items);
         }
     };
-
-    paginationControls.appendChild(prevLink);
-
+    paginationControls.appendChild(prevButton);
 
     for (let i = 1; i <= totalPages; i++) {
-        const pageLink = document.createElement('a');
-        pageLink.href = '#';
-        pageLink.innerText = i;
-        pageLink.className = currentPage === i ? 'active' : '';
-        pageLink.addEventListener('click', async (e) => {
-            e.preventDefault();
-            let products = await getProducts(currentPage=currentPage)
-            console.log(products.items)
-            // displayProducts(products.items);
-        });
-        paginationControls.appendChild(pageLink);
+        const pageButton = document.createElement('button');
+        pageButton.innerText = i;
+        pageButton.onclick = async () => {
+            currentPage = i;
+            let products = await getProducts(currentPage);
+            console.log(products.items);
+            displayProducts(products.items);
+        };
+        paginationControls.appendChild(pageButton);
     }
 
-    const nextLink = document.createElement('a');
-    nextLink.href = '#';
-    nextLink.innerHTML = '&raquo;';
-    nextLink.onclick = async(e) => {
-        e.preventDefault();
+    const nextButton = document.createElement('button');
+    nextButton.innerHTML = '&raquo;';
+    nextButton.onclick = async () => {
         if (currentPage < totalPages) {
             currentPage++;
-            let products = await getProducts(currentPage=currentPage)
-            console.log(products.items)
-            // displayProducts(products.items);
+            let products = await getProducts(currentPage);
+            console.log(products.items);
+            console.log("CLICKEd")
+            displayProducts(products.items);
         }
     };
-    paginationControls.appendChild(nextLink);
+    paginationControls.appendChild(nextButton);
 }
+
 
  
 export async function fetchImageUrl(imagePath) {
