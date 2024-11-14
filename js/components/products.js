@@ -2,13 +2,15 @@ import {getProducts} from '../api.js'
 import { createPagination, fetchImageUrl } from '../utils.js';
  
 async function displayProducts(products) {
+    console.log(
+        `Product ${products}`
+    )
     const productView = document.getElementById("productView");
     productView.innerHTML = '';
 
     for (const product of products) {
        
         let objectUrl = await fetchImageUrl(product.imageUrl);
-        console.log(objectUrl);
 
         const productCard = `
             <div class="product-card" data-price="${product.price}" data-discount="${product.discountPercent}">
@@ -27,21 +29,24 @@ async function displayProducts(products) {
     }
 }
 
+document.addEventListener("DOMContentLoaded", loadProduct)
+
 async function loadProduct() {
     let urlParams = new URLSearchParams(window.location.search);
     let limit = 10;
-    let currentPage = 1;
-    let filter_type = urlParams.get('filter_type').replaceAll("'","");  
-    let products = await getProducts(filter_type, limit, currentPage);
+    let filter_type = urlParams.get('filter_type')
+    if (filter_type){
+        filter_type = filter_type.replaceAll("'","");  
+    }
+    let products = await getProducts(1, limit, filter_type);
 
     console.log("Started")
     let items = products.items;
     console.log(items)
     displayProducts(items);
-    createPagination(products.total, currentPage, limit,displayProducts )
+    createPagination(products.total, limit, getProducts, displayProducts )
 }
 
-loadProduct()
 
 // function applyFilters() {
 //     const searchValue = document.getElementById('searchInput').value.toLowerCase();
@@ -59,45 +64,28 @@ loadProduct()
 //     });
 // }
 
-function updatePaginationControls() {
-    document.getElementById("prevButton").disabled = currentPage === 1;
-    document.getElementById("nextButton").disabled = currentPage === totalPages;
-    document.getElementById("pageIndicator").textContent = `Page ${currentPage} of ${totalPages}`;
-}
- 
-function changePage(direction) {
-    currentPage += direction;
-    if (currentPage < 1) currentPage = 1;
-    if (currentPage > totalPages) currentPage = totalPages;
-    fetchProducts();
-}
 
- 
-function applyFilters() {
-    currentPage = 1;  
-    fetchProducts();
-}
 
-document.getElementById('searchInput').addEventListener('input', () => {
-    currentPage = 1;
-    displayProducts(currentPage);
-    createPagination(applyFilters().length);
-});
+// document.getElementById('searchInput').addEventListener('input', () => {
+//     currentPage = 1;
+//     displayProducts(currentPage);
+//     createPagination(applyFilters().length);
+// });
 
-document.querySelectorAll('.tag-filter').forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
-        currentPage = 1;
-        displayProducts(currentPage);
-        createPagination(applyFilters().length);
-    });
-});
+// document.querySelectorAll('.tag-filter').forEach(checkbox => {
+//     checkbox.addEventListener('change', () => {
+//         currentPage = 1;
+//         displayProducts(currentPage);
+//         createPagination(applyFilters().length);
+//     });
+// });
 
-document.querySelectorAll('.price-range').forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
-        currentPage = 1;
-        displayProducts(currentPage);
-        createPagination(applyFilters().length);
-    });
-});
+// document.querySelectorAll('.price-range').forEach(checkbox => {
+//     checkbox.addEventListener('change', () => {
+//         currentPage = 1;
+//         displayProducts(currentPage);
+//         createPagination(applyFilters().length);
+//     });
+// });
 
 // Initialize display and pagination on page load
