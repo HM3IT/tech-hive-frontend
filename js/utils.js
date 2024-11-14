@@ -1,3 +1,5 @@
+import { sendRequest } from "./api.js";
+
 export const TOKEN_NAME = "accessToken"
 export const API_ENDPOINT = "http://localhost:8000/api"
 
@@ -75,5 +77,15 @@ export async function createPagination(totalItems, currentPage, productsPerPage,
     paginationControls.appendChild(nextLink);
 }
 
+ 
+export async function fetchImageUrl(imagePath) {
+    let imageName = imagePath.split('/').pop();
+    const response = await sendRequest(`/products/images/${imageName}`, "GET" );
+    
+    if (response.ok) {
+        const blob = await response.blob();
+        return URL.createObjectURL(blob);  
+    }
 
-
+    return 'static/fallback-img.jpg'; 
+}

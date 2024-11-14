@@ -1,14 +1,18 @@
 import {getProducts} from '../api.js'
-import { createPagination } from '../utils.js';
+import { createPagination, fetchImageUrl } from '../utils.js';
  
 async function displayProducts(products) {
     const productView = document.getElementById("productView");
     productView.innerHTML = '';
 
-    products.forEach(product => {
+    for (const product of products) {
+       
+        let objectUrl = await fetchImageUrl(product.imageUrl);
+        console.log(objectUrl);
+
         const productCard = `
             <div class="product-card" data-price="${product.price}" data-discount="${product.discountPercent}">
-                <img src="${product.imageUrl}" alt="${product.name}" class="product-image">
+                <img src="${objectUrl}" alt="${product.name}" class="product-image">
                 <h3 class="product-title">${product.name}</h3>
                 <p class="product-description">${product.description}</p>
                 <div class="product-tags">
@@ -18,8 +22,9 @@ async function displayProducts(products) {
                 <p class="product-discount">Discount: ${product.discountPercent}%</p>
                 <button class="read-more">Read More</button>
             </div>`;
+
         productView.innerHTML += productCard;
-    });
+    }
 }
 
 async function loadProduct() {
