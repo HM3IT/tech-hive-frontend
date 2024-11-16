@@ -1,0 +1,75 @@
+.footer {
+    background-color: #f8f9fa; /* Light background */
+    padding: 40px 20px; /* Spacing around the footer */
+    color: #333; /* Text color */
+    text-align: center; /* Center text */
+    font-family: Arial, sans-serif; /* Font family */
+}
+
+.footer-container {
+    display: flex; /* Flexbox for layout */
+    justify-content: space-around; /* Space sections evenly */
+    flex-wrap: wrap; /* Allow wrapping */
+    max-width: 1200px; /* Maximum width */
+    margin: auto; /* Center container */
+}
+
+.footer-section {
+    margin: 20px; /* Space between sections */
+    flex: 1; /* Allow sections to grow */
+    min-width: 200px; /* Minimum width for better layout */
+}
+
+.footer-section h3 {
+    font-size: 18px; /* Heading size */
+    margin-bottom: 10px; /* Space below heading */
+    color: #333; /* Heading color */
+}
+
+.social-icons a {
+    color: #333; /* Icon color */
+    margin: 0 10px; /* Increased spacing between icons */
+    font-size: 24px; /* Larger icons */
+    text-decoration: none; /* No underline */
+}
+
+.visit-btn {
+    display: inline-block; /* Inline block for button styling */
+    border: 1px solid red; /* Red border */
+    border-radius: 20px; /* Rounded corners */
+    color: red; /* Text color */
+    padding: 8px 20px; /* Padding for button */
+    margin: 5px 0; /* Margin for vertical spacing */
+    text-decoration: none; /* No underline */
+    font-size: 14px; /* Font size */
+    font-weight: bold; /* Bold text */
+}
+
+.innwa-yangon p, .innwa-mandalay p {
+    display: flex; /* Flexbox for layout */
+    justify-content: space-between; /* Space between items */
+    margin: 5px 0; /* Vertical spacing */
+}
+
+.arrow {
+    font-size: 18px; /* Arrow size */
+    color: #333; /* Arrow color */
+}
+
+.viber p {
+    font-size: 16px; /* Phone number size */
+    color: #333; /* Color */
+}
+
+.qr-code {
+    width: 100px; /* QR code width */
+    height: 100px; /* QR code height */
+    margin-top: 10px; /* Space above QR code */
+}
+
+/* Bottom Footer */
+.footer-bottom {
+    margin-top: 20px; /* Space above footer text */
+    font-size: 14px; /* Footer text size */
+    color: #666; /* Footer text color */
+}
