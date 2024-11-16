@@ -1,0 +1,162 @@
+<style>
+/* Basic Reset */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Roboto', sans-serif;
+background-color: #f4f6f8;
+color: #333;
+}
+
+/* Layout Styling */
+.dashboard-container {
+display: flex;
+}
+
+.sidebar {
+width: 260px;
+background-color: #1f1f38;
+color: #fff;
+padding: 20px;
+height: 100vh;
+position: fixed;
+}
+
+.sidebar h2 {
+font-size: 22px;
+font-weight: bold;
+text-align: center;
+margin-bottom: 30px;
+color: #ffffff;
+}
+
+.nav-links {
+list-style: none;
+margin-top: 20px;
+}
+
+.nav-links li {
+margin: 15px 0;
+}
+
+.nav-links li a {
+color: #c2c2dd;
+text-decoration: none;
+font-size: 16px;
+display: block;
+padding: 10px 15px;
+border-radius: 4px;
+transition: background-color 0.3s ease, color 0.3s;
+}
+
+.nav-links li a:hover, .nav-links li a.active {
+background-color: #343457;
+color: #ffffff;
+}
+
+.main-content {
+margin-left: 260px;
+padding: 20px;
+flex-grow: 1;
+background-color: #f4f6f8;
+min-height: 100vh;
+}
+
+/* Header Styling */
+.header {
+padding: 15px 20px;
+background-color: #ffffff;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+margin-bottom: 20px;
+}
+
+.header h1 {
+font-size: 24px;
+color: #2a2a72;
+}
+
+/* Add Product Form Styling */
+.add-product-section {
+background-color: #ffffff;
+padding: 30px;
+border-radius: 8px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+max-width: 600px;
+margin: 0 auto;
+}
+
+.add-product-form .form-group {
+margin-bottom: 20px;
+}
+
+.add-product-form label {
+display: block;
+font-weight: bold;
+margin-bottom: 8px;
+color: #333;
+}
+
+.add-product-form input[type="text"],
+.add-product-form input[type="number"],
+.add-product-form input[type="file"],
+.add-product-form select,
+.add-product-form textarea {
+width: 100%;
+padding: 10px;
+border: 1px solid #ddd;
+border-radius: 4px;
+font-size: 16px;
+color: #555;
+outline: none;
+transition: border-color 0.3s ease;
+}
+
+.add-product-form input[type="text"]:focus,
+.add-product-form input[type="number"]:focus,
+.add-product-form input[type="file"]:focus,
+.add-product-form select:focus,
+.add-product-form textarea:focus {
+border-color: #2a2a72;
+}
+
+.add-product-form textarea {
+resize: vertical;
+}
+
+/* Buttons */
+.form-group .submit-btn {
+padding: 12px 20px;
+border: none;
+background-color: #4CAF50;
+color: #fff;
+font-size: 16px;
+border-radius: 4px;
+cursor: pointer;
+transition: background-color 0.3s;
+margin-right: 10px;
+}
+
+.form-group .submit-btn:hover {
+background-color: #45a049;
+}
+
+.form-group .cancel-btn {
+padding: 12px 20px;
+border: none;
+background-color: #f44336;
+color: #fff;
+font-size: 16px;
+border-radius: 4px;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+.form-group .cancel-btn:hover {
+background-color: #e53935;
+}
+
+</style>

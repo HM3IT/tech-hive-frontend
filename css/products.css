@@ -7,12 +7,13 @@
 
 /* Body Styling */
 body {
-    font-family: Arial, sans-serif;
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 280px 3fr;
     gap: 20px;
     padding: 20px;
 }
+
+/* Body Styling */
 
 /* Navbar */
 #nav {
@@ -76,6 +77,13 @@ body {
 /* Hover Effect */
 .product-image-grid img:hover {
     transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+
+.product-grid .product-description{
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    white-space: nowrap;
 }
 
 /* Responsive Adjustments */
