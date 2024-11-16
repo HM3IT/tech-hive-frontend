@@ -20,7 +20,8 @@ async function displayProducts(products) {
                 </div>
                 <p class="product-price">Price: $${product.price}</p>
                 <p class="product-discount">Discount: ${product.discountPercent}%</p>
-                <button class="read-more">Read More</button>
+                <button class="read-more" >Read More</button>
+                
             </div>`;
 
         productView.innerHTML += productCard;
@@ -101,3 +102,5 @@ document.querySelectorAll('.price-range').forEach(checkbox => {
 });
 
 // Initialize display and pagination on page load
+// Select all "Read More" buttons
+
