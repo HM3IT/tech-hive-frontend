@@ -5,6 +5,7 @@ let dropDownCategory =document.getElementById("product-category");
 
 
 document.addEventListener("DOMContentLoaded", async()=>{
+    console.log("Hello")
     let categories = await getCategory();
     // dropDownCategory.
     console.log(categories)

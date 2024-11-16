@@ -55,7 +55,7 @@ export async function getProducts(currentPage = 1, limit = 10, filter_type = nul
     // const selectedPriceRanges = Array.from(document.querySelectorAll('.price-range:checked')).map(input => input.value);
 
     // Construct query parameters based on filters
-    let url = `/products?pageSize=${limit}&currentPage=${currentPage}`;
+    let url = `/products/list?pageSize=${limit}&currentPage=${currentPage}`;
 
     let response = await sendAuthRequest(url, "GET", null)
 
