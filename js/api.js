@@ -47,7 +47,31 @@ export async function sendAuthRequest(url, method="GET", data = null) {
     return await fetch(API_ENDPOINT + url, options);
 }
 
+export async function sentformRequest(url, method, formData) {
+    const token = getCookie(TOKEN_NAME); 
+    let headers = {
+        'Content-Type': 'application/json',
+    };
 
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+    }else{
+        window.location.href = "login.html"
+    }
+
+    fetch(API_ENDPOINT + url, {
+        method: method,
+        headers:headers,
+        body: formData, 
+      })
+        .then(response => response.json()) 
+        .then(data => {
+          console.log('Success:', data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+}
 
 export async function getProducts(currentPage = 1, limit = 10, filter_type = null) {
     // const searchInput = document.getElementById("searchInput").value.toLowerCase();

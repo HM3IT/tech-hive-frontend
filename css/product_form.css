@@ -1,4 +1,3 @@
-<style>
 /* Basic Reset */
 * {
 margin: 0;
@@ -158,5 +157,3 @@ transition: background-color 0.3s;
 .form-group .cancel-btn:hover {
 background-color: #e53935;
 }
-
-</style>

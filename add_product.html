@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="css/product_form.css">
 </head>
 <body>
-    <script type="module" src="js/components/productController.js"></script>
+    <script type="module" src="js/components/product_Controller.js"></script>
+
     <div class="dashboard-container">
         <!-- Sidebar -->
         <aside class="sidebar">
@@ -41,14 +42,29 @@
 
                     <div class="form-group">
                         <label for="product-category">Category</label>
-                        <select id="product-category">
-                           
+                        <select id="product-category" name="category" required>
+                            <option value="" disabled selected>Select category</option>
                         </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-brand">Brand</label>
+                        <input type="text" id="product-brand" placeholder="Enter product brand">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-stock">Stock</label>
+                        <input type="number" id="product-stock" placeholder="Enter product stock">
                     </div>
 
                     <div class="form-group">
                         <label for="product-price">Price ($)</label>
                         <input type="number" id="product-price" placeholder="Enter product price">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-discount">Discount</label>
+                        <input type="number" id="product-discount" placeholder="Enter product discount">
                     </div>
 
                     <div class="form-group">
@@ -67,7 +83,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="submit-btn">Add Product</button>
+                        <button type="submit" id="submit-btn" class="submit-btn">Add Product</button>
                         <button type="button" class="cancel-btn">Cancel</button>
                     </div>
                 </form>

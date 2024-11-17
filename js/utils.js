@@ -1,4 +1,4 @@
-import { sendRequest, sendAuthRequest } from "./api.js";
+import { sendAuthRequest } from "./api.js";
 
 export const TOKEN_NAME = "accessToken"
 export const API_ENDPOINT = "http://localhost:8000/api"
