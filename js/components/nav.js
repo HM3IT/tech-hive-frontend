@@ -12,13 +12,16 @@ window.addEventListener("load", (e) => {
     .then(message => console.log(message))
     .catch(error => console.error(error));
 
+    const checkDomAndAttachListener = () => {
+        const closeBtn = document.getElementById('logout-btn');
+        if (closeBtn) {
+            console.log("found")
+            closeBtn.addEventListener('click', logout);
+            console.log("Listener attached to logout button.");
+            clearInterval(interval); // Stop the interval once the element is found
+        }
+    };
     
-    console.log("HEllo")
-    setTimeout(() => {
-        let closeBtn =  document.getElementById('logout-btn')
-        console.log(closeBtn)
-        closeBtn.addEventListener('click', logout);
-    }, 2000);
-    
+    const interval = setInterval(checkDomAndAttachListener, 500);
  
 })

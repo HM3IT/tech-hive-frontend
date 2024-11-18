@@ -23,7 +23,7 @@ export async function signin(event) {
 		setAccessTokenCookie(token, expireTimeMs);   
 		console.log('Login successful and token stored in cookies');
 		alert("login successfull")
-		window.location.href = "./client/index.html"
+		window.location.href = "./index.html"
 	} else {
 		let errorData = await response.json();
 		console.log(errorData)
@@ -62,7 +62,7 @@ export async function signup(event) {
 	 
 		setAccessTokenCookie(token, expireTimeMs);   
 		alert(`User ${username} registered successfully!`);
-		window.location.href = "./client/index.html";
+		window.location.href = "./index.html";
 	} else {
 		let errorData = await response.json();
 		console.log(errorData)
@@ -73,11 +73,11 @@ export async function signup(event) {
 
 export async function logout(){
 	
-	let response = await sendRequest('/access/logout', 'POST', null);
+	let response = await sendAuthRequest('/access/logout', 'POST', null);
 	if (response.ok) {
 		deleteAccessTokenCookie();     
 		alert(`Logout successfully!`);
-		window.location.href = "./client/index.html";
+		window.location.href = "./index.html";
 	} else {
 		let errorData = await response.json();
 		console.log(errorData)
