@@ -1,19 +1,17 @@
 function loadComponent(url, placeholderId) {
-
-    fetch("./components/"+url)
-        .then(response => response.text())
-        .then(html => {
-            let element = document.getElementById(placeholderId);
-            if (element){
-                element.innerHTML = html;
-            }
-        })
-        .catch(err => console.error('Error loading the component:', err));
+    return new Promise((resolve, reject) => {
+        fetch(`./components/${url}`)
+            .then(response => response.text())
+            .then(html => {
+                const element = document.getElementById(placeholderId);
+                if (element) {
+                    element.innerHTML = html;
+                    resolve(`Component loaded into #${placeholderId}`);
+                } else {
+                    // reject(`Placeholder with ID '${placeholderId}' not found.`);
+                }
+            })
+            .catch(err => reject(`Error loading the component: ${err}`));
+    });
 }
-
-
-window.onload = function() {
-    loadComponent('nav.html', 'nav');
-    loadComponent('footer.html', 'footer');
-};
  

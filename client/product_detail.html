@@ -190,16 +190,16 @@
         <button class="slider-btn" id="prevBtn" onclick="prevImage()">&#10094;</button>
         
         <!-- Main Image Display -->
-        <img src="static/images/13.jpg" alt="Laptop Image" class="main-image" id="mainImage">
+        <img src="../static/images/13.jpg" alt="Laptop Image" class="main-image" id="mainImage">
         
         <button class="slider-btn" id="nextBtn" onclick="nextImage()">&#10095;</button>
 
         <!-- Thumbnail Images -->
         <div class="thumbnail-container">
-            <img src="static/images/14.jpg" alt="Thumbnail 1" class="thumbnail" onclick="showImage(0)">
-            <img src="static/images/15.jpg" alt="Thumbnail 2" class="thumbnail" onclick="showImage(1)">
-            <img src="static/images/16.jpg" alt="Thumbnail 3" class="thumbnail" onclick="showImage(2)">
-            <img src="static/images/17.jpg" alt="Thumbnail 4" class="thumbnail" onclick="showImage(3)">
+            <img src="../static/images/14.jpg" alt="Thumbnail 1" class="thumbnail" onclick="showImage(0)">
+            <img src="../static/images/15.jpg" alt="Thumbnail 2" class="thumbnail" onclick="showImage(1)">
+            <img src="../static/images/16.jpg" alt="Thumbnail 3" class="thumbnail" onclick="showImage(2)">
+            <img src="../static/images/17.jpg" alt="Thumbnail 4" class="thumbnail" onclick="showImage(3)">
         </div>
     </div>
     
@@ -265,10 +265,10 @@
         }
     }
     const images = [
-    'static/images/13.jpg', // Replace with actual paths
-    'static/images/14.jpg',
-    'static/images/15.jpg',
-    'static/images/16.jpg'
+    '../static/images/13.jpg', // Replace with actual paths
+    '../static/images/14.jpg',
+    '../static/images/15.jpg',
+    '../static/images/16.jpg'
 ];
 
 let currentImageIndex = 0;

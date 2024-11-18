@@ -28,7 +28,7 @@ export async function sendAuthRequest(url, method="GET", data = null) {
     if (token) {
         headers['Authorization'] = `Bearer ${token}`;
     }else{
-        window.location.href = "login.html"
+        window.location.href = "./client/login.html"
     }
 
     if (data) {
@@ -56,7 +56,7 @@ export async function sentformRequest(url, method, formData) {
     if (token) {
         headers['Authorization'] = `Bearer ${token}`;
     }else{
-        window.location.href = "login.html"
+        window.location.href = "./client/login.html"
     }
 
     fetch(API_ENDPOINT + url, {

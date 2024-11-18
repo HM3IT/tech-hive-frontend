@@ -4,7 +4,7 @@ import {TOKEN_NAME, getCookie } from '../utils.js';
 addEventListener("DOMContentLoaded", (e) => {
     if (getCookie(TOKEN_NAME)){
         // alert("already sign in")
-        // window.location.href= "/index.html"
+        // window.location.href= "./client/index.html"
     }
 
     let loginForm =  document.getElementById("login-form")
