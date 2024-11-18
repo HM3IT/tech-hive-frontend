@@ -1,6 +1,8 @@
 import { getProducts } from '../api.js';
 import { fetchImageUrl } from '../utils.js';
 
+
+
 async function displayProducts(products) {
     const productView = document.getElementById("productView");
     productView.innerHTML = '';
@@ -9,7 +11,7 @@ async function displayProducts(products) {
         let objectUrl = await fetchImageUrl(product.imageUrl);
 
         const productCard = `
-            <div class="product-card" data-price="${product.price}" data-discount="${product.discountPercent}">
+            <div class="product-card" data-id="${product.id}" data-price="${product.price}" data-discount="${product.discountPercent}">
                 <img src="${objectUrl}" alt="${product.name}" class="product-image">
                 <h3 class="product-title">${product.name}</h3>
                 <p class="product-description">${product.description}</p>
@@ -17,14 +19,32 @@ async function displayProducts(products) {
                     ${product.discountPercent > 0 ? '<span class="tag">Discount</span>' : ''}
                 </div>
                 <p class="product-price">Price: $${product.price}</p>
-                <p class="product-discount">Discount: ${product.discountPercent}%</p>
-                <a href="carts.html">Add to cart</a>
-                <button class="read-more">Read More</button>           
+                <p class="product-discount">Discount: ${product.discountPercent}%</p>                  
+                <button onclick="addToCart('${product.id}', '${product.name}', ${product.price}, 1)" class="add-to-cart">Add to Cart</button>
             </div>`;
-
+        
         productView.innerHTML += productCard;
     }
 }
+
+window.addToCart = function(productId, productName, productPrice, quantity) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Check if the product already exists in the cart
+    const existingProduct = cart.find((item) => item.id === productId);
+    if (existingProduct) {
+        existingProduct.quantity += quantity;
+    } else {
+        cart.push({ id: productId, name: productName,discountPercent, price: productPrice, quantity });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(`${productName} has been added to the cart!`);
+};
+
+export { displayProducts };
+
+
 
 function createPagination(totalItems, itemsPerPage, fetchFunction, displayFunction) {
     const totalPages = Math.ceil(totalItems / itemsPerPage);
