@@ -104,6 +104,7 @@ body {
 
 
 /* Pagination Controls */
+
 .pagination {
     text-align: center;
     margin-top: 20px;
@@ -148,24 +149,29 @@ body {
 
   .pagination {
     display: flex;
-    justify-content: center; /* Centers the pagination */
+    justify-content: center;
     margin-top: 20px;
-}
-.pagination a {
+  }
+  
+  .pagination a {
     color: black;
     padding: 8px 16px;
     text-decoration: none;
     border: 1px solid #ddd;
-    margin: 0 4px; /* Adds space between pagination items */
-}
-.pagination a.active {
+    margin: 0 4px;
+    border-radius: 4px;
+  }
+  
+  .pagination a.active {
     background-color: #4CAF50;
     color: white;
     border: 1px solid #4CAF50;
-}
-.pagination a:hover:not(.active) {
+  }
+  
+  .pagination a:hover:not(.active) {
     background-color: #ddd;
-}
+  }
+  
 
 /* Responsive Adjustments */
 @media (max-width: 600px) {

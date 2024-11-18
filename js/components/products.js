@@ -1,15 +1,11 @@
-import {getProducts} from '../api.js'
-import { createPagination, fetchImageUrl } from '../utils.js';
- 
+import { getProducts } from '../api.js';
+import { fetchImageUrl } from '../utils.js';
+
 async function displayProducts(products) {
-    console.log(
-        `Product ${products}`
-    )
     const productView = document.getElementById("productView");
     productView.innerHTML = '';
 
     for (const product of products) {
-       
         let objectUrl = await fetchImageUrl(product.imageUrl);
 
         const productCard = `
@@ -22,73 +18,92 @@ async function displayProducts(products) {
                 </div>
                 <p class="product-price">Price: $${product.price}</p>
                 <p class="product-discount">Discount: ${product.discountPercent}%</p>
-                <button class="read-more" >Read More</button>
-                
+                <a href="carts.html">Add to cart</a>
+                <button class="read-more">Read More</button>           
             </div>`;
 
         productView.innerHTML += productCard;
     }
 }
 
-document.addEventListener("DOMContentLoaded", loadProduct)
+function createPagination(totalItems, itemsPerPage, fetchFunction, displayFunction) {
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const paginationContainer = document.getElementById('paginationControls');
+    paginationContainer.innerHTML = '';
 
-async function loadProduct() {
-    let urlParams = new URLSearchParams(window.location.search);
-    let limit = 10;
-    let filter_type = urlParams.get('filter_type')
-    if (filter_type){
-        filter_type = filter_type.replaceAll("'","");  
+    let currentPage = 1;
+
+    function renderPage(page) {
+        currentPage = page;
+        fetchFunction(page, itemsPerPage).then(data => {
+            displayFunction(data.items);
+        });
+
+        // Update active page styles
+        const pageLinks = paginationContainer.querySelectorAll('a');
+        pageLinks.forEach(link => {
+            link.classList.remove('active');
+            if (parseInt(link.textContent) === currentPage) {
+                link.classList.add('active');
+            }
+        });
     }
-    let products = await getProducts(1, limit, filter_type);
 
-    console.log("Started")
-    let items = products.items;
-    console.log(items)
-    displayProducts(items);
-    createPagination(products.total, limit, getProducts, displayProducts )
+    // Create previous button
+    const prevButton = document.createElement('a');
+    prevButton.innerHTML = '&laquo;';
+    prevButton.href = '#';
+    prevButton.onclick = (e) => {
+        e.preventDefault();
+        if (currentPage > 1) {
+            renderPage(currentPage - 1);
+        }
+    };
+    paginationContainer.appendChild(prevButton);
+
+    // Create page number buttons
+    for (let i = 1; i <= totalPages; i++) {
+        const pageLink = document.createElement('a');
+        pageLink.textContent = i;
+        pageLink.href = '#';
+        pageLink.className = i === currentPage ? 'active' : '';
+        pageLink.onclick = (e) => {
+            e.preventDefault();
+            renderPage(i);
+        };
+        paginationContainer.appendChild(pageLink);
+    }
+
+    // Create next button
+    const nextButton = document.createElement('a');
+    nextButton.innerHTML = '&raquo;';
+    nextButton.href = '#';
+    nextButton.onclick = (e) => {
+        e.preventDefault();
+        if (currentPage < totalPages) {
+            renderPage(currentPage + 1);
+        }
+    };
+    paginationContainer.appendChild(nextButton);
+
+    // Initial render
+    renderPage(currentPage);
 }
 
+document.addEventListener("DOMContentLoaded", loadProduct);
 
-// function applyFilters() {
-//     const searchValue = document.getElementById('searchInput').value.toLowerCase();
-//     const selectedTags = Array.from(document.querySelectorAll('.tag-filter:checked')).map(checkbox => checkbox.value);
-//     const selectedPriceRanges = Array.from(document.querySelectorAll('.price-range:checked')).map(checkbox => checkbox.value);
+async function loadProduct() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const limit = 10;
+    let filterType = urlParams.get('filter_type');
 
-//     return products.filter(product => {
-//         const matchesSearch = product.name.toLowerCase().includes(searchValue);
-//         const matchesTags = selectedTags.length === 0 || selectedTags.some(tag => product.tags.includes(tag));
-//         const matchesPrice = selectedPriceRanges.length === 0 || selectedPriceRanges.some(range => {
-//             const [min, max] = range.split('-').map(Number);
-//             return max ? product.price >= min && product.price <= max : product.price >= min;
-//         });
-//         return matchesSearch && matchesTags && matchesPrice;
-//     });
-// }
+    if (filterType) {
+        filterType = filterType.replaceAll("'", "");
+    }
 
+    const products = await getProducts(1, limit, filterType);
+    const items = products.items;
 
-
-// document.getElementById('searchInput').addEventListener('input', () => {
-//     currentPage = 1;
-//     displayProducts(currentPage);
-//     createPagination(applyFilters().length);
-// });
-
-// document.querySelectorAll('.tag-filter').forEach(checkbox => {
-//     checkbox.addEventListener('change', () => {
-//         currentPage = 1;
-//         displayProducts(currentPage);
-//         createPagination(applyFilters().length);
-//     });
-// });
-
-// document.querySelectorAll('.price-range').forEach(checkbox => {
-//     checkbox.addEventListener('change', () => {
-//         currentPage = 1;
-//         displayProducts(currentPage);
-//         createPagination(applyFilters().length);
-//     });
-// });
-
-// Initialize display and pagination on page load
-// Select all "Read More" buttons
-
+    displayProducts(items);
+    createPagination(products.total, limit, getProducts, displayProducts);
+}

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Order List</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f6f8;
+            color: #333;
+        }
+
+        .dashboard-container {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 260px;
+            background-color: #1f1f38;
+            color: #fff;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            color: #c2c2dd;
+            text-decoration: none;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 4px;
+        }
+
+        .sidebar ul li a.active,
+        .sidebar ul li a:hover {
+            background-color: #343457;
+            color: #fff;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 20px;
+            flex-grow: 1;
+            background-color: #f4f6f8;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #2a2a72;
+        }
+
+        .header .search-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .header input[type="text"] {
+            padding: 10px;
+            width: 250px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .search-btn {
+            padding: 10px 15px;
+            background-color: #2a2a72;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .search-btn:hover {
+            background-color: #1b1b4f;
+        }
+
+        .data-table h2 {
+            margin-bottom: 15px;
+            font-size: 20px;
+            color: #2a2a72;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        table th, table td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        table th {
+            background-color: #f7f7f7;
+            font-weight: bold;
+            color: #2a2a72;
+        }
+
+        table tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .action-buttons button {
+            padding: 8px 12px;
+            margin: 0 2px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .action-buttons .view-btn {
+            background-color: #2a2a72;
+            color: #fff;
+        }
+
+        .action-buttons .delete-btn {
+            background-color: #d9534f;
+            color: #fff;
+        }
+
+        .action-buttons button:hover {
+            opacity: 0.9;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            padding: 8px 12px;
+            margin: 0 2px;
+            background-color: #2a2a72;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .pagination button:hover {
+            background-color: #1b1b4f;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Admin Dashboard</h2>
+            <ul>
+                <li><a href="admin.html">Overview</a></li>
+                <li><a href="admin_products.html">Products</a></li>
+                <li><a class="active" href="orders.html">Orders</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li><a href="#settings">Settings</a></li>
+                <li><a href="#logout">Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h1>Order List</h1>
+                <div class="search-container">
+                    <input type="text" placeholder="Search orders...">
+                    <button class="search-btn">Search</button>
+                </div>
+            </header>
+
+            <!-- Order Table -->
+            <section class="data-table">
+                <h2>All Orders</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Total</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#1001</td>
+                            <td>John Doe</td>
+                            <td>2024-11-15</td>
+                            <td>Shipped</td>
+                            <td>$250.00</td>
+                            <td class="action-buttons">
+                                <button class="view-btn">View</button>
+                                <button class="delete-btn">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#1002</td>
+                            <td>Jane Smith</td>
+                            <td>2024-11-14</td>
+                            <td>Pending</td>
+                            <td>$75.00</td>
+                            <td class="action-buttons">
+                                <button class="view-btn">View</button>
+                                <button class="delete-btn">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button>Prev</button>
+                    <button>1</button>
+                    <button>2</button>
+                    <button>Next</button>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

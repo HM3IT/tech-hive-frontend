@@ -1,6 +1,7 @@
 
-.navbar{
- margin-bottom: 0;
+#nav-bar{
+ margin-bottom: 0!important;
+
 }
   .dropdown-submenu {
       position: relative;

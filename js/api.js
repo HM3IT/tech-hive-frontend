@@ -15,7 +15,6 @@ export async function sendRequest(url, method="GET", data = null) {
     if (data) {
         options.body = JSON.stringify(data);
     }
-
     return await fetch(API_ENDPOINT + url, options);
 }
 

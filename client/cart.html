@@ -129,6 +129,7 @@
         <thead>
             <tr>
                 <th>Product</th>
+                
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Total</th>
@@ -137,7 +138,15 @@
         </thead>
         <tbody>
             <tr>
-                <td class="product-name">UltraBook Pro 13 - i7 13th Gen</td>
+                <td class="product-name">
+                    <div class="product-info">
+                        <img src="static/images/5.jpg" alt="UltraBook Pro 13" class="product-img">
+                        <div>
+                            <h4>UltraBook Pro 13 - i7 13th Gen</h4>
+                            <p>Experience cutting-edge performance with the latest Intel Core i7 13th Gen processor, lightweight design, and long battery life for on-the-go productivity.</p>
+                        </div>
+                    </div>
+                </td>
                 <td>3,600,000 Ks</td>
                 <td>
                     <div class="quantity-controls">
@@ -183,8 +192,10 @@
         // Optionally update grand total here if you have multiple items
     }
 </script>
-<footer id="footer">
-         
-</footer>
+
+<footer id="footer"></footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </body>
 </html>
