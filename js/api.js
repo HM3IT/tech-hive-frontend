@@ -49,28 +49,32 @@ export async function sendAuthRequest(url, method="GET", data = null) {
 
 export async function sentformRequest(url, method, formData) {
     const token = getCookie(TOKEN_NAME); 
-    let headers = {
-        'Content-Type': 'application/json',
-    };
-
-    if (token) {
-        headers['Authorization'] = `Bearer ${token}`;
-    }else{
-        window.location.href = "./login.html"
+    
+    if (!token) {
+       alert("Need to be admin")
+       window.location.href = "./login.html"
+       return null;
     }
-
-    fetch(API_ENDPOINT + url, {
-        method: method,
-        headers:headers,
-        body: formData, 
-      })
-        .then(response => response.json()) 
-        .then(data => {
-          console.log('Success:', data);
-        })
-        .catch(error => {
-          console.error('Error:', error);
+    let headers = {'Authorization':`Bearer ${token}`};
+    try {
+        const response = await fetch(API_ENDPOINT + url, {
+            method: method,
+            headers: headers,
+            body: formData,
         });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error("Server error:", errorData);
+            throw new Error(errorData.detail || "Request failed.");
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error:", error);
+        return null; // Return null to indicate failure
+    }
 }
 
 export async function getProducts(currentPage = 1, limit = 10, filter_type = null) {

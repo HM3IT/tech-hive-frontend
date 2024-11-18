@@ -32,11 +32,11 @@ document.querySelector(".add-product-form").addEventListener("submit", async (ev
         description: document.getElementById("product-description").value,
         price: parseFloat(document.getElementById("product-price").value),
         imageUrl: document.getElementById("product-image").files[0] ? document.getElementById("product-image").files[0].name : "",
-        brand: "string", // Add brand value or link it to an input field if needed
+        brand: "string",  
         categoryId: document.getElementById("product-category").value,
         subImageUrl: Array.from(document.getElementById("sub-product-image").files).map(file => file.name),
-        stock: 0, // Update if you have a field for stock in the form
-        discountPercent: 0 // Update if you have a field for discount
+        stock: 0, 
+        discountPercent: 0 
     };
 
     try {
