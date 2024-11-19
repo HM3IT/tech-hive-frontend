@@ -1,3 +1,4 @@
+import { sendAuthRequest } from "../api.js";
 import { logout  } from "../auth.js";
 import { getCookie,TOKEN_NAME } from "../utils.js";
 
@@ -27,32 +28,48 @@ window.addEventListener("load", (e) => {
  
 })
 
+window.addEventListener("DOMContentLoaded",async () => {
 
-window.addEventListener("DOMContentLoaded", () => {
-    // Initialize navigation logic
-    const navCheckInterval = setInterval(() => {
-        const loginMenu = document.getElementsById("auth-bar");
-        if (loginMenu) {
-            clearInterval(navCheckInterval);
-            initializeNav(loginMenu);
+    async function updateNavBar(){
+        const TOKEN = getCookie(TOKEN_NAME);
+        let authBtns = document.getElementsByClassName("auth-btns");
+        let unauthBtns = document.getElementsByClassName("unauth-btns");
+        if (!TOKEN) {
+            Array.from(authBtns).forEach((btn) => (btn.style.display = "block"));
+            Array.from(unauthBtns).forEach((btn) => (btn.style.display = "none"));
+        } else {
+            try {
+                const response = await sendAuthRequest("/access/me", "GET");
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log(`Welcome, ${data.name}`);
+               
+                    Array.from(authBtns).forEach((btn) => (btn.style.display = "block"));
+                    Array.from(unauthBtns).forEach((btn) => (btn.style.display = "none"));
+                } else {
+                    // Show unauthenticated buttons
+                    console.log("Failed to retrieve user data");
+                    Array.from(authBtns).forEach((btn) => (btn.style.display = "none"));
+                    Array.from(unauthBtns).forEach((btn) => (btn.style.display = "block"));
+                }
+            } catch (error) {
+                console.error("Error checking authentication:", error);
+             
+                Array.from(authBtns).forEach((btn) => (btn.style.display = "none"));
+                Array.from(unauthBtns).forEach((btn) => (btn.style.display = "block"));
+            }
         }
-    }, 100); // Check every 100ms until navigation is loaded
+    }
+    // initial loading
+    setTimeout(() => {
+        updateNavBar();
+    }, 1000);
+
+    setInterval(async () => {
+       await updateNavBar()
+    }, 10000); 
 });
 
-function initializeNav(loginMenu) {
-    const isLoggedIn = getCookie(TOKEN_NAME);
 
-    if (isLoggedIn) {
-        // Replace menu with logout option
-        loginMenu.innerHTML = `<li><a href="#" id="logout-link">Logout</a></li>;`
-        const logoutLink = document.getElementById("logout-link");
-        logoutLink.addEventListener("click", logout);
-        loginMenu.getElementById("profile-btn")
-    } else {
-        // Replace menu with login/signup options
-        loginMenu.innerHTML = 
-            `<li><a href="login.html">Login</a></li>
-            <li><a href="register.html">Sign Up</a></li>`
-        ;
-    }
-}
+ 

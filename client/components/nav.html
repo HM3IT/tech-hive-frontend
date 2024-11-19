@@ -14,7 +14,7 @@
                     </div>
                     <div class="navbar-collapse collapse" id="mobile_menu">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="/index.html">Home</a></li>
+                            <li class="active"><a href="index.html">Home</a></li>
                             <li class="dropdown">
                                 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Components <span class="caret"></span></a>
@@ -64,7 +64,7 @@
                                 <form action="" class="navbar-form">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input type="search" name="search" placeholder="Search Anything Here..." class="form-control">
+                                            <input id="search-bar" type="search" name="search" placeholder="Search Anything Here..." class="form-control">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
                                         </div>
                                     </div>
@@ -73,17 +73,17 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right" id="auth-bar">
 
-                            <li id="profile-btn"><a href="profile.html"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                            <li id="profile-btn" class="auth-btns" style="display: none;"><a href="profile.html"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Login / Sign Up <span class="caret"></span></a>
-                                <ul class="dropdown-menu" id="login-menu">
+                                <a href="#"  class="dropdown-toggle unauth-btns" data-toggle="dropdown"><span class="glyphicon glyphicon-log-in"></span> Login / Sign Up <span class="caret"></span></a>
+                                <a href="#"  class="auth-btns" style="display: none;">Logout</a>
+                                <ul class="dropdown-menu unauth-btns" id="login-menu">
                                     <li><a href="login.html">Login</a></li>
-                                    <li><a href="register.html">Sign Up</a></li>
-                                    <li><a href="#" id="logout-btn" style="display: none;">Logout</a></li>
+                                    <li> <a href="register.html">Sign Up</a></li>
+                                 
                                 </ul>
                             </li>
                         </ul>
-                        
                     </div>
                 </div>
             </div>

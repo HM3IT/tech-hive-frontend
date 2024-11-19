@@ -20,14 +20,14 @@ async function displayProducts(products) {
                 </div>
                 <p class="product-price">Price: $${product.price}</p>
                 <p class="product-discount">Discount: ${product.discountPercent}%</p>                  
-                <button onclick="addToCart('${product.id}', '${product.name}', ${product.price}, 1)" class="add-to-cart">Add to Cart</button>
+                <button onclick="addToCart('${product.id}', '${product.name}', ${product.price}, 1, ${product.discountPercent})" class="add-to-cart">Add to Cart</button>
             </div>`;
         
         productView.innerHTML += productCard;
     }
 }
 
-window.addToCart = function(productId, productName, productPrice, quantity) {
+window.addToCart = function(productId, productName, productPrice, quantity, discountPercent) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     // Check if the product already exists in the cart
@@ -110,7 +110,7 @@ function createPagination(totalItems, itemsPerPage, fetchFunction, displayFuncti
     renderPage(currentPage);
 }
 
-document.addEventListener("DOMContentLoaded", loadProduct);
+
 
 async function loadProduct() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -124,6 +124,32 @@ async function loadProduct() {
     const products = await getProducts(1, limit, filterType);
     const items = products.items;
 
-    displayProducts(items);
+    // displayProducts(items);
     createPagination(products.total, limit, getProducts, displayProducts);
 }
+
+
+
+const searchInput = document.getElementById("searchInput");
+
+function debounce(func, delay) {
+    let timeout;
+    return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), delay);
+    };
+}
+
+
+const handleSearchInput = debounce((event) => {
+    console.log(event.target.value);
+}, 300);
+
+
+searchInput.addEventListener("input", handleSearchInput);
+document.addEventListener("DOMContentLoaded", function(e){
+    loadProduct();
+
+
+});
+
