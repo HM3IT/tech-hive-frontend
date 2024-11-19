@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+    <link rel="stylesheet" href="css/productdetail.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/footer.css">
+    
+</head>
+<body>
+    <script src="js/main.js"></script>
+    <script type="module"  src="js/components/nav.js"></script>
+      <!-- Navbar -->
+       <nav id="nav">
+  
+       </nav>
+
+<div class="product-container">
+    <div class="image-gallery">
+        <button class="slider-btn" id="prevBtn" onclick="prevImage()">&#10094;</button>
+        
+        <!-- Main Image Display -->
+        <img src="../static/images/13.jpg" alt="Laptop Image" class="main-image" id="mainImage">
+        
+        <button class="slider-btn" id="nextBtn" onclick="nextImage()">&#10095;</button>
+
+        <!-- Thumbnail Images -->
+        <div class="thumbnail-container">
+            <img src="../static/images/14.jpg" alt="Thumbnail 1" class="thumbnail" onclick="showImage(0)">
+            <img src="../static/images/15.jpg" alt="Thumbnail 2" class="thumbnail" onclick="showImage(1)">
+            <img src="../static/images/16.jpg" alt="Thumbnail 3" class="thumbnail" onclick="showImage(2)">
+            <img src="../static/images/17.jpg" alt="Thumbnail 4" class="thumbnail" onclick="showImage(3)">
+        </div>
+    </div>
+    
+    <div class="product-details">
+        <h2>UltraBook Pro 13 - i7 13th Gen</h2>
+        <p class="category">Category: <span>Laptop</span></p>
+        <p class="brand">Brand: <span>UltraTech</span></p>
+
+        <div class="specs">
+            <p><strong>CPU:</strong> Core i7</p>
+            <p><strong>RAM:</strong> 16GB</p>
+            <p><strong>Storage:</strong> 1TB SSD</p>
+            <p><strong>Display:</strong> 13.3 inches</p>
+            <p><strong>Graphics:</strong> Intel® Iris® Xe Graphics</p>
+        </div>
+
+        <div class="color-option">
+            <p>Color: <span class="color-circle"></span> Space Gray</p>
+        </div>
+
+        <div class="price">
+            <p><span class="original-price">4,500,000 Ks</span> <span class="discounted-price">3,600,000 Ks</span></p>
+            <p class="discount">Discount: 20% OFF</p>
+        </div>
+
+        <div class="quantity">
+            <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
+            <input type="text" value="1" class="quantity-input" id="quantityInput">
+            <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
+        </div>
+
+        <p class="availability">Available Quantity - 5</p>
+
+        <div class="description">
+            <p><strong>Description:</strong> This UltraBook Pro 13 is a powerful, sleek laptop equipped with the latest 13th Gen Intel Core i7 processor, 16GB RAM, and 1TB SSD, perfect for both professional and personal use.</p>
+        </div>
+
+        <div class="rating">
+            <p><strong>Rating:</strong></p>
+            <div class="stars">
+                <span onclick="rateProduct(1)">&#9733;</span>
+                <span onclick="rateProduct(2)">&#9733;</span>
+                <span onclick="rateProduct(3)">&#9733;</span>
+                <span onclick="rateProduct(4)">&#9733;</span>
+                <span onclick="rateProduct(5)">&#9733;</span>
+            </div>
+            <p id="userRating"></p>
+        </div>
+
+        <button class="add-to-cart">Add to Cart</button>
+    </div>
+</div>
+
+<script>
+    function changeQuantity(amount) {
+        const quantityInput = document.getElementById('quantityInput');
+        let currentQuantity = parseInt(quantityInput.value);
+
+        if (!isNaN(currentQuantity)) {
+            currentQuantity += amount;
+            if (currentQuantity < 1) currentQuantity = 1; // Ensure quantity doesn't go below 1
+            quantityInput.value = currentQuantity;
+        }
+    }
+    const images = [
+    '../static/images/13.jpg', // Replace with actual paths
+    '../static/images/14.jpg',
+    '../static/images/15.jpg',
+    '../static/images/16.jpg'
+];
+
+let currentImageIndex = 0;
+const mainImage = document.getElementById('mainImage');
+const thumbnails = document.querySelectorAll('.thumbnail');
+
+// Update the main image and active thumbnail
+function updateImage(index) {
+    mainImage.src = images[index];
+    thumbnails.forEach((thumb, idx) => {
+        thumb.classList.toggle('active', idx === index);
+    });
+}
+
+function prevImage() {
+    currentImageIndex = (currentImageIndex === 0) ? images.length - 1 : currentImageIndex - 1;
+    updateImage(currentImageIndex);
+}
+
+function nextImage() {
+    currentImageIndex = (currentImageIndex === images.length - 1) ? 0 : currentImageIndex + 1;
+    updateImage(currentImageIndex);
+}
+
+function showImage(index) {
+    currentImageIndex = index;
+    updateImage(currentImageIndex);
+}
+
+// Initialize the first image as active
+updateImage(currentImageIndex);
+
+// Rating Functionality
+function rateProduct(rating) {
+    const stars = document.querySelectorAll('.stars span');
+    stars.forEach((star, index) => {
+        star.classList.toggle('active', index < rating);
+    });
+    document.getElementById('userRating').innerText = `You rated this product ${rating} stars`;
+}
+
+</script>
+<footer id="footer">
+         
+</footer>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

@@ -1,5 +1,6 @@
+import { sendAuthRequest } from "../api.js";
 import { logout  } from "../auth.js";
-import { getCookie,TOKEN_NAME } from "../utils.js";
+import { getCookie,TOKEN_NAME, getCategory } from "../utils.js";
 
 window.addEventListener("load", (e) => {
 
@@ -16,10 +17,9 @@ window.addEventListener("load", (e) => {
     const checkDomAndAttachListener = () => {
         const closeBtn = document.getElementById('logout-btn');
         if (closeBtn) {
-            console.log("found")
             closeBtn.addEventListener('click', logout);
-            console.log("Listener attached to logout button.");
-            clearInterval(interval); // Stop the interval once the element is found
+            // Stop the interval once the element is found
+            clearInterval(interval); 
         }
     };
     
@@ -28,31 +28,75 @@ window.addEventListener("load", (e) => {
 })
 
 
-window.addEventListener("DOMContentLoaded", () => {
-    // Initialize navigation logic
-    const navCheckInterval = setInterval(() => {
-        const loginMenu = document.getElementsById("auth-bar");
-        if (loginMenu) {
-            clearInterval(navCheckInterval);
-            initializeNav(loginMenu);
+window.addEventListener("DOMContentLoaded",async () => {
+    async function loadComponent(){
+        let menu = document.getElementById("components-menu");
+        let categories = await getCategory();
+
+        menu.innerHTML = '';
+
+        categories.forEach(category => {
+        
+            let listItem = document.createElement('li');
+            listItem.innerHTML = `<a href="products.html?filter_type=${category.name}">${category.name}</a>`;
+       
+            menu.appendChild(listItem);
+        });
+            
+      
+    }
+
+    async function updateNavBar(){
+        const TOKEN = getCookie(TOKEN_NAME);
+ 
+        let authBtns = document.getElementsByClassName("auth-btns");
+        let unauthBtns = document.getElementsByClassName("unauth-btns");
+        if (!TOKEN) {
+          
+            Array.from(authBtns).forEach((btn) => (btn.style.display = "none"));
+            Array.from(unauthBtns).forEach((btn) => (btn.style.display = ""));
+        } else {
+            try {
+                const response = await sendAuthRequest("/access/me", "GET");
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log(`Welcome, ${data.name}`);
+               
+                    Array.from(authBtns).forEach((btn) => (btn.style.display = ""));
+                    Array.from(unauthBtns).forEach((btn) => (btn.style.display = "none"));
+                } else {
+                    // Show unauthenticated buttons
+                    console.log("Failed to retrieve user data");
+                    Array.from(authBtns).forEach((btn) => (btn.style.display = "none"));
+                    Array.from(unauthBtns).forEach((btn) => (btn.style.display = ""));
+                }
+            } catch (error) {
+                console.error("Error checking authentication:", error);
+             
+                Array.from(authBtns).forEach((btn) => (btn.style.display = "none"));
+                Array.from(unauthBtns).forEach((btn) => (btn.style.display = ""));
+            }
         }
-    }, 100); // Check every 100ms until navigation is loaded
+    }
+    // initial loading wait for js
+    let intervalId = setInterval(() => {
+        let authBtns = document.getElementsByClassName("auth-btns");
+    
+        if (authBtns.length > 0) {
+        
+            console.log("Auth buttons found, updating navbar...");
+            updateNavBar();
+            loadComponent()
+            
+            clearInterval(intervalId); 
+        }  
+    }, 10);
+
+    setInterval(async () => {
+       await updateNavBar()
+    }, 10000); 
 });
 
-function initializeNav(loginMenu) {
-    const isLoggedIn = getCookie(TOKEN_NAME);
 
-    if (isLoggedIn) {
-        // Replace menu with logout option
-        loginMenu.innerHTML = `<li><a href="#" id="logout-link">Logout</a></li>;`
-        const logoutLink = document.getElementById("logout-link");
-        logoutLink.addEventListener("click", logout);
-        loginMenu.getElementById("profile-btn")
-    } else {
-        // Replace menu with login/signup options
-        loginMenu.innerHTML = 
-            `<li><a href="login.html">Login</a></li>
-            <li><a href="register.html">Sign Up</a></li>`
-        ;
-    }
-}
+ 

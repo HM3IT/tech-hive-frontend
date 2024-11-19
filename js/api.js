@@ -27,7 +27,7 @@ export async function sendAuthRequest(url, method="GET", data = null) {
     if (token) {
         headers['Authorization'] = `Bearer ${token}`;
     }else{
-        window.location.href = "./login.html"
+        // window.location.href = "./index.html"
     }
 
     if (data) {
@@ -72,23 +72,6 @@ export async function sentformRequest(url, method, formData) {
         return data;
     } catch (error) {
         console.error("Error:", error);
-        return null; // Return null to indicate failure
-    }
-}
-
-export async function getProducts(currentPage = 1, limit = 10, filter_type = null) {
-    // const searchInput = document.getElementById("searchInput").value.toLowerCase();
-    // const selectedTags = Array.from(document.querySelectorAll('.filter-section input[type="checkbox"]:checked')).map(input => input.value.toLowerCase());
-    // const selectedPriceRanges = Array.from(document.querySelectorAll('.price-range:checked')).map(input => input.value);
-
-    // Construct query parameters based on filters
-    let url = `/products/list?pageSize=${limit}&currentPage=${currentPage}`;
-
-    let response = await sendAuthRequest(url, "GET", null)
-
-    if (response.ok) {
-        return await response.json();        
-    } else {
-        console.error("Failed to fetch products");
+        return null; 
     }
 }

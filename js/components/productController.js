@@ -1,4 +1,5 @@
 import { sendAuthRequest, sentformRequest } from "../api.js";
+import { getCategory } from "../utils.js";
 
 
 let dropDownCategory = document.getElementById("product-category");
