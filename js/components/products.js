@@ -1,4 +1,4 @@
-import { getProducts } from '../api.js';
+import { sendRequest } from '../api.js';
 import { fetchImageUrl } from '../utils.js';
 
 
@@ -9,7 +9,6 @@ async function displayProducts(products) {
 
     for (const product of products) {
         let objectUrl = await fetchImageUrl(product.imageUrl);
-
         const productCard = `
             <div class="product-card" data-id="${product.id}" data-price="${product.price}" data-discount="${product.discountPercent}">
                 <img src="${objectUrl}" alt="${product.name}" class="product-image">
@@ -46,7 +45,7 @@ export { displayProducts };
 
 
 
-function createPagination(totalItems, itemsPerPage, fetchFunction, displayFunction) {
+function createPagination(totalItems, itemsPerPage, fetchFunction, displayFunction, filters) {
     const totalPages = Math.ceil(totalItems / itemsPerPage);
     const paginationContainer = document.getElementById('paginationControls');
     paginationContainer.innerHTML = '';
@@ -55,7 +54,7 @@ function createPagination(totalItems, itemsPerPage, fetchFunction, displayFuncti
 
     function renderPage(page) {
         currentPage = page;
-        fetchFunction(page, itemsPerPage).then(data => {
+        fetchFunction(page, itemsPerPage, filters).then(data => {
             displayFunction(data.items);
         });
 
@@ -110,27 +109,62 @@ function createPagination(totalItems, itemsPerPage, fetchFunction, displayFuncti
     renderPage(currentPage);
 }
 
-
+async function getProducts(page, limit, filters){
+    let response = await sendRequest(`/products/search?query_str=${filters}&page=${page}&limit=${limit}`, "GET");
+    if(response.ok){
+      let data = await response.json();
+      let products = data.items;
+      let unwrappedProducts = products.map(item => item.document);
+  
+      
+      return {
+        total: data.total, 
+        items: unwrappedProducts,
+        perPage: data.per_page
+      };
+    }
+    return {}
+    
+}
 
 async function loadProduct() {
     const urlParams = new URLSearchParams(window.location.search);
     const limit = 10;
+    const page= 1
     let filterType = urlParams.get('filter_type');
-
+    let products;
+    let filters = null
     if (filterType) {
-        filterType = filterType.replaceAll("'", "");
+        filters = filterType.replaceAll("'", ""); 
     }
+    let data = await getProducts(limit, page, filters);
+    console.log(data)
+    createPagination(data.total, limit, getProducts, displayProducts, filters);
+    } 
+    
+ 
 
-    const products = await getProducts(1, limit, filterType);
-    const items = products.items;
-
-    // displayProducts(items);
-    createPagination(products.total, limit, getProducts, displayProducts);
-}
-
+let oldSearchVal =""
+const handleSearchInput = debounce(async(event) => {
+  let searchVal = event.target.value;
+  // search optimization
+  let limit = 10
+  console.log("Listening")
+  if (oldSearchVal === searchVal){
+    return
+  }
+  oldSearchVal = searchVal
+  searchVal = searchVal.trim().toLowerCase(); 
+  let filters = encodeURIComponent(searchVal);
+  let data = await getProducts(filters)
+  console.log("TOtal ",data.total )
+  createPagination(data.total, limit, getProducts, displayProducts, filters);
+}, 500);
 
 
 const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("input", handleSearchInput);
 
 function debounce(func, delay) {
     let timeout;
@@ -141,15 +175,9 @@ function debounce(func, delay) {
 }
 
 
-const handleSearchInput = debounce((event) => {
-    console.log(event.target.value);
-}, 300);
 
 
-searchInput.addEventListener("input", handleSearchInput);
 document.addEventListener("DOMContentLoaded", function(e){
     loadProduct();
-
-
 });
 
