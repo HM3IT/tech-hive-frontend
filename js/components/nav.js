@@ -32,11 +32,13 @@ window.addEventListener("DOMContentLoaded",async () => {
 
     async function updateNavBar(){
         const TOKEN = getCookie(TOKEN_NAME);
+ 
         let authBtns = document.getElementsByClassName("auth-btns");
         let unauthBtns = document.getElementsByClassName("unauth-btns");
         if (!TOKEN) {
-            Array.from(authBtns).forEach((btn) => (btn.style.display = "block"));
-            Array.from(unauthBtns).forEach((btn) => (btn.style.display = "none"));
+          
+            Array.from(authBtns).forEach((btn) => (btn.style.display = "none"));
+            Array.from(unauthBtns).forEach((btn) => (btn.style.display = ""));
         } else {
             try {
                 const response = await sendAuthRequest("/access/me", "GET");
@@ -61,14 +63,24 @@ window.addEventListener("DOMContentLoaded",async () => {
             }
         }
     }
-    // initial loading
-    setTimeout(() => {
-        updateNavBar();
-    }, 1000);
+    // initial loading wait for js
+    let intervalId = setInterval(() => {
+        let authBtns = document.getElementsByClassName("auth-btns");
+    
+        if (authBtns.length > 0) {
+        
+            console.log("Auth buttons found, updating navbar...");
+            updateNavBar();
+            
+            clearInterval(intervalId); 
+        } else {
+            console.log("No auth buttons found yet.");
+        }
+    }, 10);
 
     setInterval(async () => {
        await updateNavBar()
-    }, 10000); 
+    }, 5000); 
 });
 
 
