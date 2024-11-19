@@ -1,4 +1,5 @@
 import { sendAuthRequest, sentformRequest } from "../api.js";
+import { getCategory } from "../utils.js";
 
 
 let dropDownCategory = document.getElementById("product-category");
@@ -22,21 +23,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 });
 
-async function getCategory() {
-    let currentPage = 1;
-    let pageSize = 300;
-
-    let url = `/categories?currentPage=${currentPage}&pageSize=${pageSize}`;
-
-    let response = await sendAuthRequest(url, "GET", null);
-
-    if (response.ok) {
-        let data = await response.json();
-        return data.items;
-    } else {
-        console.log("Failed to fetch categories:", response);
-    }
-}
 
  
 async function uploadImage(file) {

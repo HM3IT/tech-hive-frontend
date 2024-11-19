@@ -144,3 +144,20 @@ export async function displayProducts(products) {
         productView.innerHTML += productCard;
     }
 }
+
+
+export async function getCategory() {
+    let currentPage = 1;
+    let pageSize = 300;
+
+    let url = `/categories?currentPage=${currentPage}&pageSize=${pageSize}`;
+
+    let response = await sendAuthRequest(url, "GET", null);
+
+    if (response.ok) {
+        let data = await response.json();
+        return data.items;
+    } else {
+        console.log("Failed to fetch categories:", response);
+    }
+}

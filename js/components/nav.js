@@ -1,6 +1,6 @@
 import { sendAuthRequest } from "../api.js";
 import { logout  } from "../auth.js";
-import { getCookie,TOKEN_NAME } from "../utils.js";
+import { getCookie,TOKEN_NAME, getCategory } from "../utils.js";
 
 window.addEventListener("load", (e) => {
 
@@ -28,7 +28,24 @@ window.addEventListener("load", (e) => {
  
 })
 
+
 window.addEventListener("DOMContentLoaded",async () => {
+    async function loadComponent(){
+        let menu = document.getElementById("components-menu");
+        let categories = await getCategory();
+
+        menu.innerHTML = '';
+
+        categories.forEach(category => {
+        
+            let listItem = document.createElement('li');
+            listItem.innerHTML = `<a href="products.html?filter_type=${category.name}">${category.name}</a>`;
+       
+            menu.appendChild(listItem);
+        });
+            
+      
+    }
 
     async function updateNavBar(){
         const TOKEN = getCookie(TOKEN_NAME);
@@ -47,19 +64,19 @@ window.addEventListener("DOMContentLoaded",async () => {
                     const data = await response.json();
                     console.log(`Welcome, ${data.name}`);
                
-                    Array.from(authBtns).forEach((btn) => (btn.style.display = "block"));
+                    Array.from(authBtns).forEach((btn) => (btn.style.display = ""));
                     Array.from(unauthBtns).forEach((btn) => (btn.style.display = "none"));
                 } else {
                     // Show unauthenticated buttons
                     console.log("Failed to retrieve user data");
                     Array.from(authBtns).forEach((btn) => (btn.style.display = "none"));
-                    Array.from(unauthBtns).forEach((btn) => (btn.style.display = "block"));
+                    Array.from(unauthBtns).forEach((btn) => (btn.style.display = ""));
                 }
             } catch (error) {
                 console.error("Error checking authentication:", error);
              
                 Array.from(authBtns).forEach((btn) => (btn.style.display = "none"));
-                Array.from(unauthBtns).forEach((btn) => (btn.style.display = "block"));
+                Array.from(unauthBtns).forEach((btn) => (btn.style.display = ""));
             }
         }
     }
@@ -71,6 +88,7 @@ window.addEventListener("DOMContentLoaded",async () => {
         
             console.log("Auth buttons found, updating navbar...");
             updateNavBar();
+            loadComponent()
             
             clearInterval(intervalId); 
         } else {
