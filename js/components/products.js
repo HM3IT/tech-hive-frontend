@@ -126,7 +126,9 @@ async function getProducts(page, limit, filters){
     return {}
     
 }
-
+// ============================
+// Search and Filter section
+// ===========================
 async function loadProduct() {
     const urlParams = new URLSearchParams(window.location.search);
     const limit = 10;
@@ -156,7 +158,6 @@ const handleSearchInput = debounce(async(event) => {
   searchVal = searchVal.trim().toLowerCase(); 
   let filters = encodeURIComponent(searchVal);
   let data = await getProducts(1, limit, filters)
-  console.log("TOtal ",data.total )
   createPagination(data.total, limit, getProducts, displayProducts, filters);
 }, 500);
 
@@ -173,10 +174,23 @@ function debounce(func, delay) {
     };
 }
 
-
-
-
-document.addEventListener("DOMContentLoaded", function(e){
+document.addEventListener("DOMContentLoaded", async function(e){
     loadProduct();
+    const priceRangeRadios = document.getElementsByClassName("price-range");
+
+    for (let i = 0; i < priceRangeRadios.length; i++) {
+        priceRangeRadios[i].addEventListener("change", handlePriceRangeChange);
+    }
+    
+    async function handlePriceRangeChange() {
+    
+        const selectedValue = Array.from(priceRangeRadios)
+            .find(radio => radio.checked)?.value;
+        let limit= 10
+        let filters = `null&price_range=${selectedValue}`
+        let data = await getProducts(1, limit, filters)
+        createPagination(data.total, limit, getProducts, displayProducts, filters);
+
+    }
 });
 

@@ -80,7 +80,7 @@ window.addEventListener("DOMContentLoaded",async () => {
 
     setInterval(async () => {
        await updateNavBar()
-    }, 5000); 
+    }, 10000); 
 });
 
 
