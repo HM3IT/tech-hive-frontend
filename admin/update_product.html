@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Update Product</title>
+    <link rel="stylesheet" href="../css/update_product.css">
+</head>
+<body>
+    <script type="module" src="../js/components/product_update.js"></script>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="admin-sidebar">
+            <h2>Admin Dashboard</h2>
+                    <ul class="nav-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="orders.html">Orders</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li><a href="settings.html">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h1>Update Product</h1>
+            </header>
+
+            <!-- Update Product Form -->
+            <section class="update-product-section">
+                <form class="update-product-form" id="update-product-form">
+                    <div class="form-group">
+                        <label for="product-name">Product Name</label>
+                        <input type="text" id="product-name" placeholder="Enter product name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-category">Category</label>
+                        <select id="product-category" name="category" required>
+                            <option value="" disabled selected>Select category</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-brand">Brand</label>
+                        <input type="text" id="product-brand" placeholder="Enter product brand">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-stock">Stock</label>
+                        <input type="number" id="product-stock" placeholder="Enter product stock">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-price">Price ($)</label>
+                        <input type="number" id="product-price" placeholder="Enter product price">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-discount">Discount</label>
+                        <input type="number" id="product-discount" placeholder="Enter product discount">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-image">Product Image</label>
+                        <input type="file" id="product-image">
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label for="sub-product-image" class="form-label">Sub Images</label>
+                        <input class="form-control" type="file" id="sub-product-image" multiple>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-description">Description</label>
+                        <textarea id="product-description" rows="5" placeholder="Enter product description"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="submit-btn" id="update-btn">Update Product</button>
+                        <button type="button" class="cancel-btn" id="cancel-btn">Cancel</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

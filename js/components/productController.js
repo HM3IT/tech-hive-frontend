@@ -4,7 +4,7 @@ import { sendAuthRequest, sentformRequest } from "../api.js";
 let dropDownCategory = document.getElementById("product-category");
 
 document.addEventListener("DOMContentLoaded", async () => {
-
+    console.log("Hello");
     let categories = await getCategory();
 
     categories.forEach(category => {
@@ -15,18 +15,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     let productForm = document.getElementById("add-product-form")
-
+    if (productForm) {
     productForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         await addProduct();
-    });
+    });}
 });
 
-async function getCategory() {
+export async function getCategory() {
     let currentPage = 1;
     let pageSize = 300;
 
-    let url = `/categories?currentPage=${currentPage}&pageSize=${pageSize}`;
+    let url = `/categories/list?currentPage=${currentPage}&pageSize=${pageSize}`;
 
     let response = await sendAuthRequest(url, "GET", null);
 
@@ -63,7 +63,7 @@ async function addProduct() {
     let productDescription = document.getElementById("product-description").value;
     let productPrice = parseFloat(document.getElementById("product-price").value);
     let productCategory = document.getElementById("product-category").value;
-    let productImage = document.getElementById("product-image").files[0]; 
+    let productImage = document.getElementById("product-image").files[0];
     let productBrand = document.getElementById("product-brand").value;
     let productStock = parseInt(document.getElementById("product-stock").value) || 0;
     let productDiscount = parseInt(document.getElementById("product-discount").value) || 0;
