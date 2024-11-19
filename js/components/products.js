@@ -1,9 +1,7 @@
 import { displayProducts, createPagination, getProducts } from '../utils.js';
 
 let price_range_filter = "null"
-let category_filter = "null"
 let query_filter = "null"
-
 
 // ============================
 // Search and Filter section
@@ -13,12 +11,12 @@ async function loadProduct() {
     const limit = 10;
     const page= 1
     let filterType = urlParams.get('filter_type');
-    let filters = null
+  
     if (filterType) {
-        filters = filterType.replaceAll("'", ""); 
+        query_filter = filterType.replaceAll("'", ""); 
     }
+    let filters = `${query_filter}&price_range=${price_range_filter}`
     let data = await getProducts(limit, page, filters);
-    console.log(data)
     createPagination(data.total, limit, getProducts, displayProducts, filters);
     } 
     
@@ -35,7 +33,8 @@ const handleSearchInput = debounce(async(event) => {
   }
   oldSearchVal = searchVal
   searchVal = searchVal.trim().toLowerCase(); 
-  let filters = encodeURIComponent(searchVal);
+  query_filter = encodeURIComponent(searchVal);
+  let filters = `query_str=${query_filter}&price_range=${price_range_filter}` 
   let data = await getProducts(1, limit, filters)
   createPagination(data.total, limit, getProducts, displayProducts, filters);
 }, 500);
@@ -67,8 +66,9 @@ document.addEventListener("DOMContentLoaded", async function(e){
             .find(radio => radio.checked)?.value;
         let limit= 10
         price_range_filter = `null&price_range=${selectedValue}`
-        let data = await getProducts(1, limit, price_range_filter)
-        createPagination(data.total, limit, getProducts, displayProducts, price_range_filter);
+        let filters = `${query_filter}&price_range=${price_range_filter}`
+        let data = await getProducts(1, limit, filters)
+        createPagination(data.total, limit, getProducts, displayProducts, filters);
 
     }
 });
