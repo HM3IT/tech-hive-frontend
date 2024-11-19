@@ -150,7 +150,7 @@ export async function getCategory() {
     let currentPage = 1;
     let pageSize = 300;
 
-    let url = `/categories?currentPage=${currentPage}&pageSize=${pageSize}`;
+    let url = `/categories/list?currentPage=${currentPage}&pageSize=${pageSize}`;
 
     let response = await sendAuthRequest(url, "GET", null);
 

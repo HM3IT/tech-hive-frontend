@@ -11,9 +11,10 @@
 </head>
 <body>
     
-    <script type="module"  src="../js/components/cart.js"></script> 
+    <!-- <script type="module"  src="../js/components/cart.js"></script>  -->
     <script src="../js/main.js"></script>
     <script type="module"  src="../js/components/nav.js"></script>
+    <script type="module" src="../js/components/cartController.js"></script>
       <!-- Navbar -->
        <nav id="nav">
   
@@ -36,7 +37,9 @@
             <!-- Dynamic rows will be inserted here -->
         </tbody>
     </table>
-    <h3 class="grand-total">Grand Total: $0.00</h3>
+    <h3 class="grand-total" id="order-total">Grand Total: $0.00</h3>
+
+    <button id="order-submit-btn">Order Now</button>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

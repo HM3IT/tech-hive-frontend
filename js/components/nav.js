@@ -17,10 +17,9 @@ window.addEventListener("load", (e) => {
     const checkDomAndAttachListener = () => {
         const closeBtn = document.getElementById('logout-btn');
         if (closeBtn) {
-            console.log("found")
             closeBtn.addEventListener('click', logout);
-            console.log("Listener attached to logout button.");
-            clearInterval(interval); // Stop the interval once the element is found
+            // Stop the interval once the element is found
+            clearInterval(interval); 
         }
     };
     
@@ -91,9 +90,7 @@ window.addEventListener("DOMContentLoaded",async () => {
             loadComponent()
             
             clearInterval(intervalId); 
-        } else {
-            console.log("No auth buttons found yet.");
-        }
+        }  
     }, 10);
 
     setInterval(async () => {

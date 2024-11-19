@@ -34,7 +34,7 @@ const handleSearchInput = debounce(async(event) => {
   oldSearchVal = searchVal
   searchVal = searchVal.trim().toLowerCase(); 
   query_filter = encodeURIComponent(searchVal);
-  let filters = `query_str=${query_filter}&price_range=${price_range_filter}` 
+  let filters = `${query_filter}&price_range=${price_range_filter}` 
   let data = await getProducts(1, limit, filters)
   createPagination(data.total, limit, getProducts, displayProducts, filters);
 }, 500);
@@ -75,18 +75,3 @@ document.addEventListener("DOMContentLoaded", async function(e){
 
 
 
-// add to cart handler
-window.addToCart = function(productId, productName, productPrice, quantity, discountPercent) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    // Check if the product already exists in the cart
-    const existingProduct = cart.find((item) => item.id === productId);
-    if (existingProduct) {
-        existingProduct.quantity += quantity;
-    } else {
-        cart.push({ id: productId, name: productName,discountPercent, price: productPrice, quantity });
-    }
-
-    localStorage.setItem('cart', JSON.stringify(cart));
-    alert(`${productName} has been added to the cart!`);
-};

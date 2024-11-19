@@ -27,7 +27,7 @@ export async function sendAuthRequest(url, method="GET", data = null) {
     if (token) {
         headers['Authorization'] = `Bearer ${token}`;
     }else{
-        window.location.href = "./login.html"
+        // window.location.href = "./index.html"
     }
 
     if (data) {
