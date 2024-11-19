@@ -115,8 +115,8 @@ async function getProducts(page, limit, filters){
       let data = await response.json();
       let products = data.items;
       let unwrappedProducts = products.map(item => item.document);
-  
-      
+      console.log("inside")
+      console.log(data)
       return {
         total: data.total, 
         items: unwrappedProducts,
@@ -132,7 +132,6 @@ async function loadProduct() {
     const limit = 10;
     const page= 1
     let filterType = urlParams.get('filter_type');
-    let products;
     let filters = null
     if (filterType) {
         filters = filterType.replaceAll("'", ""); 
@@ -156,7 +155,7 @@ const handleSearchInput = debounce(async(event) => {
   oldSearchVal = searchVal
   searchVal = searchVal.trim().toLowerCase(); 
   let filters = encodeURIComponent(searchVal);
-  let data = await getProducts(filters)
+  let data = await getProducts(1, limit, filters)
   console.log("TOtal ",data.total )
   createPagination(data.total, limit, getProducts, displayProducts, filters);
 }, 500);
