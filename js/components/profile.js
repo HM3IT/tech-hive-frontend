@@ -34,14 +34,10 @@ document.addEventListener("DOMContentLoaded", async function(){
             reader.readAsDataURL(file);
         }
     });
-    
-
-
 
     await loadProfile();
     await loadMyOrder();
    
-    
     
    async function loadMyOrder(){
        const orderContainer = document.getElementById("order-cart-container")
@@ -67,9 +63,6 @@ document.addEventListener("DOMContentLoaded", async function(){
        .catch(error => {
            console.error('Error fetching orders:', error);
        });
-   
-
-     
-       
+    
     }
 })

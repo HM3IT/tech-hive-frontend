@@ -4,15 +4,45 @@ let grandTotal = 0.00
 
 function updateCartQuantity(productId, quantity) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const product = cart.find((item) => item.id === productId);
+ 
+    const product = cart.find((item) => item.productId === productId);
 
     if (product) {
         product.quantity = parseInt(quantity, 10);
         localStorage.setItem('cart', JSON.stringify(cart));
-        loadCart();
+
+    // Update the specific row's total value dynamically
+     const row = document.querySelector(`tr[data-id="${productId}"]`);
+     if (row) {
+         const discountPercent = product.discountPercentAtOrder || 0;
+         const discountAmount = (product.priceAtOrder * discountPercent) / 100;
+         const discountedPrice = product.priceAtOrder - discountAmount;
+         const rowTotal = discountedPrice * product.quantity;
+ 
+         const grandTotalCell = row.querySelector('.grand-total');
+         if (grandTotalCell) {
+             grandTotalCell.textContent = `$${rowTotal.toFixed(2)}`;
+         }
+     }
+ 
+     updateGrandTotal(cart);
+ }
+}
+function updateGrandTotal(cart) {
+    const grandTotal = cart.reduce((total, item) => {
+        const discountPercent = item.discountPercentAtOrder || 0;
+        const discountAmount = (item.priceAtOrder * discountPercent) / 100;
+        const discountedPrice = item.priceAtOrder - discountAmount;
+        return total + discountedPrice * item.quantity;
+    }, 0);
+
+    const grandTotalElement = document.querySelector('#grandTotal');
+    if (grandTotalElement) {
+        grandTotalElement.textContent = `$${grandTotal.toFixed(2)}`;
     }
 }
 
+ 
 const loadCart= function() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const cartTableBody = document.querySelector('#cartTable tbody');
@@ -22,13 +52,13 @@ const loadCart= function() {
     cartTableBody.innerHTML = '';
 
     cart.forEach((item, index) => {
-        // Ensure discountPercent exists and calculate the discounted price
+  
         const discountPercent = item.discountPercentAtOrder || 0;
         const discountAmount = (item.priceAtOrder * discountPercent) / 100;
         const discountedPrice = item.priceAtOrder - discountAmount;
 
         const row = `
-            <tr data-index="${index}">
+            <tr data-index="${index}" data-id="${item.productId}">
                 <td>
                     <img src="${item.imageUrl}" alt="${item.name}" class="cart-product-image" />
                 </td>
@@ -42,12 +72,12 @@ const loadCart= function() {
                         value="${item.quantity}" 
                         min="1" 
                         class="quantity-input" 
-                        data-id="${item.id}" 
-                        onchange="updateCartQuantity('${item.id}', this.value)">
+                        data-id="${item.productId}" 
+                        onchange="updateCartQuantity('${item.productId}', this.value)">
                 </td>
-                <td>$${(discountedPrice * item.quantity).toFixed(2)}</td>
+                <td class="grand-total">$${(discountedPrice * item.quantity).toFixed(2)}</td>
                 <td>
-                    <button onclick="removeFromCart('${item.id}')" class="remove-item">Remove</button>
+                    <button onclick="removeFromCart('${item.productId}')" class="remove-item">Remove</button>
                 </td>
             </tr>`;
         cartTableBody.innerHTML += row;
@@ -59,19 +89,9 @@ const loadCart= function() {
 
 function removeFromCart(productId) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart = cart.filter((item) => item.id !== productId);
+    cart = cart.filter((item) => item.productId !== productId);
     localStorage.setItem('cart', JSON.stringify(cart));
     loadCart();
-}
-
-function updateGrandTotal(cart) {
-    grandTotal = cart.reduce((sum, item) => {
-        const discountPercent = item.discountPercentAtOrder || 0;
-        const discountAmount = (item.priceAtOrder * discountPercent) / 100;
-        const discountedPrice = item.priceAtOrder - discountAmount;
-        return sum + discountedPrice * item.quantity;
-    }, 0);
-    document.querySelector('.grand-total').innerText = `Grand Total: $${grandTotal.toFixed(2)}`;
 }
 
 
