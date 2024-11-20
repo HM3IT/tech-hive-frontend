@@ -36,9 +36,9 @@ function updateGrandTotal(cart) {
         return total + discountedPrice * item.quantity;
     }, 0);
 
-    const grandTotalElement = document.querySelector('#grandTotal');
+    const grandTotalElement = document.getElementById('order-total');
     if (grandTotalElement) {
-        grandTotalElement.textContent = `$${grandTotal.toFixed(2)}`;
+        grandTotalElement.innerText = `$${grandTotal.toFixed(2)}`;
     }
 }
 
@@ -95,9 +95,7 @@ function removeFromCart(productId) {
 }
 
 
-
- 
-function addToCart(productId, productName, productPrice, quantity, discountPercent) {
+ function addToCart(productId, productName, productPrice, quantity, discountPercent) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
  
     const existingProduct = cart.find((item) => item.id === productId);
@@ -118,4 +116,5 @@ window.addToCart = addToCart
 
 document.addEventListener("DOMContentLoaded", async function(event){
     loadCart()
+
 })
