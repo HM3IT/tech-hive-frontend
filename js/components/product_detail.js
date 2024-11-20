@@ -1,4 +1,3 @@
-import { sendAuthRequest } from "../api.js";
 import { fetchImageUrl, fetchProductDetail } from "../utils.js";
 
 // import { getCategory } from "./productController.js";
