@@ -1,15 +1,38 @@
 import {sendAuthRequest} from "../api.js";
+import {fetchImageUrl} from "../utils.js";
 
 document.addEventListener("DOMContentLoaded",async function(){
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let grandTotal = await getGrandTotal();
     let userName = document.getElementById("user-name");
-    let shipAddress = document.getElementById("ship-address")
-    let phone = document.getElementById("phone")
+    let shipAddress = document.getElementById("ship-address");
+    let phone = document.getElementById("phone");
+    let orderSubmitBtn = document.getElementById("order-submit-btn");
+    const tblBody = document.getElementById("order-summary-tbody");
+
+    orderSubmitBtn.addEventListener("click", submitOrder);
+
     const response = await sendAuthRequest("/access/me", "GET");
     if(response.ok){
         let user = await response.json();
- 
-        userName.innerText = user.name
+        userName.innerText = user.name;
         shipAddress.innerText = user.address || "";
+    }
+
+    const grandTotalElement = document.getElementById('order-total');
+    grandTotalElement.innerText = `$${grandTotal.toFixed(2)}`;
+    
+ 
+    loadCartSummaryTable(cart);
+
+    async function getGrandTotal(){
+        return cart.reduce((total, item) => {
+            const discountPercent = item.discountPercentAtOrder || 0;
+            const discountAmount = (item.priceAtOrder * discountPercent) / 100;
+            const discountedPrice = item.priceAtOrder - discountAmount;
+            return total + discountedPrice * item.quantity;
+    }, 0);
+
     }
 
     async function submitOrder(){
@@ -23,8 +46,8 @@ document.addEventListener("DOMContentLoaded",async function(){
         let orderData = {
             orderProducts: cart,
             address: shipAddress.innerText.trim(),
-            totalPrice: grandTotal,
-            phone: phone.innerText.trim()
+            totalPrice: await getGrandTotal(), // avoid HTML snopping
+            phone: phone.innerText
         };
      
         let response = await sendAuthRequest("/orders/add","POST", orderData)
@@ -39,40 +62,47 @@ document.addEventListener("DOMContentLoaded",async function(){
             console.log(orderData)
         }
     }
-
-
-
-
-
-    let orderSubmitBtn = document.getElementById("order-submit-btn");
-    orderSubmitBtn.addEventListener("click", submitOrder)
- 
-
-
-async function loadOrderTable(orders) {
-  
-        tblBody.innerHTML = ""; 
+        
+    async function loadCartSummaryTable(cart) {
+        const tblBody = document.getElementById('order-summary-tbody');  
+        if (!tblBody) {
+            return;
+        }
+        tblBody.innerHTML = '';
+    
+        for (const item of cart) {
+            const discountPercent = item.discountPercentAtOrder || 0;
+            const discountAmount = (item.priceAtOrder * discountPercent) / 100;
+            const discountedPrice = item.priceAtOrder - discountAmount;
+            const objectUrl = await fetchImageUrl(item.imageUrl);
+    
+         
+            const row = document.createElement("tr");
+            row.setAttribute("data-index", cart.indexOf(item));
+            row.setAttribute("data-id", item.productId);
     
     
-        orders.forEach(async (order) => {
-            let row = document.createElement("tr");
-            let user = await getUser(order.userId)
-       
             row.innerHTML = `
-                <tr>
-                    <td>${order.id}</td>
-                    <td>${user.name}</td>
-                    <td>${order.createAt}</td>
-                    <td>${order.status}</td>
-                    <td>${order.totalPrice}</td>
-                    <td class="action-buttons">
-                        <button class="view-btn" data-id="${order.id}">View</button>
-                        <button class="update-btn" data-id="${order.id}">Update</button>
-                    </td>
-                </tr>
+                <td>
+                    <img src="${objectUrl}" alt="${item.name}" class="cart-product-image" />
+                </td>
+                <td>${item.name}</td>
+                <td>${discountPercent}%</td>
+                <td>$${discountedPrice.toFixed(2)}</td>
+                <td>${item.quantity}</td>
+                <td class="grand-total">$${(discountedPrice * item.quantity).toFixed(2)}</td>
             `;
+    
+         
             tblBody.appendChild(row);
-        });
+        }
+    
+   
+        const cartProductImages = document.getElementsByClassName("cart-product-image");
+        for (const image of cartProductImages) {
+            image.style.width = "120px";
+            image.style.height = "120px";
+        }
     }
     
 })

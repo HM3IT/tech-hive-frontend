@@ -29,27 +29,57 @@ async function loadOrders() {
         console.log("Failed to fetch products:", response);
     }
 }
+// async function loadOrderTable(orders) {
+//     tblBody.innerHTML = "";  
+
+//     for (const order of orders) {
+//         const row = document.createElement("tr");
+//         const user = await getUser(order.userId);
+
+//         row.innerHTML = `
+//             <td>${order.id}</td>
+//             <td>${user.name}</td>
+//             <td>${order.createAt}</td>
+//             <td>${order.status}</td>
+//             <td>${order.totalPrice}</td>
+//             <td class="action-buttons">
+//                 <button class="view-btn" data-id="${order.id}">View</button>
+//                 <button class="update-btn" data-id="${order.id}">Update</button>
+//             </td>
+//         `;
+
+//         tblBody.appendChild(row);
+//     }
+// }
+
+// });
+
+
+
 async function loadOrderTable(orders) {
-    tblBody.innerHTML = "";  
+  
+    tblBody.innerHTML = ""; 
 
-    for (const order of orders) {
-        const row = document.createElement("tr");
-        const user = await getUser(order.userId);
 
+    orders.forEach(async (order) => {
+        let row = document.createElement("tr");
+        let user = await getUser(order.userId)
+   
         row.innerHTML = `
-            <td>${order.id}</td>
-            <td>${user.name}</td>
-            <td>${order.createAt}</td>
-            <td>${order.status}</td>
-            <td>${order.totalPrice}</td>
-            <td class="action-buttons">
-                <button class="view-btn" data-id="${order.id}">View</button>
-                <button class="update-btn" data-id="${order.id}">Update</button>
-            </td>
+            <tr>
+                <td>${order.id}</td>
+                <td>${user.name}</td>
+                <td>${order.createAt}</td>
+                <td>${order.status}</td>
+                <td>${order.totalPrice}</td>
+                <td class="action-buttons">
+                    <button class="view-btn" data-id="${order.id}">View</button>
+                    <button class="update-btn" data-id="${order.id}">Update</button>
+                </td>
+            </tr>
         `;
-
         tblBody.appendChild(row);
-    }
+    });
 }
 
-});
+})

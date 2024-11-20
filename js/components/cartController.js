@@ -1,4 +1,4 @@
-import { sendAuthRequest } from "../api.js";
+import {fetchImageUrl} from "../utils.js";
 
 let grandTotal = 0.00
 
@@ -43,66 +43,75 @@ function updateGrandTotal(cart) {
 }
 
  
-const loadCart= function() {
+async function loadCart() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const cartTableBody = document.querySelector('#cartTable tbody');
-    if (!cartTableBody){
-        return
+    if (!cartTableBody) {
+        return;
     }
     cartTableBody.innerHTML = '';
 
-    cart.forEach((item, index) => {
-  
+    for (const item of cart) {
         const discountPercent = item.discountPercentAtOrder || 0;
         const discountAmount = (item.priceAtOrder * discountPercent) / 100;
         const discountedPrice = item.priceAtOrder - discountAmount;
-
-        const row = `
-            <tr data-index="${index}" data-id="${item.productId}">
-                <td>
-                    <img src="${item.imageUrl}" alt="${item.name}" class="cart-product-image" />
-                </td>
-                <td>${item.name}</td>
-                <td>$${item.priceAtOrder.toFixed(2)}</td>
-                <td>${discountPercent}%</td>
-                <td>$${discountedPrice.toFixed(2)}</td>
-                <td>
-                    <input 
-                        type="number" 
-                        value="${item.quantity}" 
-                        min="1" 
-                        class="quantity-input" 
-                        data-id="${item.productId}" 
-                        onchange="updateCartQuantity('${item.productId}', this.value)">
-                </td>
-                <td class="grand-total">$${(discountedPrice * item.quantity).toFixed(2)}</td>
-                <td>
-                    <button onclick="removeFromCart('${item.productId}')" class="remove-item">Remove</button>
-                </td>
-            </tr>`;
-        cartTableBody.innerHTML += row;
-    });
+        const objectUrl = await fetchImageUrl(item.imageUrl);
+ 
+        const row = document.createElement("tr");
+        row.setAttribute("data-index", cart.indexOf(item));
+        row.setAttribute("data-id", item.productId);
+ 
+        row.innerHTML = `
+            <td>
+                <img src="${objectUrl}" alt="${item.name}" class="cart-product-image" />
+            </td>
+            <td>${item.name}</td>
+            <td>$${item.priceAtOrder.toFixed(2)}</td>
+            <td>${discountPercent}%</td>
+            <td>$${discountedPrice.toFixed(2)}</td>
+            <td>
+                <input 
+                    type="number" 
+                    value="${item.quantity}" 
+                    min="1" 
+                    class="quantity-input" 
+                    data-id="${item.productId}" 
+                    onchange="updateCartQuantity('${item.productId}', this.value)">
+            </td>
+            <td class="grand-total">$${(discountedPrice * item.quantity).toFixed(2)}</td>
+            <td>
+                <button onclick="removeFromCart('${item.productId}')" class="remove-item">Remove</button>
+            </td>`;
+  
+        cartTableBody.appendChild(row);
+    }
+ 
+    const cartProductImages = document.getElementsByClassName("cart-product-image");
+    for (const image of cartProductImages) {
+        image.style.width = "120px";
+        image.style.height = "120px";
+    }
 
     updateGrandTotal(cart);
 }
 
-
-function removeFromCart(productId) {
+async function removeFromCart(productId) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     cart = cart.filter((item) => item.productId !== productId);
     localStorage.setItem('cart', JSON.stringify(cart));
-    loadCart();
+    await loadCart();
 }
 
 
- function addToCart(productId, productName, productPrice, quantity, discountPercent) {
+ function addToCart(productId, productName, productPrice, quantity, discountPercent, imageUrl) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    console.log("IMAGEURL ",imageUrl)
  
     const existingProduct = cart.find((item) => item.id === productId);
     if (existingProduct) {
         existingProduct.quantity += quantity;
     } else {
-        cart.push({ productId: productId, name: productName, discountPercentAtOrder:discountPercent, priceAtOrder: productPrice, quantity });
+        cart.push({ productId: productId, name: productName, imageUrl, discountPercentAtOrder:discountPercent, priceAtOrder: productPrice, quantity });
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -115,6 +124,6 @@ window.removeFromCart = removeFromCart
 window.addToCart = addToCart
 
 document.addEventListener("DOMContentLoaded", async function(event){
-    loadCart()
+    await loadCart()
 
 })

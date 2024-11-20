@@ -91,6 +91,52 @@ export function createPagination(totalItems, itemsPerPage, fetchFunction, displa
 }
 
 
+export async function fetchImageUrl(imagePath) {
+    let imageName = imagePath.split('/').pop();
+    const response = await sendAuthRequest(`/products/images/${imageName}`, "GET" );
+    
+    if (response.ok) {
+        const blob = await response.blob();
+        return URL.createObjectURL(blob);  
+    }
+
+    return 'static/fallback-img.jpg'; 
+}
+
+
+
+export async function getSubImagUrls(files){
+    let subImageUrls = await Promise.all(
+        Array.from(files).map(async (file) => {
+            return await uploadImage(file);
+        })
+    );
+    let subImgUrlObj = {};
+    subImageUrls.forEach((url, index) => {
+        let key;
+        switch (index) {
+            case 0:
+                key = 'first';
+                break;
+            case 1:
+                key = 'second';
+                break;
+            case 2:
+                key = 'third';
+                break;
+            case 3:
+                key = 'fourth';
+                break;
+            default:
+                key = `image${index + 1}`;
+        }
+        subImgUrlObj[key] = url;
+    });
+    return subImgUrlObj;
+}
+
+
+
 export async function getProducts(page, limit, filters){
     let response = await sendRequest(`/products/search?query_str=${filters}&page=${page}&limit=${limit}`, "GET");
     if(response.ok){
@@ -125,7 +171,7 @@ export async function displayProducts(products) {
                 </div>
                 <p class="product-price">Price: $${product.price}</p>
                 <p class="product-discount">Discount: ${product.discountPercent}%</p>                  
-                <button onclick="addToCart('${product.id}', '${product.name}', ${product.price}, 1, ${product.discountPercent})" class="add-to-cart">Add to Cart</button>
+                <button onclick="addToCart('${product.id}', '${product.name}', ${product.price}, 1, ${product.discountPercent}, '${product.imageUrl}' )" class="add-to-cart">Add to Cart</button>
             </div>`;
         
         productView.innerHTML += productCard;
@@ -193,51 +239,6 @@ export async function updateProduct(productId, productData){
     return false;  
      
 }
-
-export async function fetchImageUrl(imagePath) {
-    let imageName = imagePath.split('/').pop();
-    const response = await sendAuthRequest(`/products/images/${imageName}`, "GET" );
-    
-    if (response.ok) {
-        const blob = await response.blob();
-        return URL.createObjectURL(blob);  
-    }
-
-    return 'static/fallback-img.jpg'; 
-}
-
-
-
-export async function getSubImagUrls(files){
-    let subImageUrls = await Promise.all(
-        Array.from(files).map(async (file) => {
-            return await uploadImage(file);
-        })
-    );
-    let subImgUrlObj = {};
-    subImageUrls.forEach((url, index) => {
-        let key;
-        switch (index) {
-            case 0:
-                key = 'first';
-                break;
-            case 1:
-                key = 'second';
-                break;
-            case 2:
-                key = 'third';
-                break;
-            case 3:
-                key = 'fourth';
-                break;
-            default:
-                key = `image${index + 1}`;
-        }
-        subImgUrlObj[key] = url;
-    });
-    return subImgUrlObj;
-}
-
 
 
 export async function getMyOrders(){
