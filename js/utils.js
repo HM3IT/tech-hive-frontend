@@ -237,3 +237,15 @@ export async function getSubImagUrls(files){
     });
     return subImgUrlObj;
 }
+
+
+
+export async function getMyOrders(){
+    let response = await sendAuthRequest("/orders/list", "GET")
+
+    if (response.ok){
+        let data = await response.json()
+        return data.items || []
+    }
+    return null
+}

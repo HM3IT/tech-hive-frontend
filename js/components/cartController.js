@@ -77,22 +77,35 @@ function updateGrandTotal(cart) {
 
 async function submitOrder(){
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-    let orderData = {
-        order_products: cart,
-        address: "sample address",
-        total_price: grandTotal,
-    };
-    console.log(orderData)
-    // sendAuthRequest("/orders/add","POST", cart)
+ 
+    if (!cart || cart.length <= 0){
+        alert("Please add products")
+        return
+    }
 
+    let orderData = {
+        orderProducts: cart,
+        address: "sample address",
+        totalPrice: grandTotal,
+    };
+ 
+    let response = await sendAuthRequest("/orders/add","POST", orderData)
+    if (response.ok){
+        alert("Order is placed successfully")
+        let orderData = await response.json();
+
+        // deleting old cart data
+        localStorage.setItem('cart', null)
+        window.location.reload();
+
+        console.log(orderData)
+    }
 }
 
-// add to cart handler
+ 
 function addToCart(productId, productName, productPrice, quantity, discountPercent) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    // Check if the product already exists in the cart
+ 
     const existingProduct = cart.find((item) => item.id === productId);
     if (existingProduct) {
         existingProduct.quantity += quantity;
