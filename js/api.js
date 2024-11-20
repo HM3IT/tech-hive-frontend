@@ -46,7 +46,7 @@ export async function sendAuthRequest(url, method="GET", data = null) {
     return await fetch(API_ENDPOINT + url, options);
 }
 
-export async function sentformRequest(url, method, formData) {
+export async function sentFormRequest(url, method, formData) {
     const token = getCookie(TOKEN_NAME); 
     
     if (!token) {

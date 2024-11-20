@@ -1,5 +1,5 @@
-import { sendAuthRequest, sentformRequest } from "../api.js";
-import { getCategory } from "../utils.js";
+import { sendAuthRequest,  } from "../api.js";
+import { getCategory, uploadImage, getSubImagUrls } from "../utils.js";
 
 
 let dropDownCategory = document.getElementById("product-category");
@@ -23,41 +23,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     });}
 });
 
-export async function getCategory() {
-    let currentPage = 1;
-    let pageSize = 300;
-
-    let url = `/categories/list?currentPage=${currentPage}&pageSize=${pageSize}`;
-
-    let response = await sendAuthRequest(url, "GET", null);
-
-    if (response.ok) {
-        let data = await response.json();
-        return data.items;
-    } else {
-        console.log("Failed to fetch categories:", response);
-    }
-}
 
  
-async function uploadImage(file) {
-    let formData = new FormData();
-    formData.append("file", file);
-
-    let url = `/files/upload`;
-    try {
-    
-        let result = await sentformRequest(url, "POST", formData);
-
-       
-        return result.file_path; 
-        
-    } catch (error) {
-        console.error("Error uploading image:", error);
-        alert("An unexpected error occurred during image upload.");
-        return null;
-    }
-}
 
 async function addProduct() {
     let productName = document.getElementById("product-name").value;
@@ -69,23 +36,14 @@ async function addProduct() {
     let productStock = parseInt(document.getElementById("product-stock").value) || 0;
     let productDiscount = parseInt(document.getElementById("product-discount").value) || 0;
     let subProductImages = document.getElementById("sub-product-image").files;
+    if (!imageUrl && !subImageUrl) {
+        alert("Please upload images and sub-images as well!")
+        return;
+    }
 
     let imageUrl = await uploadImage(productImage);
-    if (!imageUrl) return;
-
-
-    let subImageUrls = await Promise.all(
-        Array.from(subProductImages).map(async (file) => {
-            return await uploadImage(file); // uploadImage returns the file path
-        })
-    );
-    
   
-    let subImgUrlObj = {};
-    subImageUrls.forEach((url, index) => {
-        const key = index === 0 ? 'first' : index === 1 ? 'second' : `image${index + 1}`;
-        subImgUrlObj[key] = url;
-    });
+    let subImageUrl = await getSubImagUrls(subProductImages)
  
     let productData = {
         name: productName,
@@ -96,7 +54,7 @@ async function addProduct() {
         categoryId: productCategory,
         stock: productStock,
         discountPercent: productDiscount,
-        subImageUrl: subImgUrlObj  
+        subImageUrl  
     };
 
     let url = `/products/add`;

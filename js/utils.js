@@ -1,4 +1,4 @@
-import { sendAuthRequest, sendRequest } from "./api.js";
+import { sendAuthRequest, sendRequest, sentFormRequest } from "./api.js";
 
 export const TOKEN_NAME = "accessToken"
 export const API_ENDPOINT = "http://localhost:8000/api"
@@ -160,4 +160,80 @@ export async function getCategory() {
     } else {
         console.log("Failed to fetch categories:", response);
     }
+}
+
+
+export async function fetchProductDetail(productId) {
+    let url = `/products/detail/${productId}`;  
+    let response = await sendAuthRequest(url, "GET", null);
+    if (response.ok) {
+        return await response.json();
+    } else {
+        console.log("Failed to fetch product:", productId);
+    }
+}
+
+
+export async function uploadImage(file) {
+    let formData = new FormData();
+    formData.append("file", file);
+
+    let url = `/files/upload`;
+    try {
+    
+        let result = await sentFormRequest(url, "POST", formData);
+
+       
+        return result.file_path; 
+        
+    } catch (error) {
+        console.error("Error uploading image:", error);
+        alert("An unexpected error occurred during image upload.");
+        return null;
+    }
+}
+
+
+export async function updateProduct(productId, productData){
+    let url = `/products/update/${productId}`;
+    let response = await sendAuthRequest(url, "PATCH", productData);
+
+    if (response.ok) {
+        alert("Product updated successfully!");
+        return true;
+    }  
+    alert("Failed to update product.");
+    return false;  
+     
+}
+
+
+export async function getSubImagUrls(files){
+    let subImageUrls = await Promise.all(
+        Array.from(files).map(async (file) => {
+            return await uploadImage(file);
+        })
+    );
+    let subImgUrlObj = {};
+    subImageUrls.forEach((url, index) => {
+        let key;
+        switch (index) {
+            case 0:
+                key = 'first';
+                break;
+            case 1:
+                key = 'second';
+                break;
+            case 2:
+                key = 'third';
+                break;
+            case 3:
+                key = 'fourth';
+                break;
+            default:
+                key = `image${index + 1}`;
+        }
+        subImgUrlObj[key] = url;
+    });
+    return subImgUrlObj;
 }
