@@ -91,19 +91,6 @@ export function createPagination(totalItems, itemsPerPage, fetchFunction, displa
 }
 
 
- 
-export async function fetchImageUrl(imagePath) {
-    let imageName = imagePath.split('/').pop();
-    const response = await sendAuthRequest(`/products/images/${imageName}`, "GET" );
-    
-    if (response.ok) {
-        const blob = await response.blob();
-        return URL.createObjectURL(blob);  
-    }
-
-    return 'static/fallback-img.jpg'; 
-}
-
 export async function getProducts(page, limit, filters){
     let response = await sendRequest(`/products/search?query_str=${filters}&page=${page}&limit=${limit}`, "GET");
     if(response.ok){
@@ -206,6 +193,19 @@ export async function updateProduct(productId, productData){
     return false;  
      
 }
+
+export async function fetchImageUrl(imagePath) {
+    let imageName = imagePath.split('/').pop();
+    const response = await sendAuthRequest(`/products/images/${imageName}`, "GET" );
+    
+    if (response.ok) {
+        const blob = await response.blob();
+        return URL.createObjectURL(blob);  
+    }
+
+    return 'static/fallback-img.jpg'; 
+}
+
 
 
 export async function getSubImagUrls(files){

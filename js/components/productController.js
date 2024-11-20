@@ -36,14 +36,15 @@ async function addProduct() {
     let productStock = parseInt(document.getElementById("product-stock").value) || 0;
     let productDiscount = parseInt(document.getElementById("product-discount").value) || 0;
     let subProductImages = document.getElementById("sub-product-image").files;
-    if (!imageUrl && !subImageUrl) {
-        alert("Please upload images and sub-images as well!")
-        return;
-    }
+
 
     let imageUrl = await uploadImage(productImage);
   
     let subImageUrl = await getSubImagUrls(subProductImages)
+    if (imageUrl.length <= 0 && subImageUrl.length <= 0) {
+        alert("Please upload images and sub-images as well!")
+        return;
+    }
  
     let productData = {
         name: productName,

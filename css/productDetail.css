@@ -51,7 +51,7 @@
 #prevBtn { left: 10px; }
 #nextBtn { right: 10px; }
 
-.thumbnail-container {
+#thumbnail-container {
     display: flex;
     justify-content: center;
     margin-top: 10px;
