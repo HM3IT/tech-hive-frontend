@@ -10,3 +10,15 @@
 body {
     font-family: Arial, sans-serif;
 }
+
+.auth-btns i{
+    margin: 0 5px;
+    font-size: 1.4rem;
+  }
+
+
+.navbar{
+    margin-bottom: 0!important;
+
+}
+ 
