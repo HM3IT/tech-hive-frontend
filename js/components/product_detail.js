@@ -77,18 +77,25 @@ async function loadProduct(productId){
     userRating.innerText = `Current Rating: ${product.rating || "No ratings yet"} stars`;
 
     // Image Fetching
-    let objectUrl = await fetchImageUrl(product.imageUrl);
+    let mainObjectUrl = await fetchImageUrl(product.imageUrl);
     let images = []  
 
     if (product.imageUrl) {
-        mainImage.src = objectUrl;
-        images.push(objectUrl)
+        mainImage.src = mainObjectUrl;
+        images.push(mainObjectUrl)
     } else {
         showError("Image not available for this product.");
     }
 
     if (product.subImageUrl && typeof product.subImageUrl === "object") {
         const subImgContainer = document.getElementById("thumbnail-container")
+
+        let mainThumbElement = document.createElement("img");
+        mainThumbElement.src = mainObjectUrl;
+        mainThumbElement.alt = `Main image`;
+        mainThumbElement.className = "sub-image thumbnail";  
+
+        subImgContainer.appendChild(mainThumbElement)
         for (const [key, url] of Object.entries(product.subImageUrl)) {
             try {
                 const objectUrl = await fetchImageUrl(url);
