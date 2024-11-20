@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="../css/orderConfirm.css">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <script src="../js/main.js"></script>
+    <script type="module"  src="../js/components/nav.js"></script>
+    <script type="module" src="../js/components/cartController.js"></script>
+    <script type="module" src="../js/components/orderConfirmForm.js"></script>
+    <nav id="nav">
+  
+    </nav>
+    
+    <div id="order-confirm-div" class="container">
+        <h1>Order Confirmation</h1>
+
+        <div class="section">
+            <h2>Shipping Address</h2>
+            <p><strong>Full Name:</strong> <span id="user-name">John Doe</span></p>
+            <form id="shipping-form">
+                <label for="address">Address:</label>
+                <textarea id="ship-address" placeholder="Enter your shipping address" required></textarea>
+                
+                <label for="phone">Phone Number:</label>
+                <input type="text" id="phone" placeholder="Enter your phone number" required>
+            </form>
+        </div>
+
+        
+        <div class="section">
+            <h2>Order Summary</h2>
+            <table>
+                <thead>
+                    <tr>
+                        
+                        <th>Product</th>
+                        <th>Name</th>
+                        <th>Unit Price</th>
+                        <th>Discount</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        
+                    </tr>
+                </thead>
+                <tbody id="order-summary-tbody">
+     
+            
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="4">Total</th>
+                        <th id="grand-total">$50</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+  
+        <div class="section">
+            <h2>Shipping Method</h2>
+            <p>Cash on Delivery (COD)</p>
+            <a href="#" class="refund-policy">Read About Refund Policy</a>
+        </div>
+
+    
+        <div class="section">
+            <button id="order-submit-btn">Place Order</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -61,7 +61,7 @@ window.addEventListener("DOMContentLoaded",async () => {
 
                 if (response.ok) {
                     const data = await response.json();
-                    console.log(`Welcome, ${data.name}`);
+             
                
                     Array.from(authBtns).forEach((btn) => (btn.style.display = ""));
                     Array.from(unauthBtns).forEach((btn) => (btn.style.display = "none"));

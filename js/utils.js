@@ -249,3 +249,29 @@ export async function getMyOrders(){
     }
     return null
 }
+
+
+export async function getUser(userId){
+   let response = await sendAuthRequest(`/users/${userId}`);
+   if (response.ok){
+        return await response.json()
+    }
+    return null
+}
+
+
+export async function fetchOrders() {
+    let currentPage = 1; 
+    let pageSize = 10;  
+
+    let url = `/orders/list?currentPage=${currentPage}&pageSize=${pageSize}`;
+    let response = await sendAuthRequest(url, "GET", null);
+
+    if (response.ok) {
+        let data = await response.json();
+        return data.items
+    } else {
+        console.log("Failed to fetch products:", response);
+    }
+    return null;
+}

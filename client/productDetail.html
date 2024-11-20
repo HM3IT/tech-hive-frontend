@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/productDetail.css">
+    <title>Laptop Product Page</title>
+    
+</head>
+<body>
+    <script type="module" src="../js/components/product_detail.js"></script>
+
+<div class="product-container">
+    <div class="image-gallery">
+        <button class="slider-btn" id="prevBtn">&#10094;</button>
+  
+        <img src="" alt="Laptop Image" class="main-image" id="mainImage">
+        
+        <button class="slider-btn" id="nextBtn">&#10095;</button>
+ 
+        <div id="thumbnail-container">
+ 
+        </div>
+    </div>
+    
+    <div id="product-details">
+        <h2 id="product-name"></h2>
+ 
+        <p>Brand: <span id="brand"></span></p>
+
+        <div class="price">
+            <p>Price: <span id="original-price" style="text-decoration-line: line-through;"></span> <span id="discounted-price"></span> </p>
+            <p id="discount"></p>
+        </div>
+
+        <p id="availability"></p>
+
+        <div class="quantity">
+            <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
+            <input type="text" value="1" class="quantity-input" id="quantityInput">
+            <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
+        </div>
+
+        <div>
+            <p><strong>Description:</strong> <span id="description"></span></p>
+        </div>
+
+        <div id="rating">
+            <p><strong>Rating:</strong></p>
+            <div id="stars">
+                <span onclick="rateProduct(1)">&#9733;</span>
+                <span onclick="rateProduct(2)">&#9733;</span>
+                <span onclick="rateProduct(3)">&#9733;</span>
+                <span onclick="rateProduct(4)">&#9733;</span>
+                <span onclick="rateProduct(5)">&#9733;</span>
+            </div>
+            <p id="userRating"></p>
+        </div>
+
+        <button class="add-to-cart">Add to Cart</button>
+    </div>
+</div>
+
+<script>
+
+function changeQuantity(amount) {
+    const quantityInput = document.getElementById('quantityInput');
+    let currentQuantity = parseInt(quantityInput.value);
+
+    if (!isNaN(currentQuantity)) {
+        currentQuantity += amount;
+        if (currentQuantity < 1) currentQuantity = 1;  
+        quantityInput.value = currentQuantity;
+    }
+}
+function rateProduct(rating) {
+    const stars = document.querySelectorAll('.stars span');
+    stars.forEach((star, index) => {
+        star.classList.toggle('active', index < rating);
+    });
+    document.getElementById('userRating').innerText = `You rated this product ${rating} stars`;
+}
+
+function rateProduct(rating) {
+    document.getElementById("userRating").textContent = `You rated this product ${rating} star(s)`;
+}
+</script>
+
+</body>
+</html>

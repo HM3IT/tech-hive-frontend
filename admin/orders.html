@@ -11,6 +11,7 @@
 <body>
   <script src="../js/main.js"> </script>
   <script src="../js/components/dashboard.js"> </script>
+  <script type="module" src="../js/components/orderController.js"> </script>
     <div class="dashboard-container">
         <!-- Sidebar -->
         <aside class="sidebar" id="admin-sidebar">
@@ -42,8 +43,9 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="order-tbl-body">
+                       
+                        <!-- <tr>
                             <td>#1001</td>
                             <td>John Doe</td>
                             <td>2024-11-15</td>
@@ -53,18 +55,7 @@
                                 <button class="view-btn">View</button>
                                 <button class="delete-btn">Delete</button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>#1002</td>
-                            <td>Jane Smith</td>
-                            <td>2024-11-14</td>
-                            <td>Pending</td>
-                            <td>$75.00</td>
-                            <td class="action-buttons">
-                                <button class="view-btn">View</button>
-                                <button class="delete-btn">Delete</button>
-                            </td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
 

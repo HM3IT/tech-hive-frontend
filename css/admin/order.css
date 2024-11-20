@@ -10,7 +10,14 @@ body {
     background-color: #f4f6f8;
    
 }
- 
+.update-btn{
+    background-color: orange;
+    color: black;
+    font-weight: bold;
+}
+.update-btn:hover{
+    background-color: rgb(255, 115, 0);
+}
 h2{
     color: white;
 }

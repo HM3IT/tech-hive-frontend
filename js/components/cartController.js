@@ -95,32 +95,6 @@ function removeFromCart(productId) {
 }
 
 
-async function submitOrder(){
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
- 
-    if (!cart || cart.length <= 0){
-        alert("Please add products")
-        return
-    }
-
-    let orderData = {
-        orderProducts: cart,
-        address: "sample address",
-        totalPrice: grandTotal,
-    };
- 
-    let response = await sendAuthRequest("/orders/add","POST", orderData)
-    if (response.ok){
-        alert("Order is placed successfully")
-        let orderData = await response.json();
-
-        // deleting old cart data
-        localStorage.setItem('cart', null)
-        window.location.reload();
-
-        console.log(orderData)
-    }
-}
 
  
 function addToCart(productId, productName, productPrice, quantity, discountPercent) {
@@ -144,10 +118,4 @@ window.addToCart = addToCart
 
 document.addEventListener("DOMContentLoaded", async function(event){
     loadCart()
-
-    let orderSubmitBtn = document.getElementById("order-submit-btn");
-    if (orderSubmitBtn){
-
-        orderSubmitBtn.addEventListener("click", submitOrder)
-    }
 })
