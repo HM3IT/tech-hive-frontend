@@ -4,28 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/productDetail.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/styles.css">
     <title>Laptop Product Page</title>
     
 </head>
 <body>
     <script type="module" src="../js/components/product_detail.js"></script>
+    <script src="../js/main.js"></script>
+    <script type="module"  src="../js/components/nav.js"></script>
+    
+    <!-- Navbar -->
+<nav id="nav">
 
+</nav>
 <div class="product-container">
     <div class="image-gallery">
         <button class="slider-btn" id="prevBtn">&#10094;</button>
-  
+        
+        <!-- Main Image Display -->
         <img src="" alt="Laptop Image" class="main-image" id="mainImage">
         
         <button class="slider-btn" id="nextBtn">&#10095;</button>
- 
+
+        <!-- Thumbnail Images -->
         <div id="thumbnail-container">
- 
+            <!-- <img src="" id="subImage-1" alt="Thumbnail 1" class="thumbnail" onclick="showImage(0)">
+            <img src="" id="subImage-2" alt="Thumbnail 2" class="thumbnail" onclick="showImage(1)">
+            <img src="" id="subImage-3" alt="Thumbnail 3" class="thumbnail" onclick="showImage(2)">
+            <img src="" id="subImage-4" alt="Thumbnail 4" class="thumbnail" onclick="showImage(3)"> -->
         </div>
     </div>
     
     <div id="product-details">
         <h2 id="product-name"></h2>
- 
+        <!-- <p class="category">Category: <span></span></p> -->
         <p>Brand: <span id="brand"></span></p>
 
         <div class="price">
@@ -61,6 +74,9 @@
     </div>
 </div>
 
+<footer id="footer">
+  
+</footer>
 <script>
 
 function changeQuantity(amount) {
@@ -85,6 +101,8 @@ function rateProduct(rating) {
     document.getElementById("userRating").textContent = `You rated this product ${rating} star(s)`;
 }
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
 </html>

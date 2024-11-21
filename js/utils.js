@@ -155,6 +155,10 @@ export async function getProducts(page, limit, filters){
     
 }
 
+function truncateDescription(description, limit){
+    
+    return description.length > limit ? description.substring(0, limit) + '...' : description;
+};
 export async function displayProducts(products) {
     const productView = document.getElementById("productView");
     productView.innerHTML = '';
@@ -162,21 +166,29 @@ export async function displayProducts(products) {
     for (const product of products) {
         let objectUrl = await fetchImageUrl(product.imageUrl);
         const productCard = `
-            <div class="product-card" data-id="${product.id}" data-price="${product.price}" data-discount="${product.discountPercent}">
-                <img src="${objectUrl}" alt="${product.name}" class="product-image">
+            <div style="width: 26rem;" class="product-card card" data-id="${product.id}" data-price="${product.price}" data-discount="${product.discountPercent}">
+                <img src="${objectUrl}" alt="${product.name}" class="product-image card-img-top">
                 <h3 class="product-title">${product.name}</h3>
-                <p class="product-description">${product.description}</p>
+                <p class="product-description">${truncateDescription(product.description, Math.floor(product.description.length / 2))}</p>
                 <div class="product-tags">
-                    ${product.discountPercent > 0 ? '<span class="tag">Discount</span>' : ''}
+                    ${product.discountPercent > 0 ? '<span class="tag">Tags</span>' : ''}
                 </div>
                 <p class="product-price">Price: $${product.price}</p>
                 <p class="product-discount">Discount: ${product.discountPercent}%</p>                  
-                <button onclick="addToCart('${product.id}', '${product.name}', ${product.price}, 1, ${product.discountPercent}, '${product.imageUrl}' )" class="add-to-cart">Add to Cart</button>
+          
+                <div class="product-button">               
+                    <button  type="button" class="add-to-cart btn btn-success" onclick="addToCart('${product.id}', '${product.name}', ${product.price}, 1, ${product.discountPercent}, '${product.imageUrl}')">Add to Cart</button>
+                 
+                    <a type="button" class="view-detail-btn" href="productDetail.html?productId=${product.id}">View detail</a> 
+                </div>  
+          
             </div>`;
         
         productView.innerHTML += productCard;
     }
 }
+
+
 
 
 export async function getCategory() {

@@ -22,3 +22,14 @@ body {
 
 }
  
+.pagination{
+display: flex !important;
+width: 100% !important;
+}
+.pagination a{
+    text-decoration: none;
+}
+
+.navbar-form{
+  padding: 0 !important;
+}

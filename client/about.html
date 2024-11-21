@@ -1,57 +1,133 @@
-
-    <script src="../js/main.js"></script>
-    <script type="module"  src="../js/components/nav.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
     <link rel="stylesheet" href="../css/about.css">
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    
+<script src="../js/main.js"></script>
+<script type="module"  src="../js/components/nav.js"></script>
 
-    <link rel="stylesheet" href="../css/main.css">
-  <!-- Navbar -->
-   <nav id="nav">
+<!-- Navbar -->
+<nav id="nav">
 
-   </nav>
+</nav>
+
+
 
 <!-- About Us Section -->
 <section class="about-us-section py-5">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2>About Us</h2>
-            <p class="text-muted">Providing Quality Computer Parts & Accessories to Empower Your Tech Journey</p>
+<div class="container">
+    <div class="text-center mb-5">
+        <h2>About Us</h2>
+        <p class="text-muted">Providing Quality Computer Parts & Accessories to Empower Your Tech Journey</p>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Who We Are</h3>
+            <p>At <strong>[Your Shop Name]</strong>, we are dedicated to providing high-quality computer parts and accessories to tech enthusiasts and professionals. From motherboards and processors to graphic cards and peripherals, we offer an extensive range of products at competitive prices.</p>
+            <p>Founded in <strong>[Year]</strong>, our mission is to be the go-to platform for all your computer hardware needs, ensuring a seamless online shopping experience with reliable customer support.</p>
         </div>
-        
-        <div class="row">
-            <div class="col-md-6">
-                <h3>Who We Are</h3>
-                <p>At <strong>[Your Shop Name]</strong>, we are dedicated to providing high-quality computer parts and accessories to tech enthusiasts and professionals. From motherboards and processors to graphic cards and peripherals, we offer an extensive range of products at competitive prices.</p>
-                <p>Founded in <strong>[Year]</strong>, our mission is to be the go-to platform for all your computer hardware needs, ensuring a seamless online shopping experience with reliable customer support.</p>
-            </div>
-            <div class="col-md-6">
-                <h3>Why Choose Us?</h3>
-                <p>With a commitment to quality and customer satisfaction, <strong>[Your Shop Name]</strong> stands out for our wide selection, fast shipping, and trusted warranties. Our knowledgeable team is here to help you choose the right products for your setup and answer any tech questions you may have.</p>
-            </div>
+        <div class="col-md-6">
+            <h3>Why Choose Us?</h3>
+            <p>With a commitment to quality and customer satisfaction, <strong>[Your Shop Name]</strong> stands out for our wide selection, fast shipping, and trusted warranties. Our knowledgeable team is here to help you choose the right products for your setup and answer any tech questions you may have.</p>
         </div>
-        
-        <div class="row mt-5">
-            <div class="col-md-6">
-                <h3>Location</h3>
-                <p>We are located in <strong>[City, Area/Street Name]</strong>. You’re welcome to visit our store for in-person assistance and to check out our latest arrivals.</p>
-                <!-- Google Map Embed -->
-                <div class="map-container mt-3">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d122231.21852275373!2d96.16424959999999!3d16.7903232!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1ecb30f2640d7%3A0xa92d46dde83ad4d0!2sINNWA%20IT%20%26%20Mobile!5e0!3m2!1sen!2smm!4v1731392776907!5m2!1sen!2smm" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <h3>Location</h3>
+            <p>We are located in <strong>[City, Area/Street Name]</strong>. You’re welcome to visit our store for in-person assistance and to check out our latest arrivals.</p>
+            <!-- Google Map Embed -->
+            <div class="map-container mt-3">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d122231.21852275373!2d96.16424959999999!3d16.7903232!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1ecb30f2640d7%3A0xa92d46dde83ad4d0!2sINNWA%20IT%20%26%20Mobile!5e0!3m2!1sen!2smm!4v1731392776907!5m2!1sen!2smm" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <p><strong>Address:</strong> [Your Full Address]</p>
+            <p><strong>Opening Hours:</strong> Mon - Sat, 9:00 AM - 7:00 PM</p>
+        </div>
+        <div class="col-md-6">
+            <h3>Contact Us</h3>
+            <p>For inquiries, please get in touch with us:</p>
+            <p><strong>Phone:</strong> [Your Contact Number]</p>
+            <p><strong>Email:</strong> [Your Email Address]</p>
+            <p><strong>Social Media:</strong> <a href="#">Facebook</a>, <a href="#">Instagram</a>, <a href="#">Twitter</a></p>
+            
+        </div>
+    </div>
+</div>
+
+
+<div class="container my-5">
+    <h1 class="text-center mb-4">Frequently Asked Questions (FAQ)</h1>
+    <div class="accordion" id="faqAccordion">
+        <!-- FAQ Item 1 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading1">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                    What types of computers do you sell?
+                </button>
+            </h2>
+            <div id="faq1" class="accordion-collapse collapse show" aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    We sell a wide range of computers, including desktops, laptops, gaming PCs, workstations, and all-in-one PCs. Our inventory includes popular brands like Dell, HP, Lenovo, ASUS, Apple, and custom-built systems.
                 </div>
-                <p><strong>Address:</strong> [Your Full Address]</p>
-                <p><strong>Opening Hours:</strong> Mon - Sat, 9:00 AM - 7:00 PM</p>
             </div>
-            <div class="col-md-6">
-                <h3>Contact Us</h3>
-                <p>For inquiries, please get in touch with us:</p>
-                <p><strong>Phone:</strong> [Your Contact Number]</p>
-                <p><strong>Email:</strong> [Your Email Address]</p>
-                <p><strong>Social Media:</strong> <a href="#">Facebook</a>, <a href="#">Instagram</a>, <a href="#">Twitter</a></p>
-                
+        </div>
+        <!-- FAQ Item 2 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                    Do you sell refurbished or used computers?
+                </button>
+            </h2>
+            <div id="faq2" class="accordion-collapse collapse" aria-labelledby="faqHeading2" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Yes, we offer both brand-new and refurbished computers. Refurbished computers undergo thorough testing and quality assurance to ensure they perform like new.
+                </div>
+            </div>
+        </div>
+        <!-- FAQ Item 3 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                    What payment methods do you accept?
+                </button>
+            </h2>
+            <div id="faq3" class="accordion-collapse collapse" aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    We accept major credit and debit cards, PayPal, bank transfers, and Buy Now, Pay Later options through third-party services (where available).
+                </div>
+            </div>
+        </div>
+        <!-- FAQ Item 4 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faqHeading4">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                    Do you offer customization options for PCs?
+                </button>
+            </h2>
+            <div id="faq4" class="accordion-collapse collapse" aria-labelledby="faqHeading4" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Absolutely! We provide options for customizing desktops and laptops, including processor, RAM, storage, graphics cards, and more. You can build a PC tailored to your specific needs.
+                </div>
             </div>
         </div>
     </div>
+</div>
 </section>
 
+<footer id="footer">
+  
+</footer>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
