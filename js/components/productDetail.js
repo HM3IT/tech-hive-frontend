@@ -6,9 +6,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         const prevBtn = document.getElementById("prevBtn")
         const nextBtn = document.getElementById("nextBtn")
         const mainImage = document.getElementById('mainImage');
-        const incrementBtn = document.getElementById("increment-btn");
-        const decrementBtn = document.getElementById("decrement-btn");
-        const quantityCounter = document.getElementById("quantityInput")
+  
+       
         
         let thumbnails = null
         let currentImageIndex = 0;
@@ -18,8 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             return;
         }
 
-        incrementBtn.addEventListener("click", ()=>updateCartQuantity(productId, quantityCounter.value))
-        decrementBtn.addEventListener("click", ()=>updateCartQuantity(productId, quantityCounter.value))
+ 
          
         let images =  await loadProduct(productId)
 
@@ -91,7 +89,8 @@ async function loadProduct(productId){
     let images = [];
 
     function addProductToCart(){
-        addToCart(product.id, product.name, product.price, 1, product.discountPercent, product.imageUrl)
+        const quantityCounter = document.getElementById("quantityInput")
+        addToCart(product.id, product.name, product.price, quantityCounter.value, product.discountPercent, product.imageUrl)
     }
 
     if (product.imageUrl) {

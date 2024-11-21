@@ -298,11 +298,13 @@ export function addToCart(productId, productName, productPrice, quantity, discou
         return null;
     }
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    console.log("IMAGEURL ",imageUrl)
+
+    quantity = parseInt(quantity, 10);
  
-    const existingProduct = cart.find((item) => item.id === productId);
+    const existingProduct = cart.find((item) => item.productId === productId);
     if (existingProduct) {
         existingProduct.quantity += quantity;
+    
     } else {
         cart.push({ productId: productId, name: productName, imageUrl, discountPercentAtOrder:discountPercent, priceAtOrder: productPrice, quantity });
     }
@@ -314,13 +316,17 @@ export function addToCart(productId, productName, productPrice, quantity, discou
 
 
 export function updateCartQuantity(productId, quantity) {
+    console.log("Qnatity: ", quantity)
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
  
     const product = cart.find((item) => item.productId === productId);
 
     if (product) {
         product.quantity = parseInt(quantity, 10);
+     
+        
         localStorage.setItem('cart', JSON.stringify(cart));
+
 
     // Update the specific row's total value dynamically
      const row = document.querySelector(`tr[data-id="${productId}"]`);
