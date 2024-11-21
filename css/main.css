@@ -15,7 +15,9 @@ body {
     margin: 0 5px;
     font-size: 1.4rem;
   }
-
+a{
+    text-decoration: none;
+}
 
 .navbar{
     margin-bottom: 0!important;
@@ -32,4 +34,12 @@ width: 100% !important;
 
 .navbar-form{
   padding: 0 !important;
+}
+
+.checkbox-group{
+    display: flex;
+    font-size: 14px;
+    align-items: start;
+    text-align: left;
+    margin: 20px 0;
 }

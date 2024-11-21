@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+#login-btn{
+    display: block;
+    margin: 10px auto;
+}
 
 
 .container {
@@ -46,11 +50,7 @@ input[type="password"] {
     font-size: 16px;
 }
 
-.checkbox-group {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-}
+ 
 
 .checkbox-group input {
     margin-right: 5px;

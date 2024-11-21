@@ -68,10 +68,15 @@ async function loadProduct(productId){
 
     productName.innerText = product.name;
     brandSpan.innerText = product.brand;
-    originalPrice.innerText = `${product.price} Ks`;
-    discountedPrice.innerText = `${discountedPriceValue.toFixed(2)} Ks`;
-    discount.innerText = `Discount: ${product.discountPercent}% OFF`;
-    availability.innerText = `Available Quantity - ${product.stock}`;
+    originalPrice.innerText = `${product.price}$`;
+    if(product.discountPercent >= 1){
+        discount.innerText = `Discount: ${product.discountPercent}% OFF`;
+        discountedPrice.innerText = `${discountedPriceValue.toFixed(2)}$`;
+        originalPrice.style.textDecorationLine = "line-through";
+        originalPrice.style.color = "red";
+        discountedPrice.style.color = "green"
+    }
+    availability.innerText = `Available Quantity: ${product.stock}`;
     descriptionSpan.innerText = product.description;
     userRating.innerText = `Current Rating: ${product.rating || "No ratings yet"} stars`;
 

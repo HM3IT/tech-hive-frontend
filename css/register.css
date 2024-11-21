@@ -44,11 +44,7 @@ input[type="password"] {
     font-size: 16px;
 }
 
-.checkbox-group {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-}
+ 
 
 .checkbox-group input {
     margin-right: 5px;

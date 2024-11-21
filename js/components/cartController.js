@@ -1,4 +1,4 @@
-import {fetchImageUrl} from "../utils.js";
+import {fetchImageUrl, getCookie, TOKEN_NAME} from "../utils.js";
 
 let grandTotal = 0.00
 
@@ -104,6 +104,12 @@ async function removeFromCart(productId) {
 
 
  function addToCart(productId, productName, productPrice, quantity, discountPercent, imageUrl) {
+    const token = getCookie(TOKEN_NAME); 
+    if (!token){
+        alert("To buy a product. Please login first");
+        window.location.href = "login.html"
+        return null;
+    }
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     console.log("IMAGEURL ",imageUrl)
  

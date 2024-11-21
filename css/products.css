@@ -51,8 +51,7 @@ body {
 /* Product Image Grid */
 .product-image-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 equal-width columns */
-    gap: 10px;
+    grid-template-columns: repeat(5, 300px); /* 5 equal-width columns */
     margin: 20px 0;
 }
 
