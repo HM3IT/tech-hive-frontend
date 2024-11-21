@@ -49,7 +49,7 @@ async function populateProductTable(products) {
                 </span>
             </td>
             <td>
-                <a href="product_detail.html?productId=${product.id}" style="text-decoration: none;">
+                <a href="productDetail.html?productId=${product.id}" style="text-decoration: none;">
                     <button class="view-btn">View</button>
                 </a>
                 <a href="updateProduct.html?productId=${product.id}" style="text-decoration: none;">

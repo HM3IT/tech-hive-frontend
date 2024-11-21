@@ -203,6 +203,7 @@ body {
 
 .product-price{
     color: green;
+    margin: 0;
 }
 
 .product-discount{

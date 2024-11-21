@@ -147,7 +147,7 @@ h2 {
 }
 
 /* Add to Cart Button */
-.add-to-cart {
+#add-to-cart {
     display: block;
     width: 100%;
     padding: 10px;
@@ -161,7 +161,7 @@ h2 {
     margin-top: 20px;
 }
 
-.add-to-cart:hover {
+#add-to-cart:hover {
     background-color: #218838;
 }
 

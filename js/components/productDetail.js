@@ -1,6 +1,4 @@
-import { fetchImageUrl, fetchProductDetail } from "../utils.js";
-
-// import { getCategory } from "./productController.js";
+import { fetchImageUrl, fetchProductDetail, addToCart, updateCartQuantity , updateGrandTotal } from "../utils.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
         const params = new URLSearchParams(window.location.search);
@@ -8,7 +6,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         const prevBtn = document.getElementById("prevBtn")
         const nextBtn = document.getElementById("nextBtn")
         const mainImage = document.getElementById('mainImage');
-
+        const incrementBtn = document.getElementById("increment-btn");
+        const decrementBtn = document.getElementById("decrement-btn");
+        const quantityCounter = document.getElementById("quantityInput")
+        
         let thumbnails = null
         let currentImageIndex = 0;
 
@@ -16,6 +17,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             showError("Invalid Product ID. Please check the URL.");
             return;
         }
+
+        incrementBtn.addEventListener("click", ()=>updateCartQuantity(productId, quantityCounter.value))
+        decrementBtn.addEventListener("click", ()=>updateCartQuantity(productId, quantityCounter.value))
          
         let images =  await loadProduct(productId)
 
@@ -38,12 +42,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         function nextImage() {
-            console.log("ENTER")
             currentImageIndex = (currentImageIndex === images.length - 1) ? 0 : currentImageIndex + 1;
             updateImage(currentImageIndex);
         }
 
-
+     
         updateImage(currentImageIndex);
 
       
@@ -66,6 +69,9 @@ async function loadProduct(productId){
     let userRating = document.getElementById("userRating");
     let discountedPriceValue = product.price - (product.price * product.discountPercent) / 100;
 
+    const addCartBtn  = document.getElementById("add-to-cart");
+    addCartBtn.addEventListener("click", addProductToCart);
+
     productName.innerText = product.name;
     brandSpan.innerText = product.brand;
     originalPrice.innerText = `${product.price}$`;
@@ -74,7 +80,7 @@ async function loadProduct(productId){
         discountedPrice.innerText = `${discountedPriceValue.toFixed(2)}$`;
         originalPrice.style.textDecorationLine = "line-through";
         originalPrice.style.color = "red";
-        discountedPrice.style.color = "green"
+        discountedPrice.style.color = "green";
     }
     availability.innerText = `Available Quantity: ${product.stock}`;
     descriptionSpan.innerText = product.description;
@@ -82,7 +88,11 @@ async function loadProduct(productId){
 
     // Image Fetching
     let mainObjectUrl = await fetchImageUrl(product.imageUrl);
-    let images = []  
+    let images = [];
+
+    function addProductToCart(){
+        addToCart(product.id, product.name, product.price, 1, product.discountPercent, product.imageUrl)
+    }
 
     if (product.imageUrl) {
         mainImage.src = mainObjectUrl;
@@ -103,8 +113,7 @@ async function loadProduct(productId){
         for (const [key, url] of Object.entries(product.subImageUrl)) {
             try {
                 const objectUrl = await fetchImageUrl(url);
-                console.log(`Fetched ObjectUrl for ${key}:`, objectUrl);
-    
+              
                 const subImageElement = document.createElement("img");
                 subImageElement.src = objectUrl;
                 subImageElement.alt = `${key} image`;

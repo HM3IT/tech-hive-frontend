@@ -10,7 +10,7 @@
     
 </head>
 <body>
-    <script type="module" src="../js/components/product_detail.js"></script>
+    <script type="module" src="../js/components/productDetail.js"></script>
     <script src="../js/main.js"></script>
     <script type="module"  src="../js/components/nav.js"></script>
     
@@ -49,9 +49,9 @@
         <p id="availability"></p>
 
         <div class="quantity">
-            <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
+            <button id="increment-btn" class="quantity-btn" onclick="changeQuantity(-1)">-</button>
             <input type="text" value="1" class="quantity-input" id="quantityInput">
-            <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
+            <button id="decrement-btn" class="quantity-btn" onclick="changeQuantity(1)">+</button>
         </div>
 
         <div>
@@ -70,7 +70,7 @@
             <p id="userRating"></p>
         </div>
 
-        <button class="add-to-cart">Add to Cart</button>
+        <button id="add-to-cart">Add to Cart</button>
     </div>
 </div>
 
