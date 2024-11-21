@@ -210,7 +210,7 @@ export async function getCategory() {
 
 export async function fetchProductDetail(productId) {
     let url = `/products/detail/${productId}`;  
-    let response = await sendAuthRequest(url, "GET", null);
+    let response = await sendRequest(url, "GET", null);
     if (response.ok) {
         return await response.json();
     } else {
