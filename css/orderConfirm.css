@@ -10,10 +10,10 @@ body {
     padding: 20px;
 }
 
-
-#order-confirm-div{
+#order-confirm-div {
     margin-top: 30px;
 }
+
 .container {
     max-width: 800px;
     margin: 0 auto;
@@ -57,24 +57,29 @@ textarea {
     resize: none;
 }
 
+/* Updated table styling */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 15px;
+    font-size: 18px; /* Increased font size for the table */
 }
 
 table th, table td {
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 12px; /* Slightly increased padding for readability */
     text-align: left;
 }
 
 table th {
     background-color: #f0f0f0;
+    font-size: 20px; /* Larger font size for table headers */
+    font-weight: bold;
 }
 
 tfoot th {
     text-align: right;
+    font-size: 20px; /* Larger font size for the footer row */
 }
 
 .refund-policy {
@@ -103,3 +108,22 @@ button {
 button:hover {
     background-color: #218838;
 }
+
+.policy-agreement {
+    display: inline-flex; /* Aligns items horizontally */
+    align-items: center; /* Vertically centers checkbox and text */
+}
+
+.policy-agreement input[type="checkbox"] {
+    margin-right: 8px; /* Adds space between checkbox and label */
+    width: auto; /* Ensure default checkbox size */
+    height: auto; /* Ensure default checkbox size */
+}
+
+.policy-agreement label {
+    font-size: 16px; /* Adjust font size for better readability */
+}
+
+
+
+

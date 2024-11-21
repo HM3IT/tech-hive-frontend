@@ -117,11 +117,5 @@ async function loadProduct(productId){
     return images;
 }
  
-function showError(message) {
-    const container = document.getElementById("product-details");
-    container.innerHTML = `<p class="error">${message}</p>`;
-}
-
- 
 
   

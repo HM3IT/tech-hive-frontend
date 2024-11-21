@@ -78,28 +78,35 @@
   
 </footer>
 <script>
-
-function changeQuantity(amount) {
-    const quantityInput = document.getElementById('quantityInput');
-    let currentQuantity = parseInt(quantityInput.value);
-
-    if (!isNaN(currentQuantity)) {
-        currentQuantity += amount;
-        if (currentQuantity < 1) currentQuantity = 1;  
-        quantityInput.value = currentQuantity;
+    function showError(message) {
+        const container = document.getElementById("product-details");
+        container.innerHTML = `<p class="error">${message}</p>`;
     }
-}
-function rateProduct(rating) {
-    const stars = document.querySelectorAll('.stars span');
-    stars.forEach((star, index) => {
-        star.classList.toggle('active', index < rating);
-    });
-    document.getElementById('userRating').innerText = `You rated this product ${rating} stars`;
-}
+    
+     
+    function changeQuantity(amount) {
+        const quantityInput = document.getElementById('quantityInput');
+        let currentQuantity = parseInt(quantityInput.value);
+    
+        if (!isNaN(currentQuantity)) {
+            currentQuantity += amount;
+            if (currentQuantity < 1) currentQuantity = 1;  
+            quantityInput.value = currentQuantity;
+        }
+    }
+    function rateProduct(rating) {
+        const stars = document.querySelectorAll('.stars span');
+        stars.forEach((star, index) => {
+            star.classList.toggle('active', index < rating);
+        });
+        document.getElementById('userRating').innerText = `You rated this product ${rating} stars`;
+    }
+    
+    function rateProduct(rating) {
+        document.getElementById("userRating").textContent = `You rated this product ${rating} star(s)`;
+    }
+      
 
-function rateProduct(rating) {
-    document.getElementById("userRating").textContent = `You rated this product ${rating} star(s)`;
-}
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
