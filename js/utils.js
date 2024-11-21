@@ -93,7 +93,7 @@ export function createPagination(totalItems, itemsPerPage, fetchFunction, displa
 
 export async function fetchImageUrl(imagePath) {
     let imageName = imagePath.split('/').pop();
-    const response = await sendAuthRequest(`/products/images/${imageName}`, "GET" );
+    const response = await sendRequest(`/files/${imageName}`, "GET" );
     
     if (response.ok) {
         const blob = await response.blob();

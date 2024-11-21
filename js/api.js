@@ -2,17 +2,14 @@
 import {TOKEN_NAME, API_ENDPOINT, getCookie } from './utils.js';
  
 
-export async function sendRequest(url, method="GET", data = null) {
-    let headers = {
-        'Content-Type': 'application/json',
-    };
-
+export async function sendRequest(url, method = "GET", data = null) {
     const options = {
         method: method,
-        headers: headers,
+        headers: {},
     };
 
     if (data) {
+        options.headers['Content-Type'] = 'application/json';
         options.body = JSON.stringify(data);
     }
     return await fetch(API_ENDPOINT + url, options);
