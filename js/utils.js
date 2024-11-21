@@ -197,7 +197,7 @@ export async function getCategory() {
 
     let url = `/categories/list?currentPage=${currentPage}&pageSize=${pageSize}`;
 
-    let response = await sendAuthRequest(url, "GET", null);
+    let response = await sendRequest(url, "GET", null);
 
     if (response.ok) {
         let data = await response.json();

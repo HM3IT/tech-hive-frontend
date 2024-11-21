@@ -24,9 +24,11 @@ export async function sendAuthRequest(url, method="GET", data = null) {
     if (token) {
         headers['Authorization'] = `Bearer ${token}`;
     }else{
-        // window.location.href = "./index.html"
+        alert(`This request -${url} need user to be login`);
+        window.location.href = "index.html";
+        return null;
     }
-
+ 
     if (data) {
         console.log("Request Body:", JSON.stringify(data));
     }

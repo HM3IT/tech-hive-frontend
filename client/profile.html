@@ -11,14 +11,13 @@
    <link rel="stylesheet" href="../css/profile.css">
 </head>
 <body>
-<script src="../js/main.js"></script>
-<script type="module" src="../js/components/profile.js"></script>
+    <script src="../js/main.js"></script>
+    <script type="module" src="../js/components/profile.js"></script>
 <!-- Navbar -->
 
-        <button id="back-btn" onclick="window.location.href='index.html'">Back</button>
+    <button id="back-btn" onclick="window.location.href='index.html'">Back</button>
 
     <!-- Profile Navigation -->
-  
     <section class="row mt-4">
         <div class="col-md-3">
             <ul class="nav nav-pills flex-column" id="profileTabs" role="tablist">
@@ -39,48 +38,54 @@
             <div class="tab-content" id="profileTabsContent">
                 <!-- Account Info Tab -->
                 <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
-                    <h4>Account Information</h4>
+                    <h2>Account Information</h2>
+
+                    <img id="profile-img" src="" alt="Profile Image" class="img-thumbnail" style="width: 150px; height: 150px;">
                    
-                    <p>Name: <strong id="name"></strong></p>
-                    <p>Email: <strong id="email"></strong></p>
-                    <p>Customer Level: <strong id="userLevel"></strong></p>
-                    <p>Address: <strong id="address"></strong></p>
-                    <button class="btn btn-primary mt-2">Edit Information</button>
+                    <p class="profile-detail">Name: <strong id="name"></strong></p>
+                    <p class="profile-detail">Email: <strong id="email"></strong></p>
+                    <p class="profile-detail">Customer Level: <strong id="userLevel"></strong></p>
+                    <p class="profile-detail">Address: <strong id="address"></strong></p>
                 </div>
 
                 <!-- Order History Tab -->
                 <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                     <h4>Order History</h4>
                   <div id="order-cart-container">
-                    <!-- <div class="order-card">
-                        <h5>Order #1234</h5>
-                        <p><strong>Date:</strong> 2024-11-10</p>
-                        <p><strong>Status:</strong> Delivered</p>
-                        <p><strong>Total:</strong> $120.00</p>
-                        <button class="btn btn-outline-primary btn-sm">View Details</button>
-                    </div> -->
+       
                   </div>
                     
                 </div>
 
                 <!-- Settings Tab -->
-                <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                <div class="tab-pane fade" id="settings" role="tabpanel" >
                     <h4>Account Settings</h4>
-                    <form>
+                    <form id="profile-update-form">
                         <div class="mb-3">
-                            <img id="profile-img" src="https://via.placeholder.com/150" alt="Profile Image" class="img-thumbnail" style="width: 150px; height: 150px;">
+                            <img id="preview-profile-img" src="https://via.placeholder.com/150" alt="Profile Image" class="img-thumbnail" style="width: 150px; height: 150px;">
                             <div>
+                                <label for="uploadProfilePhoto">Upload New profile (Optional)</label>
                                 <input type="file" id="uploadProfilePhoto" class="form-control mt-2">
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="changeEmail" class="form-label">Change Email</label>
-                            <input type="email" class="form-control" id="changeEmail" placeholder="New Email">
+                            <label for="changeName" class="form-label">Change Name (Optional)</label>
+                            <input type="text" name="newName" class="form-control" id="changeName" placeholder="New Name">
                         </div>
                         <div class="mb-3">
-                            <label for="changePassword" class="form-label">Change Password</label>
-                            <input type="password" class="form-control" id="changePassword" placeholder="New Password">
+                            <label for="changeAddress" class="form-label">Change Address (Optional)</label>
+                            <textarea id="changeAddress" name="newAddress" class="form-control" placeholder="--" cols="30" rows="5"></textarea>
                         </div>
+                        <div class="mb-3">
+                            <label for="changePassword" class="form-label">New Password  (Optional)</label>
+                            <input type="password" name="newPassword" class="form-control" id="changePassword" placeholder="New Password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="oldPassword" class="form-label">Old Password  <strong  id="old-password-label">(Must be provided)</strong></label>
+                            <input type="password" name="oldPassword" class="form-control" id="oldPassword" placeholder="New Password">
+                        </div>
+
+                        
                         <button type="submit" class="btn btn-primary">Save Changes</button>
                     </form>
                 </div>
@@ -92,19 +97,7 @@
 
 <!-- Bootstrap JS and Popper.js -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-    document.getElementById('uploadProfilePhoto').addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('profile-img').src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-</script>
+ 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 

@@ -110,7 +110,30 @@ form .form-control:focus {
   /* background-color: white; */
 }
 #back-btn:hover{
-    background-color: #0057e7;
-    color: white;
-    font-weight: bolder;
+background-color: #0057e7;
+color: white;
+font-weight: bolder;
+}
+
+#settings{
+    width:600px;
+    margin-left: 50px;
+
+}
+#profile-img, #preview-profile-img{
+border-radius: 50%;
+margin-bottom: 20px;
+}
+
+.profile-detail{
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+#changeAddress{
+    resize: none;
+}
+
+#old-password-label{
+    color: red;
 }

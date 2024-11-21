@@ -1,39 +1,31 @@
+import { sendAuthRequest } from '../api.js';
 import {me} from '../auth.js';
-import {getMyOrders} from '../utils.js';
+import {getMyOrders, fetchImageUrl, uploadImage} from '../utils.js';
 
 
-document.addEventListener("DOMContentLoaded", async function(){
-
-    let img = document.getElementById("profile-img");
-    let name = document.getElementById("name");
-    let email = document.getElementById("email");
-    let address = document.getElementById("address");
-    let customerLevel = document.getElementById("userLevel");
+document.addEventListener("DOMContentLoaded", async function(event){
+    let newImgUrl = ""
+    let uploadedImg = document.getElementById("preview-profile-img");
+    let profileImg = document.getElementById("profile-img");
  
     
-    async function loadProfile() {
-        let response  = await me();
-        console.log(response)
-     
-        name.innerText = response.name
-        customerLevel.innerText = response.userLevel
-        address.innerText = response.address
-        email.innerText = response.email
-        if (response.imageUrl){
-            
-        }
-    }
+    let email = document.getElementById("email");
 
-    document.getElementById('uploadProfilePhoto').addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('profile-img').src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-    });
+    let address = document.getElementById("address");
+    let changeAddress = document.getElementById("changeAddress");
+
+    let name = document.getElementById("name");
+    let changeName = document.getElementById("changeName");
+
+    let customerLevel = document.getElementById("userLevel");
+    
+    
+    let profileUpdateForm = document.getElementById('profile-update-form');
+    let profileUploadBtn = document.getElementById('uploadProfilePhoto');
+
+    profileUploadBtn.addEventListener('change', profileHandler);
+    profileUpdateForm.addEventListener('submit',updateUserInfo)
+
 
     await loadProfile();
     await loadMyOrder();
@@ -65,4 +57,66 @@ document.addEventListener("DOMContentLoaded", async function(){
        });
     
     }
+
+
+        
+    async function loadProfile() {
+        let response  = await me();
+  
+        name.innerText = response.name;
+        changeName.value = response.name;
+
+        
+        address.innerText = response.address || "---";
+        changeAddress.value = response.address;
+        
+        customerLevel.innerText = response.userLevel;
+        email.innerText = response.email;
+        newImgUrl = response.imageUrl;
+       
+        
+        if (newImgUrl!=null && newImgUrl != ""){
+            let objectUrl = await fetchImageUrl(newImgUrl);
+            profileImg.src = objectUrl;
+            
+        }else{
+            profileImg.src = "../static/images/default-avatar-profile.jpg"
+        }
+    }
+    async function updateUserInfo(event){
+        event.preventDefault(); 
+        const formData = new FormData(profileUpdateForm);  
+
+    
+        const newUserData = {};
+        formData.forEach((value, key) => {
+            newUserData[key] = value;
+        });
+        newUserData["newImageUrl"] = newImgUrl
+        console.log(newUserData)
+
+        let response = await sendAuthRequest("/users/update", "PATCH", newUserData)
+        if (response.ok){
+            alert("Successfully updated");
+            await loadProfile();
+            profileUpdateForm.reset();
+        }else{
+            let error = await response.json()
+            alert(`${error.detail || error.message }`);
+        }
+    }
+
+    async function profileHandler(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedImg.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+
+            newImgUrl = await uploadImage(file);
+        }
+    };
+ 
 })

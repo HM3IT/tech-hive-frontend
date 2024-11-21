@@ -17,7 +17,12 @@ async function loadProduct() {
     }
     let filters = `${query_filter}&price_range=${price_range_filter}`
     let data = await getProducts(limit, page, filters);
-    createPagination(data.total, limit, getProducts, displayProducts, filters);
+    let total = data.total;
+    if(total <= 0){
+        alert("No products are found")
+      }else{
+    createPagination(total, limit, getProducts, displayProducts, filters);
+      }
     } 
     
  
@@ -36,7 +41,12 @@ const handleSearchInput = debounce(async(event) => {
   query_filter = encodeURIComponent(searchVal);
   let filters = `${query_filter}&price_range=${price_range_filter}` 
   let data = await getProducts(1, limit, filters)
-  createPagination(data.total, limit, getProducts, displayProducts, filters);
+  let total = data.total
+  if(total <= 0){
+    alert("No products are found")
+  }else{
+      createPagination(total, limit, getProducts, displayProducts, filters);
+  }
 }, 500);
 
 
@@ -68,8 +78,12 @@ document.addEventListener("DOMContentLoaded", async function(e){
         price_range_filter = `null&price_range=${selectedValue}`
         let filters = `${query_filter}&price_range=${price_range_filter}`
         let data = await getProducts(1, limit, filters)
-        createPagination(data.total, limit, getProducts, displayProducts, filters);
-
+        let total = data.total
+        if(total <= 0){
+            alert("No products are found")
+          }else{
+        createPagination(total, limit, getProducts, displayProducts, filters);
+        }
     }
 });
 
