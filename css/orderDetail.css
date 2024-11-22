@@ -36,7 +36,7 @@ body {
     margin-bottom: 15px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border-bottom: 2px solid #16a085;
+    border-bottom: 2px solid #035597;
     display: inline-block;
     padding-bottom: 5px;
 }
@@ -50,7 +50,7 @@ body {
 /* Order Information */
 .section p span {
     font-weight: bold;
-    color: #16a085;
+    color: #035597;
 }
 
 /* Table Styling */
@@ -105,7 +105,7 @@ table img {
 
 /* Buttons */
 button {
-    background: #16a085;
+    background: #0359bd;
     color: white;
     border: none;
     padding: 12px 20px;
@@ -145,12 +145,12 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-thumb {
-    background: #16a085;
+    background: #035597;
     border-radius: 5px;
 }
 
 body::-webkit-scrollbar-thumb:hover {
-    background: #1abc9c;
+    background: #035597;
 }
 
 /* Back Button */

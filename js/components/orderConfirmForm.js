@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded",async function(){
             orderProducts: cart,
             address: shipAddress.innerText.trim(),
             totalPrice: await getGrandTotal(), // avoid HTML snopping
-            phone: phone.innerText
+            phone: phone.innerText,
         };
      
         let response = await sendAuthRequest("/orders/add","POST", orderData)

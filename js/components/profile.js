@@ -39,13 +39,18 @@ document.addEventListener("DOMContentLoaded", async function(event){
         const orderCard = document.createElement("div");
         orderCard.classList.add("order-card");
         const createdDate = new Date(order.createdAt);
-        let orderDate = createdDate.toLocaleDateString();
+   
+        let orderDateStr = createdDate.toLocaleDateString(); 
+        let orderTime = createdDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); // Format: HH:MM
+        console.log(orderTime);
+   
+ 
         orderCard.innerHTML = `
             <h5>Order #${order.id}</h5>
-            <p><strong>Date:</strong> ${orderDate}</p>
+            <p><strong>Date:</strong> ${orderDateStr} ${orderTime}</p>
             <p><strong>Status:</strong> ${order.status}</p>
             <p><strong>Total:</strong> $${order.totalPrice.toFixed(2)}</p>
-            <button class="btn btn-outline-primary btn-sm">View Details</button>
+            <a href=orderDetail.html?orderId=${order.id}  class="btn btn-outline-primary btn-sm">View Details</a>
         `;
 
         orderContainer.appendChild(orderCard);
