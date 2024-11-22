@@ -10,17 +10,36 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Handle the signup form submission
-    const signUpForm = document.getElementById("signup-form");
-    signUpForm.addEventListener("submit", signup);
+    let signUpForm = document.getElementById("signup-form");
+    signUpForm.addEventListener("submit", () => {
+        //event.preventDefault(); // Prevent form submission for validation
+        
+        let passwordField = document.getElementById('signup-password');
+        let password = passwordField.value;
+
+        // Validate password
+        if (!isValidPassword(password)) {
+            alert("Password must be at least 8 characters long and include at least one special character.");
+            return;
+        }
+
+        // Proceed with signup if valid
+        signup();
+    });
 
     // Toggle password visibility
-    const showPasswordCheckbox = document.getElementById('show-password');
+    let showPasswordCheckbox = document.getElementById('show-password');
     showPasswordCheckbox.addEventListener("change", () => {
         togglePassword('signup-password');
     });
 ``
     function togglePassword(fieldId) {
-        const field = document.getElementById(fieldId);
+        let field = document.getElementById(fieldId);
         field.type = field.type === "password" ? "text" : "password";
+    }
+
+    function isValidPassword(password) {
+        let specialCharacterRegex = /[!@#$%^&*(),.?":{}|<>]/; // Define special characters
+        return password.length >= 8 && specialCharacterRegex.test(password);
     }
 });

@@ -32,9 +32,7 @@ export async function signin(event) {
 }
 
  
-export async function signup(event) {
-    event.preventDefault(); // Prevent form submission
-
+export async function signup() {
     const username = document.getElementById("signup-name").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("signup-password").value;
