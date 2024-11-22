@@ -143,8 +143,6 @@ export async function getProducts(page, limit, filters){
       let data = await response.json();
       let products = data.items;
       let unwrappedProducts = products.map(item => item.document);
-      console.log("inside")
-      console.log(data)
       return {
         total: data.total, 
         items: unwrappedProducts,
