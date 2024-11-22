@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <link rel="stylesheet" href="../css/orderdetail.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+   
+
+    </style>
+</head>
+<body>
+    <script src="../js/main.js"></script>
+    <script type="module" src="../js/components/nav.js"></script>
+    <script type="module" src="../js/components/orderDetails.js"></script>
+    <nav id="nav">
+    </nav>
+    
+    <div id="order-detail-div" class="container">
+        <h1>Order Details</h1>
+
+        <div class="section">
+            <h2>Order Information</h2>
+            <p><strong>Order ID:</strong> <span id="order-id">123456</span></p>
+            <p><strong>Order Date:</strong> <span id="order-date">2024-11-22</span></p>
+            <p><strong>Order Status:</strong> <span id="order-status">Pending</span></p>
+        </div>
+
+        <div class="section">
+            <h2>Shipping Address</h2>
+            <p><strong>Full Name:</strong> <span id="user-name">John Doe</span></p>
+            <p><strong>Address:</strong> <span id="ship-address">123 Main Street, Springfield</span></p>
+            <p><strong>Phone Number:</strong> <span id="phone">+1234567890</span></p>
+        </div>
+
+        <div class="section">
+    <h2>Order Summary</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Name</th>
+                <th>Discount</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody id="order-summary-tbody">
+            <!-- Example Row -->
+            <tr>
+                <td><img src="../images/product1.jpg" alt="Product 1" style="width:50px; height:50px;"></td>
+                <td>Product 1</td>
+                <td>10%</td>
+                <td>$20</td>
+                <td>2</td>
+                <td>$36</td>
+            </tr>
+           
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="5">Total</th>
+                <th id="order-total">$50</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+
+        <div class="section">
+            <h2>Shipping Method</h2>
+            <p>Cash on Delivery (COD)</p>
+            
+        </div>
+        
+        
+    </div>
+</body>
+</html>

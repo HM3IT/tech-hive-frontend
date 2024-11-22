@@ -72,6 +72,32 @@
 
         <button id="add-to-cart">Add to Cart</button>
     </div>
+    <div class="review-section">
+        <h3>Product Reviews</h3>
+        <div id="review-form">
+            <textarea id="reviewText" placeholder="Write your review here..."></textarea>
+            <div>
+                <label for="reviewRating">Your Rating:</label>
+                <select id="reviewRating">
+                    <option value="1">1 Star</option>
+                    <option value="2">2 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="5">5 Stars</option>
+                </select>
+            </div>
+            <div>
+                <label for="profileImage">Profile Image URL:</label>
+                <input type="text" id="profileImage" placeholder="Enter profile image URL">
+            </div>
+            <button id="submitReview">Submit Review</button>
+        </div>
+        
+        <div id="reviews-container">
+            <h4>Customer Reviews</h4>
+            <div id="reviews"></div>
+        </div>
+    </div>
 </div>
 
 <footer id="footer">
