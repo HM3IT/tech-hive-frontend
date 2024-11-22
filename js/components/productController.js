@@ -1,5 +1,5 @@
 import { sendAuthRequest,  } from "../api.js";
-import { getCategory, uploadImage, getSubImagUrls } from "../utils.js";
+import { getCategory, uploadImage, getSubImagUrls, showConfirmBox } from "../utils.js";
 
 
 let dropDownCategory = document.getElementById("product-category");
@@ -17,9 +17,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     let addProductButton = document.getElementById("submit-btn");
     let cancelButton = document.getElementById("cancel-btn");
-    let productForm = document.getElementById("add-product-form"); // Get the form element
-
-    // Attach event listeners to buttons
+    let productForm = document.getElementById("add-product-form");  
+ 
     if (addProductButton) {
         addProductButton.addEventListener("click", async (e) => {
             e.preventDefault();
@@ -30,135 +29,79 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (cancelButton) {
         cancelButton.addEventListener("click", async (e) => {
             e.preventDefault();
-            handleCancelForm();
+            productForm.reset()
         });
     }
 
-    // Attach event listener to the form submission
+ 
     if (productForm) {
         productForm.addEventListener("submit", async (e) => {
-            e.preventDefault(); // Prevent the default form submission behavior
-            await addProduct(); // Call addProduct function
+            e.preventDefault(); 
+            await addProduct(); 
         });
     }
 });
 
 
 async function addProduct() {
+ 
+    if (!validateProductForm()) {
+        return; 
+    }
 
- // Show the initial confirmation dialog for adding a product
-    showInfoBox(
-        "Are You Sure You Want to Add the New Product?",
-        async () => {
-            // If "OK" is clicked, perform form validation and add the product
-            if (!validateProductForm()) {
-                return; // Exit if validation fails
-            }
+    let productName = document.getElementById("product-name").value;
+    let productDescription = document.getElementById("product-description").value;
+    let productPrice = parseFloat(document.getElementById("product-price").value);
+    let productCategory = document.getElementById("product-category").value;
+    let productImage = document.getElementById("product-image").files[0];
+    let productBrand = document.getElementById("product-brand").value;
+    let productStock = parseInt(document.getElementById("product-stock").value) || 0;
+    let productDiscount = parseInt(document.getElementById("product-discount").value) || 0;
+    let subProductImages = document.getElementById("sub-product-image").files;
 
-            // Gather form data
-            let productName = document.getElementById("product-name").value;
-            let productDescription = document.getElementById("product-description").value;
-            let productPrice = parseFloat(document.getElementById("product-price").value);
-            let productCategory = document.getElementById("product-category").value;
-            let productImage = document.getElementById("product-image").files[0];
-            let productBrand = document.getElementById("product-brand").value;
-            let productStock = parseInt(document.getElementById("product-stock").value) || 0;
-            let productDiscount = parseInt(document.getElementById("product-discount").value) || 0;
-            let subProductImages = document.getElementById("sub-product-image").files;
+    let imageUrl = await uploadImage(productImage);
 
-            let imageUrl = await uploadImage(productImage);
-  
-            let subImageUrl = await getSubImagUrls(subProductImages)
-            if (imageUrl.length <= 0 && subImageUrl.length <= 0) {
-                alert("Please upload images and sub-images as well!")
-                return;
-            }
+    let subImageUrl = await getSubImagUrls(subProductImages)
+    if (imageUrl.length <= 0 && subImageUrl.length <= 0) {
+        alert("Please upload images and sub-images as well!")
+        return;
+    }
 
-            let productData = {
-                name: productName,
-                description: productDescription,
-                price: productPrice,
-                imageUrl: imageUrl,
-                brand: productBrand,
-                categoryId: productCategory,
-                stock: productStock,
-                discountPercent: productDiscount,
-                subImageUrl,
-            };
+    let productData = {
+        name: productName,
+        description: productDescription,
+        price: productPrice,
+        imageUrl: imageUrl,
+        brand: productBrand,
+        categoryId: productCategory,
+        stock: productStock,
+        discountPercent: productDiscount,
+        subImageUrl,
+    };
 
-            let url = `/products/add`;
+    let url = `/products/add`;
 
-            try {
-                let response = await sendAuthRequest(url, "POST", productData);
+    try {
+        let response = await sendAuthRequest(url, "POST", productData);
 
-                if (response.ok) {
-                    // Show the success message and redirect
-                    displayMessage("Product added successfully!", "success");
-                    setTimeout(() => {
-                        window.location.href = "../admin/products.html";
-                    }, 1000);
-                } else {
-                    console.error("Failed to add product:", response);
-                    displayMessage("Error adding product. Please try again.", "error");
-                }
-            } catch (error) {
-                console.error("Error:", error);
-                displayMessage("An unexpected error occurred. Please try again.", "error");
-            }
-        },
-        // If "Cancel" is clicked, show the second confirmation dialog
-        () => {
-            showInfoBox(
-                "Are You Sure You Want to Cancel the Adding of the New Product?",
-                () => {
-                    // On confirmation of cancellation, redirect to products.html
-                    displayMessage("Action canceled successfully.", "success");
-                    setTimeout(() => {
-                        window.location.href = "../admin/products.html";
-                    }, 1000);
-                },
-                // On canceling the second dialog, do nothing
-                () => {}
-            );
+        if (response.ok) {
+            // Show the success message and redirect
+            displayMessage("Product added successfully!", "success");
+            setTimeout(() => {
+                window.location.href = "../admin/products.html";
+            }, 1000);
+        } else {
+            console.error("Failed to add product:", response);
+            displayMessage("Error adding product. Please try again.", "error");
         }
-    );
-}
+    } catch (error) {
+        console.error("Error:", error);
+        displayMessage("An unexpected error occurred. Please try again.", "error");
+    }
+    } 
 
-function handleCancelForm() {
-    // Redirect to products.html directly
-    window.location.href = "../admin/products.html";
-}
-
-// Show a reusable confirmation dialog
-function showInfoBox(message, onOk, onCancel) {
-    // Create the info box container
-    let infoBox = document.createElement("div");
-    infoBox.classList.add("info-box");
-
-    infoBox.innerHTML = `
-        <div class="info-content">
-            <p>${message}</p>
-            <div class="info-buttons">
-                <button id="info-ok" class="info-btn info-ok">OK</button>
-                <button id="info-cancel" class="info-btn info-cancel">Cancel</button>
-            </div>
-        </div>
-    `;
-
-    document.body.appendChild(infoBox);
-
-    // Event listeners for OK and Cancel
-    document.getElementById("info-ok").addEventListener("click", async () => {
-        infoBox.remove();
-        if (onOk) onOk();
-    });
-
-    document.getElementById("info-cancel").addEventListener("click", async () => {
-        infoBox.remove();
-        if (onCancel) onCancel();
-    });
-}
-
+ 
+ 
 
 function validateProductForm() {
     let isValid = true;

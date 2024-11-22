@@ -266,7 +266,7 @@ export async function getMyOrders(){
 
 
 export async function getUser(userId){
-   let response = await sendAuthRequest(`/users/${userId}`);
+   let response = await sendAuthRequest(`/users/detail/${userId}`);
    if (response.ok){
         return await response.json()
     }
@@ -294,9 +294,14 @@ export async function fetchOrders() {
 export function addToCart(productId, productName, productPrice, quantity, discountPercent, imageUrl) {
     const token = getCookie(TOKEN_NAME); 
     if (!token){
-        alert("To buy a product. Please login first");
-        window.location.href = "login.html"
-        return null;
+        let isConfirm = showConfirmBox("To buy a product. Please login first", 
+        ()=>window.location.href = "login.html",
+        ()=>false
+        );
+        if(!isConfirm){
+            return null;
+        }
+        
     }
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -360,4 +365,34 @@ export function updateGrandTotal(cart) {
     if (grandTotalElement) {
         grandTotalElement.innerText = `$${grandTotal.toFixed(2)}`;
     }
+}
+
+
+export function showConfirmBox(message, onOk, onCancel) {
+   
+    let infoBox = document.createElement("div");
+    infoBox.setAttribute("id", "confirm-box");
+
+    infoBox.innerHTML = `
+        <div class="info-content">
+            <p>${message}</p>
+            <div class="info-buttons">
+                <button id="info-ok" class="info-btn info-ok">OK</button>
+                <button id="info-cancel" class="info-btn info-cancel">Cancel</button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(infoBox);
+
+    // Event listeners for OK and Cancel
+    document.getElementById("info-ok").addEventListener("click", async () => {
+        infoBox.remove();
+        if (onOk) onOk();
+    });
+
+    document.getElementById("info-cancel").addEventListener("click", async () => {
+        infoBox.remove();
+        if (onCancel) onCancel();
+    });
 }
