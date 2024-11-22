@@ -55,9 +55,8 @@ document.addEventListener("DOMContentLoaded",async function(){
             alert("Order is placed successfully")
             let orderData = await response.json();
     
-            // deleting old cart data
             localStorage.setItem('cart', null)
-            window.location.reload();
+            window.location.href = "products.html"
     
             console.log(orderData)
         }
@@ -84,7 +83,7 @@ document.addEventListener("DOMContentLoaded",async function(){
     
             row.innerHTML = `
                 <td>
-                    <img src="${objectUrl}" alt="${item.name}" class="cart-product-image" />
+                    <img style="width:120px; height: 120px;" src="${objectUrl}" alt="${item.name}" class="cart-product-image" />
                 </td>
                 <td>${item.name}</td>
                 <td>${discountPercent}%</td>
@@ -96,13 +95,7 @@ document.addEventListener("DOMContentLoaded",async function(){
          
             tblBody.appendChild(row);
         }
-    
-   
-        const cartProductImages = document.getElementsByClassName("cart-product-image");
-        for (const image of cartProductImages) {
-            image.style.width = "120px";
-            image.style.height = "120px";
-        }
+ 
     }
     
 })

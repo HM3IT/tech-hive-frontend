@@ -1,11 +1,20 @@
 import {fetchImageUrl, addToCart, updateCartQuantity, updateGrandTotal } from "../utils.js";
 
 async function loadCart() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const cartTableBody = document.querySelector('#cartTable tbody');
-    if (!cartTableBody) {
+
+    if (!cartTableBody){
+        return
+    }
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+ 
+    if (!Array.isArray(cart) || cart.length === 0) {
+        alert("You haven't added any products yet! Please add products");
+        window.location.href = "products.html"
         return;
     }
+    
     cartTableBody.innerHTML = '';
 
     for (const item of cart) {

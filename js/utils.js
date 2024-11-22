@@ -143,8 +143,6 @@ export async function getProducts(page, limit, filters){
       let data = await response.json();
       let products = data.items;
       let unwrappedProducts = products.map(item => item.document);
-      console.log("inside")
-      console.log(data)
       return {
         total: data.total, 
         items: unwrappedProducts,
@@ -155,10 +153,13 @@ export async function getProducts(page, limit, filters){
     
 }
 
-function truncateDescription(description, limit){
-    
-    return description.length > limit ? description.substring(0, limit) + '...' : description;
-};
+function truncateDescription(description, maxLength = 30) {
+    if (description.length > maxLength) {
+        return description.slice(0, maxLength) + "...";
+    }
+    return description;
+}
+
 export async function displayProducts(products) {
     const productView = document.getElementById("productView");
     productView.innerHTML = '';
@@ -169,7 +170,7 @@ export async function displayProducts(products) {
             <div style="width: 26rem;" class="product-card card" data-id="${product.id}" data-price="${product.price}" data-discount="${product.discountPercent}">
                 <img src="${objectUrl}" alt="${product.name}" class="product-image card-img-top">
                 <h3 class="product-title">${product.name}</h3>
-                <p class="product-description">${truncateDescription(product.description, Math.floor(product.description.length / 2))}</p>
+                <p class="product-description">  ${truncateDescription(product.description, 85)}</p>
                 <div class="product-tags">
                     ${product.discountPercent > 0 ? '<span class="tag">Tags</span>' : ''}
                 </div>

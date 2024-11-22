@@ -70,15 +70,10 @@ body {
     margin: 0 auto;
     font-family: Arial, sans-serif;
     line-height: 1.6;
+    overflow: hidden;
+    text-align: justify;
   }
   
-  .product-description {
-    overflow: hidden;
-  }
-
-
-
-
 
 /* Pagination Controls */
 .pagination-container {

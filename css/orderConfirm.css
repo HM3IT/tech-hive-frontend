@@ -110,18 +110,20 @@ button:hover {
 }
 
 .policy-agreement {
-    display: inline-flex; /* Aligns items horizontally */
-    align-items: center; /* Vertically centers checkbox and text */
+    display: flex;
+    align-items: start;
+    justify-content: left;
+    height: 60px;
 }
 
 .policy-agreement input[type="checkbox"] {
-    margin-right: 8px; /* Adds space between checkbox and label */
-    width: auto; /* Ensure default checkbox size */
-    height: auto; /* Ensure default checkbox size */
+    margin-right: 8px;  
+    width: auto;  
+    height: auto; 
 }
 
 .policy-agreement label {
-    font-size: 16px; /* Adjust font size for better readability */
+    font-size: 16px; 
 }
 
 
