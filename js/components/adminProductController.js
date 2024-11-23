@@ -1,47 +1,43 @@
-import { sendAuthRequest } from "../api.js";
-import { fetchImageUrl } from "../utils.js";
+import { fetchImageUrl, getProducts, createPagination } from "../utils.js";
  
 document.addEventListener("DOMContentLoaded", async () => {
+
+    const page = 1;
+    const limit = 8;
+
+    let filters = "null"
+    
+    let data = await getProducts(page, limit, filters)
+ 
+
+    createPagination(data.total, data.perPage, getProducts, displayProductTbl, filters);
+
+});
+
+    // tblBody.addEventListener("click", async (e) => {
+    //     if (e.target.classList.contains("delete-btn")) {
+    //         let productId = e.target.dataset.productId;
+    //         await deleteProduct(productId);
+    //     }
+    // });
+
+
+
+
+async function displayProductTbl(products) {
     const tblBody = document.getElementById("product-tbl-body")
-   
-    await DisplayProducts();
-
-    tblBody.addEventListener("click", async (e) => {
-        if (e.target.classList.contains("delete-btn")) {
-            let productId = e.target.dataset.productId;
-            await deleteProduct(productId);
-        }
-    });
-
-
-async function DisplayProducts() {
-    let currentPage = 1; 
-    let pageSize = 100;  
-
-    let url = `/products/list?currentPage=${currentPage}&pageSize=${pageSize}`;
-    let response = await sendAuthRequest(url, "GET", null);
-
-    if (response.ok) {
-        let data = await response.json();
-        populateProductTable(data.items);
-    } else {
-        console.log("Failed to fetch products:", response);
-    }
-}
-
-async function populateProductTable(products) {
   
     tblBody.innerHTML = ""; 
 
-
     products.forEach(async (product) => {
+        console.log(product)
         let row = document.createElement("tr");
         let objectUrl = await fetchImageUrl(product.imageUrl);
         row.innerHTML = `
             <td><img src="${objectUrl}" alt="Product Image" class="product-image"></td>
             <td>${product.name}</td>
             <td>${product.brand}</td>
-            <td>${product.category.name}</td>
+            <td>${product.categoryName}</td>
             <td>$${product.price.toFixed(2)}</td>
             <td>
                 <span class="status ${product.stock > 0 ? "available" : "unavailable"}">
@@ -62,4 +58,3 @@ async function populateProductTable(products) {
     });
 }
 
-});
