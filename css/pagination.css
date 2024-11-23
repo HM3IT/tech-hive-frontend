@@ -28,3 +28,8 @@
 .pagination a:hover:not(.active) {
     background-color: #ddd;
 }
+ 
+.pagination{
+    margin-top: 30px;
+}
+ 

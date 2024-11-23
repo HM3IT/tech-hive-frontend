@@ -95,7 +95,7 @@ body {
   border-radius: 4px;
 }
 
-.search-btn, .add-product-btn {
+#search-btn, .add-product-btn {
   padding: 10px 15px;
   border: none;
   background-color: #2a2a72;
@@ -109,7 +109,7 @@ body {
   background-color: #4CAF50;
 }
 
-.search-btn:hover {
+#search-btn:hover {
   background-color: #1b1b4f;
 }
 

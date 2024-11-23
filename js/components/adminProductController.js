@@ -1,26 +1,35 @@
 import { fetchImageUrl, getProducts, createPagination } from "../utils.js";
  
+let searchQry= "null"
+
+const page = 1;
+const limit = 8;
 document.addEventListener("DOMContentLoaded", async () => {
 
-    const page = 1;
-    const limit = 8;
+    let data = await getProducts(page, limit, searchQry)
+    const searchBtn = document.getElementById("search-btn")
+    let searchInputBox = document.getElementById("search-input");
+    searchBtn.addEventListener("click", searchProduct);
+    searchInputBox.addEventListener("keypress", async function(event) {
+        if (event.key === "Enter") {
+            await searchProduct()
+        }
+    });
 
-    let filters = "null"
-    
-    let data = await getProducts(page, limit, filters)
- 
-
-    createPagination(data.total, data.perPage, getProducts, displayProductTbl, filters);
+    createPagination(data.total, data.perPage, getProducts, displayProductTbl, searchQry);
 
 });
 
-    // tblBody.addEventListener("click", async (e) => {
-    //     if (e.target.classList.contains("delete-btn")) {
-    //         let productId = e.target.dataset.productId;
-    //         await deleteProduct(productId);
-    //     }
-    // });
+async function searchProduct(){
+    let searchVal =  document.getElementById("search-input").value;
+    searchVal = searchVal.trim()
 
+    if(searchVal.length > 0){
+        searchQry = searchVal;
+        let data = await getProducts(page, limit, searchQry);
+        createPagination(data.total, data.perPage, getProducts, displayProductTbl, searchQry);
+    }
+}
 
 
 
@@ -30,7 +39,6 @@ async function displayProductTbl(products) {
     tblBody.innerHTML = ""; 
 
     products.forEach(async (product) => {
-        console.log(product)
         let row = document.createElement("tr");
         let objectUrl = await fetchImageUrl(product.imageUrl);
         row.innerHTML = `
@@ -55,6 +63,12 @@ async function displayProductTbl(products) {
             </td>
         `;
         tblBody.appendChild(row);
+        tblBody.addEventListener("click", async (e) => {
+            if (e.target.classList.contains("delete-btn")) {
+                let productId = e.target.dataset.productId;
+                await deleteProduct(productId);
+            }
+             });
     });
 }
 
