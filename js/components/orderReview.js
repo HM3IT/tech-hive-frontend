@@ -19,6 +19,12 @@ let shipAddress = document.getElementById("ship-address");
 let phone = document.getElementById("phone");
 let orderTotal = document.getElementById("order-total");
 
+// Limiting user from choosing past date 
+const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+const formattedDate = tomorrow.toISOString().split('T')[0];
+expectedDate.setAttribute('min', formattedDate);
+
 document.addEventListener("DOMContentLoaded",async function(e){
     const params = new URLSearchParams(window.location.search);
     let orderId = params.get("orderId");
