@@ -5,15 +5,24 @@ import { createPagination } from "../utils.js";
 const page = 1;
 const limit = 10;
 
-let filters = `currentPage=${page}&pageSize=${limit}`
+let searchName = null;
 document.addEventListener("DOMContentLoaded",async function(e){
+    const searchBtn = document.getElementById("search-btn")
+    let searchInputBox = document.getElementById("search-input");
+    searchBtn.addEventListener("click", searchUser);
+    searchInputBox.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            searchUser()
+        }
+    });
+    
  
    await loadUserList()
 
 })
 
-export async function getUsers(page, limit, filters, searchName = null){
-    filters = `currentPage=${page}&pageSize=${limit}`
+export async function getUsers(page, limit, searchName = null){
+    let filters = `currentPage=${page}&pageSize=${limit}`
     if (searchName){
         filters += `&searchField=name&searchIgnoreCase=true&searchString=${searchName}`
     }
@@ -31,18 +40,20 @@ export async function getUsers(page, limit, filters, searchName = null){
       };   
 }
 
-async function searchUser(searchName){
-     
+async function searchUser(){
+
+    let searchVal = document.getElementById("search-input").value;
+   
+    searchVal = searchVal.trim()
+
+    if(searchVal.length > 0){
+        searchName = searchVal;
+        let data = await getUsers(page, limit, searchName);
+        createPagination(data.total, data.perPage, getUsers, displayUsers, searchName);
+    }
 }
 
-async function loadUserList(){
-
-   let data = await getUsers(page, limit)
-   console.log(data)
-
-   let users = data.items;
-    
-  async function displayUsers(users){
+async function displayUsers(users){
     const tbdy= document.getElementById("user-tbl-body")
     tbdy.innerHTML = ""
     users.forEach(user => {
@@ -77,5 +88,8 @@ async function loadUserList(){
   }
 
 
-   createPagination(data.total, data.perPage, getUsers, displayUsers, filters);
+async function loadUserList(){
+
+   let data = await getUsers(page, limit)
+   createPagination(data.total, data.perPage, getUsers, displayUsers, searchName);
 }
