@@ -1,6 +1,7 @@
 // register.js
 import { signup } from './auth.js';
-import { TOKEN_NAME, getCookie } from './utils.js';
+import { getCookie } from './utils.js';
+import { TOKEN_NAME } from './constants.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     // Redirect if already signed in

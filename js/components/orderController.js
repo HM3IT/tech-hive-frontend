@@ -1,5 +1,6 @@
 import { sendAuthRequest } from "../api.js";
 import { getUser } from "../utils.js";
+import {  orderStatusColor } from "../constants.js";
  
 document.addEventListener("DOMContentLoaded", async () => {
     const tblBody = document.getElementById("order-tbl-body")
@@ -29,32 +30,6 @@ async function loadOrders() {
         console.log("Failed to fetch products:", response);
     }
 }
-// async function loadOrderTable(orders) {
-//     tblBody.innerHTML = "";  
-
-//     for (const order of orders) {
-//         const row = document.createElement("tr");
-//         const user = await getUser(order.userId);
-
-//         row.innerHTML = `
-//             <td>${order.id}</td>
-//             <td>${user.name}</td>
-//             <td>${order.createAt}</td>
-//             <td>${order.status}</td>
-//             <td>${order.totalPrice}</td>
-//             <td class="action-buttons">
-//                 <button class="view-btn" data-id="${order.id}">View</button>
-//                 <button class="update-btn" data-id="${order.id}">Update</button>
-//             </td>
-//         `;
-
-//         tblBody.appendChild(row);
-//     }
-// }
-
-// });
-
-
 
 async function loadOrderTable(orders) {
   
@@ -64,17 +39,21 @@ async function loadOrderTable(orders) {
     orders.forEach(async (order) => {
         let row = document.createElement("tr");
         let user = await getUser(order.userId)
-   
+        let createdDate = new Date(order.createdAt);
+        let orderDateStr = createdDate.toLocaleDateString(); 
+        let orderTime = createdDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); 
+        let colorStr = orderStatusColor[order.status]
+        let status = order.status.toUpperCase()
+        
         row.innerHTML = `
             <tr>
                 <td>${order.id}</td>
                 <td>${user.name}</td>
-                <td>${order.createAt}</td>
-                <td>${order.status}</td>
-                <td>${order.totalPrice}</td>
+                <td>${orderDateStr} ${orderTime}</td>
+                <td class='order-status' style="color:${colorStr}">${status}</td>
+                <td>$${order.totalPrice}</td>
                 <td class="action-buttons">
-                    <button class="view-btn" data-id="${order.id}">View</button>
-                    <button class="update-btn" data-id="${order.id}">Update</button>
+                    <a class="review-btn" data-id="${order.id}" href="orderReview.html?orderId=${order.id}">Review</a>
                 </td>
             </tr>
         `;

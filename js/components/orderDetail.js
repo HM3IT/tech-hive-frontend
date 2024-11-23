@@ -6,13 +6,7 @@ document.addEventListener("DOMContentLoaded",async function(e){
     const params = new URLSearchParams(window.location.search);
     const orderId = params.get("orderId");
     const tblBody = document.getElementById('order-summary-tbody');  
-    const orderStatusColor = {
-        pending :"orange",
-        confirm: "blue",
-        cancel: "red",
-        reject:"red",
-        delivered : "green"
-    }
+ 
 
     let id = document.getElementById("order-id");
     let orderDate = document.getElementById("order-date");

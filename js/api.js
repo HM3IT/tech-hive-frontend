@@ -1,6 +1,6 @@
 
-import {TOKEN_NAME, API_ENDPOINT, getCookie } from './utils.js';
- 
+import {getCookie } from './utils.js';
+import {TOKEN_NAME, API_ENDPOINT,} from "./constants.js";
 
 export async function sendRequest(url, method = "GET", data = null) {
     const options = {

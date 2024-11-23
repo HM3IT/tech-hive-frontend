@@ -1,7 +1,6 @@
 import { sendAuthRequest, sendRequest, sentFormRequest } from "./api.js";
+import { TOKEN_NAME} from "./constants.js";
 
-export const TOKEN_NAME = "accessToken"
-export const API_ENDPOINT = "http://localhost:8000/api"
 export let currentPage = 1
 export function setAccessTokenCookie(token, expiryTimeInMs) {
     const expires = new Date(Date.now() + expiryTimeInMs);

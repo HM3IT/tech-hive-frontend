@@ -141,7 +141,8 @@ table tbody tr:hover {
     background-color: #f9f9f9;
 }
 
-.action-buttons button {
+.action-buttons a {
+    text-decoration: none;
     padding: 8px 12px;
     margin: 0 2px;
     border: none;
@@ -149,17 +150,16 @@ table tbody tr:hover {
     cursor: pointer;
 }
 
-.action-buttons .view-btn {
-    background-color: #2a2a72;
-    color: #fff;
-}
-
-.action-buttons .delete-btn {
+.action-buttons .review-btn {
     background-color: #d9534f;
     color: #fff;
 }
 
-.action-buttons button:hover {
+.order-status{
+    font-weight: bold;
+}
+
+.action-buttons a:hover {
     opacity: 0.9;
 }
 

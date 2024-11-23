@@ -1,6 +1,7 @@
 import { sendAuthRequest } from "../api.js";
 import { logout  } from "../auth.js";
-import { getCookie,TOKEN_NAME, getCategory } from "../utils.js";
+import { getCookie, getCategory } from "../utils.js";
+import { TOKEN_NAME } from "../constants.js";
 
 window.addEventListener("load", (e) => {
 

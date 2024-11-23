@@ -1,10 +1,11 @@
 import { signin } from '../auth.js';
-import {TOKEN_NAME, getCookie } from '../utils.js';
+import {getCookie } from '../utils.js';
+import {TOKEN_NAME} from '../constants.js';
 
 addEventListener("DOMContentLoaded", (e) => {
     if (getCookie(TOKEN_NAME)){
-        // alert("already sign in")
-        // window.location.href= "./index.html"
+        alert("already sign in")
+        window.location.href= "./index.html"
     }
 
     let loginForm =  document.getElementById("login-form")
