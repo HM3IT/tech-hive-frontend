@@ -1,6 +1,6 @@
 import { sendAuthRequest } from "../api.js";
 import { customerLevelColor } from "../constants.js";
-import { createPagination } from "../utils.js";
+import { createPagination, getUsers } from "../utils.js";
 
 const page = 1;
 const limit = 10;
@@ -20,25 +20,6 @@ document.addEventListener("DOMContentLoaded",async function(e){
    await loadUserList()
 
 })
-
-export async function getUsers(page, limit, searchName = null){
-    let filters = `currentPage=${page}&pageSize=${limit}`
-    if (searchName){
-        filters += `&searchField=name&searchIgnoreCase=true&searchString=${searchName}`
-    }
-    let response = await sendAuthRequest(`/users/list?${filters}`, "GET");
-    if(!response.ok){
-        alert("Failed to retrieve user lists");
-        return
-    }    
-        let data = await response.json()
-      
-      return {
-        total: data.total, 
-        items:  data.items,
-        perPage: data.limit
-      };   
-}
 
 async function searchUser(){
 

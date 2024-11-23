@@ -51,9 +51,13 @@ async function getOrders(page, limit, searchId) {
             perPage: data.limit
           };
    
-    } else {
+    }  
         console.log("Failed to fetch products:", response);
-    }
+        return {
+            total: 0, 
+            items:[],
+            perPage: 10
+          };
 }
 
 async function displayOrderTable(orders) {

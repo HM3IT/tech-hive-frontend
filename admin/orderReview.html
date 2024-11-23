@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <link rel="stylesheet" href="../css/orderDetail.css">
+    <link rel="stylesheet" href="../css/main.css">
+     
+    <link rel="stylesheet" href="../css/admin/dashboard.css">
+    <link rel="stylesheet" href="../css/admin/orderReview.css">
+   
+</head>
+<body>
+    <script src="../js/main.js"></script>
+    <script src="../js/components/dashboard.js"> </script>
+    <script type="module" src="../js/components/orderReview.js"></script>
+ 
+    <aside class="sidebar" id="admin-sidebar">
+    </aside>
+
+    <div id="order-summary"  class="container">
+        <div id="order-header" >
+
+            <h1>Order Details</h1> 
+        </div>
+
+        <div class="section">
+            <h2>Order Information</h2>
+            <p><strong>Order ID:</strong> <span id="order-id">N/A</span></p>
+            <p><strong>Order Date:</strong> <span id="order-date">N/A</span></p>
+        
+            
+        </div>
+        <hr>
+        <div class="section">
+            <h2>Shipping Address</h2>
+            <p><strong>Full Name:</strong> <span id="username">N/A</span></p>
+            <p><strong>Address:</strong> <span id="ship-address">N/A</span></p>
+            <p><strong>Phone Number:</strong> <span id="phone">N/A</span></p>
+        </div>
+        <hr>
+        <div class="section">
+            <h2>Review</h2>
+            <form id="order-review-form">
+                <label for="handle-by"><strong id="handler">Handle By:</strong></label>
+                <select id="handle-by" name="handle_by">
+                    <option value="" disabled selected>Select handler</option>
+             
+                </select>
+                <br>
+            
+                <label for="order-status"><strong>Order Status:</strong></label>
+                <select id="order-status" name="order_status">
+                
+                </select>
+                <br>
+            
+                <label for="expected-order-date"><strong>Expected Order Received:</strong></label>
+                <input type="date" id="order-expected-date" name="expected_order_date">
+                <br>
+            
+                <button id="update-btn" type="submit">Update</button>
+            </form>
+            
+        </div>
+
+        <div class="section">
+    <h2>Order Summary</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Name</th>
+                <th>Discount</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="order-summary-tbody">
+            
+        
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="5">Total</th>
+                <th colspan="2" id="order-total">N/A</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+
+        <div ip="shipping-info" class="section">
+            <h2>Shipping Method</h2>
+            <p>Cash on Delivery (COD)</p>
+            
+        </div>
+        
+        
+    </div>
+ 
+
+    <script src="../js/components/dashboard.js"></script>
+</body>
+</html>

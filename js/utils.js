@@ -396,5 +396,24 @@ export function showConfirmBox(message, onOk, onCancel) {
     });
 }
 
+export async function getUsers(page, limit, searchName = null){
+    let filters = `currentPage=${page}&pageSize=${limit}`
+    if (searchName){
+        filters += `&searchField=name&searchIgnoreCase=true&searchString=${searchName}`
+    }
+    let response = await sendAuthRequest(`/users/list?${filters}`, "GET");
+    if(!response.ok){
+        alert("Failed to retrieve user lists");
+        return
+    }    
+        let data = await response.json()
+      
+      return {
+        total: data.total, 
+        items:  data.items,
+        perPage: data.limit
+      };   
+}
 
 
+ 
