@@ -67,8 +67,7 @@ async function loadProduct(productId){
     let userRating = document.getElementById("userRating");
     let discountedPriceValue = product.price - (product.price * product.discountPercent) / 100;
 
-    const addCartBtn  = document.getElementById("add-to-cart");
-    addCartBtn.addEventListener("click", addProductToCart);
+
 
     productName.innerText = product.name;
     brandSpan.innerText = product.brand;
@@ -88,10 +87,6 @@ async function loadProduct(productId){
     let mainObjectUrl = await fetchImageUrl(product.imageUrl);
     let images = [];
 
-    function addProductToCart(){
-        const quantityCounter = document.getElementById("quantityInput")
-        addToCart(product.id, product.name, product.price, quantityCounter.value, product.discountPercent, product.imageUrl)
-    }
 
     if (product.imageUrl) {
         mainImage.src = mainObjectUrl;
@@ -126,6 +121,17 @@ async function loadProduct(productId){
         }
     } else {
         console.log("No sub-images available.");
+    }
+
+    const addCartBtn  = document.getElementById("add-to-cart");
+    if(addCartBtn){
+
+        addCartBtn.addEventListener("click", addProductToCart);
+    }
+
+    function addProductToCart(){
+        const quantityCounter = document.getElementById("quantityInput")
+        addToCart(product.id, product.name, product.price, quantityCounter.value, product.discountPercent, product.imageUrl)
     }
     return images;
 }

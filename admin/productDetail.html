@@ -4,12 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/productDetail.css">
+    <link rel="stylesheet" href="../css/admin/dashboard.css">
     <title>Laptop Product Page</title>
-    
+    <style>
+    #product-name{
+        color: black;
+    }
+    #product-details{
+        background-color: transparent;
+        box-shadow: none;
+    }
+    .product-container{
+        padding-top:100px;
+
+    }
+    </style>
 </head>
 <body>
     <script type="module" src="../js/components/productDetail.js"></script>
+    <script src="../js/main.js"> </script>
+    <script src="../js/components/dashboard.js"> </script>
+ 
 
+<aside class="sidebar" id="admin-sidebar">
+
+</aside>
 <div class="product-container">
     <div class="image-gallery">
         <button class="slider-btn" id="prevBtn">&#10094;</button>
@@ -21,10 +40,7 @@
 
         <!-- Thumbnail Images -->
         <div id="thumbnail-container">
-            <!-- <img src="" id="subImage-1" alt="Thumbnail 1" class="thumbnail" onclick="showImage(0)">
-            <img src="" id="subImage-2" alt="Thumbnail 2" class="thumbnail" onclick="showImage(1)">
-            <img src="" id="subImage-3" alt="Thumbnail 3" class="thumbnail" onclick="showImage(2)">
-            <img src="" id="subImage-4" alt="Thumbnail 4" class="thumbnail" onclick="showImage(3)"> -->
+  
         </div>
     </div>
     
@@ -34,17 +50,13 @@
         <p>Brand: <span id="brand"></span></p>
 
         <div class="price">
-            <p>Price: <span id="original-price" style="text-decoration-line: line-through;"></span> <span id="discounted-price"></span> </p>
+            <p>Price: <span id="original-price"></span> <span id="discounted-price"></span> </p>
             <p id="discount"></p>
         </div>
 
         <p id="availability"></p>
 
-        <div class="quantity">
-            <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
-            <input type="text" value="1" class="quantity-input" id="quantityInput">
-            <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
-        </div>
+ 
 
         <div>
             <p><strong>Description:</strong> <span id="description"></span></p>
@@ -62,34 +74,45 @@
             <p id="userRating"></p>
         </div>
 
-        <button class="add-to-cart">Add to Cart</button>
+  
     </div>
+ 
 </div>
 
+ 
 <script>
-
-function changeQuantity(amount) {
-    const quantityInput = document.getElementById('quantityInput');
-    let currentQuantity = parseInt(quantityInput.value);
-
-    if (!isNaN(currentQuantity)) {
-        currentQuantity += amount;
-        if (currentQuantity < 1) currentQuantity = 1;  
-        quantityInput.value = currentQuantity;
+    function showError(message) {
+        const container = document.getElementById("product-details");
+        container.innerHTML = `<p class="error">${message}</p>`;
     }
-}
-function rateProduct(rating) {
-    const stars = document.querySelectorAll('.stars span');
-    stars.forEach((star, index) => {
-        star.classList.toggle('active', index < rating);
-    });
-    document.getElementById('userRating').innerText = `You rated this product ${rating} stars`;
-}
+    
+     
+    function changeQuantity(amount) {
+        const quantityInput = document.getElementById('quantityInput');
+        let currentQuantity = parseInt(quantityInput.value);
+    
+        if (!isNaN(currentQuantity)) {
+            currentQuantity += amount;
+            if (currentQuantity < 1) currentQuantity = 1;  
+            quantityInput.value = currentQuantity;
+        }
+    }
+    function rateProduct(rating) {
+        const stars = document.querySelectorAll('.stars span');
+        stars.forEach((star, index) => {
+            star.classList.toggle('active', index < rating);
+        });
+        document.getElementById('userRating').innerText = `You rated this product ${rating} stars`;
+    }
+    
+    function rateProduct(rating) {
+        document.getElementById("userRating").textContent = `You rated this product ${rating} star(s)`;
+    }
+      
 
-function rateProduct(rating) {
-    document.getElementById("userRating").textContent = `You rated this product ${rating} star(s)`;
-}
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
 </html>
