@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>eCommerce Admin Dashboard - Users</title>
     <link rel="stylesheet" href="../css/admin/user.css">
+    <link rel="stylesheet" href="../css/main.css">
 
-    
+    <link rel="stylesheet" href="../css/pagination.css">
+ <style>
+    .pagination{
+        margin-top: 80px;
+    }
+ </style>
 </head>
 <body>
     <script src="../js/main.js"> </script>
@@ -25,7 +31,7 @@
                 <h1>Users</h1>
                 <div class="search-container">
                     <input type="text" placeholder="Search users..." aria-label="Search">
-                    <button class="search-btn">Search</button>
+                    <button id="search-btn">Search</button>
                 </div>
             </header>
 
@@ -39,30 +45,20 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th>Customer Level</th>
+                            <th>Created Date</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody id="user-tbl-body">
-                        <tr>
-                            <td>#001</td>
-                            <td>John Doe</td>
-                            <td>john.doe@example.com</td>
-                            <td>Admin</td>
-                            <td>
-                                <button class="btn btn-warning btn-sm">Edit</button>
-                                <button class="btn btn-danger btn-sm">Delete</button>
-                            </td>
-                        </tr>
+                    
                  
                     </tbody>
                 </table>
-                <!-- Pagination -->
-                <div class="pagination">
-                    <button>Prev</button>
-                    <button>1</button>
-                    <button>2</button>
-                    <button>Next</button>
-                </div>
+    
+           <div class="pagination" id="paginationControls">
+           
+           </div>
             </section>
         </main>
     </div>

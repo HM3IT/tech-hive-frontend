@@ -75,42 +75,6 @@ body {
   }
   
 
-/* Pagination Controls */
-.pagination-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; 
-}
-
-.pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 0; 
-}
-
-.pagination a {
-    color: black;
-    padding: 8px 16px;
-    text-decoration: none;
-    border: 1px solid #ddd;
-    margin: 0 4px;
-    border-radius: 4px;
-    background-color: #fff;
-    transition: background-color 0.3s ease;
-}
-
-.pagination a.active {
-    background-color: #4c4eaf;
-    color: white;
-    border: 1px solid #4c4eaf;
-}
-
-
-.pagination a:hover:not(.active) {
-    background-color: #ddd;
-}
-
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .product-image-grid {

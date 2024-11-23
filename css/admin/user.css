@@ -103,7 +103,7 @@ border-radius: 4px 0 0 4px;
 outline: none;
 }
 
-.search-btn {
+#search-btn {
 padding: 10px 15px;
 border: none;
 background-color: #2a2a72;
@@ -113,7 +113,7 @@ border-radius: 0 4px 4px 0;
 transition: background-color 0.3s ease;
 }
 
-.search-btn:hover {
+#search-btn:hover {
 background-color: #1b1b4f;
 }
 
@@ -245,3 +245,7 @@ transition: background-color 0.3s;
 background-color: #1b1b4f;
 }
  
+
+.action-btns button{
+   padding: 10px 15px;
+}
