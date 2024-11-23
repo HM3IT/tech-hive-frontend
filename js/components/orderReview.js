@@ -2,7 +2,8 @@ import { sendAuthRequest } from "../api.js";
 import { fetchImageUrl, fetchProductDetail, getUser, getUsers } from "../utils.js";
 import {  orderStatusColor } from "../constants.js";
 
-let orderId = null
+ 
+let order = null
 const tblBody = document.getElementById('order-summary-tbody');  
 const orderStatusDropdown = document.getElementById("order-status");
 const handleByDropdown = document.getElementById('handle-by');
@@ -20,7 +21,7 @@ let orderTotal = document.getElementById("order-total");
 
 document.addEventListener("DOMContentLoaded",async function(e){
     const params = new URLSearchParams(window.location.search);
-    orderId = params.get("orderId");
+    let orderId = params.get("orderId");
     await loadOrderInfo(orderId);
     let data = await getUsers(1, 250);
     let users = data.items;
@@ -31,21 +32,27 @@ document.addEventListener("DOMContentLoaded",async function(e){
     orderReviewForm.addEventListener("submit", updateOrder);
 })
 
-
  
 async function updateOrder(event) {
+ 
     event.preventDefault();
-    if(!orderId){
+    console.log(order)
+    if(!order){
         return
     }
-
+   
     let orderStatus = orderStatusDropdown.value;
-    let handlerId = handleByDropdown.value;
+    let handlerId = handleByDropdown.value.trim();
     let expectedOrderDate = expectedDate.value;
- 
+   
+    if (order.status===orderStatus && order.handler_id== handlerId && order.expected_arrived_date.length >=0){
+        alert("You haven't updated any information")
+        return
+    }
+    
 
     const updateOrderData = {
-        id:orderId,
+        id:order.id,
         orderStatus: orderStatus,
         handlerId: handlerId,
         expectedArrivedDate: expectedOrderDate + "T00:00:00"
@@ -57,21 +64,15 @@ async function updateOrder(event) {
     if(response.ok){
         let data = await response.json();
         console.log(data)
-        alert("Order successfully updated!")
+        alert("Order successfully updated!");
+        window.location.reload()
     }
 
 
 };
 
 
-
-
-
-
-
 function loadHandleByDropdown(users, selectedHandlerId) {
-    
-   
     
     handleByDropdown.innerHTML = '<option value="" disabled selected>Select handler</option>';
     
@@ -111,14 +112,11 @@ orderStatusDropdown.addEventListener('change', function() {
 });
 
 
-
-
 async function loadOrderInfo(orderId){
     let response = await sendAuthRequest(`/orders/detail?id=${orderId}`, "GET");
     if(response.ok){
-        let order = await response.json();
-        console.log("order")
-        console.log(order)
+        order = await response.json();
+    
         let user = await getUser(order.user_id);
         username.innerText = user.name;
         id.innerText  = order.id;
@@ -132,19 +130,17 @@ async function loadOrderInfo(orderId){
         let orderTime = createdDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); 
         orderDate.innerText  =`${orderDateStr} ${orderTime}`
  
-        let expectedDateStr = "Still processing"
-
         expectedDate.style.color = "orange"
- 
         if(order.expected_arrived_date.length > 0){
             let expectedDateObj = new Date(order.expected_arrived_date);
-            expectedDateStr = expectedDateObj.toLocaleDateString();
-            expectedDate.style.color = "green" 
+            let expectedDateStr = expectedDateObj.toISOString().split('T')[0];
+            expectedDate.value = expectedDateStr;
+            // not allowing users to change the shipped date once it is set 
+            expectedDate.disabled = true;
+            expectedDate.style.color = "green";
+            expectedDate.style.backgroundColor= "#dde6f0"
         }
-        expectedDate.innerText =  expectedDateStr
 
-
- 
         let totalAmount = 0.0
         for (const item of order.order_products	) {
             const discountPercent = item.discountPercentAtOrder || 0;

@@ -5,7 +5,7 @@ export const orderStatusColor = {
     pending :"orange",
     confirm: "blue",
     cancelled: "red",
-    shipped:"crisom",
+    shipped: "#a64e00",
     delivered : "green"
 }
 
