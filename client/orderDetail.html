@@ -38,7 +38,7 @@
             <div id="order-header" >
 
                 <h1>Order Details</h1>
-                <h3 id="provider-name">(Tech Hive)</h3>
+                <!-- <h3 id="provider-name">(Tech Hive)</h3> -->
             </div>
     
             <div class="section">
@@ -97,14 +97,25 @@
 
 
     <script>
+        const order = document.getElementById("order-summary");
+        function adjustScale() {
+            const zoomLevel = window.devicePixelRatio;  
+            const baseScale = 0.75;  
+            const adjustedScale = baseScale / zoomLevel;  
+
+            order.style.transform = `scale(${adjustedScale})`;
+            order.style.transformOrigin = "top left";  
+        }
+        window.addEventListener("resize", adjustScale);
         document.addEventListener('DOMContentLoaded', function () {
             let downloadBtn = document.getElementById("order-download-btn");
  
-            let order = document.getElementById("order-summary");
+            
             downloadBtn.addEventListener("click", downloadorder);
    
-            
+       
             function downloadorder() {
+                adjustScale();
                 html2canvas(order).then(function (canvas) {
                     const imgData = canvas.toDataURL('image/png');
             

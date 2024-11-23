@@ -9,21 +9,19 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "./index.html";
     }
 
-    // Handle the signup form submission
+ 
     let signUpForm = document.getElementById("signup-form");
-    signUpForm.addEventListener("submit", () => {
-        //event.preventDefault(); // Prevent form submission for validation
+    signUpForm.addEventListener("submit", function(event){
+        event.preventDefault(); 
         
         let passwordField = document.getElementById('signup-password');
         let password = passwordField.value;
-
-        // Validate password
+ 
         if (!isValidPassword(password)) {
             alert("Password must be at least 8 characters long and include at least one special character.");
             return;
         }
-
-        // Proceed with signup if valid
+ 
         signup();
     });
 

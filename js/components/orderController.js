@@ -19,7 +19,7 @@ async function loadOrders() {
     let currentPage = 1; 
     let pageSize = 10;  
 
-    let url = `/orders/list?currentPage=${currentPage}&pageSize=${pageSize}`;
+    let url = `/orders/admin/list?currentPage=${currentPage}&pageSize=${pageSize}`;
     let response = await sendAuthRequest(url, "GET", null);
 
     if (response.ok) {

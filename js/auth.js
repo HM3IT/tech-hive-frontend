@@ -10,7 +10,6 @@ export async function signin(event) {
 
 	let email = document.getElementById('signin-email').value;
 	let password = document.getElementById('signin-password').value;
- 
 	let response = await sendRequest('/access/login', 'POST', { email, password });
 	
 	if (response.ok) {
@@ -42,8 +41,7 @@ export async function signup() {
         alert("You must accept the terms to register.");
         return;
     }
-
-    // Simple validation and feedback (extend this logic as needed)
+ 
     if (!username || !email || !password) {
         alert("All fields are required.");
         return;
