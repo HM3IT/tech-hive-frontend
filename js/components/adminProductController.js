@@ -63,12 +63,12 @@ async function displayProductTbl(products) {
             </td>
         `;
         tblBody.appendChild(row);
-        tblBody.addEventListener("click", async (e) => {
-            if (e.target.classList.contains("delete-btn")) {
-                let productId = e.target.dataset.productId;
-                await deleteProduct(productId);
-            }
-             });
+    });
+    tblBody.addEventListener("click", async (e) => {
+        if (e.target.classList.contains("delete-btn")) {
+            let productId = e.target.dataset.productId;
+            await deleteProduct(productId);
+        }
     });
 }
 

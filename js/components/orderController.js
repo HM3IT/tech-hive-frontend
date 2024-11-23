@@ -1,41 +1,46 @@
 import { sendAuthRequest } from "../api.js";
-import { getUser } from "../utils.js";
+import { getUser, createPagination } from "../utils.js";
 import {  orderStatusColor } from "../constants.js";
  
+const limit = 1
+const page = 1
+let filter = ""
+
 document.addEventListener("DOMContentLoaded", async () => {
-    const tblBody = document.getElementById("order-tbl-body")
+
    
-    let data = await loadOrders();
-    await loadOrderTable(data.items);
-
-    tblBody.addEventListener("click", async (e) => {
-        if (e.target.classList.contains("update-btn")) {
-            let orderId = e.target.dataset.id;
-            window.location.href=`orderStatusForm.html?productId=${orderId}`
-        }
-    });
+    let data = await getOrders(page, limit);
+  
+    createPagination(data.total, data.perPage, getOrders, displayOrderTable, filter);
+ 
+})
 
 
-async function loadOrders() {
-    let currentPage = 1; 
-    let pageSize = 10;  
 
-    let url = `/orders/admin/list?currentPage=${currentPage}&pageSize=${pageSize}`;
+
+
+async function getOrders(page, limit) {
+  
+    let url = `/orders/admin/list?currentPage=${page}&pageSize=${limit}`;
     let response = await sendAuthRequest(url, "GET", null);
 
     if (response.ok) {
-        return  await response.json();
+        let data =  await response.json();
+        return {
+            total: data.total, 
+            items: data.items,
+            perPage: data.limit
+          };
    
     } else {
         console.log("Failed to fetch products:", response);
     }
 }
 
-async function loadOrderTable(orders) {
-  
+async function displayOrderTable(orders) {
+    const tblBody = document.getElementById("order-tbl-body")
+
     tblBody.innerHTML = ""; 
-
-
     orders.forEach(async (order) => {
         let row = document.createElement("tr");
         let user = await getUser(order.userId)
@@ -58,7 +63,13 @@ async function loadOrderTable(orders) {
             </tr>
         `;
         tblBody.appendChild(row);
+    
+    });
+
+    tblBody.addEventListener("click", async (e) => {
+        if (e.target.classList.contains("update-btn")) {
+            let orderId = e.target.dataset.id;
+            window.location.href=`orderStatusForm.html?productId=${orderId}`
+        }
     });
 }
-
-})
