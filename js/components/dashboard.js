@@ -19,7 +19,6 @@ loadComponent("dashboardSidebar.html", "admin-sidebar")
 
 
 function highlightButton(buttonId) {
-    console.log("trigger ",buttonId)
  
     const defaultBackgroundColor = "##1f1f38;";
     const defaultTextColor = "#f4f6f8";

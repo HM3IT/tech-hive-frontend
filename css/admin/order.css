@@ -96,7 +96,7 @@ h2{
     outline: none;
 }
 
-.search-btn {
+#search-btn {
     padding: 10px 15px;
     background-color: #2a2a72;
     color: #fff;
@@ -105,7 +105,7 @@ h2{
     cursor: pointer;
 }
 
-.search-btn:hover {
+#search-btn:hover {
     background-color: #1b1b4f;
 }
 

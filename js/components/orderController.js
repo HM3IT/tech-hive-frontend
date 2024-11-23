@@ -2,26 +2,45 @@ import { sendAuthRequest } from "../api.js";
 import { getUser, createPagination } from "../utils.js";
 import {  orderStatusColor } from "../constants.js";
  
-const limit = 1
+const limit = 10
 const page = 1
-let filter = ""
+let searchId = ""
 
 document.addEventListener("DOMContentLoaded", async () => {
 
-   
+    const searchBtn = document.getElementById("search-btn")
+    let searchInputBox = document.getElementById("search-input");
+    searchBtn.addEventListener("click", searchOrder);
+    searchInputBox.addEventListener("keypress", async function(event) {
+        if (event.key === "Enter") {
+            await searchOrder()
+        }
+    });
+    
+
     let data = await getOrders(page, limit);
-  
-    createPagination(data.total, data.perPage, getOrders, displayOrderTable, filter);
+    createPagination(data.total, data.perPage, getOrders, displayOrderTable, searchId);
  
 })
 
+async function searchOrder(){
+    let orderId = document.getElementById("search-input").value.trim()
 
+    if (orderId.length> 0){
+        searchId= orderId
+        let data = await getOrders(page, limit, searchId );
+        createPagination(data.total, data.perPage, getOrders, displayOrderTable, searchId);
+    }
+}
 
-
-
-async function getOrders(page, limit) {
+async function getOrders(page, limit, searchId) {
   
     let url = `/orders/admin/list?currentPage=${page}&pageSize=${limit}`;
+
+    if(searchId && searchId.length>0){
+        url+= `&ids=${searchId}`
+
+    }
     let response = await sendAuthRequest(url, "GET", null);
 
     if (response.ok) {

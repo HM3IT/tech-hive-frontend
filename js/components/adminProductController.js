@@ -6,7 +6,6 @@ const page = 1;
 const limit = 8;
 document.addEventListener("DOMContentLoaded", async () => {
 
-    let data = await getProducts(page, limit, searchQry)
     const searchBtn = document.getElementById("search-btn")
     let searchInputBox = document.getElementById("search-input");
     searchBtn.addEventListener("click", searchProduct);
@@ -15,7 +14,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             await searchProduct()
         }
     });
-
+    
+    let data = await getProducts(page, limit, searchQry)
     createPagination(data.total, data.perPage, getProducts, displayProductTbl, searchQry);
 
 });
