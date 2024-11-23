@@ -40,8 +40,8 @@ const slides = document.querySelectorAll('.slide-image');
 const totalSlides = slides.length;
 
 function showSlide(index) {
-    currentSlide = (index + totalSlides) % totalSlides;  // Wrap the index
-    const offset = -currentSlide * 100;                   // Calculate the offset
+    currentSlide = (index + totalSlides) % totalSlides;   
+    const offset = -currentSlide * 100;                  
     document.querySelector('.slide').style.transform = `translateX(${offset}%)`;
 }
 

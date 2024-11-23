@@ -16,9 +16,8 @@ body {
 }
 
 /* Container Styling */
-.container {
+#order-summary {
     max-width: 1200px;
-    margin: 30px auto;
     background: #ffffff;
     padding: 20px 30px;
     border-radius: 10px;
@@ -26,6 +25,11 @@ body {
 }
 
 /* Section Styling */
+ #order-header{
+    display: flex;
+  justify-content: space-between;
+ 
+ }
 .section {
     margin-bottom: 30px;
 }
@@ -161,7 +165,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .container {
+    #order-summary {
         padding: 15px;
     }
 
@@ -212,3 +216,84 @@ tfoot th {
     font-weight: bold;
     background-color: #eafaf1;
 }
+
+
+#order-section{
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+#shipping-info{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#order-download-btn{
+    position: fixed;
+    left: 120px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  #order-download-btn .link_wrapper{
+    position: relative;
+  }
+  
+  #order-download-btn a{
+    display: block;
+    width: 180px;
+    height: 50px;
+    line-height: 50px;
+    font-weight: bold;
+    text-decoration: none;
+    background: #333;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 3px solid #333;
+    transition: all .35s;
+  }
+  
+  #order-download-btn .icon{
+    width: 50px;
+    height: 50px;
+    border: 3px solid transparent;
+    position: absolute;
+    transform: rotate(45deg);
+    right: 0;
+    top: 0;
+    z-index: -1;
+    transition: all .35s;
+  }
+  
+  #order-download-btn .icon svg{
+    width: 30px;
+    position: absolute;
+    top: calc(50% - 15px);
+    left: calc(50% - 15px);
+    transform: rotate(-45deg);
+    fill: #1b42f0;
+    transition: all .35s;
+  }
+  
+  #order-download-btn a:hover{
+    width: 150px;
+    border: 3px solid #1b42f0;
+    background: transparent;
+    color: #1b42f0;
+  }
+  #order-download-btn a:hover + .icon{
+    border: 3px solid #1b42f0;
+    right: -25%;
+  }
+
+
+
+  #provider-name {
+    color: #0359bd;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
