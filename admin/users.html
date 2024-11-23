@@ -11,6 +11,7 @@
 <body>
     <script src="../js/main.js"> </script>
     <script src="../js/components/dashboard.js"> </script>
+    <script type="module" src="../js/components/userController.js"> </script>
     <div class="dashboard-container">
         <!-- Sidebar -->
         <aside class="sidebar" id="admin-sidebar">
@@ -41,7 +42,7 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="user-tbl-body">
                         <tr>
                             <td>#001</td>
                             <td>John Doe</td>
@@ -52,16 +53,7 @@
                                 <button class="btn btn-danger btn-sm">Delete</button>
                             </td>
                         </tr>
-                        <tr>
-                            <td>#002</td>
-                            <td>Jane Smith</td>
-                            <td>jane.smith@example.com</td>
-                            <td>Editor</td>
-                            <td>
-                                <button class="btn btn-warning btn-sm">Edit</button>
-                                <button class="btn btn-danger btn-sm">Delete</button>
-                            </td>
-                        </tr>
+                 
                     </tbody>
                 </table>
                 <!-- Pagination -->

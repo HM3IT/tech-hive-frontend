@@ -1,6 +1,7 @@
 import { sendAuthRequest } from "../api.js";
 import { fetchImageUrl, fetchProductDetail } from "../utils.js";
 import {me} from '../auth.js';
+import {  orderStatusColor } from "../constants.js";
 
 document.addEventListener("DOMContentLoaded",async function(e){
     const params = new URLSearchParams(window.location.search);
