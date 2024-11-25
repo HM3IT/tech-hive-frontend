@@ -1,12 +1,12 @@
 // register.js
 import { signup } from './auth.js';
-import { getCookie } from './utils.js';
+import { getCookie, showAlert } from './utils.js';
 import { TOKEN_NAME } from './constants.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     // Redirect if already signed in
     if (getCookie(TOKEN_NAME)) {
-        alert("You are already signed in");
+        showAlert("You are already signed in", "#ff4d4d");
         window.location.href = "./index.html";
     }
 
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let password = passwordField.value;
  
         if (!isValidPassword(password)) {
-            alert("Password must be at least 8 characters long and include at least one special character.");
+            showAlert("Password must be at least 8 characters long and include at least one special character.", "#ff4d4d");
             return;
         }
  

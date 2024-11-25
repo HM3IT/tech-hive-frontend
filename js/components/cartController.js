@@ -1,4 +1,4 @@
-import {fetchImageUrl, addToCart, updateCartQuantity, updateGrandTotal } from "../utils.js";
+import {fetchImageUrl, addToCart, updateCartQuantity, updateGrandTotal, showAlert } from "../utils.js";
 
 async function loadCart() {
     const cartTableBody = document.querySelector('#cartTable tbody');
@@ -10,8 +10,10 @@ async function loadCart() {
     
  
     if (!Array.isArray(cart) || cart.length === 0) {
-        alert("You haven't added any products yet! Please add products");
-        window.location.href = "products.html"
+        showAlert("You haven't added any products yet! Please add products", "#ff4d4d");
+        setTimeout(() => {
+            window.location.href = "products.html";
+        }, 1000);
         return;
     }
     
@@ -61,6 +63,7 @@ async function loadCart() {
     updateGrandTotal(cart);
 }
 
+
 async function removeFromCart(productId) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     cart = cart.filter((item) => item.productId !== productId);
@@ -78,3 +81,16 @@ document.addEventListener("DOMContentLoaded", async function(event){
     await loadCart()
 
 })
+
+
+async function confirmRemove(productId) {
+    showConfirmBox(
+        "Do You Want to Remove this Item?",
+        async () => {
+            await removeFromCart(productId); // Call the existing removeFromCart function
+        },
+        () => {
+            console.log("Remove action cancelled."); // Optional: Handle cancel case
+        }
+    );
+}

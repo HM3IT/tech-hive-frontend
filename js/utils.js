@@ -7,9 +7,11 @@ export function setAccessTokenCookie(token, expiryTimeInMs) {
     document.cookie = `${TOKEN_NAME}=${token}; expires=${expires.toUTCString()}; path=/; secure; SameSite=Strict`;
 }
 
+
 export function deleteAccessTokenCookie() {
     document.cookie = `${TOKEN_NAME}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; secure; SameSite=Strict`;
 }
+
 
 export function getCookie(name) {
     const nameEQ = `${name}=`;
@@ -103,7 +105,6 @@ export async function fetchImageUrl(imagePath) {
 }
 
 
-
 export async function getSubImagUrls(files){
     let subImageUrls = await Promise.all(
         Array.from(files).map(async (file) => {
@@ -135,7 +136,6 @@ export async function getSubImagUrls(files){
 }
 
 
-
 export async function getProducts(page, limit, filters){
     let response = await sendRequest(`/products/search?query_str=${filters}&page=${page}&limit=${limit}`, "GET");
     if(response.ok){
@@ -148,9 +148,9 @@ export async function getProducts(page, limit, filters){
         perPage: data.per_page
       };
     }
-    return {}
-    
+    return {}   
 }
+
 
 function truncateDescription(description, maxLength = 30) {
     if (description.length > maxLength) {
@@ -158,6 +158,7 @@ function truncateDescription(description, maxLength = 30) {
     }
     return description;
 }
+
 
 export async function displayProducts(products) {
     const productView = document.getElementById("productView");
@@ -187,8 +188,6 @@ export async function displayProducts(products) {
         productView.innerHTML += productCard;
     }
 }
-
-
 
 
 export async function getCategory() {
@@ -244,12 +243,11 @@ export async function updateProduct(productId, productData){
     let response = await sendAuthRequest(url, "PATCH", productData);
 
     if (response.ok) {
-        alert("Product updated successfully!");
+        showAlert("Product updated successfully!");
         return true;
     }  
-    alert("Failed to update product.");
-    return false;  
-     
+    showAlert("Failed to update product.");
+    return false;
 }
 
 
@@ -315,7 +313,7 @@ export function addToCart(productId, productName, productPrice, quantity, discou
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));
-    alert(`${productName} has been added to the cart!`);
+    showAlert(`<b>${productName}</b> has been added to the cart!`, "#007bff");
 
 };
 
@@ -368,7 +366,6 @@ export function updateGrandTotal(cart) {
 
 
 export function showConfirmBox(message, onOk, onCancel) {
-   
     let infoBox = document.createElement("div");
     infoBox.setAttribute("id", "confirm-box");
 
@@ -396,6 +393,30 @@ export function showConfirmBox(message, onOk, onCancel) {
     });
 }
 
+
+export function showAlert(message, bg_color, duration = 3000) {
+    let alertBox = document.createElement("div");
+    alertBox.setAttribute("id", "alert-box");
+    alertBox.className = "custom-alert-box";
+
+    if (bg_color){
+        alertBox.style.backgroundColor = bg_color;
+    }
+    alertBox.innerHTML = `
+        <div class="alert-content">
+            <p>${message}</p>
+        </div>
+    `;
+
+    document.body.appendChild(alertBox);
+
+    setTimeout(() => {
+        alertBox.classList.add("fade-out");
+        setTimeout(() => alertBox.remove(), 300);
+    }, duration);
+}
+
+
 export async function getUsers(page, limit, searchName = null){
     let filters = `currentPage=${page}&pageSize=${limit}`
     if (searchName){
@@ -414,6 +435,3 @@ export async function getUsers(page, limit, searchName = null){
         perPage: data.limit
       };   
 }
-
-
- 

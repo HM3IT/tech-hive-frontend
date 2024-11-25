@@ -1,4 +1,4 @@
-import { displayProducts, createPagination, getProducts } from '../utils.js';
+import { displayProducts, createPagination, getProducts, showAlert } from '../utils.js';
 
 let price_range_filter = "null"
 let query_filter = "null"
@@ -19,13 +19,11 @@ async function loadProduct() {
     let data = await getProducts(limit, page, filters);
     let total = data.total;
     if(total <= 0){
-        alert("No products are found")
+        showAlert("No products are found", "#ff4d4d")
       }else{
     createPagination(total, limit, getProducts, displayProducts, filters);
       }
-    } 
-    
- 
+    }
 
 let oldSearchVal =""
 const handleSearchInput = debounce(async(event) => {
@@ -43,7 +41,7 @@ const handleSearchInput = debounce(async(event) => {
   let data = await getProducts(1, limit, filters)
   let total = data.total
   if(total <= 0){
-    alert("No products are found")
+    showAlert("No products are found", "#ff4d4d")
   }else{
       createPagination(total, limit, getProducts, displayProducts, filters);
   }
@@ -80,12 +78,9 @@ document.addEventListener("DOMContentLoaded", async function(e){
         let data = await getProducts(1, limit, filters)
         let total = data.total
         if(total <= 0){
-            alert("No products are found")
+            showAlert("No products are found", "#ff4d4d")
           }else{
         createPagination(total, limit, getProducts, displayProducts, filters);
         }
     }
 });
-
-
-
