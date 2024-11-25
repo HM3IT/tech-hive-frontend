@@ -1,6 +1,6 @@
 import { sendAuthRequest } from "../api.js";
 import { fetchProductDetail, getSubImagUrls, getCategory, getTags, updateProduct, uploadImage } from "../utils.js";
-
+import {tagKeyLookup, tagColor} from "../constants.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -26,10 +26,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     const cancelBtn = document.getElementById("cancel-btn")
 
-    // cancelBtn.addEventListener("click", () => {
-    //     window.location.href = "../admin/products.html";
-    // });
+    cancelBtn.addEventListener("click", () => {
+        updateForm.reset()
+    });
 
+   
 
 async function loadOldProduct(productId) {
     oldProduct = await fetchProductDetail(productId)
@@ -58,17 +59,22 @@ async function loadOldProduct(productId) {
 
     const oldTagIds = oldProduct.productTags.map((tag) => (tag.tagId));
     tags.forEach((tag) => {
+        console.log(tag)
         let optionElement = document.createElement("option");
         optionElement.value = tag.id;
         optionElement.innerText = tag.name;
         console.log(tag.id)
         console.log(oldTagIds)
  
-        if (oldTagIds.includes(tag.id)) {
-            optionElement.selected =true;
-            optionElement.style.backgroundColor="#343457"
-            optionElement.style.color="white"
-        }
+    
+            let tagName = tag.name.toLowerCase()
+            const colorTagKey = tagName in tagKeyLookup ? tagKeyLookup[tagName] : tagKeyLookup.DEFAULT;
+        
+       
+            optionElement.style.borderLeft = `7px solid ${tagColor[colorTagKey]}`;
+      
+            optionElement.selected = true;
+   
         dropDownTags.appendChild(optionElement);
     });
 }
@@ -110,11 +116,11 @@ async function updateProductHandler() {
         subImageUrl,  
         tagIds
     };
-    console.log(tagIds)
+  
 
     let isSuccess = await updateProduct(oldProduct.id, productData);
     if(isSuccess){
-        cancelBtn.form.reset();
+        window.location.reload()
     }
 }
 
