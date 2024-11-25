@@ -1,11 +1,14 @@
 import { sendAuthRequest } from "../api.js";
-import { fetchProductDetail, getSubImagUrls, getCategory, updateProduct, uploadImage } from "../utils.js";
+import { fetchProductDetail, getSubImagUrls, getCategory, getTags, updateProduct, uploadImage } from "../utils.js";
 
 
 document.addEventListener("DOMContentLoaded", async () => {
 
     let productId =""
     let oldProduct;
+
+    let dropDownCategory = document.getElementById("product-category");
+    let dropDownTags = document.getElementById("product-tags");
 
     let urlParams = new URLSearchParams(window.location.search);
     productId = urlParams.get("productId");
@@ -40,7 +43,8 @@ async function loadOldProduct(productId) {
     
     
     let categories = await getCategory();
-    let dropDownCategory = document.getElementById("product-category");
+    let tags = await getTags();
+  
  
     categories.forEach((category) => {
         let optionElement = document.createElement("option");
@@ -51,11 +55,28 @@ async function loadOldProduct(productId) {
         }
         dropDownCategory.appendChild(optionElement);
     });
+
+    const oldTagIds = oldProduct.productTags.map((tag) => (tag.tagId));
+    tags.forEach((tag) => {
+        let optionElement = document.createElement("option");
+        optionElement.value = tag.id;
+        optionElement.innerText = tag.name;
+        console.log(tag.id)
+        console.log(oldTagIds)
+ 
+        if (oldTagIds.includes(tag.id)) {
+            optionElement.selected =true;
+            optionElement.style.backgroundColor="#343457"
+            optionElement.style.color="white"
+        }
+        dropDownTags.appendChild(optionElement);
+    });
 }
 
 async function updateProductHandler() {
+    let tagIds = Array.from(dropDownTags.selectedOptions).map(option => option.value);
+    let categoryId = dropDownCategory.value;
     let name = document.getElementById("product-name").value.trim();
-    let categoryId = document.getElementById("product-category").value;
     let brand = document.getElementById("product-brand").value.trim();
     let stock = parseInt(document.getElementById("product-stock").value);
     let price = parseFloat(document.getElementById("product-price").value);
@@ -63,6 +84,8 @@ async function updateProductHandler() {
     let description = document.getElementById("product-description").value.trim();
     let productImage = document.getElementById("product-image").files;
     let subProductImages = document.getElementById("sub-product-image").files;
+    
+
     let imageUrl = oldProduct.imageUrl;
     let subImageUrl = oldProduct.subImageUrl;
     if (productImage.length > 0){
@@ -85,7 +108,9 @@ async function updateProductHandler() {
         discountPercent,
         imageUrl, 
         subImageUrl,  
+        tagIds
     };
+    console.log(tagIds)
 
     let isSuccess = await updateProduct(oldProduct.id, productData);
     if(isSuccess){

@@ -189,8 +189,6 @@ export async function displayProducts(products) {
 }
 
 
-
-
 export async function getCategory() {
     let currentPage = 1;
     let pageSize = 300;
@@ -207,6 +205,21 @@ export async function getCategory() {
     }
 }
 
+export async function getTags() {
+    let currentPage = 1;
+    let pageSize = 300;
+
+    let url = `/tags/list?currentPage=${currentPage}&pageSize=${pageSize}`;
+
+    let response = await sendRequest(url, "GET", null);
+
+    if (response.ok) {
+        let data = await response.json();
+        return data.items;
+    } else {
+        console.log("Failed to fetch tags:", response);
+    }
+}
 
 export async function fetchProductDetail(productId) {
     let url = `/products/detail/${productId}`;  
