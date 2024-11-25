@@ -1,5 +1,5 @@
 import { sendAuthRequest, sendRequest, sentFormRequest } from "./api.js";
-import { TOKEN_NAME} from "./constants.js";
+import { TOKEN_NAME, orderStatusColor} from "./constants.js";
 
 export let currentPage = 1
 export function setAccessTokenCookie(token, expiryTimeInMs) {
@@ -172,7 +172,8 @@ export async function displayProducts(products) {
                 <h3 class="product-title">${product.name}</h3>
                 <p class="product-description">  ${truncateDescription(product.description, 85)}</p>
                 <div class="product-tags">
-                    ${product.discountPercent > 0 ? '<span class="tag">Tags</span>' : ''}
+                ${product.discountPercent > 0 ? '<span class="tag discount">Discount</span>' : ''}
+                 ${product.isNewArrival ? '<span class="tag new-arrival">New Arrival</span>' : ''}
                 </div>
                 <p class="product-price">Price: $${product.price}</p>
                 <p class="product-discount">Discount: ${product.discountPercent}%</p>                  
@@ -206,6 +207,21 @@ export async function getCategory() {
     }
 }
 
+export async function getTags() {
+    let currentPage = 1;
+    let pageSize = 300;
+
+    let url = `/tags/list?currentPage=${currentPage}&pageSize=${pageSize}`;
+
+    let response = await sendRequest(url, "GET", null);
+
+    if (response.ok) {
+        let data = await response.json();
+        return data.items;
+    } else {
+        console.log("Failed to fetch tags:", response);
+    }
+}
 
 export async function fetchProductDetail(productId) {
     let url = `/products/detail/${productId}`;  
@@ -434,4 +450,70 @@ export async function getUsers(page, limit, searchName = null){
         items:  data.items,
         perPage: data.limit
       };   
+}
+
+
+ export async function getOrders(page, limit, searchId) {
+  
+    let url = `/orders/admin/list?currentPage=${page}&pageSize=${limit}`;
+
+    if(searchId && searchId.length>0){
+        url+= `&ids=${searchId}`
+
+    }
+    let response = await sendAuthRequest(url, "GET", null);
+
+    if (response.ok) {
+        let data =  await response.json();
+        return {
+            total: data.total, 
+            items: data.items,
+            perPage: data.limit
+          };
+   
+    }  
+        console.log("Failed to fetch products:", response);
+        return {
+            total: 0, 
+            items:[],
+            perPage: 10
+          };
+}
+
+
+
+export async function displayOrderTable(orders, tblBody) {
+
+    tblBody.innerHTML = ""; 
+    orders.forEach(async (order) => {
+        let row = document.createElement("tr");
+        let user = await getUser(order.userId)
+        let createdDate = new Date(order.createdAt);
+        let orderDateStr = createdDate.toLocaleDateString(); 
+        let orderTime = createdDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); 
+        let colorStr = orderStatusColor[order.status]
+        let status = order.status.toUpperCase()
+        
+        row.innerHTML = `
+            <tr>
+                <td>${order.id}</td>
+                <td>${user.name}</td>
+                <td>${orderDateStr} ${orderTime}</td>
+                <td class='order-status' style="color:${colorStr}">${status}</td>
+                <td>$${order.totalPrice}</td>
+                <td class="action-buttons">
+                    <a class="review-btn" data-id="${order.id}" href="orderReview.html?orderId=${order.id}">Review</a>
+                </td>
+            </tr>
+        `;
+        tblBody.appendChild(row);
+    
+    });
+
+    tblBody.addEventListener("click", async (e) => {
+        if (e.target.classList.contains("update-btn")) {
+            let orderId = e.target.dataset.id;
+            window.location.href=`orderStatusForm.html?productId=${orderId}`
+        }
+    });
 }

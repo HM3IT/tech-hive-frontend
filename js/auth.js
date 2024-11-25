@@ -88,9 +88,14 @@ export async function logout(){
 export async function me(){
 	let response = await sendAuthRequest('/access/me', 'GET');
 	if (response.ok) {
-		return response.json()
+		return response.json();
 	} else {
 		let errorData = await response.json();
+		console.log("errorData")
+		console.log(errorData)
+		if (errorData.status_code == 401){
+			deleteAccessTokenCookie()
+		}
 		console.log(errorData)
 	}	 
 }

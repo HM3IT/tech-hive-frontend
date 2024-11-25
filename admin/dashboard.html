@@ -6,12 +6,13 @@
     <title>eCommerce Admin Dashboard</title>
  
     <link rel="stylesheet" href="../css/admin/dashboard.css">
+    <link rel="stylesheet" href="../css/admin/statistics.css">
 
 </head>
 <body>
     <script src="../js/main.js"> </script>
     <script src="../js/components/dashboard.js"> </script>
-
+    <script type="module" src="../js/components/dataAnalysisTbl.js"> </script>
     <div class="dashboard-container">
         <!-- Sidebar -->
         <aside class="sidebar" id="admin-sidebar">
@@ -23,8 +24,8 @@
             <!-- Header -->
             <header class="header">
                 <h1>Dashboard</h1>
-                <input type="text" placeholder="Search...">
-                <button class="search-btn">Search</button>
+          
+                <input type="date" id="filter-date" name="expected_order_date">
             </header>
 
             <!-- Dashboard Overview Cards -->
@@ -54,36 +55,20 @@
                     <thead>
                         <tr>
                             <th>Order ID</th>
-                            <th>Product</th>
+                            <th>Customer</th>
                             <th>Date</th>
                             <th>Status</th>
                             <th>Total</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>#1001</td>
-                            <td>Product A</td>
-                            <td>2024-10-01</td>
-                            <td>Shipped</td>
-                            <td>$120.00</td>
-                        </tr>
-                        <tr>
-                            <td>#1002</td>
-                            <td>Product B</td>
-                            <td>2024-10-02</td>
-                            <td>Pending</td>
-                            <td>$75.00</td>
-                        </tr>
-                        <tr>
-                            <td>#1003</td>
-                            <td>Product C</td>
-                            <td>2024-10-03</td>
-                            <td>Completed</td>
-                            <td>$210.00</td>
-                        </tr>
+                    <tbody id="order-tbl-body">
+     
                     </tbody>
                 </table>
+
+          
+       
             </section>
         </main>
     </div>

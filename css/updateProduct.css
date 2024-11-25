@@ -157,3 +157,54 @@ body {
 .form-group .cancel-btn:hover {
     background-color: #e53935;
 }
+
+
+#dropdown-boxes{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+#dropdown-boxes .first-col{
+    width: 220px;
+}
+
+#dropdown-boxes .first-col label{
+   margin-top: 10px;
+}
+#dropdown-boxes .first-col,
+#dropdown-boxes .sec-col{
+    height: 250px;
+}
+
+#product-tags{
+    display: flex;
+    width: 270px;
+    text-align: center;
+    justify-content: center;
+}
+
+#product-tags option{
+    display: flex;
+    width: 180px;
+    height: 35px;
+    justify-content: center;
+    align-items: center;
+ 
+    background-color:white;
+}
+
+#product-tags option{
+    border-radius: 0 15px 0 15px;
+    margin: 10px auto;
+    border: .5px solid black;
+    color: black;
+}
+option:checked {
+    background: rgb(255, 255, 255) linear-gradient(0deg, #0348c9 0%, #0348c9 100%);
+    color: black;  
+}
+
+ 
+/* #product-tags option:last-child{
+    border-radius: 0 0 15px 15px;
+} */

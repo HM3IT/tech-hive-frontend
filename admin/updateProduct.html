@@ -37,23 +37,29 @@
                         <input type="text" id="product-name" placeholder="Enter product name">
                     </div>
 
-                    <div class="form-group">
-                        <label for="product-category">Category</label>
-                        <select id="product-category" name="category" required>
-                            <option value="" disabled selected>Select category</option>
-                        </select>
-                    </div>
+                    <div id="dropdown-boxes">
+                        <div class="first-col" class="form-group">
+                            <label for="product-category">Category</label>
+                            <select id="product-category" name="category" required>
+                                <option value="" disabled selected>Select category</option>
+                            </select>
+                           
+                                <label for="product-brand">Brand</label>
+                                <input type="text" id="product-brand" placeholder="Enter product brand">
+                                <label for="product-stock">Stock</label>
+                                <input type="number" id="product-stock" placeholder="Enter product stock">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="product-brand">Brand</label>
-                        <input type="text" id="product-brand" placeholder="Enter product brand">
+    
+                        <div class="sec-col"  class="form-group">
+                            <label for="product-tags">Select Tags</label>
+                            <select id="product-tags" name="tags[]" class="form-control" multiple required>
+                           
+                            </select>
+                            <small class="form-text text-muted">Hold down the Ctrl (Windows) or Command (Mac) key to select multiple options.</small>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="product-stock">Stock</label>
-                        <input type="number" id="product-stock" placeholder="Enter product stock">
-                    </div>
-
+      
                     <div class="form-group">
                         <label for="product-price">Price ($)</label>
                         <input type="number" id="product-price" placeholder="Enter product price">

@@ -43,7 +43,7 @@ h2 {
 
 .image-gallery .slider-btn {
     position: absolute;
-    top: 40%;
+    top: 50%;
     transform: translateY(-50%);
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
@@ -194,3 +194,74 @@ h2 {
         height: 80px;
     }
 }
+
+.reviews-section {
+    margin-top: 20px;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.reviews-section h3, .reviews-section h4 {
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+#reviews-container .review {
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#reviews-container .review .review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#reviews-container .review .review-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+#reviews-container .review .review-header span {
+    font-weight: bold;
+}
+
+#reviews-container .review .review-stars {
+    color: gold;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+#review-stars span {
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #ccc;
+}
+
+#review-stars .active {
+    color: gold;
+}
+
+#submit-review {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#submit-review:hover {
+    background-color: #0056b3;
+}
+
