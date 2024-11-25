@@ -1,6 +1,5 @@
-import { sendAuthRequest } from "../api.js";
-import { getUser, createPagination } from "../utils.js";
-import {  orderStatusColor } from "../constants.js";
+import { getUser, getOrders, createPagination } from "../utils.js";
+import { orderStatusColor} from "../constants.js";
  
 const limit = 10
 const page = 1
@@ -10,7 +9,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const searchBtn = document.getElementById("search-btn")
     let searchInputBox = document.getElementById("search-input");
-    searchBtn.addEventListener("click", searchOrder);
+    if(searchBtn){
+
+        searchBtn.addEventListener("click", searchOrder);
+    }
+
     searchInputBox.addEventListener("keypress", async function(event) {
         if (event.key === "Enter") {
             await searchOrder()
@@ -33,32 +36,6 @@ async function searchOrder(){
     }
 }
 
-async function getOrders(page, limit, searchId) {
-  
-    let url = `/orders/admin/list?currentPage=${page}&pageSize=${limit}`;
-
-    if(searchId && searchId.length>0){
-        url+= `&ids=${searchId}`
-
-    }
-    let response = await sendAuthRequest(url, "GET", null);
-
-    if (response.ok) {
-        let data =  await response.json();
-        return {
-            total: data.total, 
-            items: data.items,
-            perPage: data.limit
-          };
-   
-    }  
-        console.log("Failed to fetch products:", response);
-        return {
-            total: 0, 
-            items:[],
-            perPage: 10
-          };
-}
 
 async function displayOrderTable(orders) {
     const tblBody = document.getElementById("order-tbl-body")
