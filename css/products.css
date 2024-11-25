@@ -183,3 +183,33 @@ body {
     background-color:  rgb(7, 7, 172);
     color: white;
 }
+
+/* General styles for the product-tags container */
+.product-tags {
+    display: flex;
+    gap: 10px; /* Space between tags */
+    margin-top: 10px;
+}
+
+/* General styles for tags */
+.product-tags .tag {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+/* Specific styles for the Discount tag */
+.product-tags .tag.discount {
+    background-color: #4221ae; 
+    border: 1px solid #4221ae; 
+}
+
+/* Specific styles for the New Arrival tag */
+.product-tags .tag.new-arrival {
+    background-color: #20200a; 
+    border: 1px solid #20200a; 
+}

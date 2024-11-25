@@ -171,7 +171,8 @@ export async function displayProducts(products) {
                 <h3 class="product-title">${product.name}</h3>
                 <p class="product-description">  ${truncateDescription(product.description, 85)}</p>
                 <div class="product-tags">
-                    ${product.discountPercent > 0 ? '<span class="tag">Tags</span>' : ''}
+                ${product.discountPercent > 0 ? '<span class="tag discount">Discount</span>' : ''}
+                 ${product.isNewArrival ? '<span class="tag new-arrival">New Arrival</span>' : ''}
                 </div>
                 <p class="product-price">Price: $${product.price}</p>
                 <p class="product-discount">Discount: ${product.discountPercent}%</p>                  
