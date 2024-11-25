@@ -103,19 +103,40 @@ border-radius: 4px 0 0 4px;
 outline: none;
 }
 
-#search-btn {
-padding: 10px 15px;
-border: none;
-background-color: #2a2a72;
-color: #fff;
-cursor: pointer;
-border-radius: 0 4px 4px 0;
-transition: background-color 0.3s ease;
-}
-
-#search-btn:hover {
-background-color: #1b1b4f;
-}
+.search-container {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+ }
+ 
+ .search-container input[type="text"] {
+   padding: 10px;
+   width: 250px;
+   border: 1px solid #ddd;
+   border-radius: 4px;
+ }
+ 
+ #search-btn, .add-product-btn {
+   padding: 10px 15px;
+   border: none;
+   background-color: #2a2a72;
+   color: #fff;
+   cursor: pointer;
+   border-radius: 4px;
+   transition: background-color 0.3s ease;
+ }
+ 
+ .add-product-btn {
+   background-color: #2a2a72;
+ }
+ 
+ #search-btn:hover {
+   background-color: #1b1b4f;
+ }
+ 
+ .add-product-btn:hover {
+   background-color: #1b1b4f;
+ }
 
 .profile-dropdown {
 position: relative;
@@ -249,3 +270,5 @@ background-color: #1b1b4f;
 .action-btns button{
    padding: 10px 15px;
 }
+
+/* Link and Button Styling */

@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../css/productDetail.css">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/styles.css">
+    
     <title>Product Detail</title>
     
 </head>
@@ -34,6 +35,49 @@
             <img src="" id="subImage-2" alt="Thumbnail 2" class="thumbnail" onclick="showImage(1)">
             <img src="" id="subImage-3" alt="Thumbnail 3" class="thumbnail" onclick="showImage(2)">
             <img src="" id="subImage-4" alt="Thumbnail 4" class="thumbnail" onclick="showImage(3)"> -->
+        </div>
+        <div class="container1">
+            <h2 class="text-center">Product Review </h2>
+    
+            <!-- Review Form -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Leave a Review</h4>
+                </div>
+                <div class="panel-body">
+                    <form id="reviewForm">
+                        <div class="form-group">
+                            <label for="userName">Your Name</label>
+                            <input type="text" class="form-control" id="userName" placeholder="Enter your name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reviewText">Your Review</label>
+                            <textarea class="form-control" id="reviewText" rows="4" placeholder="Write your review here" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Your Rating</label>
+                            <div id="starRating" class="star-rating">
+                                <span class="star" data-value="1">&#9733;</span>
+                                <span class="star" data-value="2">&#9733;</span>
+                                <span class="star" data-value="3">&#9733;</span>
+                                <span class="star" data-value="4">&#9733;</span>
+                                <span class="star" data-value="5">&#9733;</span>
+                            </div>
+                            <input type="hidden" id="ratingValue" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Review</button>
+                    </form>
+                </div>
+            </div>
+    
+            <!-- Display Reviews -->
+            <div id="reviewsContainer" class="mt-5">
+                <h4>All Reviews</h4>
+                <div id="reviewList">
+                   
+                </div>
+            </div>
         </div>
         
     </div>
@@ -77,38 +121,7 @@
         <button id="add-to-cart">Add to Cart</button>
         
     </div>
-    <div id="product-reviews" class="reviews-section">
-        <h3>Customer Reviews</h3>
-        <div id="reviews-container">
-            
-        </div>
-    
-     
-        <div id="add-review">
-            <h4>Write a Review</h4>
-            <form id="review-form">
-                <div class="form-group">
-                    <label for="user-profile">Your Name:</label>
-                    <input type="text" id="user-profile" placeholder="Enter your name" required>
-                </div>
-                <div class="form-group">
-                    <label for="review-stars">Rating:</label>
-                    <div id="review-stars" class="stars">
-                        <span onclick="selectStar(1)">&#9733;</span>
-                        <span onclick="selectStar(2)">&#9733;</span>
-                        <span onclick="selectStar(3)">&#9733;</span>
-                        <span onclick="selectStar(4)">&#9733;</span>
-                        <span onclick="selectStar(5)">&#9733;</span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="review-message">Your Review:</label>
-                    <textarea id="review-message" placeholder="Write your review here..." required></textarea>
-                </div>
-                <button type="button" id="submit-review" onclick="addReview()">Submit</button>
-            </form>
-        </div>
-    </div>
+   
     
 
 <footer id="footer">
@@ -146,7 +159,7 @@
 
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
 </body>
 </html>
