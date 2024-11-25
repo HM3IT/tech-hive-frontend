@@ -1,5 +1,5 @@
 import { sendAuthRequest } from "../api.js";
-import { logout  } from "../auth.js";
+import { logout, me  } from "../auth.js";
 import { getCookie, getCategory } from "../utils.js";
 import { TOKEN_NAME } from "../constants.js";
 
@@ -58,12 +58,10 @@ window.addEventListener("DOMContentLoaded",async () => {
             Array.from(unauthBtns).forEach((btn) => (btn.style.display = ""));
         } else {
             try {
-                const response = await sendAuthRequest("/access/me", "GET");
+                const response = await me();
 
-                if (response.ok) {
-                    const data = await response.json();
-             
-               
+                if (response) {
+ 
                     Array.from(authBtns).forEach((btn) => (btn.style.display = ""));
                     Array.from(unauthBtns).forEach((btn) => (btn.style.display = "none"));
                 } else {
