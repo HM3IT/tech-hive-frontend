@@ -240,7 +240,9 @@ table tr:hover {
     background-color: #1b1b4f;
 }
 
-
+#admin-sidebar .nav-links{
+    padding-left: 0;
+}
 #admin-sidebar h2{
     margin-top: 20px;
     margin-bottom: 10px;
