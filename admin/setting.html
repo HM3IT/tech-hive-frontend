@@ -12,6 +12,7 @@
 <body>
     <script src="../js/main.js"></script>
     <script src="../js/components/dashboard.js"> </script>
+    <script type="module" src="../js/components/profile.js"></script>
     <div class="dashboard-container">
         <!-- Sidebar -->
         <aside class="sidebar" id="admin-sidebar">
@@ -45,11 +46,14 @@
                         <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
                             <h2>Account Information</h2>
         
-                            <img id="profile-img" src="" alt="Profile Image" class="img-thumbnail" style="width: 150px; height: 150px;">
+                            <img id="profile-img" src="" alt="Profile Image" class="img-thumbnail" >
                            
-                            <p class="profile-detail">Name: <strong id="name"></strong></p>
-                            <p class="profile-detail">Email: <strong id="email"></strong></p>
-                          
+                            <div id="account-info">
+                                <p class="profile-detail">Name: <strong id="name"></strong></p>
+                                <p class="profile-detail">Email: <strong id="email"></strong></p>
+           
+                                <p class="profile-detail">Address: <strong id="address"></strong></p>
+                            </div>
                         </div>
         
                      
@@ -69,7 +73,10 @@
                                     <label for="changeName" class="form-label">Change Name (Optional)</label>
                                     <input type="text" name="newName" class="form-control" id="changeName" placeholder="New Name">
                                 </div>
-                               
+                                <div class="mb-3">
+                                    <label for="changeAddress" class="form-label">Change Address (Optional)</label>
+                                    <textarea id="changeAddress" name="newAddress" class="form-control" placeholder="--" cols="30" rows="5"></textarea>
+                                </div>
                                 <div class="mb-3">
                                     <label for="changePassword" class="form-label">New Password  (Optional)</label>
                                     <input type="password" name="newPassword" class="form-control" id="changePassword" placeholder="New Password">

@@ -1,15 +1,13 @@
-/* Reset Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+ #profile-img{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+ }
 
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f4f6f8;
-    color: #333;
-}
+ #account-info{
+    margin: 20px 0;
+    font-size: 1.5rem;
+ }
 
 .dashboard-container {
     display: flex;
@@ -217,4 +215,6 @@ form {
     background-color: #1b1b4f;
 }
 
-
+.nav-links{
+    padding-left: 0;
+}

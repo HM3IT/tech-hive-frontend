@@ -33,6 +33,9 @@ document.addEventListener("DOMContentLoaded", async function(event){
     
    async function loadMyOrder(){
        const orderContainer = document.getElementById("order-cart-container")
+       if (!orderContainer){
+         return
+       }
        getMyOrders()
        .then(myOrders => {
         myOrders.forEach(order => {
@@ -74,8 +77,10 @@ document.addEventListener("DOMContentLoaded", async function(event){
         
         address.innerText = response.address || "---";
         changeAddress.value = response.address;
-        
-        customerLevel.innerText = response.userLevel;
+        if (customerLevel){
+
+            customerLevel.innerText = response.userLevel;
+        }
         email.innerText = response.email;
         newImgUrl = response.imageUrl;
        
