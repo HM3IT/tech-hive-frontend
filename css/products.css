@@ -191,12 +191,13 @@ body {
     margin: 10px 0;
     flex-wrap: wrap;
     font-size:  1.2rem;;
+    
 }
 
 .flex{
     display: flex;
     justify-content: space-around;
-    font-weight: bold;
+    margin-bottom: 10px;
 }
 .tag-filter{
     margin-right: 6px!important;

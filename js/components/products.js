@@ -1,8 +1,8 @@
-import { displayProducts, createPagination, getProducts, showAlert } from '../utils.js';
+import { displayProducts, createPagination, getProducts, showAlert, getTags } from '../utils.js';
 
 let price_range_filter = "null"
 let query_filter = "null"
-
+let selectedTags = new Set();
 // ============================
 // Search and Filter section
 // ===========================
@@ -60,8 +60,56 @@ function debounce(func, delay) {
     };
 }
 
+async function handleTagSelection(event) {
+  const tag = event.target.value;
+
+  if (event.target.checked) {
+      selectedTags.add(tag);
+  } else {
+      selectedTags.delete(tag);
+  }
+
+  console.log("Selected Tags:", Array.from(selectedTags));
+  let filteredTagQry = Array.from(selectedTags).join(", ");
+  let filters = `${filteredTagQry}&price_range=${price_range_filter}` 
+  let data = await getProducts(1, 10, filters)
+  let total = data.total
+  if(total <= 0){
+    showAlert("No products are found", "#ff4d4d")
+  }else{
+      createPagination(1, 10, getProducts, displayProducts, filters);
+  }
+}
+
+function createTagFilter(tagNames){
+  let tagContainer =  document.getElementById("tag-filters")
+  tagNames.forEach(tag => {
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.className = "tag-filter";
+    checkbox.value = tag;
+    
+    const label = document.createElement("label");
+    label.textContent = tag;
+    label.prepend(checkbox);
+
+    const wrapper = document.createElement("div");
+    wrapper.appendChild(label);
+
+    tagContainer.appendChild(wrapper);
+ 
+    checkbox.addEventListener("change", handleTagSelection);
+});
+  
+}
+
 document.addEventListener("DOMContentLoaded", async function(e){
     loadProduct();
+    let tags = await getTags();
+    let tagNames = tags.map((tag)=>(tag.name))
+
+    createTagFilter(tagNames)
+   
     const priceRangeRadios = document.getElementsByClassName("price-range");
 
     for (let i = 0; i < priceRangeRadios.length; i++) {

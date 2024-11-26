@@ -176,6 +176,20 @@ export async function displayProducts(products) {
      
             return `<span class="tag" style="background-color:${tagColor[colorTagKey]}">${tag}</span>`;
         }).join("");  
+
+
+        let priceElement = ` <p class="product-price">Price: ${product.price}</p>`
+        if(product.discountPercent >= 1){
+            let discountPrice =  product.price * (1 - product.discountPercent / 100)
+            priceElement  =`
+             <p class="product-discount">Discount: ${product.discountPercent}%</p>  
+            <p class="product-price">Price:
+                <span style='text-decoration-line: line-through; color:red;'> $${product.price} </span>
+                <span style='color:green;'>$${discountPrice.toFixed(2)}</span>
+            </p>
+             `
+        }
+        
         
         const productCard = `
             <div style="width: 26rem;" class="product-card card" data-id="${product.id}" data-price="${product.price}" data-discount="${product.discountPercent}">
@@ -186,8 +200,7 @@ export async function displayProducts(products) {
                     ${dynamicTags}
                     </div>
                 <div class="flex">
-                <p class="product-discount">Discount: ${product.discountPercent}%</p>  
-                <p class="product-price">Price: $${product.price}</p>
+                  ${priceElement}
                 </div>
           
                 <div class="product-button">               
