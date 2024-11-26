@@ -137,7 +137,7 @@ async function loadOrderInfo(orderId){
         orderDate.innerText  =`${orderDateStr} ${orderTime}`
  
         expectedDate.style.color = "orange"
-        if(order.expected_arrived_date.length > 0){
+        if(order.expected_arrived_date && order.expected_arrived_date.length > 0){
             let expectedDateObj = new Date(order.expected_arrived_date);
             let expectedDateStr = expectedDateObj.toISOString().split('T')[0];
             expectedDate.value = expectedDateStr;

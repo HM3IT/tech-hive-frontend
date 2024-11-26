@@ -1,4 +1,4 @@
-import {fetchImageUrl, addToCart, updateCartQuantity, updateGrandTotal } from "../utils.js";
+import {fetchImageUrl, addToCart, updateCartQuantity, updateGrandTotal, showAlert } from "../utils.js";
 
 async function loadCart() {
     const cartTableBody = document.querySelector('#cartTable tbody');
@@ -10,8 +10,10 @@ async function loadCart() {
     
  
     if (!Array.isArray(cart) || cart.length === 0) {
-        alert("You haven't added any products yet! Please add products");
-        window.location.href = "products.html"
+        showAlert("You haven't added any products yet! Please add products", "#ff4d4d");
+        setTimeout(() => {
+            window.location.href = "products.html";
+        }, 1000);
         return;
     }
     
@@ -61,6 +63,7 @@ async function loadCart() {
     updateGrandTotal(cart);
 }
 
+
 async function removeFromCart(productId) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     cart = cart.filter((item) => item.productId !== productId);
@@ -79,3 +82,54 @@ document.addEventListener("DOMContentLoaded", async function(event){
 
 })
 
+
+async function confirmRemove(productId) {
+    showConfirmBox(
+        "Do You Want to Remove this Item?",
+        async () => {
+            await removeFromCart(productId); // Call the existing removeFromCart function
+        },
+        () => {
+            console.log("Remove action cancelled."); // Optional: Handle cancel case
+        }
+    );
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const cartContainers = document.querySelectorAll('.cart-container');
+    const grandTotalElement = document.querySelector('.grand-total');
+
+    cartContainers.forEach(cart => {
+        const decrementBtn = cart.querySelector('.decrement');
+        const incrementBtn = cart.querySelector('.increment');
+        const quantityInput = cart.querySelector('.quantity-input');
+        const removeBtn = cart.querySelector('.remove-btn');
+
+        decrementBtn.addEventListener('click', () => {
+            if (quantityInput.value > 1) {
+                quantityInput.value--;
+                updateTotal();
+            }
+        });
+
+        incrementBtn.addEventListener('click', () => {
+            quantityInput.value++;
+            updateTotal();
+        });
+
+        removeBtn.addEventListener('click', () => {
+            cart.remove();
+            updateTotal();
+        });
+    });
+
+    function updateTotal() {
+        let total = 0;
+        cartContainers.forEach(cart => {
+            const price = parseFloat(cart.querySelector('.product-info p').textContent.replace('$', ''));
+            const quantity = parseInt(cart.querySelector('.quantity-input').value, 10);
+            total += price * quantity;
+        });
+        grandTotalElement.textContent = `Total: $${total.toFixed(2)}`;
+    }
+});

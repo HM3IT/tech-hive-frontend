@@ -1,5 +1,5 @@
 
-import { setAccessTokenCookie, deleteAccessTokenCookie } from './utils.js';
+import { setAccessTokenCookie, deleteAccessTokenCookie, showAlert } from './utils.js';
 import { sendRequest, sendAuthRequest } from './api.js';
 
 
@@ -21,13 +21,13 @@ export async function signin(event) {
 	 
 		setAccessTokenCookie(token, expireTimeMs);   
 		console.log('Login successful and token stored in cookies');
-		alert("login successfull")
-		window.location.href = "./index.html"
-	} else {
-		let errorData = await response.json();
-		console.log(errorData)
-	 
-	}
+		showAlert("Login Successfull", "#28a745")
+		setTimeout(() => {
+            window.location.href = "./index.html";
+        }, 1000); 
+    } else {
+        showAlert("Oops! Login Failed. Check Email or Password.", "#ff4d4d");
+    }
 }
 
  
@@ -38,12 +38,12 @@ export async function signup() {
     const terms = document.getElementById("terms").checked;
 
     if (!terms) {
-        alert("You must accept the terms to register.");
+        showAlert("You must accept the terms to register.", "#ff4d4d");
         return;
     }
  
     if (!username || !email || !password) {
-        alert("All fields are required.");
+        showAlert("All fields are required.", "#ff4d4d");
         return;
     }
 	 
@@ -57,8 +57,10 @@ export async function signup() {
 		const expireTimeMs = responseData.expireDate
 	 
 		setAccessTokenCookie(token, expireTimeMs);   
-		alert(`User ${username} registered successfully!`);
-		window.location.href = "./index.html";
+		showAlert(`${username} registered successfully!`, "#28a745");
+		setTimeout(() => {
+            window.location.href = "./index.html";
+        }, 1000); 
 	} else {
 		let errorData = await response.json();
 		console.log(errorData)
@@ -72,15 +74,15 @@ export async function logout(){
 	let response = await sendAuthRequest('/access/logout', 'POST', null);
 	if (response.ok) {
 		deleteAccessTokenCookie();     
-		alert(`Logout successfully!`);
-		window.location.href = "./index.html";
-	} else {
+		showAlert("Logout Successfully!", "#28a745");
+        setTimeout(() => {
+            window.location.href = "./index.html";
+        }, 1000); 	} else {
 		let errorData = await response.json();
 		console.log(errorData)
 	 
 	}	 
 }
-
 
 
 export async function me(){

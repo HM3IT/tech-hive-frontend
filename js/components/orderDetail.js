@@ -40,8 +40,9 @@ document.addEventListener("DOMContentLoaded",async function(e){
  
         let expectedDateStr = "Still processing"
         expectedDate.style.color = "orange"
+        
  
-        if(order.expected_arrived_date.length > 0){
+        if(order.expected_arrived_date  && order.expected_arrived_date.length > 0){
             let expectedDateObj = new Date(order.expected_arrived_date);
             expectedDateStr = expectedDateObj.toLocaleDateString();
             expectedDateStr.style.color = "green" 
