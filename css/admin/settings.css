@@ -218,3 +218,16 @@ form {
 .nav-links{
     padding-left: 0;
 }
+
+#profileTabs{
+    width: 280px;
+  font-size: 1.5rem;
+  font-weight: bold;
+ 
+  text-indent: 20px;
+}
+
+#settings-tab,
+#account-tab{
+    padding: 15px 20px !important; 
+}

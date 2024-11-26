@@ -241,4 +241,7 @@ table tr:hover {
 }
 
 
- 
+#admin-sidebar h2{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
