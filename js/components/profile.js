@@ -22,9 +22,11 @@ document.addEventListener("DOMContentLoaded", async function(event){
     
     let profileUpdateForm = document.getElementById('profile-update-form');
     let profileUploadBtn = document.getElementById('uploadProfilePhoto');
+    if(profileUploadBtn){
 
-    profileUploadBtn.addEventListener('change', profileHandler);
-    profileUpdateForm.addEventListener('submit',updateUserInfo)
+        profileUploadBtn.addEventListener('change', profileHandler);
+        profileUpdateForm.addEventListener('submit',updateUserInfo)
+    }
 
 
     await loadProfile();
@@ -72,16 +74,17 @@ document.addEventListener("DOMContentLoaded", async function(event){
         let response  = await me();
   
         name.innerText = response.name;
-        changeName.value = response.name;
+        address.innerText = response.address || "---";
+
 
         
-        address.innerText = response.address || "---";
-        if (changeAddress){
-
+        if(profileUpdateForm){
+            changeName.value = response.name;
             changeAddress.value = response.address;
         }
+        
+    
         if (customerLevel){
-
             customerLevel.innerText = response.userLevel;
         }
         email.innerText = response.email;

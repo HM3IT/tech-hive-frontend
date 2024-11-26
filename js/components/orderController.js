@@ -58,7 +58,7 @@ async function displayOrderTable(orders) {
                 <td class='order-status' style="color:${colorStr}">${status}</td>
                 <td>$${order.totalPrice}</td>
                 <td class="action-buttons">
-                    <a class="review-btn" data-id="${order.id}" href="orderReview.html?orderId=${order.id}">Review</a>
+                    <a class="review-btn" data-id="${order.id}" href="orderDetail.html?orderId=${order.id}">Review</a>
                 </td>
             </tr>
         `;

@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded",async function(e){
         if(order.expected_arrived_date  && order.expected_arrived_date.length > 0){
             let expectedDateObj = new Date(order.expected_arrived_date);
             expectedDateStr = expectedDateObj.toLocaleDateString();
-            expectedDateStr.style.color = "green" 
+            expectedDate.style.color = "green" 
         }
         expectedDate.innerText =  expectedDateStr
 
