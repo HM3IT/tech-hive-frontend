@@ -32,6 +32,10 @@ main {
 }
 
 .form-section {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 20px 0;
 }
 
@@ -42,6 +46,7 @@ main {
 
 form {
     display: flex;
+    width: 420px;
     flex-direction: column;
     gap: 15px;
 }
