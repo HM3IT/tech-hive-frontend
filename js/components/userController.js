@@ -58,8 +58,8 @@ async function displayUsers(users){
             <td style="color: ${colorStr};">${customerLevel}</td>
             <td>${createdDateStr} ${createdTime}</td>
             <td class="action-btns">
-                <button class="btn btn-primary btn-sm">Review</button>
-                <button class="btn btn-danger btn-sm">Delete</button>
+                <a class="btn btn-primary btn-bg" href="userReview.html?userId=${user.id}">Review</a>
+                <a class="btn btn-danger btn-bg" href="userReview.html?userId=${user.id}">Delete</a>
             </td>
         </tr>
         `;

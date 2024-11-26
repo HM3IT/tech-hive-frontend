@@ -1,16 +1,27 @@
-        
 
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f2f5; /* Light background */
-    color: #333; /* Dark text color */
-    margin: 0;
-    padding: 30px;
+#profile-img{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+ }
+
+ #account-info{
+    margin: 20px 0;
+    font-size: 1.5rem;
+ }
+
+#profileTabs{
+    width: 280px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-indent: 20px;
+  }
+  
+#settings-tab,
+#account-tab{
+    padding: 15px 20px !important; 
 }
-
-
-
 /* Sidebar Navigation Styling */
 .nav-pills .nav-link {
     color: #333; /* Dark text for inactive links */

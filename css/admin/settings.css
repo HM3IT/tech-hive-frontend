@@ -220,10 +220,9 @@ form {
 }
 
 #profileTabs{
-    width: 280px;
+  width: 280px;
   font-size: 1.5rem;
   font-weight: bold;
- 
   text-indent: 20px;
 }
 

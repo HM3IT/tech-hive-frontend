@@ -76,7 +76,10 @@ document.addEventListener("DOMContentLoaded", async function(event){
 
         
         address.innerText = response.address || "---";
-        changeAddress.value = response.address;
+        if (changeAddress){
+
+            changeAddress.value = response.address;
+        }
         if (customerLevel){
 
             customerLevel.innerText = response.userLevel;
