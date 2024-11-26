@@ -1,5 +1,5 @@
 import { sendAuthRequest, sendRequest, sentFormRequest } from "./api.js";
-import { TOKEN_NAME, orderStatusColor} from "./constants.js";
+import { TOKEN_NAME, orderStatusColor, tagKeyLookup, tagColor} from "./constants.js";
 
 export let currentPage = 1
 export function setAccessTokenCookie(token, expiryTimeInMs) {
@@ -166,17 +166,29 @@ export async function displayProducts(products) {
 
     for (const product of products) {
         let objectUrl = await fetchImageUrl(product.imageUrl);
+  
+        const dynamicTags = product.tags.map(tag => {
+            if(tag.length <= 0){
+                return
+            }
+            let tagName = tag.toLowerCase();
+            const colorTagKey = tagKeyLookup[tagName] || tagKeyLookup.default;
+     
+            return `<span class="tag" style="background-color:${tagColor[colorTagKey]}">${tag}</span>`;
+        }).join("");  
+        
         const productCard = `
             <div style="width: 26rem;" class="product-card card" data-id="${product.id}" data-price="${product.price}" data-discount="${product.discountPercent}">
                 <img src="${objectUrl}" alt="${product.name}" class="product-image card-img-top">
                 <h3 class="product-title">${product.name}</h3>
                 <p class="product-description">  ${truncateDescription(product.description, 85)}</p>
-                <div class="product-tags">
-                ${product.discountPercent > 0 ? '<span class="tag discount">Discount</span>' : ''}
-                 ${product.isNewArrival ? '<span class="tag new-arrival">New Arrival</span>' : ''}
-                </div>
+                 <div class="product-tags">
+                    ${dynamicTags}
+                    </div>
+                <div class="flex">
+                <p class="product-discount">Discount: ${product.discountPercent}%</p>  
                 <p class="product-price">Price: $${product.price}</p>
-                <p class="product-discount">Discount: ${product.discountPercent}%</p>                  
+                </div>
           
                 <div class="product-button">               
                     <button  type="button" class="add-to-cart btn btn-success" onclick="addToCart('${product.id}', '${product.name}', ${product.price}, 1, ${product.discountPercent}, '${product.imageUrl}')">Add to Cart</button>

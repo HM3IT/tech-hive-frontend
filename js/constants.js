@@ -34,9 +34,9 @@ export const tagColorKey  ={
 export const tagColor = {
     NEW_ARRIVAL: "green",
     FLASH_SALE: "red",
-    PROMOTION: "blue",
+    PROMOTION: "orange",
     BEST_SELLER: "gold", 
-    DISCOUNTED: "purple", 
+    DISCOUNTED: "red", 
     TRENDING: "orange", 
     PRE_ORDER: "teal",
     FREE_SHIPPING: "cyan",
