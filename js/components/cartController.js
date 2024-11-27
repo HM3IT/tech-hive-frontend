@@ -11,15 +11,15 @@ async function loadCart() {
  
     if (!Array.isArray(cart) || cart.length === 0) {
         showConfirmBox("You haven't added any products yet! Please add products", () => {
-            // Delay removal of the Cancel button until after the modal is rendered
+         
             setTimeout(() => {
                 const cancelButton = document.getElementById("info-cancel");
                 if (cancelButton) {
-                    cancelButton.remove();  // Remove the Cancel button from the DOM
+                    cancelButton.remove();    
                 }
-            }, 50);  // Small delay to ensure the modal is fully rendered
+            }, 50);   
     
-            // Perform the redirection after OK is clicked
+     
             window.location.href = "products.html";
         });
         return;
@@ -36,15 +36,16 @@ async function loadCart() {
         const row = document.createElement("tr");
         row.setAttribute("data-index", cart.indexOf(item));
         row.setAttribute("data-id", item.productId);
+        row.id = item.productId;
  
         row.innerHTML = `
             <td>
                 <img src="${objectUrl}" alt="${item.name}" class="cart-product-image" />
             </td>
             <td>${item.name}</td>
-            <td>$${item.priceAtOrder.toFixed(2)}</td>
+            <td>$${item.priceAtOrder}</td>
             <td>${discountPercent}%</td>
-            <td>$${discountedPrice.toFixed(2)}</td>
+            <td>$${discountedPrice}</td>
             <td>
                 <input 
                     type="number" 
@@ -77,7 +78,11 @@ async function removeFromCart(productId) {
     cart = cart.filter((item) => item.productId !== productId);
     localStorage.setItem('cart', JSON.stringify(cart));
     showAlert("Your Item Is Removed Successfully!", "#28a745");
-    await loadCart();
+    console.log(productId)
+    let removeElement = document.getElementById(productId)
+    if (removeElement){
+        removeElement.style.display = "none"
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function() {
