@@ -220,6 +220,7 @@ h2 {
     padding: 10px;
     font-size: 1rem;
     resize: none;
+    margin-bottom: 30px;
 }
 
 .review-form .submit-btn {
