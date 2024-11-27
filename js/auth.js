@@ -11,7 +11,12 @@ export async function signin(event) {
 	let email = document.getElementById('signin-email').value;
 	let password = document.getElementById('signin-password').value;
 	let response = await sendRequest('/access/login', 'POST', { email, password });
-	
+
+    if (!email || !password) {
+        showAlert("All Fields Are Required!", "#ff4d4d");
+        return;
+    }
+
 	if (response.ok) {
 		let responseData = await response.json();
 		const token = responseData.access_token	;  
@@ -38,12 +43,12 @@ export async function signup() {
     const terms = document.getElementById("terms").checked;
 
     if (!terms) {
-        showAlert("You must accept the terms to register.", "#ff4d4d");
+        showAlert("You Must Accept The Terms To Register!", "#ff4d4d");
         return;
     }
  
     if (!username || !email || !password) {
-        showAlert("All fields are required.", "#ff4d4d");
+        showAlert("All Fields Are Required!", "#ff4d4d");
         return;
     }
 	 
@@ -57,7 +62,7 @@ export async function signup() {
 		const expireTimeMs = responseData.expireDate
 	 
 		setAccessTokenCookie(token, expireTimeMs);   
-		showAlert(`${username} registered successfully!`, "#28a745");
+		showAlert(`${username} Registered Successfully!`, "#28a745");
 		setTimeout(() => {
             window.location.href = "./index.html";
         }, 1000); 

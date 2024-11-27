@@ -23,11 +23,15 @@
             <h2>Shipping Address</h2>
             <p><strong>Full Name:</strong> <span id="user-name">John Doe</span></p>
             <form id="shipping-form">
-                <label for="address">Address:</label>
-                <textarea id="ship-address" placeholder="Enter your shipping address" required></textarea>
+                <label for="address">Address:
+                    <span id="shipAddress-error" class="error-message"></span>
+                </label>
+                <textarea id="ship-address" placeholder="Enter your shipping address"></textarea>
                 
-                <label for="phone">Phone Number:</label>
-                <input type="text" id="phone" placeholder="Enter your phone number" required>
+                <label for="phone">Phone Number:
+                    <span id="phoneNo-error" class="error-message"></span>
+                </label>
+                <input type="text" id="phone" placeholder="Enter your phone number">
             </form>
         </div>
 
@@ -69,7 +73,9 @@
         </div>
         <div class="policy-agreement">
             <input type="checkbox" id="agree-refund-policy" required>
-            <label for="agree-refund-policy">I agree to the refund policy</label>
+            <label for="agree-refund-policy">I agree to the refund policy
+                <span id="agreeRefund-error" class="error-message"></span>
+            </label>
         </div>
         
         

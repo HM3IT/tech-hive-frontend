@@ -1,5 +1,5 @@
 import { sendAuthRequest,  } from "../api.js";
-import { getCategory, uploadImage, getSubImagUrls, showConfirmBox } from "../utils.js";
+import { getCategory, uploadImage, getSubImagUrls, showAlert } from "../utils.js";
 
 
 let dropDownCategory = document.getElementById("product-category");
@@ -86,17 +86,17 @@ async function addProduct() {
 
         if (response.ok) {
             // Show the success message and redirect
-            displayMessage("Product added successfully!", "success");
+            showAlert("Product Added Successfully!", "#28a745");
             setTimeout(() => {
                 window.location.href = "../admin/products.html";
             }, 1000);
         } else {
             console.error("Failed to add product:", response);
-            displayMessage("Error adding product. Please try again.", "error");
+            showAlert("Error Adding Product. Please Try Again.", "#ff4d4d");
         }
     } catch (error) {
         console.error("Error:", error);
-        displayMessage("An unexpected error occurred. Please try again.", "error");
+        showAlert("An Unexpected Error Occurred. Please Try Again.", "#ff4d4d");
     }
     } 
 
@@ -212,29 +212,4 @@ function validateProductForm() {
     }
 
     return isValid;
-}
-
-function displayMessage(message, type) {
-    let messageContainer = document.createElement("div");
-    messageContainer.classList.add(
-        "message-container",
-        type === "success" ? "success-message" : "error-message"
-    );
-
-    messageContainer.innerHTML = `
-        <div class="message-content">
-            <h2>${type === "success" ? "Success" : "Error"}</h2>
-            <p>${message}</p>
-        </div>
-    `;
-
-    document.body.appendChild(messageContainer);
-
-    // Automatically remove the message and handle redirection if success
-    setTimeout(() => {
-        messageContainer.remove();
-        if (type === "success") {
-            window.location.href = "../admin/products.html"; // Redirect on success
-        }
-    }, 3000);
 }

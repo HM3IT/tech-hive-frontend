@@ -284,10 +284,10 @@ export async function updateProduct(productId, productData){
     let response = await sendAuthRequest(url, "PATCH", productData);
 
     if (response.ok) {
-        showAlert("Product updated successfully!");
+        showAlert("Product Updated Successfully!", "#28a745");
         return true;
     }  
-    showAlert("Failed to update product.");
+    showAlert("Failed to Update Product!", "#ff4d4d");
     return false;
 }
 
@@ -354,7 +354,7 @@ export function addToCart(productId, productName, productPrice, quantity, discou
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));
-    showAlert(`<b>${productName}</b> has been added to the cart!`, "#007bff");
+    showAlert("Product Is Added to Cart Successfully!", "#28a745");
 
 };
 

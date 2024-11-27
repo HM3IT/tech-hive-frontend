@@ -1,4 +1,4 @@
-import {fetchImageUrl, addToCart, updateCartQuantity, updateGrandTotal, showAlert } from "../utils.js";
+import {fetchImageUrl, addToCart, updateCartQuantity, updateGrandTotal, showAlert, showConfirmBox } from "../utils.js";
 
 async function loadCart() {
     const cartTableBody = document.querySelector('#cartTable tbody');
@@ -10,10 +10,18 @@ async function loadCart() {
     
  
     if (!Array.isArray(cart) || cart.length === 0) {
-        showAlert("You haven't added any products yet! Please add products", "#ff4d4d");
-        setTimeout(() => {
+        showConfirmBox("You haven't added any products yet! Please add products", () => {
+            // Delay removal of the Cancel button until after the modal is rendered
+            setTimeout(() => {
+                const cancelButton = document.getElementById("info-cancel");
+                if (cancelButton) {
+                    cancelButton.remove();  // Remove the Cancel button from the DOM
+                }
+            }, 50);  // Small delay to ensure the modal is fully rendered
+    
+            // Perform the redirection after OK is clicked
             window.location.href = "products.html";
-        }, 1000);
+        });
         return;
     }
     
@@ -68,9 +76,34 @@ async function removeFromCart(productId) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     cart = cart.filter((item) => item.productId !== productId);
     localStorage.setItem('cart', JSON.stringify(cart));
+    showAlert("Your Item Is Removed Successfully!", "#28a745");
     await loadCart();
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    const orderNowButton = document.getElementById("order_now");
+
+    if (orderNowButton) {
+        orderNowButton.addEventListener("click", handleOrderClick);
+    }
+});
+
+export async function handleOrderClick() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    if (!Array.isArray(cart) || cart.length === 0) {
+        showAlert("Order Unsuccessful! There is No Product in Cart", "#ff4d4d");
+        setTimeout(() => {
+            window.location.href = "./products.html";
+        }, 1000);
+        return;
+    }
+
+    showAlert("You Have Ordered Successfully!", "#28a745");
+    setTimeout(() => {
+        window.location.href = "./orderConfirm.html";
+    }, 1000); 
+}
 
 // to be able to call globally
 window.addToCart = addToCart
@@ -81,19 +114,6 @@ document.addEventListener("DOMContentLoaded", async function(event){
     await loadCart()
 
 })
-
-
-async function confirmRemove(productId) {
-    showConfirmBox(
-        "Do You Want to Remove this Item?",
-        async () => {
-            await removeFromCart(productId); // Call the existing removeFromCart function
-        },
-        () => {
-            console.log("Remove action cancelled."); // Optional: Handle cancel case
-        }
-    );
-}
 
 document.addEventListener('DOMContentLoaded', () => {
     const cartContainers = document.querySelectorAll('.cart-container');
