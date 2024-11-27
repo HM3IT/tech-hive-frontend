@@ -13,6 +13,8 @@
     <script src="../js/main.js"> </script>
     <script src="../js/components/dashboard.js"> </script>
     <script type="module" src="../js/components/dataAnalysisTbl.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <div class="dashboard-container">
         <!-- Sidebar -->
         <aside class="sidebar" id="admin-sidebar">
@@ -45,6 +47,15 @@
                 <div class="card">
                     <h3>Orders</h3>
                     <p id="total-order">456</p>
+                </div>
+            </section>
+
+            <section id="charts-section">
+                <div id="order-trend-container">
+                    <canvas id="order-trend-chart" </canvas>
+                </div>
+                <div>
+                    <canvas id="monthly-revenue-chart"></canvas>
                 </div>
             </section>
 

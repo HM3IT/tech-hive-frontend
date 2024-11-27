@@ -178,7 +178,7 @@ export async function displayProducts(products) {
         }).join("");  
 
 
-        let priceElement = ` <p class="product-price">Price: ${product.price}</p>`
+        let priceElement = ` <p class="product-price">Price: $${product.price}</p>`
         if(product.discountPercent >= 1){
             let discountPrice =  product.price * (1 - product.discountPercent / 100)
             priceElement  =`
