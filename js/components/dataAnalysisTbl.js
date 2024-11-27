@@ -6,10 +6,12 @@ const limit = 10
 const page = 1
 let searchId = ""
 
-const orderCard = document.getElementById("total-order")
-const userCard = document.getElementById("total-user")
-const salesCard = document.getElementById("total-sales")
-const productCard = document.getElementById("total-product")
+const orderCard = document.getElementById("total-order");
+const userCard = document.getElementById("total-user");
+const salesCard = document.getElementById("total-sales");
+const productCard = document.getElementById("total-product");
+const expenseCard = document.getElementById("total-expense");
+const profitCard = document.getElementById("profit-margin");
 
 const weeklyOrderTrendChart = document.getElementById('order-trend-chart');
 const monthlyRevenueChart = document.getElementById('monthly-revenue-chart');
@@ -33,10 +35,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     await generateLineChart(weeklyOrderTrendChart, orderTrendDataset);
 
 
-    const revenueDatset = getMonthlyRevenueData()
-    await generateMonthlyRevenueChart(monthlyRevenueChart, revenueDatset)
+    // const revenueDatset = getMonthlyRevenueData()
+    // console.log(revenueDatset)
+    // await generateMonthlyRevenueChart(monthlyRevenueChart, revenueDatset)
 
- 
+    expenseCard.style.color = "orange"
+    salesCard.style.color = "green"
 })
 
 async function searchOrder(){
@@ -56,9 +60,15 @@ async function getTotalStatistics(filterDate= ""){
     .then((data)=>{
         console.log(data)
         orderCard.innerText = data.orders;
-        salesCard.innerText = Math.round(data.sales)
+        salesCard.innerText = `$ ${Math.round(data.revenue)}`
         productCard.innerText = data.products;
+        expenseCard.innerText = data.expense;
         userCard.innerText = data.users;
+        profitCard.innerText = data.profit_margin.toFixed(2);
+
+        profitCard.style.color = data.profit_margin >0 ? "green":"red";
+     
+        
 
     })
     .catch((err)=>console.log(err))
@@ -84,6 +94,8 @@ async function getMonthlyRevenueData() {
     let response = await sendAuthRequest(`/statistics/revenue`, "GET");
     if (response.ok) {
         let data = await response.json();
+        console.log("revenue")
+        console.log(data)
         return data;
     }
 }
