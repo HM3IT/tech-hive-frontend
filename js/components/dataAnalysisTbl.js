@@ -32,7 +32,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const orderTrendDataset = await getWeeklyOrderTrend()
     await generateLineChart(weeklyOrderTrendChart, orderTrendDataset);
 
- 
+
+    const revenueDatset = getMonthlyRevenueData()
+    await generateMonthlyRevenueChart(monthlyRevenueChart, revenueDatset)
 
  
 })
@@ -77,7 +79,62 @@ async function getWeeklyOrderTrend(){
 }
 
 
+async function getMonthlyRevenueData() {
+                                   
+    let response = await sendAuthRequest(`/statistics/revenue`, "GET");
+    if (response.ok) {
+        let data = await response.json();
+        return data;
+    }
+}
 
+async function generateMonthlyRevenueChart(canvasElement, data) {
+    if (!canvasElement) {
+        return;
+    }
+    const ctx = canvasElement.getContext('2d');
+
+    const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    
+    const revenueData = [data.revenue];  
+    const expenseData = [data.expense]; 
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,  
+            datasets: [
+                {
+                    label: 'Revenue',
+                    data: revenueData,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    fill: true
+                },
+                {
+                    label: 'Expense',
+                    data: expenseData,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1,
+                    fill: true
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: true },
+                tooltip: { enabled: true }
+            },
+            scales: {
+                x: { title: { display: true, text: 'Months' } },
+                y: { title: { display: true, text: 'Amount' } }
+            }
+        }
+    });
+}
 
 async function generateLineChart(canvasElement, data) {
     if (!canvasElement || !data) {

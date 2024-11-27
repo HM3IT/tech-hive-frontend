@@ -192,7 +192,7 @@ export async function displayProducts(products) {
         
         
         const productCard = `
-            <div style="width: 26rem;" class="product-card card" data-id="${product.id}" data-price="${product.price}" data-discount="${product.discountPercent}">
+            <div class="product-card card" data-id="${product.id}" data-price="${product.price}" data-discount="${product.discountPercent}">
                 <img src="${objectUrl}" alt="${product.name}" class="product-image card-img-top">
                 <h3 class="product-title">${product.name}</h3>
                 <p class="product-description">  ${truncateDescription(product.description, 85)}</p>

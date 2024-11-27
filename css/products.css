@@ -8,7 +8,7 @@
 /* Body Styling */
 body {
     display: grid;
-    grid-template-columns: 280px 3fr;
+    /* grid-template-columns: 280px 3fr; */
  
 }
 
@@ -24,11 +24,13 @@ body {
     background-color: #f8f8f8;
     padding: 20px;
     border-radius: 8px;
+    width: 240px;
 }
 
 .sidebar h2 {
     margin-bottom: 20px;
     color: #333;
+    font-size: 2rem;
 }
 
 /* Product Content Area */
@@ -51,8 +53,7 @@ body {
 /* Product Image Grid */
 .product-image-grid {
     display: grid;
-    grid-template-columns: repeat(5, 300px); /* 5 equal-width columns */
-    margin: 20px 0;
+    grid-template-columns: repeat(5, 260px); /* 5 equal-width columns */
 }
 
 
@@ -72,6 +73,7 @@ body {
     line-height: 1.6;
     overflow: hidden;
     text-align: justify;
+    font-size: 1.2rem;
   }
   
 
@@ -197,7 +199,7 @@ body {
 .flex{
     display: flex;
     justify-content: space-around;
-    margin-bottom: 10px;
+    font-size: 1.3rem;
 }
 .tag-filter{
     margin-right: 6px!important;
