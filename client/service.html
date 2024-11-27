@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branch Locations</title>
+    
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<style>
+    
+    
+    .container1 {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+    }
+    
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+    }
+    
+    .card {
+        flex: 1 1 calc(25% - 20px);
+        background: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 15px;
+        text-align: center;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    
+    .card img {
+        width: 100%;
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+    
+    .card h3 {
+        font-size: 18px;
+        color: #444;
+        margin-bottom: 10px;
+    }
+    
+    .card p.toggle {
+        font-size: 14px;
+        color: #555;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .details {
+        font-size: 14px;
+        color: #666;
+        margin: 5px 0;
+        display: none;
+    }
+    
+    .arrow {
+        border: solid black;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 3px;
+        transform: rotate(45deg);
+        transition: transform 0.2s;
+    }
+    
+    .arrow.down {
+        transform: rotate(45deg);
+    }
+    
+    .arrow.up {
+        transform: rotate(-135deg);
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+</style>
+<body>
+    <script src="../js/main.js"></script>
+    <script type="module"  src="../js/components/nav.js"></script>
+    
+    <!-- Navbar -->
+    <nav id="nav">
+    
+    </nav>
+    <div class="container1">
+        <h1>Yangon Branch</h1>
+        <div class="card-container">
+            <!-- Card 1 -->
+           
+
+            <div class="card">
+                
+                <h3>INNWA Merchant Road</h3>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Address:</strong> <i class="arrow down"></i>
+                </p>
+                <div class="details">
+                    Merchant Road, Yangon
+                </div>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Phone:</strong> <i class="arrow down"></i>
+                </p>
+                <div class="details">
+                    +95-123-456789
+                </div>
+            </div>
+            <div class="card">
+               
+                <h3>INNWA Merchant Road</h3>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Address:</strong> <i class="arrow down"></i>
+                </p>
+                <div class="details">
+                    Merchant Road, Yangon
+                </div>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Phone:</strong> <i class="arrow down"></i>
+                </p>
+                <div class="details">
+                    +95-123-456789
+                </div>
+            </div>
+            <div class="card">
+              
+                <h3>INNWA Merchant Road</h3>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Address:</strong> <i class="arrow down"></i>
+                </p>
+                <div class="details">
+                    Merchant Road, Yangon
+                </div>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Phone:</strong> <i class="arrow down"></i>
+                </p>
+                <div class="details">
+                    +95-123-456789
+                </div>
+            </div>
+            <div class="card">
+                
+                <h3>INNWA Merchant Road</h3>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Address:</strong> <i class="arrow down"></i>
+                </p>
+                <div class="details">
+                    Merchant Road, Yangon
+                </div>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Phone:</strong> <i class="arrow down"></i>
+                </p>
+                <div class="details">
+                    +95-123-456789
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="card">
+                
+                <h3>INNWA Premium Seik Kan Thar Street</h3>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Address:</strong> <i class="arrow down"></i>
+                </p>
+                <div class="details">
+                    Seik Kan Thar Street, Yangon
+                </div>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Phone:</strong> <i class="arrow down"></i>
+                </p>
+                <div class="details">
+                    +95-987-654321
+                </div>
+            </div>
+            <!-- Add more cards as needed -->
+        </div>
+        <h1>Mandalay Branch</h1>
+        <div class="card-container">
+            <!-- Card 1 -->
+            <div class="card">
+                
+                <h3>INNWA Merchant Road</h3>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Address:</strong> <i class="arrow down"></i>
+                </p>
+                <div class="details">
+                    Merchant Road, Yangon
+                </div>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Phone:</strong> <i class="arrow down"></i>
+                </p>
+                <div class="details">
+                    +95-123-456789
+                </div>
+            </div>
+            <div class="card">
+                
+                <h3>INNWA Merchant Road</h3>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Address:</strong> <i class="arrow down"></i>
+                </p>
+                <div class="details">
+                    Merchant Road, Yangon
+                </div>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Phone:</strong> <i class="arrow down"></i>
+                </p>
+                <div class="details">
+                    +95-123-456789
+                </div>
+            </div>
+            <div class="card">
+                
+                <h3>INNWA Merchant Road</h3>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Address:</strong> <i class="arrow down"></i>
+                </p>
+                <div class="details">
+                    Merchant Road, Yangon
+                </div>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Phone:</strong> <i class="arrow down"></i>
+                </p>
+                <div class="details">
+                    +95-123-456789
+                </div>
+            </div>
+    </div>
+    
+   
+   
+    <script >
+        function toggleDetails(element) {
+            const details = element.nextElementSibling;
+            const arrow = element.querySelector('.arrow');
+            
+            if (details.style.display === 'block') {
+                details.style.display = 'none';
+                arrow.classList.remove('up');
+                arrow.classList.add('down');
+            } else {
+                details.style.display = 'block';
+                arrow.classList.remove('down');
+                arrow.classList.add('up');
+            }
+        }
+        
+    </script>
+</body>
+</html>

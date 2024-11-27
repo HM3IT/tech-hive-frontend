@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Form</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<style>
+ 
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.image-section {
+    flex: 1;
+    background-color: #e9f5ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-section img {
+    max-width: 100%;
+    height: auto;
+}
+
+.form-section {
+    flex: 1;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+h1 span {
+    color: #6c63ff;
+}
+
+p {
+    margin-bottom: 20px;
+    color: #555;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input, select, textarea, button {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+textarea {
+    resize: none;
+    height: 80px;
+}
+
+button {
+    background-color: #6c63ff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #5a52e2;
+}
+
+</style>
+<body>
+    <script src="../js/main.js"></script>
+    <script type="module"  src="../js/components/nav.js"></script>
+    
+    <!-- Navbar -->
+    <nav id="nav">
+    
+    </nav>
+    
+    <div class="container">
+        <div class="image-section">
+            <img src="../static/images/dd.png" alt="Appointment Illustration">
+        </div>
+        <div class="form-section">
+            <h1>Make An <span>Appointment</span></h1>
+            <p>Ask Service you want to know</p>
+            <form action="submit_form.php" method="POST">
+                <input type="text" name="name" placeholder="Name *" required>
+                <input type="email" name="email" placeholder="Email *" required>
+                <input type="tel" name="phone" placeholder="Phone *" required>
+                <textarea name="address" placeholder="Address"></textarea>
+                <select name="service" required>
+                    <option value="" disabled selected>Choose Service *</option>
+                    <option value="service1">Service 1</option>
+                    <option value="service2">Service 2</option>
+                </select>
+                <input type="date" name="date" required>
+                <input type="time" name="time" required>
+                <textarea name="message" placeholder="Message *" required></textarea>
+                <button type="submit">Book</button>
+            </form>
+        </div>
+    </div>
+    <footer id="footer">
+  
+    </footer>
+</body>
+</html>

@@ -258,39 +258,6 @@ body {
         <script>
            
         
-            // JavaScript to handle displaying reviews
-            const reviewsContainer = document.getElementById('reviews-container');
-            const seeMoreBtn = document.getElementById('see-more-btn');
-            const seeLessBtn = document.getElementById('see-less-btn');
-        
-            // Example reviews data
-            const reviews = Array.from(reviewsContainer.children); // Assuming all children are review elements
-            const maxVisibleReviews = 5;
-            let currentVisibleCount = maxVisibleReviews;
-        
-            // Function to show limited reviews
-            const updateVisibleReviews = () => {
-                reviews.forEach((review, index) => {
-                    review.style.display = index < currentVisibleCount ? 'block' : 'none';
-                });
-        
-                seeMoreBtn.style.display = currentVisibleCount < reviews.length ? 'inline-block' : 'none';
-                seeLessBtn.style.display = currentVisibleCount > maxVisibleReviews ? 'inline-block' : 'none';
-            };
-        
-            // Event listeners for buttons
-            seeMoreBtn.addEventListener('click', () => {
-                currentVisibleCount += maxVisibleReviews;
-                updateVisibleReviews();
-            });
-        
-            seeLessBtn.addEventListener('click', () => {
-                currentVisibleCount = maxVisibleReviews;
-                updateVisibleReviews();
-            });
-        
-            // Initial display
-            updateVisibleReviews();
         </script>
         
 </body>
