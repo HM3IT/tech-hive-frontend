@@ -6,6 +6,11 @@ const limit = 10
 const page = 1
 let searchId = ""
 
+const orderCard = document.getElementById("total-order")
+const userCard = document.getElementById("total-user")
+const salesCard = document.getElementById("total-sales")
+const productCard = document.getElementById("total-product")
+
 document.addEventListener("DOMContentLoaded", async () => {
 
     let data = await getOrders(page, limit);
@@ -18,6 +23,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     await displayOrderTable(data.items, tblBody)
  
+    await getTotalStatistics()
 })
 
 async function searchOrder(){
@@ -28,6 +34,23 @@ async function searchOrder(){
         let data = await getOrders(page, limit, searchId );
 
     }
+}
+
+
+async function getTotalStatistics(filterDate= ""){
+    sendAuthRequest("/statistics/total?currentPage=1&pageSize=500")
+    .then((res)=>res.json())
+    .then((data)=>{
+        console.log(data)
+        orderCard.innerText = data.orders;
+        salesCard.innerText = data.sales;
+        productCard.innerText = data.products;
+        userCard.innerText = data.users;
+
+    })
+    .catch((err)=>console.log(err))
+
+
 }
 
 
