@@ -1,9 +1,4 @@
-/* Universal Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+ 
 
 body {
     font-family: Arial, sans-serif;
@@ -175,4 +170,8 @@ button:hover, .btn:hover {
     margin: 5px 0 0;
     font-size: 14px;
     color: #bbbbbb; 
+}
+
+#order_now{
+    display: none;
 }

@@ -17,7 +17,7 @@ body {
 
 /* Container Styling */
 #order-summary {
-    max-width: 1200px;
+    max-width: 900px;
     background: #ffffff;
     padding: 20px 30px;
     border-radius: 10px;

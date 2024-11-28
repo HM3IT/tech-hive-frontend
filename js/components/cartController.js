@@ -1,5 +1,7 @@
 import {fetchImageUrl, addToCart, updateCartQuantity, updateGrandTotal, showAlert, showConfirmBox } from "../utils.js";
 
+
+
 async function loadCart() {
     const cartTableBody = document.querySelector('#cartTable tbody');
 
@@ -10,6 +12,7 @@ async function loadCart() {
     
  
     if (!Array.isArray(cart) || cart.length === 0) {
+
         showConfirmBox("You haven't added any products yet! Please add products", () => {
          
             setTimeout(() => {
@@ -23,6 +26,12 @@ async function loadCart() {
             window.location.href = "products.html";
         });
         return;
+    }
+
+    let orderNowBtn = document.getElementById("order_now");
+
+    if (orderNowBtn){
+        orderNowBtn.style.display= "block"
     }
     
     cartTableBody.innerHTML = '';

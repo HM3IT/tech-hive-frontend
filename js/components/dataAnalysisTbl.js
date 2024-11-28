@@ -2,7 +2,7 @@ import { sendAuthRequest } from "../api.js";
 import { getUser, getOrders ,createPagination, displayOrderTable } from "../utils.js";
 
  
-const limit = 10
+const limit = 5
 const page = 1
 let searchId = ""
 
@@ -14,7 +14,7 @@ const expenseCard = document.getElementById("total-expense");
 const profitCard = document.getElementById("profit-margin");
 
 const weeklyOrderTrendChart = document.getElementById('order-trend-chart');
-const monthlyRevenueChart = document.getElementById('monthly-revenue-chart');
+const monthlyRevenueChart = document.getElementById('trending-product-chart');
 
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -60,9 +60,9 @@ async function getTotalStatistics(filterDate= ""){
     .then((data)=>{
         console.log(data)
         orderCard.innerText = data.orders;
-        salesCard.innerText = `$ ${Math.round(data.revenue)}`
+        salesCard.innerText = `$${Math.round(data.revenue)}`
         productCard.innerText = data.products;
-        expenseCard.innerText = data.expense;
+        expenseCard.innerText = `$${data.expense}`
         userCard.innerText = data.users;
         profitCard.innerText = data.profit_margin.toFixed(2);
 
