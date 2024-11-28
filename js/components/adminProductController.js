@@ -48,7 +48,7 @@ async function displayProductTbl(products) {
             <td>${product.categoryName}</td>
             <td>$${product.price.toFixed(2)}</td>
             <td>
-                <span class="status ${product.stock > 0 ? "available" : "unavailable"}">
+                <span class="status ${product.stock > 10 ? "sufficient" : "low"}">
                 ${product.stock > 0 ? product.stock : "Out of Stock"}
                 </span>
             </td>

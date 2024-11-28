@@ -28,3 +28,8 @@
     color: #aaa;               
     cursor: not-allowed;      
 }
+
+thead,
+#product-tbl-body tr td:first-child{
+    text-align: center;
+}

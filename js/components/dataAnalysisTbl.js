@@ -1,5 +1,5 @@
 import { sendAuthRequest } from "../api.js";
-import { getUser, getOrders ,createPagination, displayOrderTable } from "../utils.js";
+import { getUser, getOrders ,createPagination, displayOrderTable, fetchImageUrl } from "../utils.js";
 
  
 const limit = 5
@@ -14,33 +14,41 @@ const expenseCard = document.getElementById("total-expense");
 const profitCard = document.getElementById("profit-margin");
 
 const weeklyOrderTrendChart = document.getElementById('order-trend-chart');
-const monthlyRevenueChart = document.getElementById('trending-product-chart');
+const monthlyCategoryTrendChart = document.getElementById('trending-category-chart');
 
 document.addEventListener("DOMContentLoaded", async () => {
 
-    let data = await getOrders(page, limit);
-    const tblBody = document.getElementById("order-tbl-body")
+
     const filterDate = document.getElementById("filter-date");
 
     filterDate.addEventListener("change", (event) => {
         const selectedDate = event.target.value;
         console.log("Selected Date:", selectedDate);
     });
-    await displayOrderTable(data.items, tblBody)
+
  
     await getTotalStatistics()
-
+    expenseCard.style.color = "orange"
+    salesCard.style.color = "green"
 
     const orderTrendDataset = await getWeeklyOrderTrend()
     await generateLineChart(weeklyOrderTrendChart, orderTrendDataset);
 
 
-    // const revenueDatset = getMonthlyRevenueData()
-    // console.log(revenueDatset)
-    // await generateMonthlyRevenueChart(monthlyRevenueChart, revenueDatset)
+    const categoryTrendDataset = await getMonthlyCategoryTrend()
+    console.log(categoryTrendDataset)
+    await generateMonthlyCategoryChart(monthlyCategoryTrendChart, categoryTrendDataset)
 
-    expenseCard.style.color = "orange"
-    salesCard.style.color = "green"
+    let recentOrders = await getOrders(page, limit);
+    let productTrendDataset = await getTrendProduct();
+ 
+
+    const orderTblBody = document.getElementById("order-tbl-body")
+    const productTblBody = document.getElementById("product-tbl-body")
+    await displayOrderTable(recentOrders.items, orderTblBody)
+    await displayProductTrendTable(productTrendDataset.trend, productTblBody)
+
+
 })
 
 async function searchOrder(){
@@ -66,9 +74,7 @@ async function getTotalStatistics(filterDate= ""){
         userCard.innerText = data.users;
         profitCard.innerText = data.profit_margin.toFixed(2);
 
-        profitCard.style.color = data.profit_margin >0 ? "green":"red";
-     
-        
+        profitCard.style.color = data.profit_margin >0 ? "green":"red"; 
 
     })
     .catch((err)=>console.log(err))
@@ -89,60 +95,65 @@ async function getWeeklyOrderTrend(){
 }
 
 
-async function getMonthlyRevenueData() {
+async function getMonthlyCategoryTrend() {
                                    
-    let response = await sendAuthRequest(`/statistics/revenue`, "GET");
+    let response = await sendAuthRequest(`/statistics/categories/trend`, "GET");
     if (response.ok) {
-        let data = await response.json();
-        console.log("revenue")
-        console.log(data)
-        return data;
+        return await response.json();
     }
 }
-
-async function generateMonthlyRevenueChart(canvasElement, data) {
+async function generateMonthlyCategoryChart(canvasElement, data) {
     if (!canvasElement) {
         return;
     }
     const ctx = canvasElement.getContext('2d');
 
-    const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    
-    const revenueData = [data.revenue];  
-    const expenseData = [data.expense]; 
+    const startDate = new Date(data.date_range.start_date);
+    const monthName = startDate.toLocaleDateString('en-US', { month: 'long' });
+
+    const labels = data.trend.map(entry => entry.name);  
+    const revenueData = data.trend.map(entry => entry.revenue);  
 
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: labels,  
-            datasets: [
-                {
-                    label: 'Revenue',
-                    data: revenueData,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1,
-                    fill: true
-                },
-                {
-                    label: 'Expense',
-                    data: expenseData,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1,
-                    fill: true
-                }
-            ]
+            labels: labels,
+            datasets: [{
+                label: 'Revenue',
+                data: revenueData,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+            }]
         },
         options: {
             responsive: true,
             plugins: {
-                legend: { display: true },
-                tooltip: { enabled: true }
+                title: {
+                    display: true,
+                    text: `Category-Wise Revenue for ${monthName}`,
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            const index = context.dataIndex;
+                            const category = data.trend[index];
+                            return `Revenue: $${category.revenue}, Sold: ${category.sold}`;
+                        }
+                    }
+                }
             },
+            indexAxis: 'y',
             scales: {
-                x: { title: { display: true, text: 'Months' } },
-                y: { title: { display: true, text: 'Amount' } }
+                x: {
+                    title: { display: true, text: 'Revenue ($)' },
+                    ticks: {
+                        callback: value => `$${value}`, 
+                    }
+                },
+                y: {
+                    title: { display: true, text: 'Categories' },
+                }
             }
         }
     });
@@ -199,6 +210,57 @@ async function generateLineChart(canvasElement, data) {
                 x: { title: { display: true, text: 'Day of the Week' } },
                 y: { title: { display: true, text: 'Number of Orders' }, ticks: { stepSize: 1 } }  
             }
+        }
+    });
+}
+
+
+
+async function getTrendProduct(){
+    let response =  await sendAuthRequest(`/statistics/products/trend`, "GET");
+
+    if (response.ok) {
+        return await response.json();
+    }
+ 
+}
+
+async function displayProductTrendTable(products, tblBody) {
+    tblBody.innerHTML = "";  
+
+    products.forEach(async(product, index) => {
+        console.log(product)
+       
+        let row = document.createElement("tr");
+        let objectUrl = await fetchImageUrl(product.image_url);
+     
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>
+                <img src="${objectUrl}" alt="${product.name}" class="product-image card-img-top" style="max-height: 100px;">
+            </td>
+            <td>${product.name}</td>
+            <td>${product.revenue}</td>
+            <td>
+                 <span class="status ${product.stock > 10 ? "sufficient" : "low"}">
+                ${product.stock > 0 ? product.stock : "Out of Stock"}
+                </span>
+            </td>
+            <td>${product.sold}</td>
+            <td class="action-buttons">
+                <a class="review-btn btn btn-primary btn-sm" data-id="${product.id}" href="productDetail.html?productId=${product.id}">Review</a>
+            </td>
+        `;
+
+  
+        tblBody.appendChild(row);
+    });
+
+  
+    tblBody.addEventListener("click", (e) => {
+        if (e.target.classList.contains("review-btn")) {
+            let productId = e.target.dataset.id;
+            window.location.href = `productDetail.html?productId=${productId}`;
         }
     });
 }

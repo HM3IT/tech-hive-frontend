@@ -154,21 +154,6 @@ body {
   border-radius: 4px;
 }
 
-.status {
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #fff;
-}
-
-.status.available {
-  background-color: #4CAF50;
-}
-
-.status.unavailable {
-  background-color: #f44336;
-}
 
 /* Button Styles */
 .edit-btn, .delete-btn, .view-btn {

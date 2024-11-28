@@ -536,7 +536,7 @@ export async function displayOrderTable(orders, tblBody) {
     });
 
     tblBody.addEventListener("click", async (e) => {
-        if (e.target.classList.contains("update-btn")) {
+        if (e.target.classList.contains("review-btn")) {
             let orderId = e.target.dataset.id;
             window.location.href=`orderStatusForm.html?productId=${orderId}`
         }
