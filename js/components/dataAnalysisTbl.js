@@ -1,105 +1,60 @@
 import { sendAuthRequest } from "../api.js";
 import { getUser, getOrders ,createPagination, displayOrderTable, fetchImageUrl } from "../utils.js";
 
- 
-const limit = 5
-const page = 1
-let searchId = ""
-
-const orderCard = document.getElementById("total-order");
-const userCard = document.getElementById("total-user");
-const salesCard = document.getElementById("total-sales");
-const productCard = document.getElementById("total-product");
-const expenseCard = document.getElementById("total-expense");
-const profitCard = document.getElementById("profit-margin");
-
-const weeklyOrderTrendChart = document.getElementById('order-trend-chart');
-const monthlyCategoryTrendChart = document.getElementById('trending-category-chart');
-
 document.addEventListener("DOMContentLoaded", async () => {
 
+    const orderCard = document.getElementById("total-order");
+    const userCard = document.getElementById("total-user");
+    const salesCard = document.getElementById("total-sales");
+    const productCard = document.getElementById("total-product");
+    const expenseCard = document.getElementById("total-expense");
+    const profitCard = document.getElementById("profit-margin");
+
+    const weeklyOrderTrendChart = document.getElementById('order-trend-chart');
+    const monthlyCategoryTrendChart = document.getElementById('trending-category-chart');
+
+    const orderTblBody = document.getElementById("order-tbl-body");
+    const productTblBody = document.getElementById("product-tbl-body");
 
     const filterDate = document.getElementById("filter-date");
 
-    filterDate.addEventListener("change", (event) => {
+    let limit = 5
+    let page = 1
+
+    
+    await loadAllStatistics()
+    filterDate.addEventListener("change", async (event) => {
         const selectedDate = event.target.value;
-        console.log("Selected Date:", selectedDate);
-    });
-
- 
-    await getTotalStatistics()
-    expenseCard.style.color = "orange"
-    salesCard.style.color = "green"
-
-    const orderTrendDataset = await getWeeklyOrderTrend()
-    await generateLineChart(weeklyOrderTrendChart, orderTrendDataset);
-
-
-    const categoryTrendDataset = await getMonthlyCategoryTrend()
-
-    await generateMonthlyCategoryChart(monthlyCategoryTrendChart, categoryTrendDataset)
-
-    let recentOrders = await getOrders(page, limit);
-    let productTrendDataset = await getTrendProduct();
- 
-
-    const orderTblBody = document.getElementById("order-tbl-body")
-    const productTblBody = document.getElementById("product-tbl-body")
-    await displayOrderTable(recentOrders.items, orderTblBody)
-    await displayProductTrendTable(productTrendDataset.trend, productTblBody)
-
-
-})
-
-async function searchOrder(){
-    let orderId = document.getElementById("search-input").value.trim()
-
-    if (orderId.length> 0){
-        searchId= orderId
-        let data = await getOrders(page, limit, searchId );
-
-    }
-}
-
-
-async function getTotalStatistics(filterDate= ""){
-    sendAuthRequest("/statistics/total?currentPage=1&pageSize=500")
-    .then((res)=>res.json())
-    .then((data)=>{
-   
-        orderCard.innerText = data.orders;
-        salesCard.innerText = `$${Math.round(data.revenue)}`
-        productCard.innerText = data.products;
-        expenseCard.innerText = `$${data.expense}`
-        userCard.innerText = data.users;
-        profitCard.innerText = data.profit_margin.toFixed(2);
-
-        profitCard.style.color = data.profit_margin >0 ? "green":"red"; 
+        await loadAllStatistics(selectedDate)
 
     })
+    
+
+async function  loadAllStatistics(selectedDate = null){
+    
+    const totalStatUrl = `/statistics/total?currentPage=1&pageSize=500`;
+    const weeklyTrendUrl = `/statistics/orders/trend`;
+    const categoryTrendUrl = `/statistics/categories/trend`;
+    const orderTrendUrl =  `/orders/admin/list?currentPage=1&pageSize=5`
+    const productTrendUrl = `/statistics/products/trend`
+
+    await statisticsHandler(totalStatUrl, selectedDate, displayTotalStatistics);
+    await statisticsHandler(weeklyTrendUrl, selectedDate, (data)=>generateLineChart(weeklyOrderTrendChart, data));
+    await statisticsHandler(categoryTrendUrl, selectedDate, (data)=>generateMonthlyCategoryChart(monthlyCategoryTrendChart, data));
+    await statisticsHandler(orderTrendUrl, selectedDate, (data)=>displayOrderTable(data.items, orderTblBody));
+    await statisticsHandler(productTrendUrl, selectedDate, (data)=>displayProductTrendTable(data.trend, productTblBody));
+
+}
+
+
+async function statisticsHandler(url, displayFunc){
+     sendAuthRequest(url, "GET")    
+    .then((res)=>res.json())
+    .then((data)=>displayFunc(data))
     .catch((err)=>console.log(err))
-
-
 }
 
 
-async function getWeeklyOrderTrend(){
- 
-
- let response = await sendAuthRequest(`/statistics/orders/trend`, "GET");
- if (response.ok){
-    return await response.json()
- }
-}
-
-
-async function getMonthlyCategoryTrend() {
-                                   
-    let response = await sendAuthRequest(`/statistics/categories/trend`, "GET");
-    if (response.ok) {
-        return await response.json();
-    }
-}
 async function generateMonthlyCategoryChart(canvasElement, data) {
     if (!canvasElement) {
         return;
@@ -213,14 +168,18 @@ async function generateLineChart(canvasElement, data) {
 }
 
 
+async function displayTotalStatistics(data){
+       
+    orderCard.innerText = data.orders;
+    salesCard.innerText = `$${Math.round(data.revenue)}`
+    productCard.innerText = data.products;
+    expenseCard.innerText = `$${data.expense}`
+    userCard.innerText = data.users;
+    profitCard.innerText = data.profit_margin.toFixed(2);
 
-async function getTrendProduct(){
-    let response =  await sendAuthRequest(`/statistics/products/trend`, "GET");
-
-    if (response.ok) {
-        return await response.json();
-    }
- 
+    profitCard.style.color = data.profit_margin >0 ? "green":"red"; 
+    expenseCard.style.color = "orange"
+    salesCard.style.color = "green"
 }
 
 async function displayProductTrendTable(products, tblBody) {
@@ -261,3 +220,6 @@ async function displayProductTrendTable(products, tblBody) {
         }
     });
 }
+
+
+});
