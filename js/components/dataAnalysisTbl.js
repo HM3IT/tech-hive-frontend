@@ -193,14 +193,17 @@ async function displayTotalStatistics(data){
 
 async function displayProductTrendTable(products, tblBody) {
     tblBody.innerHTML = "";  
+  
+    products.sort((a, b) => a.rank - b.rank); 
 
-    products.forEach(async(product, index) => {
-        
+    let rank = 1
+    for (const product of products) {
         let row = document.createElement("tr");
+         
         let objectUrl = await fetchImageUrl(product.image_url);
      
         row.innerHTML = `
-            <td>${index + 1}</td>
+            <td>${rank}</td> <!-- Directly show the rank -->
             <td>
                 <img src="${objectUrl}" alt="${product.name}" class="product-image card-img-top" style="max-height: 100px;">
             </td>
@@ -216,19 +219,15 @@ async function displayProductTrendTable(products, tblBody) {
                 <a class="review-btn btn btn-primary btn-sm" data-id="${product.id}" href="productDetail.html?productId=${product.id}">Review</a>
             </td>
         `;
-
-  
+        rank++;
         tblBody.appendChild(row);
-    });
-
-  
-    tblBody.addEventListener("click", (e) => {
-        if (e.target.classList.contains("review-btn")) {
-            let productId = e.target.dataset.id;
-            window.location.href = `productDetail.html?productId=${productId}`;
-        }
-    });
+        tblBody.addEventListener("click", (e) => {
+            if (e.target.classList.contains("review-btn")) {
+                let productId = e.target.dataset.id;
+                window.location.href = `productDetail.html?productId=${productId}`;
+            }
+        });
+    }
 }
-
 
 });
