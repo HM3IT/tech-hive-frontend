@@ -323,6 +323,11 @@ h2 {
     background: #218838;
 }
 
+
+#stars span.highlight {
+    color: gold;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .review-section {

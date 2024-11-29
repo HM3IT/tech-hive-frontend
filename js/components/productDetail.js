@@ -1,59 +1,81 @@
 import { fetchImageUrl, fetchProductDetail, addToCart, updateCartQuantity , updateGrandTotal } from "../utils.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-        const params = new URLSearchParams(window.location.search);
-        const productId = params.get("productId");
-        const prevBtn = document.getElementById("prevBtn")
-        const nextBtn = document.getElementById("nextBtn")
-        const mainImage = document.getElementById('mainImage');
-  
-       
-        
-        let thumbnails = null
-        let currentImageIndex = 0;
+    let rating = 0;
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("productId");
+    const prevBtn = document.getElementById("prevBtn")
+    const nextBtn = document.getElementById("nextBtn")
+    const mainImage = document.getElementById('mainImage');
+    const starsContainer = document.getElementById("stars");
+    const stars = starsContainer.getElementsByClassName("rating");
 
-        if (!productId) {
-            showError("Invalid Product ID. Please check the URL.");
-            return;
-        }
 
- 
-         
-        let images =  await loadProduct(productId)
-
-        thumbnails = document.getElementsByClassName("thumbnail");
-
-        function updateImage(index) {
-                mainImage.src = images[index];
-                Array.from(thumbnails).forEach((thumb, idx) => {
-                    if (idx === index) {
-                        thumb.classList.add('active');  
-                    } else {
-                        thumb.classList.remove('active'); 
-                    }
-                });
-            }
-
-        function prevImage() {
-            currentImageIndex = (currentImageIndex === 0) ? images.length - 1 : currentImageIndex - 1;
-            updateImage(currentImageIndex);
-        }
-
-        function nextImage() {
-            currentImageIndex = (currentImageIndex === images.length - 1) ? 0 : currentImageIndex + 1;
-            updateImage(currentImageIndex);
-        }
-
-     
-        updateImage(currentImageIndex);
-
+    starsContainer.addEventListener("click", function (event) {
       
-        prevBtn.addEventListener("click", prevImage)
-        nextBtn.addEventListener("click", nextImage)
-        
-});
+        if (event.target.tagName === "SPAN") {
+            rating = event.target.getAttribute("data-rating");
+            highlightStars(rating)
+        }
+    });
 
- 
+    
+    let thumbnails = null
+    let currentImageIndex = 0;
+
+    if (!productId) {
+        showError("Invalid Product ID. Please check the URL.");
+        return;
+    }
+
+
+        
+    let images =  await loadProduct(productId)
+
+    thumbnails = document.getElementsByClassName("thumbnail");
+
+    function updateImage(index) {
+            mainImage.src = images[index];
+            Array.from(thumbnails).forEach((thumb, idx) => {
+                if (idx === index) {
+                    thumb.classList.add('active');  
+                } else {
+                    thumb.classList.remove('active'); 
+                }
+            });
+        }
+
+    function prevImage() {
+        currentImageIndex = (currentImageIndex === 0) ? images.length - 1 : currentImageIndex - 1;
+        updateImage(currentImageIndex);
+    }
+
+    function nextImage() {
+        currentImageIndex = (currentImageIndex === images.length - 1) ? 0 : currentImageIndex + 1;
+        updateImage(currentImageIndex);
+    }
+
+    
+    updateImage(currentImageIndex);
+
+    
+    prevBtn.addEventListener("click", prevImage)
+    nextBtn.addEventListener("click", nextImage)
+     
+    
+function highlightStars(rating) {
+    
+
+    for (let i = 0; i < stars.length; i++) {
+        if (i < rating) {
+            stars[i].classList.add("highlight");
+        } else {
+            stars[i].classList.remove("highlight");
+        }
+    }
+}
+
+
 async function loadProduct(productId){
     const product = await fetchProductDetail(productId);
 
@@ -81,7 +103,7 @@ async function loadProduct(productId){
     }
     availability.innerText = `Available Quantity: ${product.stock}`;
     descriptionSpan.innerText = product.description;
-    userRating.innerText = `Current Rating: ${product.rating || "No ratings yet"} stars`;
+ 
 
     // Image Fetching
     let mainObjectUrl = await fetchImageUrl(product.imageUrl);
@@ -136,5 +158,5 @@ async function loadProduct(productId){
     return images;
 }
  
-
-  
+ 
+});
