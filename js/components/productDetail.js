@@ -1,3 +1,4 @@
+import { sendAuthRequest } from "../api.js";
 import { fetchImageUrl, fetchProductDetail, addToCart, updateCartQuantity , updateGrandTotal } from "../utils.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -9,6 +10,35 @@ document.addEventListener("DOMContentLoaded", async () => {
     const mainImage = document.getElementById('mainImage');
     const starsContainer = document.getElementById("stars");
     const stars = starsContainer.getElementsByClassName("rating");
+    const submitBtn = document.getElementById("submit-btn");
+    const reviewText = document.getElementById("review-text");
+
+ 
+
+    submitBtn.addEventListener("click", async function (){
+       let userReview = reviewText.value;
+       if (userReview.length <= 8){
+        alert("review should have at least 8 characters")
+        return;
+       }
+       if (rating <=0){
+        alert("Please give rating for the product");
+        return;
+       }
+       const url = "/reviews/add"
+       const reviewData = {
+        "productId": productId,
+        "rating": rating,
+        "reviewText": userReview
+      }
+       let response = await sendAuthRequest(url,"POST",reviewData);
+
+       if(response.ok){
+        let data = await response.json();
+        console.log(data)
+       }
+
+    })
 
 
     starsContainer.addEventListener("click", function (event) {
@@ -30,7 +60,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
         
-    let images =  await loadProduct(productId)
+    let images =  await loadProduct(productId);
+
+    await loadProductReview(productId);
 
     thumbnails = document.getElementsByClassName("thumbnail");
 
@@ -158,5 +190,42 @@ async function loadProduct(productId){
     return images;
 }
  
- 
+async function loadProductReview(productId) {
+    const response = await sendAuthRequest(`/reviews/detail/${productId}`);
+    const productReviewContainer = document.getElementById("reviews-container");
+
+    if (response.ok) {
+        const data = await response.json();
+        const reviews = data.items;
+
+        productReviewContainer.innerHTML = "";
+
+        reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    
+        reviews.forEach(review => {
+            const reviewElement = document.createElement("div");
+            reviewElement.classList.add("user-profile");
+
+            const ratingStars = "⭐".repeat(review.rating) + "☆".repeat(5 - review.rating);
+
+            reviewElement.innerHTML = `
+                <div class="user-info">
+                    <img src="../static/images/1.jpg" alt="User Profile Picture">
+                    <p class="username">User ID: ${review.userId}</p>
+                </div>
+                <p><strong>Date:</strong> ${new Date(review.createdAt).toLocaleDateString()}</p>
+                <div class="rating">
+                    <span>${ratingStars}</span>
+                </div>
+                <p>${review.reviewText}</p>
+            `;
+
+            productReviewContainer.appendChild(reviewElement);
+        });
+    } else {
+        productReviewContainer.innerHTML = "<p>Failed to load reviews.</p>";
+    }
+}
+
 });

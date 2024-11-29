@@ -218,12 +218,12 @@ h2 {
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 10px;
-    font-size: 1rem;
+    font-size: 1.5rem;
     resize: none;
     margin-bottom: 30px;
 }
 
-.review-form .submit-btn {
+.review-form #submit-btn {
     background: #007bff;
     color: white;
     border: none;
@@ -234,7 +234,7 @@ h2 {
     transition: background 0.3s ease;
 }
 
-.review-form .submit-btn:hover {
+.review-form #submit-btn:hover {
     background: #0056b3;
 }
 
