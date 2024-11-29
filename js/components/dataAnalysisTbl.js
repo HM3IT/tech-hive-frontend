@@ -1,6 +1,10 @@
 import { sendAuthRequest } from "../api.js";
 import { getUser, getOrders ,createPagination, displayOrderTable, fetchImageUrl } from "../utils.js";
 
+
+let monthlyCategoryChart = null
+let weeklyOrderTrendChart = null
+
 document.addEventListener("DOMContentLoaded", async () => {
 
     const orderCard = document.getElementById("total-order");
@@ -10,8 +14,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const expenseCard = document.getElementById("total-expense");
     const profitCard = document.getElementById("profit-margin");
 
-    const weeklyOrderTrendChart = document.getElementById('order-trend-chart');
-    const monthlyCategoryTrendChart = document.getElementById('trending-category-chart');
+    const weeklyOrderTrendChartCanva = document.getElementById('order-trend-chart');
+    const monthlyCategoryTrendChartCanva = document.getElementById('trending-category-chart');
 
     const orderTblBody = document.getElementById("order-tbl-body");
     const productTblBody = document.getElementById("product-tbl-body");
@@ -28,16 +32,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     
 
 async function  loadAllStatistics(selectedDate = null){
-    
-    const totalStatUrl = `/statistics/total?currentPage=1&pageSize=500&filter_date=${selectedDate}`;
-    const weeklyTrendUrl = `/statistics/orders/trend`;
-    const categoryTrendUrl = `/statistics/categories/trend`;
-    const orderTrendUrl =  `/orders/admin/list?currentPage=1&pageSize=5`
-    const productTrendUrl = `/statistics/products/trend`
+    const encodedDate = selectedDate 
+        ? encodeURIComponent(selectedDate) 
+        : null;
+    const totalStatUrl = `/statistics/total?currentPage=1&pageSize=500&filter_date=${encodedDate}`;
+    const weeklyTrendUrl = `/statistics/orders/trend?filter_date=${encodedDate}`;
+    const categoryTrendUrl = `/statistics/categories/trend?filter_date=${encodedDate}`;
+    const orderTrendUrl =  `/orders/admin/list?currentPage=1&pageSize=5&filter_date=${encodedDate}`
+    const productTrendUrl = `/statistics/products/trend?filter_date=${encodedDate}`
 
     await statisticsHandler(totalStatUrl, displayTotalStatistics);
-    await statisticsHandler(weeklyTrendUrl, (data)=>generateLineChart(weeklyOrderTrendChart, data));
-    await statisticsHandler(categoryTrendUrl, (data)=>generateMonthlyCategoryChart(monthlyCategoryTrendChart, data));
+    await statisticsHandler(weeklyTrendUrl, (data)=>generateLineChart(weeklyOrderTrendChartCanva, data));
+    await statisticsHandler(categoryTrendUrl, (data)=>generateMonthlyCategoryChart(monthlyCategoryTrendChartCanva, data));
     await statisticsHandler(orderTrendUrl, (data)=>displayOrderTable(data.items, orderTblBody));
     await statisticsHandler(productTrendUrl, (data)=>displayProductTrendTable(data.trend, productTblBody));
 
@@ -56,15 +62,18 @@ async function generateMonthlyCategoryChart(canvasElement, data) {
     if (!canvasElement) {
         return;
     }
-    const ctx = canvasElement.getContext('2d');
+    const ctx = canvasElement.getContext('2d');   
 
     const startDate = new Date(data.date_range.start_date);
     const monthName = startDate.toLocaleDateString('en-US', { month: 'long' });
 
     const labels = data.trend.map(entry => entry.name);  
     const revenueData = data.trend.map(entry => entry.revenue);  
+    if (monthlyCategoryChart){
+        monthlyCategoryChart.destroy();
+    }
 
-    new Chart(ctx, {
+    monthlyCategoryChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: labels,
@@ -81,7 +90,7 @@ async function generateMonthlyCategoryChart(canvasElement, data) {
             plugins: {
                 title: {
                     display: true,
-                    text: `Category-Wise Revenue for ${monthName}`,
+                    text: `Monthly Category-Wise Revenue (${monthName})`,
                 },
                 tooltip: {
                     callbacks: {
@@ -138,12 +147,15 @@ async function generateLineChart(canvasElement, data) {
     
  
     const ctx = canvasElement.getContext('2d');
-    new Chart(ctx, {
+    if (weeklyOrderTrendChart){
+        weeklyOrderTrendChart.destroy()
+    }
+    weeklyOrderTrendChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: labels, 
             datasets: [{
-                label: 'Daily Orders Trends',
+                label: 'Weekly Orders Trends',
                 data: datasetData,  
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 2,
