@@ -18,9 +18,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const filterDate = document.getElementById("filter-date");
 
-    let limit = 5
-    let page = 1
-
     
     await loadAllStatistics()
     filterDate.addEventListener("change", async (event) => {
@@ -32,17 +29,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function  loadAllStatistics(selectedDate = null){
     
-    const totalStatUrl = `/statistics/total?currentPage=1&pageSize=500`;
+    const totalStatUrl = `/statistics/total?currentPage=1&pageSize=500&filter_date=${selectedDate}`;
     const weeklyTrendUrl = `/statistics/orders/trend`;
     const categoryTrendUrl = `/statistics/categories/trend`;
     const orderTrendUrl =  `/orders/admin/list?currentPage=1&pageSize=5`
     const productTrendUrl = `/statistics/products/trend`
 
-    await statisticsHandler(totalStatUrl, selectedDate, displayTotalStatistics);
-    await statisticsHandler(weeklyTrendUrl, selectedDate, (data)=>generateLineChart(weeklyOrderTrendChart, data));
-    await statisticsHandler(categoryTrendUrl, selectedDate, (data)=>generateMonthlyCategoryChart(monthlyCategoryTrendChart, data));
-    await statisticsHandler(orderTrendUrl, selectedDate, (data)=>displayOrderTable(data.items, orderTblBody));
-    await statisticsHandler(productTrendUrl, selectedDate, (data)=>displayProductTrendTable(data.trend, productTblBody));
+    await statisticsHandler(totalStatUrl, displayTotalStatistics);
+    await statisticsHandler(weeklyTrendUrl, (data)=>generateLineChart(weeklyOrderTrendChart, data));
+    await statisticsHandler(categoryTrendUrl, (data)=>generateMonthlyCategoryChart(monthlyCategoryTrendChart, data));
+    await statisticsHandler(orderTrendUrl, (data)=>displayOrderTable(data.items, orderTblBody));
+    await statisticsHandler(productTrendUrl, (data)=>displayProductTrendTable(data.trend, productTblBody));
 
 }
 
