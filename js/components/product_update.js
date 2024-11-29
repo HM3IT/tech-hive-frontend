@@ -57,23 +57,18 @@ async function loadOldProduct(productId) {
         dropDownCategory.appendChild(optionElement);
     });
 
-    const oldTagIds = oldProduct.productTags.map((tag) => (tag.tagId));
     tags.forEach((tag) => {
-        console.log(tag)
         let optionElement = document.createElement("option");
         optionElement.value = tag.id;
         optionElement.innerText = tag.name;
-        console.log(tag.id)
-        console.log(oldTagIds)
  
+        let tagName = tag.name.toLowerCase()
+        const colorTagKey = tagName in tagKeyLookup ? tagKeyLookup[tagName] : tagKeyLookup.DEFAULT;
     
-            let tagName = tag.name.toLowerCase()
-            const colorTagKey = tagName in tagKeyLookup ? tagKeyLookup[tagName] : tagKeyLookup.DEFAULT;
-        
-       
-            optionElement.style.borderLeft = `7px solid ${tagColor[colorTagKey]}`;
-      
-            optionElement.selected = true;
+    
+        optionElement.style.borderLeft = `7px solid ${tagColor[colorTagKey]}`;
+    
+        optionElement.selected = true;
    
         dropDownTags.appendChild(optionElement);
     });

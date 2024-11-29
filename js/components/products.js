@@ -30,7 +30,6 @@ const handleSearchInput = debounce(async(event) => {
   let searchVal = event.target.value;
   // search optimization
   let limit = 10
-  console.log("Listening")
   if (oldSearchVal === searchVal){
     return
   }
@@ -69,7 +68,6 @@ async function handleTagSelection(event) {
       selectedTags.delete(tag);
   }
 
-  console.log("Selected Tags:", Array.from(selectedTags));
   let filteredTagQry = Array.from(selectedTags).join(", ");
   let filters = `${filteredTagQry}&price_range=${price_range_filter}` 
   let data = await getProducts(1, 10, filters)

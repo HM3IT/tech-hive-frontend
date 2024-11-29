@@ -1,5 +1,5 @@
 
-import {getCookie } from './utils.js';
+import {deleteAccessTokenCookie, getCookie } from './utils.js';
 import {TOKEN_NAME, API_ENDPOINT,} from "./constants.js";
 
 export async function sendRequest(url, method = "GET", data = null) {
@@ -42,7 +42,16 @@ export async function sendAuthRequest(url, method="GET", data = null) {
         options.body = JSON.stringify(data);
     }
 
-    return await fetch(API_ENDPOINT + url, options);
+    let response = await fetch(API_ENDPOINT + url, options);
+   
+    if (!response.ok && response.status==401){
+        alert("Token expired! Please login Again")
+        window.location.href = "../client/login.html"
+        deleteAccessTokenCookie()
+    }
+    else{
+        return response
+    }
 }
 
 export async function sentFormRequest(url, method, formData) {

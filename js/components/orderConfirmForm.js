@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             setTimeout(() => {
                 window.location.href = "products.html";
             }, 1000);
-            console.log(orderData);
+          
         } else {
             showAlert("Order Placement Failed. Please try again.", "#ff4d4d");
         }

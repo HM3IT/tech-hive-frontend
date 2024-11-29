@@ -5,7 +5,6 @@ import { getCategory, uploadImage, getSubImagUrls, showAlert } from "../utils.js
 let dropDownCategory = document.getElementById("product-category");
 
 document.addEventListener("DOMContentLoaded", async () => {
-    console.log("Hello");
     let categories = await getCategory();
 
     categories.forEach(category => {

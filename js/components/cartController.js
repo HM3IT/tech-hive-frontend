@@ -87,7 +87,6 @@ async function removeFromCart(productId) {
     cart = cart.filter((item) => item.productId !== productId);
     localStorage.setItem('cart', JSON.stringify(cart));
     showAlert("Your Item Is Removed Successfully!", "#28a745");
-    console.log(productId)
     let removeElement = document.getElementById(productId)
     if (removeElement){
         removeElement.style.display = "none"

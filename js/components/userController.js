@@ -63,7 +63,6 @@ async function displayUsers(users){
             </td>
         </tr>
         `;
-        console.log(tbdy)
         tbdy.appendChild(row)
        });
   }

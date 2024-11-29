@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     const categoryTrendDataset = await getMonthlyCategoryTrend()
-    console.log(categoryTrendDataset)
+
     await generateMonthlyCategoryChart(monthlyCategoryTrendChart, categoryTrendDataset)
 
     let recentOrders = await getOrders(page, limit);
@@ -66,7 +66,7 @@ async function getTotalStatistics(filterDate= ""){
     sendAuthRequest("/statistics/total?currentPage=1&pageSize=500")
     .then((res)=>res.json())
     .then((data)=>{
-        console.log(data)
+   
         orderCard.innerText = data.orders;
         salesCard.innerText = `$${Math.round(data.revenue)}`
         productCard.innerText = data.products;
@@ -88,9 +88,7 @@ async function getWeeklyOrderTrend(){
 
  let response = await sendAuthRequest(`/statistics/orders/trend`, "GET");
  if (response.ok){
-    let data = await response.json()
-    console.log(data)
-    return data
+    return await response.json()
  }
 }
 
@@ -229,8 +227,7 @@ async function displayProductTrendTable(products, tblBody) {
     tblBody.innerHTML = "";  
 
     products.forEach(async(product, index) => {
-        console.log(product)
-       
+        
         let row = document.createElement("tr");
         let objectUrl = await fetchImageUrl(product.image_url);
      

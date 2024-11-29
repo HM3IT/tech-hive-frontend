@@ -20,12 +20,9 @@ export async function signin(event) {
 	if (response.ok) {
 		let responseData = await response.json();
 		const token = responseData.access_token	;  
-		console.log("token")
-		console.log(token)
 		const expireTimeMs = responseData.expireDate
 	 
 		setAccessTokenCookie(token, expireTimeMs);   
-		console.log('Login successful and token stored in cookies');
 		showAlert("Login Successfull", "#28a745")
 		setTimeout(() => {
             window.location.href = "./index.html";
@@ -57,8 +54,6 @@ export async function signup() {
 	if (response.ok) {
 		let responseData = await response.json();
 		const token = responseData.access_token	;  
-		console.log("token")
-		console.log(token)
 		const expireTimeMs = responseData.expireDate
 	 
 		setAccessTokenCookie(token, expireTimeMs);   

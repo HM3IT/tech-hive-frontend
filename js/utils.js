@@ -303,6 +303,16 @@ export async function getMyOrders(){
 }
 
 
+export async function getOrdersByUserId(userId){
+    let response = await sendAuthRequest(`/orders/admin/list?user_id=${userId}`, "GET")
+
+    if (response.ok){
+        let data = await response.json()
+        return data.items || []
+    }
+    return null
+}
+
 export async function getUser(userId){
    let response = await sendAuthRequest(`/users/detail/${userId}`);
    if (response.ok){
@@ -360,7 +370,6 @@ export function addToCart(productId, productName, productPrice, quantity, discou
 
 
 export function updateCartQuantity(productId, quantity) {
-    console.log("Qnatity: ", quantity)
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
  
     const product = cart.find((item) => item.productId === productId);

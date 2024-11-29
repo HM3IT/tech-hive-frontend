@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded",async function(e){
 async function updateOrder(event) {
  
     event.preventDefault();
-    console.log(order)
+ 
     if(!order){
         return
     }
@@ -63,13 +63,12 @@ async function updateOrder(event) {
         handlerId: handlerId,
         expectedArrivedDate: expectedOrderDate + "T00:00:00"
     };
-    console.log("updateOrderData")
-    console.log(updateOrderData)
+ 
     let response = await sendAuthRequest("/orders/update", "PATCH", updateOrderData)
  
     if(response.ok){
         let data = await response.json();
-        console.log(data)
+         
         alert("Order successfully updated!");
         window.location.reload()
     }

@@ -1,27 +1,31 @@
 import { sendAuthRequest } from '../api.js';
 import {me} from '../auth.js';
-import {getMyOrders, fetchImageUrl, uploadImage} from '../utils.js';
+import {getOrdersByUserId, fetchImageUrl, uploadImage} from '../utils.js';
 
 
 document.addEventListener("DOMContentLoaded", async function(event){
+
+    
+    const params = new URLSearchParams(window.location.search);
+    let userId = params.get("userId");
+    if (!userId){
+        alert("User id invalid")
+    }
+
+
     let newImgUrl = ""
     let uploadedImg = document.getElementById("preview-profile-img");
     let profileImg = document.getElementById("profile-img");
- 
-    
-    let email = document.getElementById("email");
 
+    let email = document.getElementById("email");
     let address = document.getElementById("address");
     let changeAddress = document.getElementById("changeAddress");
-
     let name = document.getElementById("name");
     let changeName = document.getElementById("changeName");
-
     let customerLevel = document.getElementById("userLevel");
-    
-    
     let profileUpdateForm = document.getElementById('profile-update-form');
     let profileUploadBtn = document.getElementById('uploadProfilePhoto');
+
     if(profileUploadBtn){
 
         profileUploadBtn.addEventListener('change', profileHandler);
@@ -29,8 +33,8 @@ document.addEventListener("DOMContentLoaded", async function(event){
     }
 
 
-    await loadProfile();
-    await loadMyOrder();
+    await loadProfile(userId);
+    await loadMyOrder(userId);
    
     
    async function loadMyOrder(){
@@ -38,7 +42,7 @@ document.addEventListener("DOMContentLoaded", async function(event){
        if (!orderContainer){
          return
        }
-       getMyOrders()
+       getOrdersByUserId(userId)
        .then(myOrders => {
         myOrders.forEach(order => {
         const orderCard = document.createElement("div");
@@ -47,7 +51,8 @@ document.addEventListener("DOMContentLoaded", async function(event){
    
         let orderDateStr = createdDate.toLocaleDateString(); 
         let orderTime = createdDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); // Format: HH:MM
-
+   
+ 
         orderCard.innerHTML = `
             <h5>Order #${order.id}</h5>
             <p><strong>Date:</strong> ${orderDateStr} ${orderTime}</p>
@@ -68,8 +73,12 @@ document.addEventListener("DOMContentLoaded", async function(event){
 
 
         
-    async function loadProfile() {
-        let response  = await me();
+    async function loadProfile(userId) {
+        let response  = await sendAuthRequest(`/users/detail/${userId}`,"GET");
+        if (!response.ok){
+            alert("Failed to retrieved users")
+        } 
+        response  = await response.json()
   
         name.innerText = response.name;
         address.innerText = response.address || "---";
@@ -107,6 +116,7 @@ document.addEventListener("DOMContentLoaded", async function(event){
             newUserData[key] = value;
         });
         newUserData["newImageUrl"] = newImgUrl
+
         let response = await sendAuthRequest("/users/update", "PATCH", newUserData)
         if (response.ok){
             alert("Successfully updated");
