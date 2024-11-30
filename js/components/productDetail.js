@@ -2,7 +2,7 @@ import { sendAuthRequest } from "../api.js";
 import { fetchImageUrl, fetchProductDetail, addToCart} from "../utils.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-    let rating = 0;
+    
     const params = new URLSearchParams(window.location.search);
     const productId = params.get("productId");
     const prevBtn = document.getElementById("prevBtn")
@@ -12,8 +12,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const stars = starsContainer.getElementsByClassName("rating");
     const submitBtn = document.getElementById("submit-btn");
     const reviewText = document.getElementById("review-text");
-
- 
+    const pageSize = 5;
+    
+    let rating = 0;
+    let currentPage = 1;  
 
     submitBtn.addEventListener("click", async function (){
        let userReview = reviewText.value;
@@ -65,6 +67,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         
     let images =  await loadProduct(productId);
+
+    await loadProductReview(productId);
 
     await loadProductReview(productId);
 
@@ -190,22 +194,28 @@ async function loadProduct(productId){
     return images;
 }
  
-async function loadProductReview(productId) {
-    const response = await sendAuthRequest(`/reviews/detail/${productId}`);
+
+
+
+async function loadProductReview(productId, append = false) {
+    const response = await sendAuthRequest(`/reviews/detail/${productId}?pageSize=${pageSize}&currentPage=${currentPage}`);
     const productReviewContainer = document.getElementById("reviews-container");
 
     if (response.ok) {
         const data = await response.json();
         const reviews = data.items;
 
-        productReviewContainer.innerHTML = "";
-        // newest review will be on top
+        if (!append) {
+            productReviewContainer.innerHTML = "";
+        }
+
+
         reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-        reviews.forEach(async(review) => {
+        reviews.forEach(async (review) => {
             const reviewElement = document.createElement("div");
             reviewElement.classList.add("user-profile");
-            let objectUrl = await fetchImageUrl(review.profileUrl)
+            let objectUrl = await fetchImageUrl(review.profileUrl);
             const ratingStars = "⭐".repeat(review.rating) + "☆".repeat(5 - review.rating);
 
             reviewElement.innerHTML = `
@@ -222,9 +232,24 @@ async function loadProductReview(productId) {
 
             productReviewContainer.appendChild(reviewElement);
         });
+
+        const seeMoreButton = document.getElementById("see-more-btn");
+        if (data.total > currentPage * pageSize) {
+            seeMoreButton.style.display = "inline-block";
+        } else {
+            seeMoreButton.style.display = "none";
+        }
     } else {
-        productReviewContainer.innerHTML = "<p>Failed to load reviews.</p>";
+        if (!append) {
+            productReviewContainer.innerHTML = "<p>Failed to load reviews.</p>";
+        }
     }
 }
+
+
+document.getElementById("see-more-btn").addEventListener("click", () => {
+    currentPage++; 
+    loadProductReview(productId, true); 
+});
 
 });
