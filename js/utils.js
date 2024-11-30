@@ -273,7 +273,7 @@ export async function uploadImage(file) {
         
     } catch (error) {
         console.error("Error uploading image:", error);
-        alert("An unexpected error occurred during image upload.");
+        showAlert("An unexpected error occurred during image upload.", "#ff4d4d");
         return null;
     }
 }
@@ -474,7 +474,7 @@ export async function getUsers(page, limit, searchName = null){
     }
     let response = await sendAuthRequest(`/users/list?${filters}`, "GET");
     if(!response.ok){
-        alert("Failed to retrieve user lists");
+        showAlert("Failed To Retrieve User Lists!", "#ff4d4d");
         return
     }    
         let data = await response.json()

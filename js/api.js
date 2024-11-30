@@ -1,5 +1,5 @@
 
-import {deleteAccessTokenCookie, getCookie } from './utils.js';
+import {deleteAccessTokenCookie, getCookie, showAlert } from './utils.js';
 import {TOKEN_NAME, API_ENDPOINT,} from "./constants.js";
 
 export async function sendRequest(url, method = "GET", data = null) {
@@ -24,7 +24,7 @@ export async function sendAuthRequest(url, method="GET", data = null) {
     if (token) {
         headers['Authorization'] = `Bearer ${token}`;
     }else{
-        alert(`This request -${url} need user to be login`);
+        showAlert(`This Request -${url} Need User To Be Login!`, "#ff4d4d");
         window.location.href = "index.html";
         return null;
     }
@@ -45,7 +45,7 @@ export async function sendAuthRequest(url, method="GET", data = null) {
     let response = await fetch(API_ENDPOINT + url, options);
    
     if (!response.ok && response.status==401){
-        alert("Token expired! Please login Again")
+        showAlert("Token expired! Please login Again.", "#ff4d4d")
         window.location.href = "../client/login.html"
         deleteAccessTokenCookie()
     }
@@ -58,7 +58,7 @@ export async function sentFormRequest(url, method, formData) {
     const token = getCookie(TOKEN_NAME); 
     
     if (!token) {
-       alert("Need to be admin")
+       showAlert("Need to be Admin!", "#ff4d4d")
        window.location.href = "./login.html"
        return null;
     }

@@ -1,6 +1,6 @@
 import { sendAuthRequest } from '../api.js';
 import {me} from '../auth.js';
-import {getMyOrders, fetchImageUrl, uploadImage} from '../utils.js';
+import {getMyOrders, fetchImageUrl, uploadImage, showAlert} from '../utils.js';
 
 
 document.addEventListener("DOMContentLoaded", async function(event){
@@ -109,12 +109,12 @@ document.addEventListener("DOMContentLoaded", async function(event){
         newUserData["newImageUrl"] = newImgUrl
         let response = await sendAuthRequest("/users/update", "PATCH", newUserData)
         if (response.ok){
-            alert("Successfully updated");
+            showAlert("Successfully Updated.", "#28a745");
             await loadProfile();
             profileUpdateForm.reset();
         }else{
             let error = await response.json()
-            alert(`${error.detail || error.message }`);
+            showAlert(`${error.detail || error.message }`, "#ff4d4d");
         }
     }
 

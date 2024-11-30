@@ -1,6 +1,6 @@
 import { sendAuthRequest } from '../api.js';
 import {me} from '../auth.js';
-import {getOrdersByUserId, fetchImageUrl, uploadImage} from '../utils.js';
+import {getOrdersByUserId, fetchImageUrl, uploadImage, showAlert} from '../utils.js';
 
 
 document.addEventListener("DOMContentLoaded", async function(event){
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async function(event){
     const params = new URLSearchParams(window.location.search);
     let userId = params.get("userId");
     if (!userId){
-        alert("User id invalid")
+        showAlert("User ID Invalid!", "#ff4d4d")
     }
 
 
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", async function(event){
     async function loadProfile(userId) {
         let response  = await sendAuthRequest(`/users/detail/${userId}`,"GET");
         if (!response.ok){
-            alert("Failed to retrieved users")
+            showAlert("Failed To Retrieved Users!", "#ff4d4d")
         } 
         response  = await response.json()
   
@@ -119,12 +119,12 @@ document.addEventListener("DOMContentLoaded", async function(event){
 
         let response = await sendAuthRequest("/users/update", "PATCH", newUserData)
         if (response.ok){
-            alert("Successfully updated");
+            showAlert("Successfully Updated.", "#28a745");
             await loadProfile();
             profileUpdateForm.reset();
         }else{
             let error = await response.json()
-            alert(`${error.detail || error.message }`);
+            showAlert(`${error.detail || error.message }`, "#ff4d4d");
         }
     }
 

@@ -1,5 +1,5 @@
 import { sendAuthRequest } from "../api.js";
-import { fetchImageUrl, fetchProductDetail, addToCart} from "../utils.js";
+import { fetchImageUrl, fetchProductDetail, addToCart, showAlert} from "../utils.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
     
@@ -169,11 +169,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     async function submitReviewHandler(){
         let userReview = reviewText.value;
         if (userReview && userReview.trim().length <= 8){
-        alert("review should have at least 8 characters")
+        showAlert("Review Should Have At Least 8 Characters", "#ff4d4d")
         return;
         }
         if (rating <=0){
-        alert("Please give rating for the product");
+        showAlert("Please Give Rating For The Product.", "#ff4d4d");
         return;
         }
     
@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             console.log(data);
             rating = 0;
             reviewText.value =""
-            alert("Your review has submitted successfully");
+            showAlert("Your Review Has Submitted Successfully.", "#28a745");
             window.location.reload();
         }
 
