@@ -190,7 +190,8 @@ export async function displayProducts(products) {
              `
         }
         
-        
+        let productName = JSON.stringify(product.name);
+        console.log(productName)
         const productCard = `
             <div class="product-card card" data-id="${product.id}" data-price="${product.price}" data-discount="${product.discountPercent}">
                 <img src="${objectUrl}" alt="${product.name}" class="product-image card-img-top">
@@ -204,7 +205,7 @@ export async function displayProducts(products) {
                 </div>
           
                 <div class="product-button">               
-                    <button  type="button" class="add-to-cart btn btn-success" onclick="addToCart('${product.id}', '${product.name}', ${product.price}, 1, ${product.discountPercent}, '${product.imageUrl}')">Add to Cart</button>
+                    <button  type="button" class="add-to-cart btn btn-success" onclick='addToCart("${product.id}", ${productName}, ${product.price}, 1, ${product.discountPercent}, "${product.imageUrl}")'>Add to Cart</button>
                  
                     <a type="button" class="view-detail-btn" href="productDetail.html?productId=${product.id}">View detail</a> 
                 </div>  

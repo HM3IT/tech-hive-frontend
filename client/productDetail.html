@@ -107,21 +107,21 @@
 <footer id="footer">
   
 </footer>
- <script>
+<script>
      
-function changeQuantity(amount) {
-    const quantityInput = document.getElementById('quantityInput');
-    let currentQuantity = parseInt(quantityInput.value);
+    function changeQuantity(amount) {
+        const quantityInput = document.getElementById('quantityInput');
+        let currentQuantity = parseInt(quantityInput.value);
 
-    if (!isNaN(currentQuantity)) {
-        currentQuantity += amount;
-        if (currentQuantity < 1) currentQuantity = 1;  
-        quantityInput.value = currentQuantity;
+        if (!isNaN(currentQuantity)) {
+            currentQuantity += amount;
+            if (currentQuantity < 1) currentQuantity = 1;  
+            quantityInput.value = currentQuantity;
+        }
     }
-}
- 
- </script>
- 
+
+</script>
+
 
 </body>
 </html>
