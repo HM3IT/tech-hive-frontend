@@ -1,5 +1,5 @@
 import { sendAuthRequest } from "../api.js";
-import { fetchImageUrl, fetchProductDetail } from "../utils.js";
+import { fetchImageUrl, fetchProductDetail, showAlert } from "../utils.js";
 import {me} from '../auth.js';
 import {  orderStatusColor } from "../constants.js";
 
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded",async function(e){
 
         orderTotal.innerText = `$ ${totalAmount}`
     }else{
-        alert("Failed to load order!")
+        showAlert("Failed To Load Order!", "#ff4d4d")
     }
  
 

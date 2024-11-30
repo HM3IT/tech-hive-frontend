@@ -62,7 +62,7 @@ async function addProduct() {
 
     let subImageUrl = await getSubImagUrls(subProductImages)
     if (imageUrl.length <= 0 && subImageUrl.length <= 0) {
-        alert("Please upload images and sub-images as well!")
+        showAlert("Please upload images and sub-images as well!", "#ff4d4d")
         return;
     }
 
@@ -99,8 +99,6 @@ async function addProduct() {
     }
     } 
 
- 
- 
 
 function validateProductForm() {
     let isValid = true;
@@ -109,8 +107,6 @@ function validateProductForm() {
     let name = document.getElementById("product-name").value;
     let category = document.getElementById("product-category").value;
     let price = document.getElementById("product-price").value;
-    // let image = document.getElementById("product-image").files.length;
-    // let subImages = document.getElementById("sub-product-image").files.length;
     let description = document.getElementById("product-description").value;
     let discount = document.getElementById("product-discount").value;
     let brand = document.getElementById("product-brand").value;
@@ -120,8 +116,6 @@ function validateProductForm() {
     let nameError = document.getElementById("name-error");
     let categoryError = document.getElementById("category-error");
     let priceError = document.getElementById("price-error");
-    // let imageError = document.getElementById("image-error");
-    // let subImageError = document.getElementById("subimage-error");
     let descriptionError = document.getElementById("description-error");
     let discountError = document.getElementById("discount-error");
     let brandError = document.getElementById("brand-error");
@@ -131,8 +125,6 @@ function validateProductForm() {
     nameError.textContent = "";
     categoryError.textContent = "";
     priceError.textContent = "";
-    // imageError.textContent = "";
-    // subImageError.textContent = "";
     descriptionError.textContent = "";
     discountError.textContent = "";
     brandError.textContent = "";
@@ -167,20 +159,6 @@ function validateProductForm() {
         priceError.style.display = "inline"
         isValid = false;
     }
-
-    // // Image validation
-    // if (image === 0) {
-    //     imageError.textContent = "Product image is required.";
-    //     imageError.style.display = "inline"
-    //     isValid = false;
-    // }
-
-    // // Sub-image validation
-    // if (subImages === 0) {
-    //     subImageError.textContent = "At least one sub-image is required.";
-    //     subImageError.style.display = "inline"
-    //     isValid = false;
-    // }
 
     // Description validation
     if (description.trim() === "") {

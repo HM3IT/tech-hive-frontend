@@ -1,5 +1,5 @@
 import { sendAuthRequest } from "../api.js";
-import { fetchProductDetail, getSubImagUrls, getCategory, getTags, updateProduct, uploadImage } from "../utils.js";
+import { fetchProductDetail, getSubImagUrls, getCategory, getTags, updateProduct, uploadImage, showAlert } from "../utils.js";
 import {tagKeyLookup, tagColor} from "../constants.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let urlParams = new URLSearchParams(window.location.search);
     productId = urlParams.get("productId");
     if (!productId) {
-        alert("Product ID is missing!");
+        showAlert("Product ID is missing!", "#ff4d4d");
         window.location.href = "../admin/products.html";  
         return;
     }

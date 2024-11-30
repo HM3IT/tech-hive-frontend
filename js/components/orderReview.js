@@ -1,5 +1,5 @@
 import { sendAuthRequest } from "../api.js";
-import { fetchImageUrl, fetchProductDetail, getUser, getUsers } from "../utils.js";
+import { fetchImageUrl, fetchProductDetail, getUser, getUsers, showAlert } from "../utils.js";
 import {  orderStatusColor } from "../constants.js";
 
  
@@ -52,7 +52,7 @@ async function updateOrder(event) {
     let expectedOrderDate = expectedDate.value;
    
     if (order.status===orderStatus && order.handler_id== handlerId && order.expected_arrived_date.length >=0){
-        alert("You haven't updated any information")
+        showAlert("You haven't updated any information!", "#ff4d4d")
         return
     }
     
@@ -69,7 +69,7 @@ async function updateOrder(event) {
     if(response.ok){
         let data = await response.json();
          
-        alert("Order successfully updated!");
+        showAlert("Order Successfully Updated!", "#28a745");
         window.location.reload()
     }
 
@@ -182,6 +182,6 @@ async function loadOrderInfo(orderId){
 
         orderTotal.innerText = `$ ${totalAmount}`
     }else{
-        alert("Failed to load order!")
+        showAlert("Failed to Load Order!", "#ff4d4d")
     }
 }
