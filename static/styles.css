@@ -10,8 +10,7 @@ body {
 }
 
 
-/* Banner Section Styling */
-/* Slider Styling */
+
 /* Slider Styling */
 .slider {
     position: relative;
@@ -34,9 +33,9 @@ body {
 }
 
 .slide-image {
-    min-width: 100%;          /* Each image takes full width of the container */
-    max-height: 600px;       /* Set a max height to control image size */
-    object-fit: cover;       /* Cover the area while maintaining aspect ratio */
+    min-width: 100%;          
+    max-height: 600px;       
+    object-fit: cover;       
 }
 
 .slide-btn {
@@ -63,94 +62,94 @@ body {
 
 
 
-/* Footer with Brand Logos */
 
 
 
 /* Footer Styling */
 .footer {
-    background-color: #f8f9fa; /* Light background */
-    padding: 40px 20px; /* Spacing around the footer */
-    color: #333; /* Text color */
-    text-align: center; /* Center text */
-    font-family: Arial, sans-serif; /* Font family */
+    background-color: #f8f9fa; 
+    padding: 40px 20px; 
+    color: #333; 
+    text-align: center; 
+    font-family: Arial, sans-serif;
 }
 
 .footer-container {
-    display: flex; /* Flexbox for layout */
-    justify-content: space-around; /* Space sections evenly */
-    flex-wrap: wrap; /* Allow wrapping */
-    max-width: 1200px; /* Maximum width */
-    margin: auto; /* Center container */
+    display: flex; 
+    justify-content: space-around; 
+    flex-wrap: wrap; 
+    max-width: 1200px; 
+    margin: auto; 
 }
 
 .footer-section {
-    margin: 20px; /* Space between sections */
-    flex: 1; /* Allow sections to grow */
-    min-width: 200px; /* Minimum width for better layout */
+    margin: 20px; 
+    flex: 1; 
+    min-width: 200px; 
 }
 
 .footer-section h3 {
-    font-size: 18px; /* Heading size */
-    margin-bottom: 10px; /* Space below heading */
-    color: #333; /* Heading color */
+    font-size: 18px; 
+    margin-bottom: 10px; 
+    color: #333; 
 }
 
 .social-icons a {
-    color: #333; /* Icon color */
-    margin: 0 10px; /* Increased spacing between icons */
-    font-size: 24px; /* Larger icons */
-    text-decoration: none; /* No underline */
+    color: #333; 
+    margin: 0 10px; 
+    font-size: 24px; 
+    text-decoration: none; 
 }
 
 .visit-btn {
-    display: inline-block; /* Inline block for button styling */
-    border: 1px solid red; /* Red border */
-    border-radius: 20px; /* Rounded corners */
-    color: red; /* Text color */
-    padding: 8px 20px; /* Padding for button */
-    margin: 5px 0; /* Margin for vertical spacing */
-    text-decoration: none; /* No underline */
-    font-size: 14px; /* Font size */
-    font-weight: bold; /* Bold text */
+    display: inline-block; 
+    border: 1px solid red; 
+    border-radius: 20px; 
+    color: red; 
+    padding: 8px 20px; 
+    margin: 5px 0; 
+    text-decoration: none; 
+    font-size: 14px; 
+    font-weight: bold; 
 }
 
 .innwa-yangon p, .innwa-mandalay p {
-    display: flex; /* Flexbox for layout */
-    justify-content: space-between; /* Space between items */
-    margin: 5px 0; /* Vertical spacing */
+    display: flex; 
+    justify-content: space-between; 
+    margin: 5px 0; 
 }
 
 .arrow {
-    font-size: 18px; /* Arrow size */
-    color: #333; /* Arrow color */
+    font-size: 18px; 
+    color: #333; 
 }
 
 .viber p {
-    font-size: 16px; /* Phone number size */
-    color: #333; /* Color */
+    font-size: 16px; 
+    color: #333; 
 }
 
 .qr-code {
-    width: 100px; /* QR code width */
-    height: 100px; /* QR code height */
-    margin-top: 10px; /* Space above QR code */
+    width: 100px; 
+    height: 100px; 
+    margin-top: 10px; 
 }
 
 /* Bottom Footer */
 .footer-bottom {
-    margin-top: 20px; /* Space above footer text */
-    font-size: 14px; /* Footer text size */
-    color: #666; /* Footer text color */
+    margin-top: 20px; 
+    font-size: 14px; 
+    color: #666; 
 }
 
-/* Container Styling */
+
 /* Container Styling */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     text-align: center;
+    
 }
 
 .container h1 {
@@ -164,6 +163,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 20px;
+   
 }
 
 /* Item Styling */
@@ -229,7 +229,7 @@ h2 {
 .product-grid {
     display: flex;
     gap: 10px;
-    overflow-x: hidden; /* Hide overflow to create carousel effect */
+    overflow-x: hidden; 
     scroll-behavior: smooth;
     width: 100%;
     padding: 0 20px;

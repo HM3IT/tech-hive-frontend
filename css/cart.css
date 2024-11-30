@@ -88,7 +88,7 @@ tfoot th {
 }
 
 /* Buttons */
-button, .btn {
+button {
     display: inline-block;
     width: 100%;
     padding: 15px;
@@ -102,12 +102,17 @@ button, .btn {
     cursor: pointer;
 }
 
-button:hover, .btn:hover {
+button:hover {
     background-color: #d93838; 
 }
 
-
-
+.success {
+    background-color: #170c0c; 
+    color: #ffffff;
+}
+.success:hover {
+    background-color: #271b1b;
+}
 /* Cart-Specific Styles */
 .cart-container {
     width: 100%;
