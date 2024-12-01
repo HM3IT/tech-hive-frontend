@@ -185,12 +185,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         let response = await sendAuthRequest("/reviews/add","POST",reviewData);
 
         if(response.ok){
-            let data = await response.json();
-            console.log(data);
             rating = 0;
             reviewText.value =""
             showAlert("Your Review Has Submitted Successfully.", "#28a745");
-            window.location.reload();
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
+        
         }
 
     }
