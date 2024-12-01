@@ -11,10 +11,11 @@
   <body>
   <script src="../js/main.js"></script>
   <script type="module"  src="../js/components/nav.js"></script>
+  <script type="module"  src="../js/components/index.js"></script>
     <!-- Navbar -->
-     <nav id="nav">
+    <nav id="nav">
 
-     </nav>
+    </nav>
      <!-- End of Navbar  -->
 
 
@@ -34,90 +35,92 @@
             <button class="slide-btn right-btn" onclick="nextSlide()">›</button>
         </div>
     </section>
-    <script>
-        let currentSlide = 0;
-const slides = document.querySelectorAll('.slide-image');
-const totalSlides = slides.length;
 
-function showSlide(index) {
-    currentSlide = (index + totalSlides) % totalSlides;   
-    const offset = -currentSlide * 100;                  
-    document.querySelector('.slide').style.transform = `translateX(${offset}%)`;
-}
-
-function nextSlide() {
-    showSlide(currentSlide + 1);
-}
-
-function prevSlide() {
-    showSlide(currentSlide - 1);
-}
-
-// Automatic slide transition every 3 seconds
-setInterval(nextSlide, 3000);
-
-    </script>
     <div class="container">
         <h1>PC Parts</h1>
         <div class="grid">
             <!-- Intel CPUs -->
             <div class="item">
+              <a href="products.html?search=Intel">
                 <img src="../static/images/12.jpg" alt="Intel CPUs">
-                <a href="cpu.html">Intel CPUs</a>
+               Intel CPUs
+              </a>
             </div>
             <!-- AMD CPUs -->
             <div class="item">
+              <a href="products.html?search=AMD CPU">
                 <img src="../static/images/13.jpg" alt="AMD CPUs">
-                <a href="#">AMD CPUs</a>
+                AMD CPUs
+              </a>
             </div>
             <!-- NVIDIA Graphics Cards -->
             <div class="item">
+              <a href="products.html?search=graphic card">
                 <img src="../static/images/14.jpg" alt="NVIDIA Graphics Cards">
-                <a href="#">NVIDIA Graphics Cards</a>
+               NVIDIA Graphics Cards
+              </a>
             </div>
             <!-- AMD Graphics Cards -->
             <div class="item">
+              <a href="products.html?search=graphic card">
                 <img src="../static/images/15.jpg" alt="AMD Graphics Cards">
-                <a href="#">AMD Graphics Cards</a>
+                AMD Graphics Cards
+              </a>
             </div>
             <!-- Intel Motherboards -->
             <div class="item">
+              <a href="products.html?search=intel motherboard">
                 <img src="../static/images/16.jpg" alt="Intel Motherboards">
-                <a href="#">Intel Motherboards</a>
+               Intel Motherboards
+              </a>
             </div>
             <!-- AMD Motherboards -->
             <div class="item">
+              <a href="products.html?search=AMD motherboard">
                 <img src="../static/images/17.jpg" alt="AMD Motherboards">
-                <a href="#">AMD Motherboards</a>
+                AMD Motherboards
+              </a>
             </div>
             <!-- DDR4 RAM -->
             <div class="item">
+              <a href="products.html?search=monitor">
                 <img src="../static/images/monitor.jpg" alt="DDR4 RAM">
-                <a href="#">Monitor</a>
+              Monitor
+            </a>
             </div>
             <!-- DDR5 RAM -->
             <div class="item">
+              <a href="products.html?search=RAM">
                 <img src="../static/images/19.jpg" alt="DDR5 RAM">
-                <a href="#">RAM</a>
+               RAM
+              </a>
             </div>
             <!-- Storage -->
             <div class="item">
+              <a href="products.html?search=SSD">
                 <img src="../static/images/20.jpg" alt="Storage">
-                <a href="#">SSD</a>
+               SSD
+              </a>
             </div>
             <div class="item">
+              <a href="products.html?search=HDD">
                 <img src="../static/images/21.jpg" alt="Storage">
-                <a href="#">Hard Drive</a>
+                Hard Drive
+              </a>
             </div>
             <!-- Cases -->
             <div class="item">
+              <a href="products.html?search=pc cases">
                 <img src="../static/images/22.jpg" alt="PC Cases">
-                <a href="#">PC Cases</a>
+                PC Cases
+              </a>
             </div>
             <!-- Power Supplies -->
             <div class="item">
+              <a href="products.html?search=power supply">
                 <img src="../static/images/23.jpg" alt="Power Supplies">
-                <a href="#">Power Supplies</a>
+                Power Supplies
+              </a>
             </div>
             
         </div>
@@ -184,32 +187,12 @@ setInterval(nextSlide, 3000);
       <span class="arrow" id="arrowRight">&#10095;</span>
     </div>
   </div>
-
-  <script>
-    const productGrid = document.getElementById('productGrid');
-    const arrowLeft = document.getElementById('arrowLeft');
-    const arrowRight = document.getElementById('arrowRight');
-
-    arrowLeft.addEventListener('click', () => {
-      productGrid.scrollBy({
-        left: -200,
-        behavior: 'smooth'
-      });
-    });
-
-    arrowRight.addEventListener('click', () => {
-      productGrid.scrollBy({
-        left: 200,
-        behavior: 'smooth'
-      });
-    });
-  </script>
-
       
 <!-- Footer with Brand Logos -->
 <footer id="footer">
   
 </footer>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 

@@ -122,3 +122,8 @@ width: 100% !important;
     opacity: 0;
     transform: translateY(-10px);
 }
+
+
+#productGrid .product img{
+    height: 100px;
+}

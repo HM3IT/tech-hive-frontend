@@ -11,9 +11,14 @@ async function loadProduct() {
     const limit = 10;
     const page= 1
     let filterType = urlParams.get('filter_type');
+    let searchVal = urlParams.get('search');
   
     if (filterType) {
         query_filter = filterType.replaceAll("'", ""); 
+    }
+    if (searchVal){
+      searchVal = searchVal.toLocaleLowerCase()
+      query_filter = `${searchVal}`
     }
     let filters = `${query_filter}&price_range=${price_range_filter}`
     let data = await getProducts(limit, page, filters);

@@ -152,7 +152,7 @@ export async function getProducts(page, limit, filters){
 }
 
 
-function truncateDescription(description, maxLength = 30) {
+export function truncateDescription(description, maxLength = 30) {
     if (description.length > maxLength) {
         return description.slice(0, maxLength) + "...";
     }
