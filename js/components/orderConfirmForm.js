@@ -2,28 +2,51 @@ import { sendAuthRequest } from "../api.js";
 import { fetchImageUrl, showAlert } from "../utils.js";
 
 document.addEventListener("DOMContentLoaded", async function () {
+
+    const showPolicyBtn = document.getElementById('show-policy-btn');
+    const popupForm = document.getElementById('popup-form');
+    const closeBtn = document.getElementById('close-btn');
+
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let grandTotal = await getGrandTotal();
-    let userName = document.getElementById("user-name");
-    let shipAddress = document.getElementById("ship-address");
-    let phone = document.getElementById("phone");
-    let orderSubmitBtn = document.getElementById("order-submit-btn");
-    const tblBody = document.getElementById("order-summary-tbody");
-
+    const userName = document.getElementById("user-name");
+    const shipAddressInput = document.getElementById("ship-address");
+    const phone = document.getElementById("phone");
+    const orderSubmitBtn = document.getElementById("order-submit-btn");
     orderSubmitBtn.addEventListener("click", submitOrder);
 
     const response = await sendAuthRequest("/access/me", "GET");
     if (response.ok) {
         let user = await response.json();
         userName.innerText = user.name;
-        shipAddress.innerText = user.address || "";
+        shipAddressInput.innerText = user.address || "";
     }
 
     const grandTotalElement = document.getElementById('order-total');
     grandTotalElement.innerText = `$${grandTotal.toFixed(2)}`;
 
 
-    loadCartSummaryTable(cart);
+    await loadCartSummaryTable(cart);
+
+
+
+    // Show the popup form when the button is clicked
+    showPolicyBtn.addEventListener('click', () => {
+        popupForm.classList.remove('hidden');
+    });
+
+    // Close the popup form when the close button is clicked
+    closeBtn.addEventListener('click', () => {
+        popupForm.classList.add('hidden');
+    });
+
+    // Close the popup form when clicking outside the content area
+    window.addEventListener('click', (event) => {
+        if (event.target === popupForm) {
+            popupForm.classList.add('hidden');
+        }
+    });
+
 
     async function getGrandTotal() {
         return cart.reduce((total, item) => {
@@ -45,8 +68,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     
         let isValid = true;
-        let shipAddress = document.getElementById("ship-address").value;
-        let phoneNo = document.getElementById("phone").value;
+        let shipAddress = shipAddressInput.value;
+        let phoneNo = phone.value;
         let agreeRefund = document.getElementById("agree-refund-policy").checked;
     
         let shipAddressError = document.getElementById("shipAddress-error");
