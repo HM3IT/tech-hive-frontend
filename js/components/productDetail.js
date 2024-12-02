@@ -25,6 +25,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     let currentPage = 1;  
     let currentImageIndex = 0;
 
+    let hasAlreadyReivew = false
+
     let images =  await loadProduct(productId);
     await loadProductReview(productId);
 
@@ -84,7 +86,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 stars[i].classList.remove("highlight");
             }
         }
-    }
+     }
 
 
     async function loadProduct(productId){
@@ -168,6 +170,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     async function submitReviewHandler(){
         let userReview = reviewText.value;
+        if (hasAlreadyReivew){
+            showAlert("You Have already review this product", "#ff4d4d")
+            return;
+        }
         if (userReview && userReview.trim().length <= 8){
         showAlert("Review Should Have At Least 8 Characters", "#ff4d4d")
         return;
@@ -203,6 +209,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (response.ok) {
             const data = await response.json();
             const reviews = data.items;
+            hasAlreadyReivew = data.is_reviewed;
 
             if (!append) {
                 productReviewContainer.innerHTML = "";
