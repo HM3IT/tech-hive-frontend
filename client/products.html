@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Customer View with Pagination</title>
-    <link rel="stylesheet" href="../css/products.css">
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/products.css">
     <link rel="stylesheet" href="../css/pagination.css">
-    
    
 
 </head>
@@ -22,57 +23,54 @@
         </nav>
        
         <!-- End -->
-       <!-- Sidebar Filter -->
-       <div class="sidebar">
-           <h2>Advanced Search</h2>
-   
-           <div class="filter-section">
-               <label>Search</label>
+        <div id="product-wrapper">
+               <!-- Sidebar Filter -->
+            <div class="sidebar">
+                <h2>Advanced Search</h2>
 
-               <ul class="nav navbar-nav">
-                <li>
-                    <form action="" class="navbar-form">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <input id="searchInput" type="search" name="search" placeholder="Search Anything Here..." class="form-control">
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                <div class="filter-section">
+  
+                        <form action="" class="navbar-form">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input id="searchInput" type="search" name="search" placeholder="Search Anything Here..." class="form-control">
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                </li>
-            </ul>
-           </div>
-   
-           <label>Tags</label>
-           <div id="tag-filters" class="filter-section">
-     
-           </div>
-   
-           <div class="filter-section">
-               <label>Price Range</label>
-               <div><input type="radio" name="price-range" value="null" class="price-range"> Clear</div>
-               <div><input type="radio" name="price-range" value="0:50" class="price-range"> $0 - $50</div>
-               <div><input type="radio" name="price-range" value="50:100" class="price-range"> $50 - $100</div>
-               <div><input type="radio" name="price-range" value="100:200" class="price-range"> $100 - $200</div>
-               <div><input type="radio" name="price-range" value="200:500" class="price-range"> $200 - $500</div>
-               <div><input type="radio" name="price-range" value=":500" class="price-range"> Above $500</div>               
-           </div>
-       </div>
-   
-       <!-- Product Content with Pagination -->
-       <div class="content">
-           <div class="product-image-grid" id="productView">
-               <!-- Product Cards will be dynamically inserted here -->
-           </div>
-   
-           <!-- Pagination Controls -->
-           <div class="pagination" id="paginationControls">
-           
-           </div>
-       </div>
- 
-       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+                        </form>
+      
+                </div>
+
+                <label>Tags</label>
+                <div id="tag-filters" class="filter-section">
+        
+                </div>
+
+                <label>Price Range</label>
+                <div class="filter-section">
+                    <div><input type="radio" name="price-range" value="null" class="price-range"> Clear</div>
+                    <div><input type="radio" name="price-range" value="0:50" class="price-range"> $0 - $50</div>
+                    <div><input type="radio" name="price-range" value="50:100" class="price-range"> $50 - $100</div>
+                    <div><input type="radio" name="price-range" value="100:200" class="price-range"> $100 - $200</div>
+                    <div><input type="radio" name="price-range" value="200:500" class="price-range"> $200 - $500</div>
+                    <div><input type="radio" name="price-range" value=":500" class="price-range"> Above $500</div>               
+                </div>
+            </div>
+
+    <!-- Product Content with Pagination -->
+            <div class="content">
+                <div class="product-image-grid" id="productView">
+                    <!-- Product Cards will be dynamically inserted here -->
+                </div>
+
+                <!-- Pagination Controls -->
+                <div class="pagination" id="paginationControls">
+                
+                </div>
+            </div>
+
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
  
