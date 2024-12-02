@@ -24,7 +24,7 @@ export async function sendAuthRequest(url, method="GET", data = null) {
     if (token) {
         headers['Authorization'] = `Bearer ${token}`;
     }else{
-        showAlert(`This Request -${url} Need User To Be Login!`, "#ff4d4d");
+        showAlert(`This feature Need User To Be Login!`, "#ff4d4d");
         window.location.href = "index.html";
         return null;
     }

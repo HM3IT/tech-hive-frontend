@@ -1,6 +1,5 @@
-
-import { setAccessTokenCookie, deleteAccessTokenCookie, showAlert } from './utils.js';
 import { sendRequest, sendAuthRequest } from './api.js';
+import { setAccessTokenCookie, deleteAccessTokenCookie, showAlert, showConfirmBox } from './utils.js';
 
 
 const redirectDelayTime = 2000
@@ -23,10 +22,20 @@ export async function signin(event) {
 		const expireTimeMs = responseData.expireDate
 	 
 		setAccessTokenCookie(token, expireTimeMs);   
-		showAlert("Login Successfull", "#28a745")
-		setTimeout(() => {
-            window.location.href = "./index.html";
-        }, 1000); 
+		showAlert("Login Successfull", "#28a745");
+		let user = await me();
+	 
+		if (user.isSuperuser){
+			let isConfirm = showConfirmBox(`Hi ${user.name}! Do you want to go to admin dashboard`, 
+				()=>window.location.href = "../admin/dashboard.html",
+				()=>	window.location.href = "./index.html"
+				);
+		}else{
+			// setTimeout(() => {
+			// 	window.location.href = "./index.html";
+			// }, 1000); 
+			
+		}
     } else {
         showAlert("Oops! Login Failed. Check Email or Password.", "#ff4d4d");
     }
@@ -91,8 +100,7 @@ export async function me(){
 		return response.json();
 	} else {
 		let errorData = await response.json();
-		console.log("errorData")
-		console.log(errorData)
+	 
 		if (errorData.status_code == 401){
 			deleteAccessTokenCookie()
 		}

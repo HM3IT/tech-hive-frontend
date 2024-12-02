@@ -191,7 +191,6 @@ export async function displayProducts(products) {
         }
         
         let productName = JSON.stringify(product.name);
-        console.log(productName)
         const productCard = `
             <div class="product-card card" data-id="${product.id}" data-price="${product.price}" data-discount="${product.discountPercent}">
                 <img src="${objectUrl}" alt="${product.name}" class="product-image card-img-top">
@@ -417,6 +416,10 @@ export function updateGrandTotal(cart) {
 
 
 export function showConfirmBox(message, onOk, onCancel) {
+    const overlay = document.createElement("div");
+    overlay.setAttribute("id", "confirm-overlay");
+    document.body.appendChild(overlay);
+
     let infoBox = document.createElement("div");
     infoBox.setAttribute("id", "confirm-box");
 
@@ -435,11 +438,13 @@ export function showConfirmBox(message, onOk, onCancel) {
     // Event listeners for OK and Cancel
     document.getElementById("info-ok").addEventListener("click", async () => {
         infoBox.remove();
+        document.body.removeChild(overlay);
         if (onOk) onOk();
     });
 
     document.getElementById("info-cancel").addEventListener("click", async () => {
         infoBox.remove();
+        document.body.removeChild(overlay);
         if (onCancel) onCancel();
     });
 }

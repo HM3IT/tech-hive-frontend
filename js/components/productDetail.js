@@ -24,13 +24,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     let rating = 0;
     let currentPage = 1;  
     let currentImageIndex = 0;
-
     let hasAlreadyReivew = false
-
     let images =  await loadProduct(productId);
-    await loadProductReview(productId);
 
- 
+    await loadProductReview(productId);
 
     let seeMoreBtn = document.getElementById("see-more-btn");
 

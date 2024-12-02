@@ -83,8 +83,7 @@ window.addEventListener("DOMContentLoaded",async () => {
         let authBtns = document.getElementsByClassName("auth-btns");
     
         if (authBtns.length > 0) {
-        
-            console.log("Auth buttons found, updating navbar...");
+    
             updateNavBar();
             loadComponent()
             
