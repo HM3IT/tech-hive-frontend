@@ -101,7 +101,7 @@ export async function fetchImageUrl(imagePath) {
         return URL.createObjectURL(blob);  
     }
 
-    return 'static/fallback-img.jpg'; 
+    return 'static/default-avatar-profile.jpg'; 
 }
 
 

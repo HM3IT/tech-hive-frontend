@@ -221,13 +221,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             reviews.forEach(async (review) => {
                 const reviewElement = document.createElement("div");
                 reviewElement.classList.add("user-profile");
-                let objectUrl = await fetchImageUrl(review.profileUrl);
+                let objectUrl = null;
+                if(review.profileUrl){
+                    objectUrl = await fetchImageUrl(review.profileUrl);
+                }else{
+                    objectUrl = "../static/default-avatar-profile.jpg"
+                }
                 const ratingStars = "⭐".repeat(review.rating) + "☆".repeat(5 - review.rating);
 
                 reviewElement.innerHTML = `
                     <div class="user-info">
                         <img src="${objectUrl}" alt="User Profile Picture">
-                        <p class="username">User: ${review.username}</p>
+                        <p class="username">User: <strong>${review.username}</strong></p>
                     </div>
                     <p><strong>Date:</strong> ${new Date(review.createdAt).toLocaleDateString()}</p>
                     <div class="rating">

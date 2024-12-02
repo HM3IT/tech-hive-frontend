@@ -23,6 +23,9 @@ a{
     margin-bottom: 0!important;
 
 }
+.dropdown{
+    cursor: pointer;
+}
  
 .pagination{
 display: flex !important;
@@ -127,3 +130,4 @@ width: 100% !important;
 #productGrid .product img{
     height: 100px;
 }
+

@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", async function(event){
             profileImg.src = objectUrl;
             
         }else{
-            profileImg.src = "../static/images/default-avatar-profile.jpg"
+            profileImg.src = "../static/default-avatar-profile.jpg"
         }
     }
     async function updateUserInfo(event){
