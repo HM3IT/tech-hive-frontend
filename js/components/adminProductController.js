@@ -1,4 +1,4 @@
-import { fetchImageUrl, getProducts, createPagination } from "../utils.js";
+import { fetchImageUrl, getProducts,deleteProduct, createPagination, showConfirmBox } from "../utils.js";
  
 let searchQry= "null"
 
@@ -59,16 +59,33 @@ async function displayProductTbl(products) {
                 <a href="updateProduct.html?productId=${product.id}" style="text-decoration: none;">
                     <button class="edit-btn">Edit</button>
                 </a>
-                <button class="delete-btn" data-product-id="${product.id}">Delete</button>
+                <button id="delete-${product.id}-btn" class="delete-btn" data-product-id="${product.id}">Delete</button>
             </td>
         `;
         tblBody.appendChild(row);
-    });
-    tblBody.addEventListener("click", async (e) => {
-        if (e.target.classList.contains("delete-btn")) {
-            let productId = e.target.dataset.productId;
-            await deleteProduct(productId);
-        }
-    });
-}
+        const deleteBtn = document.getElementById(`delete-${product.id}-btn`);
 
+ 
+            deleteBtn.addEventListener("click", async function (e) {
+                   
+                showConfirmBox(
+                    `Are you sure you want to delete the product?`,
+                    async () => {
+                        const productId = e.target.dataset.productId;  
+                        await deleteProduct(productId);  
+                        setTimeout(() => {
+                            window.location.href = "products.html";
+                        }, 1500); 
+                    },
+                    () => {
+                       
+                        return null;
+                    }
+                );
+
+            });
+       
+ 
+
+})
+}

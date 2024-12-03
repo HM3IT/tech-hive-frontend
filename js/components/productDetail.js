@@ -11,11 +11,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     const nextBtn = document.getElementById("nextBtn")
     const mainImage = document.getElementById('mainImage');
     const starsContainer = document.getElementById("stars");
-    const stars = starsContainer.getElementsByClassName("rating");
     const submitBtn = document.getElementById("submit-btn");
     const reviewText = document.getElementById("review-text");
     const thumbnails = document.getElementsByClassName("thumbnail");
+    
+    let stars = null
 
+    if(starsContainer){
+        starsContainer.getElementsByClassName("rating");
+    }
+
+    
     if (!productId) {
         showError("Invalid Product ID. Please check the URL.");
         return;
@@ -26,8 +32,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     let currentImageIndex = 0;
     let hasAlreadyReivew = false
     let images =  await loadProduct(productId);
+    if(document.getElementById("reviews-container")){
 
-    await loadProductReview(productId);
+        await loadProductReview(productId);
+    }
 
     let seeMoreBtn = document.getElementById("see-more-btn");
 
@@ -37,16 +45,19 @@ document.addEventListener("DOMContentLoaded", async () => {
             loadProductReview(productId, true); 
         });
     }
-
-    submitBtn.addEventListener("click", submitReviewHandler)
-
-    starsContainer.addEventListener("click", function (event) {
-      
-        if (event.target.tagName === "SPAN") {
-            rating = event.target.getAttribute("data-rating");
-            highlightStars(rating)
-        }
-    });
+    if(submitBtn){
+        submitBtn.addEventListener("click", submitReviewHandler)
+    }
+    if(starsContainer){
+        
+        starsContainer.addEventListener("click", function (event) {
+            
+            if (event.target.tagName === "SPAN") {
+                rating = event.target.getAttribute("data-rating");
+                highlightStars(rating)
+            }
+        });
+    }
 
     function updateImage(index) {
             mainImage.src = images[index];

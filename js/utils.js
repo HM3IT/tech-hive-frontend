@@ -492,6 +492,17 @@ export async function getUsers(page, limit, searchName = null){
       };   
 }
 
+export async function deleteProduct(productId){
+     
+    let url = `/products/delete/${productId}`;
+
+    let response = await sendAuthRequest(url, "DELETE", null);
+
+    if (response.ok) {
+       showAlert("Product is successfully deleted",  "#28a745")
+   
+    }  
+}
 
  export async function getOrders(page, limit, searchId) {
   
