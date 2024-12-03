@@ -1,10 +1,7 @@
- 
-
 body {
     font-family: Arial, sans-serif;
     background-color: #2b2b2b; 
     color: #e0e0e0; 
-    padding: 20px;
 }
 
 .container {
@@ -59,7 +56,7 @@ textarea {
     resize: none;
 }
 
-/* Tables */
+/*  Table Styles */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -113,6 +110,7 @@ button:hover {
 .success:hover {
     background-color: #271b1b;
 }
+
 /* Cart-Specific Styles */
 .cart-container {
     width: 100%;
@@ -156,8 +154,6 @@ button:hover {
     color: #0e0d0d;
 }
 
-
-
 /* Miscellaneous */
 .product-info {
     display: flex;
@@ -179,4 +175,150 @@ button:hover {
 
 #order_now{
     display: none;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    h3.grand-total {
+        font-size: 1.2rem;
+    }
+
+    table th, table td {
+        font-size: 16px;
+        padding: 8px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+
+    .cart-container {
+        padding: 15px;
+    }
+
+    .cart-product-img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .quantity-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .quantity-btn, .quantity-input {
+        margin-bottom: 5px;
+    }
+
+    .product-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .product-info h4 {
+        font-size: 14px;
+    }
+
+    .product-info p {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    h2 {
+        font-size: 1rem;
+    }
+
+    h3.grand-total {
+        font-size: 1rem;
+    }
+
+    table th, table td {
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .cart-container {
+        padding: 10px;
+    }
+
+    .cart-product-img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .quantity-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .quantity-btn, .quantity-input {
+        margin-bottom: 5px;
+    }
+
+    .product-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .product-info h4 {
+        font-size: 14px;
+    }
+
+    .product-info p {
+        font-size: 12px;
+    }
+}
+/* Hide specific columns for smaller screens */
+@media (max-width: 768px) {
+    /* Hide Price and Discount columns */
+    #cartTable th:nth-child(3), 
+    #cartTable th:nth-child(4), 
+    #cartTable th:nth-child(5), 
+    #cartTable td:nth-child(3), 
+    #cartTable td:nth-child(4),
+    #cartTable td:nth-child(5)  
+    {
+        display: none;
+    }
+    
+}
+
+/* Hide table headers for smaller screens */
+@media (max-width: 768px) {
+    #cartTable th {
+        display: none;
+    }
+}
+
+/* Hide borders for smaller screens */
+@media (max-width: 768px) {
+    #cartTable, 
+    #cartTable th, 
+    #cartTable td {
+        border: none;
+    }
 }

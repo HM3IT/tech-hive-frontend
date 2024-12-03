@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <style>
-    
-    
     .container1 {
         max-width: 1200px;
         margin: auto;
@@ -69,7 +67,7 @@
         display: none;
     }
     
-    .arrow {
+    .toggle-arrow {
         border: solid black;
         border-width: 0 3px 3px 0;
         display: inline-block;
@@ -78,11 +76,11 @@
         transition: transform 0.2s;
     }
     
-    .arrow.down {
+    .toggle-arrow.down {
         transform: rotate(45deg);
     }
     
-    .arrow.up {
+    .toggle-arrow.up {
         transform: rotate(-135deg);
     }
     
@@ -90,7 +88,6 @@
         transform: translateY(-5px);
         box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
     }
-    
 </style>
 <body>
     <script src="../js/main.js"></script>
@@ -104,105 +101,89 @@
         <h1>Yangon Branch</h1>
         <div class="card-container">
             <!-- Card 1 -->
+            <div class="card">
+                <img src="../static/images/11.jpg" alt="Merchant Road Branch">
+                <h3>Tech Hive Merchant Road Branch</h3>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Address:</strong> <i class="toggle-arrow down"></i>
+                </p>
+                <div class="details">
+                    Merchant Road, Yangon
+                </div>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Phone:</strong> <i class="toggle-arrow down"></i>
+                </p>
+                <div class="details">
+                    +95-123-456789
+                </div>
+            </div>
+            <div class="card">
+                <img src="../static/images/11.jpg" alt="Merchant Road Branch">
+                <h3>Tech Hive IT U Chit Maung Branch</h3>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Address:</strong> <i class="toggle-arrow down"></i>
+                </p>
+                <div class="details">
+                    Merchant Road, Yangon
+                </div>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Phone:</strong> <i class="toggle-arrow down"></i>
+                </p>
+                <div class="details">
+                    +95-123-456789
+                </div>
+            </div>
+            <div class="card">
+                <img src="../static/images/11.jpg" alt="Merchant Road Branch">
+                <h3>Tech Hive IT North Dagon Pinlon Branch</h3>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Address:</strong> <i class="toggle-arrow down"></i>
+                </p>
+                <div class="details">
+                    Merchant Road, Yangon
+                </div>
+                <p class="toggle" onclick="toggleDetails(this)">
+                    <strong>Phone:</strong> <i class="toggle-arrow down"></i>
+                </p>
+                <div class="details">
+                    +95-123-456789
+                </div>
+            </div>
+            
            
-
-            <div class="card">
-                <img src="../static/images/11.jpg" alt="Merchant Road Branch">
-                <h3>INNWA Merchant Road</h3>
-                <p class="toggle" onclick="toggleDetails(this)">
-                    <strong>Address:</strong> <i class="arrow down"></i>
-                </p>
-                <div class="details">
-                    Merchant Road, Yangon
-                </div>
-                <p class="toggle" onclick="toggleDetails(this)">
-                    <strong>Phone:</strong> <i class="arrow down"></i>
-                </p>
-                <div class="details">
-                    +95-123-456789
-                </div>
-            </div>
-            <div class="card">
-                <img src="../static/images/11.jpg" alt="Merchant Road Branch">
-                <h3>INNWA Merchant Road</h3>
-                <p class="toggle" onclick="toggleDetails(this)">
-                    <strong>Address:</strong> <i class="arrow down"></i>
-                </p>
-                <div class="details">
-                    Merchant Road, Yangon
-                </div>
-                <p class="toggle" onclick="toggleDetails(this)">
-                    <strong>Phone:</strong> <i class="arrow down"></i>
-                </p>
-                <div class="details">
-                    +95-123-456789
-                </div>
-            </div>
-            <div class="card">
-                <img src="../static/images/11.jpg" alt="Merchant Road Branch">
-                <h3>INNWA Merchant Road</h3>
-                <p class="toggle" onclick="toggleDetails(this)">
-                    <strong>Address:</strong> <i class="arrow down"></i>
-                </p>
-                <div class="details">
-                    Merchant Road, Yangon
-                </div>
-                <p class="toggle" onclick="toggleDetails(this)">
-                    <strong>Phone:</strong> <i class="arrow down"></i>
-                </p>
-                <div class="details">
-                    +95-123-456789
-                </div>
-            </div>
-            <div class="card">
-                <img src="../static/images/11.jpg" alt="Merchant Road Branch">
-                <h3>INNWA Merchant Road</h3>
-                <p class="toggle" onclick="toggleDetails(this)">
-                    <strong>Address:</strong> <i class="arrow down"></i>
-                </p>
-                <div class="details">
-                    Merchant Road, Yangon
-                </div>
-                <p class="toggle" onclick="toggleDetails(this)">
-                    <strong>Phone:</strong> <i class="arrow down"></i>
-                </p>
-                <div class="details">
-                    +95-123-456789
-                </div>
-            </div>
             <!-- Card 2 -->
             <div class="card">
                 <img src="../static/images/11.jpg" alt="Seik Kan Thar Branch">
                 <h3>INNWA Premium Seik Kan Thar Street</h3>
                 <p class="toggle" onclick="toggleDetails(this)">
-                    <strong>Address:</strong> <i class="arrow down"></i>
+                    <strong>Address:</strong> <i class="toggle-arrow down"></i>
                 </p>
                 <div class="details">
                     Seik Kan Thar Street, Yangon
                 </div>
                 <p class="toggle" onclick="toggleDetails(this)">
-                    <strong>Phone:</strong> <i class="arrow down"></i>
+                    <strong>Phone:</strong> <i class="toggle-arrow down"></i>
                 </p>
                 <div class="details">
                     +95-987-654321
                 </div>
             </div>
-            <!-- Add more cards as needed -->
         </div>
         <h1>Mandalay Branch</h1>
         <div class="card-container">
             <!-- Card 1 -->
             <div class="card">
                 <img src="../static/images/11.jpg" alt="Merchant Road Branch">
-                <h3>INNWA Merchant Road</h3>
+                <h3>Tech Hive IT (ကဇာကွတ်) Branch
+                </h3>
                 <p class="toggle" onclick="toggleDetails(this)">
-                    <strong>Address:</strong> <i class="arrow down"></i>
+                    <strong>Address:</strong> <i class="toggle-arrow down"></i>
                 </p>
                 <div class="details">
                     Merchant Road, Yangon
                 </div>
                 <p class="toggle" onclick="toggleDetails(this)">
-                    <strong>Phone:</strong> <i class="arrow down"></i>
+                    <strong>Phone:</strong> <i class="toggle-arrow down"></i>
                 </p>
                 <div class="details">
                     +95-123-456789
@@ -210,15 +191,15 @@
             </div>
             <div class="card">
                 <img src="../static/images/11.jpg" alt="Merchant Road Branch">
-                <h3>INNWA Merchant Road</h3>
+                <h3>Tech Hive IT (ချမ်းအေးသာဇံ) Branch</h3>
                 <p class="toggle" onclick="toggleDetails(this)">
-                    <strong>Address:</strong> <i class="arrow down"></i>
+                    <strong>Address:</strong> <i class="toggle-arrow down"></i>
                 </p>
                 <div class="details">
                     Merchant Road, Yangon
                 </div>
                 <p class="toggle" onclick="toggleDetails(this)">
-                    <strong>Phone:</strong> <i class="arrow down"></i>
+                    <strong>Phone:</strong> <i class="toggle-arrow down"></i>
                 </p>
                 <div class="details">
                     +95-123-456789
@@ -226,30 +207,31 @@
             </div>
             <div class="card">
                 <img src="../static/images/11.jpg" alt="Merchant Road Branch">
-                <h3>INNWA Merchant Road</h3>
+                <h3>Tech Hive IT (မလိခ) Branch</h3>
                 <p class="toggle" onclick="toggleDetails(this)">
-                    <strong>Address:</strong> <i class="arrow down"></i>
+                    <strong>Address:</strong> <i class="toggle-arrow down"></i>
                 </p>
                 <div class="details">
                     Merchant Road, Yangon
                 </div>
                 <p class="toggle" onclick="toggleDetails(this)">
-                    <strong>Phone:</strong> <i class="arrow down"></i>
+                    <strong>Phone:</strong> <i class="toggle-arrow down"></i>
                 </p>
                 <div class="details">
                     +95-123-456789
                 </div>
             </div>
+        </div>
     </div>
-    
+
     <footer id="footer">
-  
+    
     </footer>
    
     <script >
         function toggleDetails(element) {
             const details = element.nextElementSibling;
-            const arrow = element.querySelector('.arrow');
+            const arrow = element.querySelector('.toggle-arrow'); // Updated class name
             
             if (details.style.display === 'block') {
                 details.style.display = 'none';
@@ -261,7 +243,6 @@
                 arrow.classList.add('up');
             }
         }
-        
     </script>
 </body>
 </html>
