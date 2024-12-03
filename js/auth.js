@@ -78,19 +78,32 @@ export async function signup() {
 }
 
 
-export async function logout(){
-	
-	let response = await sendAuthRequest('/access/logout', 'POST', null);
-	if (response.ok) {
-		deleteAccessTokenCookie();     
-		showAlert("Logout Successfully!", "#28a745");
-        setTimeout(() => {
-            window.location.href = "./index.html";
-        }, 1000); 	} else {
-		let errorData = await response.json();
-		console.log(errorData)
-	 
-	}	 
+export async function logout() {
+    let isConfirmed = await showConfirmBox(
+        "Are You Sure Want To Logout?",
+        async () => {            
+            let response = await sendAuthRequest('/access/logout', 'POST', null);
+            if (response.ok) {
+                deleteAccessTokenCookie();
+                showAlert("Logout Successfully!", "#28a745");
+                setTimeout(() => {
+                    window.location.href = "./index.html";
+                }, 1000);
+            } else {
+                let errorData = await response.json();
+                console.log(errorData);
+            }
+        },
+        () => {
+            console.log("Logout canceled.");
+        }
+    );
+
+    if (isConfirmed) {
+        console.log("User confirmed logout.");
+    } else {
+        console.log("User canceled logout.");
+    }
 }
 
 

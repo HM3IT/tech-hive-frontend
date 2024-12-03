@@ -35,8 +35,15 @@ document.addEventListener("DOMContentLoaded", async () => {
  
     if (productForm) {
         productForm.addEventListener("submit", async (e) => {
-            e.preventDefault(); 
-            await addProduct(); 
+            e.preventDefault();
+    
+            let productName = document.getElementById("product-name").value;
+            if (productName.length > 150) {
+                console.log("Product name cannot exceed 150 characters.");
+                return;
+            }
+    
+            await addProduct();
         });
     }
 });
@@ -143,6 +150,13 @@ function validateProductForm() {
     if (name.trim() === "") {
         nameError.textContent = "*Product name is required.";
         nameError.style.display = "inline"
+        isValid = false;
+    }
+
+    name = name.trim();
+    if (name.length > 150) {
+        nameError.textContent = "*Product name cannot exceed 150 characters.";
+        nameError.style.display = "inline";
         isValid = false;
     }
 

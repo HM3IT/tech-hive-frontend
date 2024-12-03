@@ -111,8 +111,6 @@ export async function handleOrderClick() {
         }, 1000);
         return;
     }
-
-    showAlert("You Have Ordered Successfully!", "#28a745");
     setTimeout(() => {
         window.location.href = "./orderConfirm.html";
     }, 1000); 

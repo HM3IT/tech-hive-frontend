@@ -149,3 +149,15 @@ margin-bottom: 20px;
 #old-password-label{
     color: red;
 }
+
+@media (max-width: 880px), (max-width: 480px)  {
+    #profile-update-form{
+        max-width: 350px;
+        margin: 10px 0px 10px 0px;
+
+    }
+
+    #settings {
+        margin-top: 20px;
+    }
+}

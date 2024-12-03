@@ -70,7 +70,9 @@ async function updateOrder(event) {
         let data = await response.json();
          
         showAlert("Order Successfully Updated!", "#28a745");
-        window.location.reload()
+        setTimeout(() => {
+            window.location.reload();
+        }, 2000);
     }
 
 
