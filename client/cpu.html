@@ -3,324 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-    <title>Intel Gen 13 Processors</title>
-    <style>
-        
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #000428, #004e92);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column; 
-            min-height: 100vh;
-        }
-
-        .header-image {
-            max-width: 100%;
-            margin-bottom: 20px;
-        }
-
-        .container {
-            display: flex;
-            gap: 20px;
-            max-width: 1200px;
-            padding: 40px;
-        }
-
-        .product-item {
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            width: 300px;
-        }
-
-        .product-image {
-            max-width: 100%;
-            margin-bottom: 20px;
-            background: transparent;
-        }
-
-        .product-title {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        .product-specs {
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 15px;
-            color: #b0b0b0;
-        }
-
-        .sku {
-            font-size: 0.9rem;
-            color: #b0b0b0;
-            margin-bottom: 20px;
-        }
-
-        .in-store-only {
-            display: inline-block;
-            padding: 10px 20px;
-            color: #fff;
-            background-color: transparent;
-            border: 1px solid #fff;
-            border-radius: 4px;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .in-store-only:hover {
-            background-color: #004e92;
-        }
-        .footer {
-            background-color: #f8f9fa;
-            padding: 40px 160px;
-            color: #333;
-            text-align: center;
-            font-family: Arial, sans-serif;
-        }
-        
-        .footer-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: auto;
-        }
-        
-        .footer-section {
-            margin: 20px;
-            flex: 1;
-            min-width: 180px;
-        }
-        
-        .footer-section h3 {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        
-        .social-icons a {
-            color: #333;
-            margin: 0 8px;
-            font-size: 24px;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .social-icons a:hover {
-            color: #004e92;
-        }
-        
-        .visit-btn {
-            display: inline-block;
-            border: 1px solid red;
-            border-radius: 20px;
-            color: red;
-            padding: 8px 20px;
-            margin: 5px 0;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: bold;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
-        .visit-btn:hover {
-            background-color: red;
-            color: white;
-        }
-        
-        .innwa-yangon p, .innwa-mandalay p {
-            display: flex;
-            justify-content: space-between;
-            margin: 5px 0;
-            font-size: 14px;
-        }
-        
-        .arrow {
-            font-size: 18px;
-            color: #333;
-        }
-        
-        .viber p {
-            font-size: 16px;
-            color: #333;
-        }
-        
-        .qr-code {
-            width: 100px;
-            height: 100px;
-            margin-top: 10px;
-        }
-        
-        /* Bottom Footer */
-        .footer-bottom {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #666;
-        }
-
-        /* Responsive Styles */
-@media (max-width: 1200px) {
-    .container {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-}
-
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .product-item {
-        width: 80%;
-    }
-
-    .footer-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .footer-section {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    
-    .qr-code {
-        width: 80px;
-        height: 80px;
-    }
-}
-
-@media (max-width: 480px) {
-    body {
-        padding: 10px;
-    }
-
-    .product-item {
-        width: 100%;
-    }
-
-    .footer {
-        padding: 20px;
-    }
-
-    .footer-container {
-        flex-direction: column;
-        padding: 0;
-    }
-
-    .footer-section h3 {
-        font-size: 16px;
-    }
-
-    .footer-bottom {
-        font-size: 12px;
-    }
-}
-
-    </style>
+    <title>Invoice - INNWA IT Mobile</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.invoice-container {
+    width: 70%;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.invoice-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.invoice-header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #0078d7;
+}
+
+.invoice-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.invoice-info, .customer-info {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.service-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.service-table th, .service-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.service-table th {
+    background-color: #0078d7;
+    color: #fff;
+}
+
+.service-table tfoot td {
+    font-weight: bold;
+}
+
+.invoice-footer {
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+    margin-top: 20px;
+}
+
+@media print {
+    .invoice-container {
+        width: 100%;
+        box-shadow: none;
+    }
+}
+
+</style>
 <body>
+    <div class="invoice-container">
+        <header class="invoice-header">
+            <h1>INNWA IT Mobile</h1>
+            <p>Laptop Service Specialists</p>
+            <p>Address: No.503, Seaik Kan Thar  Street, Yangon, Myanmar</p>
+            <p>Phone: +959446095086| Email: info@innwaitmobile.com</p>
+        </header>
 
-<!-- Header Image -->
-<img src="../static/images/3.png" alt="Intel Core Processor Banner" class="header-image">
-
-<div class="container">
-    <!-- Product 1 -->
-    <div class="product-item">
-        <img src="../static/images/cp3.png" alt="i5-13600K" class="product-image">
-        <div class="product-title">i5-13600K</div>
-        <div class="product-specs">14 cores (P-cores + E-cores) | 16 threads | Max Turbo Frequency: up to 5.1GHz</div>
-        <div class="sku">SKU 436212</div>
-        <div class="in-store-only">In-Store Only</div>
-    </div>
-
-    <!-- Product 2 -->
-    <div class="product-item">
-        <img src="../static/images/cp2.png" alt="i7-13700K" class="product-image">
-        <div class="product-title">i7-13700K</div>
-        <div class="product-specs">16 cores (P-cores + E-cores) | 24 threads | Max Turbo Frequency: up to 5.3GHz</div>
-        <div class="sku">SKU 436196</div>
-        <div class="in-store-only">In-Store Only</div>
-    </div>
-
-    <!-- Product 3 -->
-    <div class="product-item">
-        <img src="../static/images/cp1.png" alt="i9-13900K" class="product-image">
-        <div class="product-title">i9-13900K</div>
-        <div class="product-specs">24 cores (P-cores + E-cores) | 32 threads | Max Turbo Frequency: up to 5.8GHz</div>
-        <div class="sku">SKU 436188</div>
-        <div class="in-store-only">In-Store Only</div>
-    </div>
-</div>
- <!-- Footer with Brand Logos -->
-    
-
- <footer class="footer">
-    <div class="footer-container">
-        <!-- Follow Us Section -->
-        <div class="footer-section follow-us">
-            <h3>FOLLOW US</h3>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
+        <section class="invoice-details">
+            <div class="invoice-info">
+                <p><strong>Invoice No:</strong> INV-00123</p>
+                <p><strong>Date:</strong> 2024-12-04</p>
             </div>
-        </div>
+            <div class="customer-info">
+                <p><strong>Customer Name:</strong> Myat Noe Khine</p>
+                <p><strong>Phone:</strong> +95 9785030203</p>
+                
+            </div>
+        </section>
 
-        <!-- Visit Us Section -->
-        <div class="footer-section visit-us">
-            <h3>VISIT US</h3>
-            <a href="#" class="visit-btn stores">Stores</a>
-            <a href="#" class="visit-btn service">Service</a>
-            <a href="#" class="visit-btn appointment">Appointment</a>
-        </div>
+        <table class="service-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Battery Replacement</td>
+                    <td>1</td>
+                    <td>60000 MMk</td>
+                    <td>60000 MMk</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Charger</td>
+                    <td>1</td>
+                    <td>50000 MMK</td>
+                    <td>50000 MMK</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Software Installation</td>
+                    <td>1</td>
+                    <td>15000 MMK</td>
+                    <td>15000 MMK</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Internal keyboard Replacement</td>
+                    <td>1</td>
+                    <td>80000 MMK</td>
+                    <td>80000 MMK</td>
+                </tr>
+            </tbody>
+            <tfoot>
+               
+              
+                <tr>
+                    <td colspan="4"><strong>Total</strong></td>
+                    <td><strong>205000 MMK</strong></td>
+                </tr>
+            </tfoot>
+        </table>
 
-        <!-- INNWA YANGON Section -->
-        <div class="footer-section innwa-yangon">
-            <h3>INNWA YANGON</h3>
-            <p>INNWA Merchant Road Branch <span class="arrow">▼</span></p>
-            <p>INNWA Premium Seik Kan Thar Street Branch <span class="arrow">▼</span></p>
-            <p>INNWA IT & Mobile U Chit Maung Branch <span class="arrow">▼</span></p>
-            <p>INNWA IT & Mobile North Dagon Pinlon Branch <span class="arrow">▼</span></p>
-        </div>
-
-        <!-- INNWA MANDALAY Section -->
-        <div class="footer-section innwa-mandalay">
-            <h3>INNWA MANDALAY</h3>
-            <p>INNWA IT & Mobile (ကဇာကွတ်) Branch <span class="arrow">▼</span></p>
-            <p>INNWA IT & Mobile (ချမ်းအေးသာဇံ) Branch <span class="arrow">▼</span></p>
-            <p>INNWA IT & Mobile (မလိခ) Branch <span class="arrow">▼</span></p>
-        </div>
-
-        <!-- Viber Section -->
-        <div class="footer-section viber">
-            <h3>Viber</h3>
-            <p><i class="fas fa-phone"></i> +959771966688</p>
-            <img src="../static/images/qr-code.png" alt="QR Code" class="qr-code">
-        </div>
+        <footer class="invoice-footer">
+            <p>Thank you for choosing INNWA IT Mobile!</p>
+            <p>Please make payment by the due date. Contact us for any questions or concerns.</p>
+        </footer>
     </div>
-
-    <div class="footer-bottom">
-        <p>INNWA IT & MOBILE © 2024.</p>
-    </div>
-</footer>
-
 </body>
-
 </html>

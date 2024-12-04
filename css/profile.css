@@ -1,30 +1,29 @@
-
-
-#profile-img{
+#profile-img {
     width: 200px;
     height: 200px;
     border-radius: 50%;
- }
+}
 
- #account-info{
+#account-info {
     margin: 20px 0;
     font-size: 1.5rem;
- }
+}
 
-#profileTabs{
+#profileTabs {
     width: 280px;
     font-size: 1.5rem;
     font-weight: bold;
     text-indent: 20px;
-  }
-  
-#settings-tab,
-#account-tab{
-    padding: 15px 20px !important; 
 }
+
+#settings-tab,
+#account-tab {
+    padding: 15px 20px !important;
+}
+
 /* Sidebar Navigation Styling */
 .nav-pills .nav-link {
-    color: #333; /* Dark text for inactive links */
+    color: #333; 
     font-weight: 500;
     font-size: 2rem;
     padding: 0.75rem 1rem;
@@ -33,18 +32,18 @@
 }
 
 .nav-pills .nav-link:hover {
-    background-color: #e0e7ff; /* Light blue on hover */
+    background-color: #e0e7ff; 
 }
 
 .nav-pills .nav-link.active {
-    background-color: #0057e7; /* Bright blue active link */
+    background-color: #0057e7; 
     color: white;
     box-shadow: 0px 4px 12px rgba(0, 87, 231, 0.3);
 }
 
 /* Card Component Styling */
 .card-custom {
-    background-color: #fff; /* White background for card */
+    background-color: #fff; 
     border: 1px solid #d1d1d1;
     padding: 1.25rem;
     border-radius: 8px;
@@ -58,7 +57,7 @@
 }
 
 .card-custom h5 {
-    color: #0057e7; /* Bright blue heading */
+    color: #0057e7; 
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
@@ -67,7 +66,7 @@
 /* Form and Button Styling */
 form label {
     font-weight: 500;
-    color: #333; /* Dark text for form labels */
+    color: #333; 
 }
 
 form .form-control {
@@ -97,7 +96,7 @@ form .form-control:focus {
 }
 
 .btn-primary:hover {
-    background-color: #003c99; /* Darker blue on hover */
+    background-color: #003c99; 
     box-shadow: 0px 4px 12px rgba(0, 87, 231, 0.3);
 }
 
@@ -114,39 +113,39 @@ form .form-control:focus {
     box-shadow: 0px 4px 12px rgba(0, 87, 231, 0.3);
 }
 
-
-#back-btn{
-  padding: 10px 20px;
-  border-radius: 10px;
-  border: 1px solid #0057e7;
-  /* background-color: white; */
-}
-#back-btn:hover{
-background-color: #0057e7;
-color: white;
-font-weight: bolder;
+#back-btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid #0057e7;
+    
 }
 
-#settings{
-    width:600px;
+#back-btn:hover {
+    background-color: #0057e7;
+    color: white;
+    font-weight: bolder;
+}
+
+#settings {
+    width: 600px;
     margin-left: 50px;
-
-}
-#profile-img, #preview-profile-img{
-border-radius: 50%;
-margin-bottom: 20px;
 }
 
-.profile-detail{
+#profile-img, #preview-profile-img {
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.profile-detail {
     font-size: 1.5rem;
     font-weight: 400;
 }
 
-#changeAddress{
+#changeAddress {
     resize: none;
 }
 
-#old-password-label{
+#old-password-label {
     color: red;
 }
 
@@ -160,4 +159,22 @@ margin-bottom: 20px;
     #settings {
         margin-top: 20px;
     }
+}
+
+
+@media (max-width: 780px) {   
+
+    .nav {
+        display: flex;
+        flex-direction: row; 
+        flex-wrap: nowrap;
+        margin-right: 20px; /* Space between nav and content */
+       
+        
+    }
+    .nav-pills .nav-link {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+    
 }

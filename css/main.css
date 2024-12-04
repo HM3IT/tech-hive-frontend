@@ -142,3 +142,16 @@ width: 100% !important;
     background-color: rgba(0, 0, 0, 0.5); 
     z-index: 999;
 }
+.navbar-nav > li > a {
+    font-size: 1.5em; 
+    
+    font-weight: bold; 
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: #ede8e8;
+    transition: color 0.3s ease; 
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: #807a7a; 
+}

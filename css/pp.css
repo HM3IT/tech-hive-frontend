@@ -1,0 +1,310 @@
+/* Prevent horizontal scroll */
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Include padding and border in element's total width */
+}
+
+/* Profile Image */
+#profile-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    max-width: 100%; /* Prevent image from overflowing */
+    height: auto;
+}
+
+/* Account Info */
+#account-info {
+    margin: 20px 0;
+    font-size: 1.5rem;
+}
+
+/* Profile Tabs */
+#profileTabs {
+    width: 280px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-indent: 20px;
+    max-width: 100%; /* Prevent overflow */
+}
+
+/* Sidebar Navigation Styling */
+.nav-pills .nav-link {
+    color: #333; /* Dark text for inactive links */
+    font-weight: 500;
+    font-size: 2rem;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    max-width: 100%; /* Prevent overflow */
+}
+
+.nav-pills .nav-link:hover {
+    background-color: #e0e7ff; /* Light blue on hover */
+}
+
+.nav-pills .nav-link.active {
+    background-color: #0057e7; /* Bright blue active link */
+    color: white;
+    box-shadow: 0px 4px 12px rgba(0, 87, 231, 0.3);
+}
+
+/* Card Component Styling */
+.card-custom {
+    background-color: #fff; /* White background for card */
+    border: 1px solid #d1d1d1;
+    padding: 1.25rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    max-width: 100%; /* Prevent overflow */
+}
+
+.card-custom:hover {
+    box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.card-custom h5 {
+    color: #0057e7; /* Bright blue heading */
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* Form and Button Styling */
+form label {
+    font-weight: 500;
+    color: #333; /* Dark text for form labels */
+}
+
+form .form-control {
+    background-color: #f9f9f9;
+    color: #333;
+    border: 1px solid #d1d1d1;
+    border-radius: 4px;
+    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.2);
+    transition: border 0.3s ease;
+    max-width: 100%; /* Prevent overflow */
+}
+
+form .form-control:focus {
+    border-color: #0057e7;
+    box-shadow: 0px 0px 5px rgba(0, 87, 231, 0.4);
+}
+
+/* Primary Button Styling */
+.btn-primary {
+    background-color: #0057e7;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    max-width: 100%; /* Prevent overflow */
+}
+
+.btn-primary:hover {
+    background-color: #003c99; /* Darker blue on hover */
+    box-shadow: 0px 4px 12px rgba(0, 87, 231, 0.3);
+}
+
+/* Outline Button Styling */
+.btn-outline-primary {
+    color: #0057e7;
+    border: 1px solid #0057e7;
+    transition: all 0.3s ease;
+    max-width: 100%; /* Prevent overflow */
+}
+
+.btn-outline-primary:hover {
+    background-color: #0057e7;
+    color: white;
+    box-shadow: 0px 4px 12px rgba(0, 87, 231, 0.3);
+}
+
+#back-btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid #0057e7;
+    /* background-color: white; */
+}
+
+#back-btn:hover {
+    background-color: #0057e7;
+    color: white;
+    font-weight: bolder;
+}
+
+#settings {
+    width: 600px;
+    margin-left: 50px;
+    max-width: 100%; /* Prevent overflow */
+}
+
+#profile-img, #preview-profile-img {
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.profile-detail {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+#changeAddress {
+    resize: none;
+}
+
+#old-password-label {
+    color: red;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 1024px) {
+    /* Profile Image */
+    #profile-img {
+        width: 150px;
+        height: 150px;
+    }
+
+    /* Profile info */
+    #account-info {
+        font-size: 1.3rem;
+    }
+
+    /* Profile Tabs */
+    #profileTabs {
+        width: 100%;
+        font-size: 1.2rem;
+        text-indent: 15px;
+    }
+
+    /* Sidebar navigation */
+    .nav-pills .nav-link {
+        font-size: 1.5rem;
+    }
+
+    /* Card Styling */
+    .card-custom {
+        padding: 1rem;
+    }
+
+    /* Button Styling */
+    .btn-primary {
+        padding: 0.4rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    /* Settings Layout */
+    #settings {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    /* Profile Details */
+    .profile-detail {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Profile Image */
+    #profile-img {
+        width: 120px;
+        height: 120px;
+    }
+
+    /* Profile info */
+    #account-info {
+        font-size: 1.1rem;
+    }
+
+    /* Profile Tabs */
+    #profileTabs {
+        width: 100%;
+        font-size: 1.1rem;
+        text-indent: 10px;
+    }
+
+    /* Sidebar navigation */
+    .nav-pills .nav-link {
+        font-size: 1.3rem;
+    }
+
+    /* Card Styling */
+    .card-custom {
+        padding: 0.9rem;
+    }
+
+    /* Button Styling */
+    .btn-primary {
+        padding: 0.3rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    /* Settings Layout */
+    #settings {
+        width: 100%;
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    /* Profile Details */
+    .profile-detail {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Profile Image */
+    #profile-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    /* Profile info */
+    #account-info {
+        font-size: 1rem;
+    }
+
+    /* Profile Tabs */
+    #profileTabs {
+        width: 100%;
+        font-size: 1rem;
+        text-indent: 5px;
+    }
+
+    /* Sidebar navigation */
+    .nav-pills .nav-link {
+        font-size: 1.2rem;
+    }
+
+    /* Card Styling */
+    .card-custom {
+        padding: 0.8rem;
+    }
+
+    /* Button Styling */
+    .btn-primary {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    /* Settings Layout */
+    #settings {
+        width: 100%;
+        margin-left: 0;
+        padding: 10px;
+    }
+
+    /* Profile Details */
+    .profile-detail {
+        font-size: 1.1rem;
+    }
+}

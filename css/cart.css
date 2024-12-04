@@ -155,6 +155,20 @@ table tfoot{
     font-size: 14px;
     color: #bbbbbb; 
 }
+.success {
+    background-color: #170c0c; 
+    color: #ffffff;
+    width: 10%;
+    float: right;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.success:hover {
+    background-color: #271b1b;
+}
 
 
 .cart-product-image{
@@ -196,6 +210,28 @@ table tfoot{
     }
     
 }
+
+@media screen and (max-width: 768px) {
+    /* Adjusting the success button for smaller screens */
+    .success {
+        width: 20%;  
+        float: none; 
+        margin: 10px auto; 
+    }
+}
+
+@media screen and (max-width: 480px) {
+    
+    .success {
+        width: 40%; 
+        padding: 15px; 
+    }
+
+    #order_now {
+        display: block;
+    }
+}
+
 
 /* Mobile Responsiveness */
 @media (max-width: 780px) {
