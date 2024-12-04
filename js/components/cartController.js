@@ -46,8 +46,40 @@ async function loadCart() {
         row.setAttribute("data-index", cart.indexOf(item));
         row.setAttribute("data-id", item.productId);
         row.id = item.productId;
- 
-        row.innerHTML = `
+
+        if (window.innerWidth <= 780) {
+            row.innerHTML = `
+            <td>
+                <img src="${objectUrl}" alt="${item.name}" class="cart-product-image" />
+            </td>
+            <td>
+                <div>
+                ${item.name}
+            
+                <div>
+                    <strong>
+            $${(discountedPrice * item.quantity).toFixed(2)}
+                    </strong>
+                </div>
+            </td>
+            <td>$${item.priceAtOrder}</td>
+            <td>${discountPercent}%</td>
+            <td>$${discountedPrice}</td>
+            <td>
+                <input 
+                    type="number" 
+                    value="${item.quantity}" 
+                    min="1" 
+                    class="quantity-input" 
+                    data-id="${item.productId}" 
+                    onchange="updateCartQuantity('${item.productId}', this.value)">
+            </td>
+            <td class="grand-total">$${(discountedPrice * item.quantity).toFixed(2)}</td>
+            <td>
+                <button onclick="removeFromCart('${item.productId}')" class="remove-item">Remove</button>
+            </td>`;
+        } else {
+            row.innerHTML = `
             <td>
                 <img src="${objectUrl}" alt="${item.name}" class="cart-product-image" />
             </td>
@@ -68,16 +100,12 @@ async function loadCart() {
             <td>
                 <button onclick="removeFromCart('${item.productId}')" class="remove-item">Remove</button>
             </td>`;
+        }
+ 
+      
   
         cartTableBody.appendChild(row);
     }
- 
-    const cartProductImages = document.getElementsByClassName("cart-product-image");
-    for (const image of cartProductImages) {
-        image.style.width = "120px";
-        image.style.height = "120px";
-    }
-
     updateGrandTotal(cart);
 }
 
@@ -87,6 +115,11 @@ async function removeFromCart(productId) {
     cart = cart.filter((item) => item.productId !== productId);
     localStorage.setItem('cart', JSON.stringify(cart));
     showAlert("Your Item Is Removed Successfully!", "#28a745");
+    const itemCount = cart.length;
+    if (itemCount <= 0){
+        document.getElementById("order_now").style.display = "none"
+    }
+ 
     let removeElement = document.getElementById(productId)
     if (removeElement){
         removeElement.style.display = "none"

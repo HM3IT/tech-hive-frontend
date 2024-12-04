@@ -79,7 +79,7 @@
 }
 
 .add-to-cart {
-    font-size: 8px;
+    font-size: 1rem;
 }
 
 .view-detail {
@@ -197,7 +197,7 @@
 
 
 @media (max-width: 880px), (max-width: 480px) {
-
+    
     #product-wrapper{
         display: grid;
         grid-template-columns: 1fr;
