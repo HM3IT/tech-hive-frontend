@@ -66,7 +66,39 @@ document.addEventListener("DOMContentLoaded",async function(e){
             let objectUrl = await fetchImageUrl(product.imageUrl)
     
             let rowTotal =parseFloat( (discountedPrice * item.quantity).toFixed(2))
+
+            if (window.innerWidth <= 780) {
             row.innerHTML = `
+            <td>
+                        <img style="width:100px; height: 100px;" src="${objectUrl}" alt="${product.name}" class="cart-product-image" />
+                    </td>
+                    <td style="text-align:left;">
+                        <div>
+                          <strong>  Name: </strong>${product.name}
+                        </div>
+                        <div>
+                          <strong>   Quantity: </strong> ${item.quantity}
+                        </div>
+                        <div style='color:green;'>
+                          <strong>   Discount: ${discountPercent} %</strong>
+                        </div>
+                    </td>
+                    <td>${discountPercent}%</td>
+                    <td>$${discountedPrice.toFixed(2)}</td>
+                   
+                    <td class="grand-total">
+                       <div>
+                            Total:
+                        </div>
+                        $${rowTotal}
+                    </td>
+                `;
+        
+                totalAmount += rowTotal
+                tblBody.appendChild(row);
+            
+            }else{
+                row.innerHTML = `
                 <td>
                     <img style="width:120px; height: 120px;" src="${objectUrl}" alt="${product.name}" class="cart-product-image" />
                 </td>
@@ -74,16 +106,18 @@ document.addEventListener("DOMContentLoaded",async function(e){
                 <td>${discountPercent}%</td>
                 <td>$${discountedPrice.toFixed(2)}</td>
                 <td>${item.quantity}</td>
-                <td class="grand-total">$${rowTotal}</td>
-            `;
-    
-            totalAmount += rowTotal
-            tblBody.appendChild(row);
+                <td class="grand-total">
+                    $${rowTotal}
+                </td>
+                `;
         
- 
+                totalAmount += rowTotal
+                tblBody.appendChild(row);
+        
+            }
         } 
 
-        orderTotal.innerText = `$ ${totalAmount}`
+        orderTotal.innerText = `$ ${totalAmount.toFixed(2)}`
     }else{
         showAlert("Failed To Load Order!", "#ff4d4d")
     }

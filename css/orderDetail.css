@@ -1,19 +1,5 @@
 /* General Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-/* Body Styling */
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-}
 
 /* Container Styling */
 #order-summary {
@@ -149,23 +135,7 @@ table img {
     object-fit: cover;
 }
 
-/* Buttons */
-button {
-    background: #0359bd;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    font-size: 1em;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-button:hover {
-    background: #1abc9c;
-    transform: scale(1.05);
-}
-
+ 
 /* Links */
 a {
     color: #2980b9;
@@ -185,19 +155,6 @@ a.refund-policy {
     font-size: 0.9em;
 }
 
-/* Custom Scrollbar */
-body::-webkit-scrollbar {
-    width: 10px;
-}
-
-body::-webkit-scrollbar-thumb {
-    background: #035597;
-    border-radius: 5px;
-}
-
-body::-webkit-scrollbar-thumb:hover {
-    background: #035597;
-}
 
 /* Back Button */
 #back-to-orders-btn {
@@ -205,51 +162,7 @@ body::-webkit-scrollbar-thumb:hover {
     margin-top: 20px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    #order-summary {
-        padding: 15px;
-    }
 
-    table, tbody tr {
-        display: block;
-        width: 100%;
-    }
-
-    thead {
-        display: none;
-    }
-
-    tbody tr {
-        margin-bottom: 15px;
-        padding: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    td {
-        display: block;
-        text-align: right;
-        padding: 10px 5px;
-    }
-
-    td::before {
-        content: attr(data-label);
-        float: left;
-        text-transform: uppercase;
-        font-weight: bold;
-        color: #2c3e50;
-    }
-
-    tfoot th {
-        text-align: left;
-    }
-
-    button {
-        width: 100%;
-        padding: 15px;
-        font-size: 1.2em;
-    }
-}
 
 /* Footer Styling */
 tfoot th {
@@ -273,65 +186,22 @@ tfoot th {
 }
 
 #order-download-btn{
-    position: fixed;
-    left: 120px;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
   
-  #order-download-btn .link_wrapper{
-    position: relative;
-  }
-  
-  #order-download-btn a{
-    display: block;
     width: 180px;
     height: 50px;
-    line-height: 50px;
     font-weight: bold;
     text-decoration: none;
-    background: #333;
     text-align: center;
     color: #fff;
+    background-color: #0046dd;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border: 3px solid #333;
     transition: all .35s;
-  }
-  
-  #order-download-btn .icon{
-    width: 50px;
-    height: 50px;
-    border: 3px solid transparent;
-    position: absolute;
-    transform: rotate(45deg);
-    right: 0;
-    top: 0;
-    z-index: -1;
-    transition: all .35s;
-  }
-  
-  #order-download-btn .icon svg{
-    width: 30px;
-    position: absolute;
-    top: calc(50% - 15px);
-    left: calc(50% - 15px);
-    transform: rotate(-45deg);
-    fill: #1b42f0;
-    transition: all .35s;
-  }
-  
-  #order-download-btn a:hover{
-    width: 150px;
-    border: 3px solid #1b42f0;
-    background: transparent;
-    color: #1b42f0;
-  }
-  #order-download-btn a:hover + .icon{
-    border: 3px solid #1b42f0;
-    right: -25%;
   }
 
+  #order-download-btn:hover{
+    background-color: #001e5f;
+  }
 
 
   #provider-name {
@@ -339,3 +209,59 @@ tfoot th {
     font-family: Arial, Helvetica, sans-serif;
   }
   
+
+
+  /* Responsive Design */
+@media (max-width: 780px),  (max-width: 480px){
+    #order-summary {
+        padding: 15px;
+    }
+    table{
+        width: fit-content;
+        margin: 0 auto;
+    }
+    tbody tr {
+        margin-bottom: 15px;
+        padding: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    table thead{
+        display: none;
+    }
+   
+    tbody tr td:nth-child(3),
+    tbody tr td:nth-child(5),
+    tbody tr td:nth-child(6){
+        display: none;
+    }
+    tbody td:nth-child(2) {
+        width: 300px;
+        text-align: center;
+    }
+    td {
+        /* display: block; */
+        text-align: right;
+        padding: 10px 5px;
+    }
+
+    td::before {
+        content: attr(data-label);
+        float: left;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: #2c3e50;
+    }
+
+    tfoot th {
+        text-align: left;
+    }
+
+    button {
+    
+        padding: 15px;
+        font-size: 1.2em;
+    }
+
+ 
+      
+}

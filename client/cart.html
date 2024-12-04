@@ -53,18 +53,28 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
+           const totalAmountCol = document.getElementById("total-amount-col");
+        let reloadTriggered = false; 
+        let resizeTimeout; 
+        if (window.innerWidth <= 780) {
+            totalAmountCol.setAttribute("colspan", "3");
+        } else {
+            totalAmountCol.setAttribute("colspan", "6");
+        }
+        
         function adjustColspan() {
-            const totalAmountCol = document.getElementById("total-amount-col");
-            if (window.innerWidth <= 780) {
-                totalAmountCol.setAttribute("colspan", "3");
-            } else {
-                totalAmountCol.setAttribute("colspan", "6");
-            }
+            clearTimeout(resizeTimeout); 
+            resizeTimeout = setTimeout(() => {
+                if (!reloadTriggered) {
+                    reloadTriggered = true;
+                    window.location.reload(); 
+                }
+            }, 1000); 
         }
 
         // adjusting col span dynamically
         window.addEventListener("resize", adjustColspan);
-        window.addEventListener("load", adjustColspan);
+        // window.addEventListener("load", adjustColspan);
     </script>
 <script>
     
