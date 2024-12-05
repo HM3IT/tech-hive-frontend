@@ -159,6 +159,15 @@ form .form-control:focus {
     #settings {
         margin-top: 20px;
     }
+    #profileTabs li{
+        text-align: center;
+    }
+    #account{
+        padding: 80px;
+    }
+    #orders{
+        padding: 80px;
+    }
 }
 
 
