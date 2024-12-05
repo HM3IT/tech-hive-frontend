@@ -1,8 +1,9 @@
 import { sendAuthRequest } from "../api.js";
-import { fetchImageUrl, fetchProductDetail, addToCart, showAlert} from "../utils.js";
+import { fetchImageUrl, fetchProductDetail, addToCart, showAlert, showConfirmBox, getCookie} from "../utils.js";
+import {TOKEN_NAME} from "../constants.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-    
+    const token = getCookie(TOKEN_NAME)
     const pageSize = 5;
     const params = new URLSearchParams(window.location.search);
     const productId = params.get("productId");
@@ -211,6 +212,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     async function loadProductReview(productId, append = false) {
+        if (!token){
+            showConfirmBox("Please login first to see product detail", 
+                ()=>window.location.href = "login.html",
+                ()=>window.location.href = "products.html"
+                );
+            return null;
+        }
+        
         const response = await sendAuthRequest(`/reviews/detail/${productId}?pageSize=${pageSize}&currentPage=${currentPage}`);
         const productReviewContainer = document.getElementById("reviews-container");
 
