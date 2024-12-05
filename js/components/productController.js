@@ -87,23 +87,31 @@ async function addProduct() {
 
     let url = `/products/add`;
 
-    try {
-        let response = await sendAuthRequest(url, "POST", productData);
+    const loadingOverlay = document.getElementById("loadingOverlay")
+ 
+    loadingOverlay.style.display = "flex";
 
-        if (response.ok) {
-            // Show the success message and redirect
-            showAlert("Product Added Successfully!", "#28a745");
-            setTimeout(() => {
-                window.location.href = "../admin/products.html";
-            }, 1000);
-        } else {
-            console.error("Failed to add product:", response);
-            showAlert("Error Adding Product. Please Try Again.", "#ff4d4d");
-        }
-    } catch (error) {
-        console.error("Error:", error);
-        showAlert("An Unexpected Error Occurred. Please Try Again.", "#ff4d4d");
-    }
+    sendAuthRequest(url, "POST", productData)
+        .then((response) => {
+            if (response.ok) {
+            
+                showAlert("Product Added Successfully!", "#28a745");
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            } else {
+                console.error("Failed to add product:", response);
+                showAlert("Error Adding Product. Please Try Again.", "#ff4d4d");
+            }
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            showAlert("An Unexpected Error Occurred. Please Try Again.", "#ff4d4d");
+        })
+        .finally(() => {
+  
+            loadingOverlay.style.display = "none";
+        });
     } 
 
 

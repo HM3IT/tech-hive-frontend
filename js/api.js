@@ -16,6 +16,7 @@ export async function sendRequest(url, method = "GET", data = null) {
 }
 
 export async function sendAuthRequest(url, method="GET", data = null) {
+ 
     const token = getCookie(TOKEN_NAME); 
     let headers = {
         'Content-Type': 'application/json',
