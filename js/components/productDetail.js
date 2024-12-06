@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let stars = null
 
     if(starsContainer){
-        starsContainer.getElementsByClassName("rating");
+        stars = starsContainer.getElementsByClassName("rating");
     }
 
     
