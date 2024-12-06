@@ -43,7 +43,7 @@ function highlightButton(buttonId) {
             if (id === buttonId) {
            
                 btn.style.backgroundColor = highlightBackgroundColor;
-                btn.style.color = highlightTextColor;
+                btn.style.color = highlightTextColor;        
             } else {
             
                 btn.style.backgroundColor = defaultBackgroundColor;
@@ -52,3 +52,16 @@ function highlightButton(buttonId) {
         }
     });
 }
+
+function loadLogoutBtn(){
+    const logoutBtn = document.getElementById("logout-btn");
+    logoutBtn.addEventListener('click', ()=>{
+        
+    document.cookie = `accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; secure; SameSite=Strict`;
+    window.location.href = "../client/index.html"
+});
+}
+setInterval(loadLogoutBtn, 500);
+   
+
+ 
